@@ -14,113 +14,136 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="1dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/back_arrow"
         android:layout_width="35dp"
         android:layout_height="23dp"
-        app:srcCompat="@drawable/arrow"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/up_panel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
         android:text="User Name"
         android:textColor="@color/cardview_dark_background"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="75dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_panel" />
 
     <ImageView
         android:id="@+id/star1"
         android:layout_width="27dp"
         android:layout_height="19dp"
-        app:srcCompat="@drawable/star_full"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="116dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:srcCompat="@drawable/star_full" />
 
     <ImageView
         android:id="@+id/star2"
         android:layout_width="27dp"
         android:layout_height="19dp"
-        app:srcCompat="@drawable/star_full"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintStart_toEndOf="@+id/star1"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:srcCompat="@drawable/star_full" />
 
     <ImageView
         android:id="@+id/star3"
         android:layout_width="27dp"
         android:layout_height="19dp"
-        app:srcCompat="@drawable/star_full"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintStart_toEndOf="@+id/star2"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:srcCompat="@drawable/star_full" />
 
     <ImageView
         android:id="@+id/star5"
         android:layout_width="20dp"
         android:layout_height="19dp"
-        app:srcCompat="@drawable/star_empty"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintStart_toEndOf="@+id/star4"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:srcCompat="@drawable/star_empty" />
 
     <ImageView
         android:id="@+id/star4"
         android:layout_width="20dp"
         android:layout_height="19dp"
-        app:srcCompat="@drawable/star_empty"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="116dp" />
+        app:layout_constraintStart_toEndOf="@+id/star3"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:srcCompat="@drawable/star_empty" />
 
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="156dp"
         android:layout_height="133dp"
-        app:srcCompat="@drawable/example_person"
-        tools:layout_editor_absoluteX="239dp"
-        tools:layout_editor_absoluteY="71dp" />
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_panel"
+        app:srcCompat="@drawable/example_person" />
 
     <ImageView
         android:id="@+id/favours_icon"
         android:layout_width="34dp"
         android:layout_height="33dp"
-        app:srcCompat="@drawable/handshacke"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="216dp" />
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:srcCompat="@drawable/handshacke" />
 
     <TextView
         android:id="@+id/favours_info"
         android:layout_width="207dp"
         android:layout_height="33dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:text="TextView"
+        android:text="7 favours, 4 times helped "
         android:textColor="@color/cardview_dark_background"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="216dp"
+        app:layout_constraintStart_toEndOf="@+id/favours_icon"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
         tools:text="7 favours, 4 times helped " />
 
     <ImageView
         android:id="@+id/location_icon"
         android:layout_width="23dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/location"
-        tools:layout_editor_absoluteX="20dp"
-        tools:layout_editor_absoluteY="249dp" />
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favours_icon"
+        app:srcCompat="@drawable/location" />
 
     <TextView
         android:id="@+id/user_location"
         android:layout_width="103dp"
         android:layout_height="29dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:text="08700, Igualada"
         android:textColor="@color/cardview_dark_background"
         android:textSize="14sp"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="249dp" />
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toBottomOf="@+id/favours_info" />
 
     <TextView
         android:id="@+id/show_location"
@@ -128,22 +151,24 @@
         android:layout_height="29dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_vertical"
-        android:text="TextView"
+        android:text="Show Location"
         android:textColor="@android:color/holo_red_light"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/user_location"
-        tools:layout_editor_absoluteY="249dp"
+        app:layout_constraintTop_toBottomOf="@+id/favours_info"
         tools:text="Show location" />
 
     <LinearLayout
         android:id="@+id/Options"
         android:layout_width="415dp"
         android:layout_height="54dp"
+        android:layout_marginTop="12dp"
         android:background="@android:color/background_light"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="292dp">
+        app:layout_constraintTop_toBottomOf="@+id/show_location"
+        tools:layout_editor_absoluteX="-1dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -204,9 +229,14 @@
         android:id="@+id/favours_table"
         android:layout_width="415dp"
         android:layout_height="383dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
         android:fillViewport="true"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="347dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Options">
 
         <LinearLayout
             android:layout_width="match_parent"

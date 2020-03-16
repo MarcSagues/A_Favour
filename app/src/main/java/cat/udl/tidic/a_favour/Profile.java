@@ -21,6 +21,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+      Log.d("Proifile","asdasdasda");
 
         UserModel user = new UserModel();
         user.setUsername("Peptio787");
@@ -45,6 +46,9 @@ public class Profile extends AppCompatActivity {
                 Log.d("MainActivity", t.getMessage());
             }
         });
+
+        Call<UserModel> usr_profile = userService.getUserProfile();
+        Log.d("Profile",usr_profile + "asdasdasda");
 
         //String token = tokenEditText.getText().toString();
         /*
