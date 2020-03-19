@@ -1,8 +1,9 @@
-package cat.udl.tidic.a_favour;
+package cat.udl.tidic.a_favour.Models;
 
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
+
 
 public class UserModel {
 
@@ -26,13 +27,24 @@ public class UserModel {
     private String phone;
     @SerializedName("photo")
     private String photo;
+    @SerializedName("stars")
+    private float stars;
+    @SerializedName("favoursDone")
+    private int favoursDone;
+    @SerializedName("timesHelped")
+    private int timesHelped;
+    @SerializedName("location")
+    private String location;
+    @SerializedName("token")
+    private String token;
 
 
     public UserModel() {
     }
 
 
-    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String genere, String password) {
+    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String genere, String password, float stars, int favoursDone, int timesHelped, String location)
+    {
         this.created_at = created_at;
         this.username = username;
         this.email = email;
@@ -41,6 +53,11 @@ public class UserModel {
         this.birthday = birthday;
         this.genere = genere;
         this.password = password;
+        this.stars = stars;
+        this.favoursDone = favoursDone;
+        this.timesHelped = timesHelped;
+        this.location = location;
+        this.token = "656e50e154865a5dc469b80437ed2f963b8f58c8857b66c9bf";
     }
 
     public String getCreated_at() {
@@ -122,9 +139,46 @@ public class UserModel {
         this.photo = photo;
     }
 
+    public float getStars() {
+        return stars;
+    }
+
+    public void setStars(float stars) {
+        this.stars = stars;
+    }
+
+    public int getFavoursDone() {
+        return favoursDone;
+    }
+
+    public void setFavoursDone(int favoursDone) {
+        this.favoursDone = favoursDone;
+    }
+
+    public int getTimesHelped() {
+        return timesHelped;
+    }
+
+    public void setTimesHelped(int timesHelped) {
+        this.timesHelped = timesHelped;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getToken()
+    {
+        return token;
+    }
+
     @NonNull
     @Override
     public String toString(){
-        return this.name + " " + this.surname;
+        return this.name + " " + this.surname + " "+  this.stars;
     }
 }

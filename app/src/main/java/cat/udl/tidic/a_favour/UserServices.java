@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.Map;
 
-import okhttp3.RequestBody;
+import cat.udl.tidic.a_favour.Models.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -33,4 +33,9 @@ public interface UserServices
     Call<Void> registerUser3(@Body JsonObject userJson);
 
     Call<UserModel> getUserProfile();
+
+    /*
+    @POST (createToken)
+    Call<ResponeBody> createToken(@Header Authoistation tokenAuth
+    */
 }
