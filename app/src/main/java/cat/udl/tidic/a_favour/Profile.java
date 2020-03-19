@@ -21,7 +21,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-      Log.d("Proifile","asdasdasda");
+    /*  Log.d("Proifile","asdasdasda");
 
         UserModel user = new UserModel();
         user.setUsername("Peptio787");

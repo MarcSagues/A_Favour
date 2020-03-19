@@ -24,6 +24,13 @@ public class Login extends AppCompatActivity {
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickOnRegister(v);
+            }
+        });
+
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 clickOnLogin(v);
             }
         });
@@ -39,12 +46,13 @@ public class Login extends AppCompatActivity {
 
     public void clickOnLogin(View v){
         //comprovar base de dades
-        Intent intent = new Intent (v.getContext(), Register.class);
+        Intent intent = new Intent (v.getContext(), Profile.class);
         startActivityForResult(intent, 0);
     }
 
-    public void clickOnRegister(){
-
+    public void clickOnRegister(View v){
+        Intent intent = new Intent (v.getContext(), Register.class);
+        startActivityForResult(intent, 0);
     }
 
 

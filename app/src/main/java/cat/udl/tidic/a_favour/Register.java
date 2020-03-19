@@ -30,6 +30,10 @@ public class Register extends AppCompatActivity {
         if (!pwd_txt.getText().equals(confirm_pwd_txt.getText())){ //comprovem que les contrasenyes siguin iguals
             sendMessage("Las contraseñas no coinciden");
         }
+        String p = "1234";
+        String salt = "16";
+        String encode_hash = Utils.encode(p,salt,29000);
+        System.out.println("PASSWORD_ENCRYPTED " + encode_hash);
         // comprovar base de dades
     }
 
