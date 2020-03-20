@@ -241,242 +241,74 @@
         app:layout_constraintTop_toBottomOf="@+id/Options">
 
         <LinearLayout
+            android:id="@+id/table_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/Fila1"
+                android:id="@+id/row_parent"
                 android:layout_width="match_parent"
-                android:layout_height="261dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="?android:attr/scrollbarSize"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
-                <TableRow
-                    android:id="@+id/tablerow1"
+                <LinearLayout
+                    android:id="@+id/row1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
+                    android:layout_weight="3"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/FavourCell"
+                    <ImageView
+                        android:id="@+id/imgfavour"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
+                        android:layout_height="151dp"
+                        app:srcCompat="@drawable/ic_launcher_background" />
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textSize="24sp" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
+                    <TextView
+                        android:id="@+id/desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+                </LinearLayout>
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tablerow2"
+                <LinearLayout
+                    android:id="@+id/row2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
+                    android:layout_weight="3"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/FavourCell"
+                    <ImageView
+                        android:id="@+id/imgfavour"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
+                        android:layout_height="151dp"
+                        app:srcCompat="@drawable/ic_launcher_background" />
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textSize="24sp" />
 
-                            <ImageView
-                                android:id="@+id/favour_image"
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:id="@+id/favour_money"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Fila2"
-                android:layout_width="match_parent"
-                android:layout_height="261dp"
-                android:layout_margin="?android:attr/scrollbarSize"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:id="@+id/favour_money"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
+                    <TextView
+                        android:id="@+id/desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+                </LinearLayout>
 
             </LinearLayout>
 
