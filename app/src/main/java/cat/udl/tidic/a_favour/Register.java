@@ -2,9 +2,7 @@ package cat.udl.tidic.a_favour;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +13,7 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.Objects;
 
+import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

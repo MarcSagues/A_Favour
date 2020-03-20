@@ -2,6 +2,7 @@ package cat.udl.tidic.a_favour.Models;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -116,5 +117,10 @@ public class ProfileViewModel
     {
         String location = this.user.getLocation() == null ? "No location" : this.user.getLocation();
         return location;
+    }
+
+    public void showLocation(View v)
+    {
+        Log.d("Profile", "S'ha premut l'opció SHOW LOCATION");
     }
 }
