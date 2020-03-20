@@ -32,5 +32,6 @@ public interface UserServices
     @POST("/users/register")
     Call<Void> registerUser3(@Body JsonObject userJson);
 
+
     Call<UserModel> getUserProfile();
 }
