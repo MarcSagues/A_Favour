@@ -52,7 +52,6 @@ public class Register extends AppCompatActivity {
         String valor1 = pwd_txt.getText().toString();
         String valor2 = confirm_pwd_txt.getText().toString();
 
-
         if (valor1.equals(valor2)){ //comprovem que les contrasenyes siguin iguals
 
             // Course API requires passwords in sha-256 in passlib format so:
@@ -73,10 +72,10 @@ public class Register extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.code() == 200){
-                        Toast.makeText(Register.this,"User registered", Toast.LENGTH_SHORT).show();
+                        sendMessage("User registered");
                     }else{
                         try {
-                            Toast.makeText(Register.this, Objects.requireNonNull(response.errorBody()).string(), Toast.LENGTH_SHORT).show();
+                            sendMessage(Objects.requireNonNull(response.errorBody().string()));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
