@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import cat.udl.tidic.a_favour.Views.ProfileView;
+
 public class Login extends AppCompatActivity {
 
     private EditText user_txt;
@@ -46,7 +48,7 @@ public class Login extends AppCompatActivity {
 
     public void clickOnLogin(View v){
         //comprovar base de dades
-        Intent intent = new Intent (v.getContext(), Profile.class);
+        Intent intent = new Intent (v.getContext(), ProfileView.class);
         startActivityForResult(intent, 0);
     }
 
