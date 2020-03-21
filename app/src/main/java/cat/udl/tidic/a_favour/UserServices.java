@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.Map;
 
-import cat.udl.tidic.a_favour.Models.UserModel;
+import cat.udl.tidic.a_favour.models.UserModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

@@ -9,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
-import cat.udl.tidic.a_favour.Models.ProfileViewModel;
+import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
 
 public class ProfileView extends AppCompatActivity
 {
@@ -33,9 +35,11 @@ public class ProfileView extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        profileViewModel = new ProfileViewModel(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        ActivityProfileBinding activityProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
+        profileViewModel = new ProfileViewModel(this);
+        activityProfileBinding.setProfileViewModel(profileViewModel);
         getAllActivityData();
         setAllListeners();
     }
@@ -75,14 +79,6 @@ public class ProfileView extends AppCompatActivity
             }
         });
 
-        //Mostrar l'ubicació de l'usuari
-        show_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d("Profile", "S'ha premut l'opció SHOW LOCATION");
-            }
-        });
 
         //Canviar a la taula de favors
         favours_btn.setOnClickListener(new View.OnClickListener() {

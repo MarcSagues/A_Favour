@@ -1,17 +1,11 @@
-package cat.udl.tidic.a_favour.Models;
+package cat.udl.tidic.a_favour.models;
 
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import cat.udl.tidic.a_favour.Models.UserModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
@@ -119,8 +113,19 @@ public class ProfileViewModel
         return location;
     }
 
-    public void showLocation(View v)
+    public void showLocationBtn()
     {
         Log.d("Profile", "S'ha premut l'opció SHOW LOCATION");
     }
+    public void backArrowBtn()
+    {
+        Log.d("Profile", "S'ha premut l'opció DE TIRAR ENRRERE");
+    }
+    public void favoursBtn() { Log.d("Profile", "S'ha premut l'opció DE FAVOURS"); }
+    public void favouritesBtn() { Log.d("Profile", "S'ha premut l'opció FAVOURITES"); }
+    public void opinionsBtn()
+    {
+        Log.d("Profile", "S'ha premut l'opció OPINIONS");
+    }
+
 }

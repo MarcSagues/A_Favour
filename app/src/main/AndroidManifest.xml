@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Register"></activity>
-        <activity android:name=".Login">
+        <activity android:name=".Views.ProfileView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

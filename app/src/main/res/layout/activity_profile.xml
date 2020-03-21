@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="ProfileViewModel"
+            type="cat.udl.tidic.a_favour.models.ProfileViewModel" />
+    </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.ProfileView">
@@ -29,6 +34,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="16dp"
+        android:onClick="@{() -> ProfileViewModel.backArrowBtn()}"
         app:layout_constraintStart_toStartOf="@+id/up_panel"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow" />
@@ -157,9 +163,9 @@
         android:layout_marginLeft="13dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
-        android:onClick="@{() -> ProfileViewModel.sohwLocation()}"
         android:gravity="center_vertical"
         android:text="Show Location"
+        android:onClick="@{() -> ProfileViewModel.showLocationBtn()}"
         android:textColor="@android:color/holo_red_light"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/user_location"
@@ -173,8 +179,10 @@
         android:layout_marginTop="12dp"
         android:background="@android:color/background_light"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/show_location"
-        tools:layout_editor_absoluteX="-1dp">
+        app:layout_constraintBottom_toTopOf="@+id/favours_table"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_location">
 
         <TableRow
             android:layout_width="match_parent"
@@ -189,6 +197,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
+                android:onClick="@{() -> ProfileViewModel.favoursBtn()}"
                 android:padding="?android:attr/scrollbarSize"
                 android:text="Favours"
                 android:textAllCaps="false" />
@@ -207,6 +216,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
+                android:onClick="@{() -> ProfileViewModel.favouritesBtn()}"
                 android:text="Favorites"
                 android:textAllCaps="false"
                 android:textColor="#8C8C8C" />
@@ -225,6 +235,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
+                android:onClick="@{() -> ProfileViewModel.opinionsBtn()}"
                 android:text="Opinons"
                 android:textAllCaps="false"
                 android:textColor="#8C8C8C" />
@@ -274,14 +285,12 @@
                         app:srcCompat="@drawable/ic_launcher_background" />
 
                     <TextView
-                        android:id="@+id/amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textSize="24sp" />
 
                     <TextView
-                        android:id="@+id/desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TextView" />
@@ -296,20 +305,17 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imgfavour"
                         android:layout_width="match_parent"
                         android:layout_height="151dp"
                         app:srcCompat="@drawable/ic_launcher_background" />
 
                     <TextView
-                        android:id="@+id/amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textSize="24sp" />
 
                     <TextView
-                        android:id="@+id/desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TextView" />
@@ -321,3 +327,4 @@
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
