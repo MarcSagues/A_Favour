@@ -3,11 +3,15 @@ package cat.udl.tidic.a_favour.models;
 import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
+import cat.udl.tidic.a_favour.User;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import retrofit2.Call;
@@ -16,20 +20,18 @@ import retrofit2.Response;
 
 public class ProfileViewModel
 {
-    private UserModel user = new UserModel();
+    //private UserModel user = new UserModel();
     private UserServices userService;
-    private ProfileView view;
 
 
-    public ProfileViewModel(ProfileView view)
+    public MutableLiveData<UserModel> user = new MutableLiveData<>();
+    public LiveData<UserModel> getUserProfile(){ return user; }
+
+    public ProfileViewModel()
     {
-        //Aqui li passo la view perque sino el Profile s'actualitza abans de que aquesta classe pugui obtindre les dades
-        // del usuari, ja que la petició GET tarda una mica
-
-        this.view = view;
         getUser();
-        userService =  RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
     }
+
    void getUser()
    {
 
@@ -49,9 +51,7 @@ public class ProfileViewModel
 
                try
                {
-                   user = response.body();
-                   setUser(user);
-                   view.updateUI();
+                   user.setValue(response.body());
                }
                catch (Exception e) { Log.e("ProfileViewModel", e.getMessage() + "ERROR");}
            }
@@ -59,31 +59,26 @@ public class ProfileViewModel
            @Override
            public void onFailure(Call<UserModel> call, Throwable t)
            {
-               view.setErrorLayout();
+               //view.setErrorLayout();
                Log.e("ProfileViewModel",  t.getMessage());
                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
            }
        });
    }
 
-   public void setUser(UserModel user)
-   {
-       this.user = user;
-   }
-
    public String getUsername()
    {
-       return this.user.getUsername();
+       return this.user.getValue().getUsername();
    }
 
-    public float getStars()
+    public float getStars_()
     {
-        return this.user.getStars();
+        return this.user.getValue().getStars();
     }
 
-    public ImageView[] refreshStars(ImageView[] stars)
+    public ImageView[] getStars(ImageView[] stars)
     {
-        float roundedStars = Math.round(getStars() * 2) / 2.0f;
+        float roundedStars = Math.round(getStars_() * 2) / 2.0f;
         int fullStars = (int) roundedStars;
         float decimalpart =  roundedStars - (int) roundedStars;
 
@@ -100,16 +95,16 @@ public class ProfileViewModel
         return stars;
     }
 
-    public String updateFavoursInfo()
+    public String getFavoursInfo()
     {
-        int favoursDone = this.user.getFavoursDone();
-        int timesHelped = this.user.getTimesHelped();
+        int favoursDone = this.user.getValue().getFavoursDone();
+        int timesHelped = this.user.getValue().getTimesHelped();
         return Integer.toString(favoursDone) + " favours done, " + Integer.toString(timesHelped) + " times helped";
     }
 
     public String  getLocation()
     {
-        String location = this.user.getLocation() == null ? "No location" : this.user.getLocation();
+        String location = this.user.getValue().getLocation() == null ? "No location" : this.user.getValue().getLocation();
         return location;
     }
 

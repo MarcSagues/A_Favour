@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.LiveData;
 
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
+import cat.udl.tidic.a_favour.models.UserModel;
 
 public class ProfileView extends AppCompatActivity
 {
@@ -31,17 +33,16 @@ public class ProfileView extends AppCompatActivity
     Button favourites_btn;
     Button opinions_btn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ActivityProfileBinding activityProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
-        profileViewModel = new ProfileViewModel(this);
+        profileViewModel = new ProfileViewModel();
         activityProfileBinding.setProfileViewModel(profileViewModel);
         getAllActivityData();
-        setAllListeners();
+        setUpProfileListeners();
     }
 
     private void getAllActivityData()
@@ -67,63 +68,27 @@ public class ProfileView extends AppCompatActivity
         //Falta crear tot lo relacionat amb els anuncis que ha publicat
     }
 
-    private  void setAllListeners()
+    private void setUpProfileListeners()
     {
-
-        //Mostrar l'ubicació de l'usuari
-        back_arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d("Profile", "S'ha premut l'opció ANAR ENRRERE");
-            }
-        });
-
-
-        //Canviar a la taula de favors
-        favours_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d("Profile", "S'ha premut l'opció show FAVOURS del menu");
-            }
-        });
-
-        //Canviar a la taula de favors
-        favourites_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d("Profile", "S'ha premut l'opció FAVOURITES del menu");
-            }
-        });
-
-        //Canviar a la taula de favors
-        opinions_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d("Profile", "S'ha premut l'opció OPINIONS del menu");
-            }
-        });
+        profileViewModel.getUserProfile().observe(this, this::onGetUserData);
     }
 
-    @SuppressLint("SetTextI18n")
-    public void updateUI()
+    private void onGetUserData(UserModel u)
     {
-        //TODO
         //profil_image.setImageResource();
 
         //El nom de l'usuari
         user_name.setText(profileViewModel.getUsername());
+
         //Poso les estrelles necessaries
-        stars = profileViewModel.refreshStars(stars);
+        stars = profileViewModel.getStars(stars);
+
         //Informació dels facvors que ha fet i que ha rebut
-        favours_info.setText(profileViewModel.updateFavoursInfo());
+        favours_info.setText(profileViewModel.getFavoursInfo());
+
         //Informació de l'ubicació de l'usuari
         user_location.setText(profileViewModel.getLocation());
     }
-
 
     public void setErrorLayout()
     {
