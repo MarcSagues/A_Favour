@@ -1,4 +1,4 @@
-package cat.udl.tidic.a_favour;
+package cat.udl.tidic.a_favour.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,10 @@ import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.Objects;
 
+import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
+import cat.udl.tidic.a_favour.UserServices;
+import cat.udl.tidic.a_favour.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,8 +54,15 @@ public class Register extends AppCompatActivity {
         String valor1 = pwd_txt.getText().toString();
         String valor2 = confirm_pwd_txt.getText().toString();
 
-        if (valor1.equals(valor2)){ //comprovem que les contrasenyes siguin iguals
+        if (!valor1.equals(valor2)){ //comprovem que les contrasenyes siguin iguals
 
+            sendMessage("Las contraseñas no coinciden");
+
+        } else if(valor1.length() < 5){
+
+            sendMessage("La contraseña tiene que tener mínimo 5 caracteres");
+
+        } else {
             // Course API requires passwords in sha-256 in passlib format so:
             String p = pwd_txt.getText().toString();
             String salt = "16";
@@ -73,7 +83,7 @@ public class Register extends AppCompatActivity {
                     if (response.code() == 200){
                         sendMessage("User registered");
                     }else{
-                        try {
+                        try { //Atrapar error usuari existent / correu existent
                             sendMessage(Objects.requireNonNull(response.errorBody().string()));
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -85,9 +95,6 @@ public class Register extends AppCompatActivity {
                 public void onFailure(Call<Void> call, Throwable t) {
                 }
             });
-
-        } else {
-            sendMessage("Las contraseñas no coinciden");
         }
 
 

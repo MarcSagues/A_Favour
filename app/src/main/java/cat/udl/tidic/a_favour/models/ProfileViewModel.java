@@ -71,6 +71,10 @@ public class ProfileViewModel
        return this.user.getValue().getUsername();
    }
 
+   public String getPassword(){
+        return this.user.getValue().getPassword();
+   }
+
     public float getStars_()
     {
         return this.user.getValue().getStars();

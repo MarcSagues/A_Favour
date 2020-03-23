@@ -1,6 +1,7 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +44,11 @@ public class ProfileView extends AppCompatActivity
         activityProfileBinding.setProfileViewModel(profileViewModel);
         getAllActivityData();
         setUpProfileListeners();
+    }
+
+    public void backArrowAction(View v){
+        Intent intent = new Intent (v.getContext(), Login.class);
+        startActivityForResult(intent, 0);
     }
 
     private void getAllActivityData()
