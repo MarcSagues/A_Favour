@@ -33,4 +33,5 @@ public class Utils {
         return String.format(Locale.ENGLISH,
                 "$%s$%d$%s$%s", algorithm, iterations, salt_hash, hash);
     }
+
 }

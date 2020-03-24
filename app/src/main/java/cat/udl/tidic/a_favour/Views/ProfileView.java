@@ -1,9 +1,7 @@
 package cat.udl.tidic.a_favour.Views;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.LiveData;
 
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
@@ -47,7 +44,7 @@ public class ProfileView extends AppCompatActivity
     }
 
     public void backArrowAction(View v){
-        Intent intent = new Intent (v.getContext(), Login.class);
+        Intent intent = new Intent (v.getContext(), LoginView.class);
         startActivityForResult(intent, 0);
     }
 

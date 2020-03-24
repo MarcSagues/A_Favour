@@ -9,20 +9,17 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.RetrofitClientInstance;
+import cat.udl.tidic.a_favour.UserServices;
+import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class Login extends AppCompatActivity {
+public class LoginView extends AppCompatActivity {
 
     private EditText user_txt;
     private EditText pwd_txt;
@@ -58,7 +55,7 @@ public class Login extends AppCompatActivity {
         register_btn = findViewById(R.id.register_btn);
         login_btn = findViewById(R.id.login_btn);
 
-        this.mPreferences = PreferencesProvider.providePreferences();
+        mPreferences = PreferencesProvider.providePreferences();
 
     }
 
@@ -67,21 +64,29 @@ public class Login extends AppCompatActivity {
 
         String username = user_txt.getText().toString();
         String password = pwd_txt.getText().toString();
-        String token_decoded = username + ":" + password;
-        byte[] bytes = token_decoded.getBytes(StandardCharsets.UTF_8);
-        String _token = Base64.encodeToString(bytes, Base64.DEFAULT);
-        mPreferences.edit().putString("token", _token).apply();
-        Toast.makeText(getApplicationContext(),
-                "Token obtained properly", Toast.LENGTH_SHORT).show();
+
+        ProfileViewModel profileViewModel = new ProfileViewModel();
+
+            String token_decoded = username + ":" + password;
+            byte[] bytes = token_decoded.getBytes(StandardCharsets.UTF_8);
+            String _token = Base64.encodeToString(bytes, Base64.DEFAULT);
+            mPreferences.edit().putString("token", _token).apply();
+            profileViewModel.setUser(username, password, mPreferences);
+            Toast.makeText(getApplicationContext(),
+                    "Token obtained properly", Toast.LENGTH_SHORT).show();
+
+
+
+
 
     }
 
     public void clickOnRegister(View v){
-        Intent intent = new Intent (v.getContext(), Register.class);
+        Intent intent = new Intent (v.getContext(), RegisterView.class);
         startActivityForResult(intent, 0);
     }
         public void sendMessage(String message){
-            Toast.makeText(Login.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
+            Toast.makeText(LoginView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
         }
 
 
