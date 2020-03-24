@@ -55,7 +55,7 @@ public class LoginView extends AppCompatActivity {
         register_btn = findViewById(R.id.register_btn);
         login_btn = findViewById(R.id.login_btn);
 
-        mPreferences = PreferencesProvider.providePreferences();
+
 
     }
 
@@ -66,14 +66,9 @@ public class LoginView extends AppCompatActivity {
         String password = pwd_txt.getText().toString();
 
         ProfileViewModel profileViewModel = new ProfileViewModel();
+        profileViewModel.setUser(username, password);
 
-            String token_decoded = username + ":" + password;
-            byte[] bytes = token_decoded.getBytes(StandardCharsets.UTF_8);
-            String _token = Base64.encodeToString(bytes, Base64.DEFAULT);
-            mPreferences.edit().putString("token", _token).apply();
-            profileViewModel.setUser(username, password, mPreferences);
-            Toast.makeText(getApplicationContext(),
-                    "Token obtained properly", Toast.LENGTH_SHORT).show();
+
 
 
 

@@ -25,6 +25,7 @@ import cat.udl.tidic.a_favour.Utils;
 import cat.udl.tidic.a_favour.Views.LoginView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,6 +34,8 @@ public class ProfileViewModel
 {
     //private UserModel user = new UserModel();
     private UserServices userService;
+    private SharedPreferences mPreferences;
+    private String token;
 
 
     public MutableLiveData<UserModel> user = new MutableLiveData<>();
@@ -43,6 +46,7 @@ public class ProfileViewModel
         //getUser();
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
+        mPreferences = PreferencesProvider.providePreferences();
     }
 
    void getUser()
@@ -79,9 +83,23 @@ public class ProfileViewModel
        });
    }
 
-   public void setUser(String username, String password, SharedPreferences mPreferences){
+   public void setUser(String username, String password){
+
+       String token_decoded = username + ":" + password;
+       byte[] bytes = token_decoded.getBytes(StandardCharsets.UTF_8);
+       String _token = Base64.encodeToString(bytes, Base64.DEFAULT);
+       mPreferences.edit().putString("token", _token).apply();
+       setToken(_token);
+
+       //Toast.makeText(getApplicationContext(),
+         //      "Token obtained properly", Toast.LENGTH_SHORT).show();
 
 
+   }
+
+   public void setToken (String token){
+
+        this.token = token;
    }
 
    public String getUsername()
