@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.models;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
@@ -26,6 +27,7 @@ import cat.udl.tidic.a_favour.Views.LoginView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,17 +45,16 @@ public class ProfileViewModel
 
     public ProfileViewModel()
     {
-        //getUser();
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
         mPreferences = PreferencesProvider.providePreferences();
+        token = mPreferences.getString("token", "");
+        Log.d("Token:", token);
+        getUser();
     }
 
    void getUser()
    {
-
-       //Hardcoded
-       String token = "656e50e154865a5dc469b80437ed2f963b8f58c8857b66c9bf";
        Map<String, String> map = new HashMap<>();
        map.put("Authorization", token);
 
@@ -88,18 +89,45 @@ public class ProfileViewModel
        String token_decoded = username + ":" + password;
        byte[] bytes = token_decoded.getBytes(StandardCharsets.UTF_8);
        String _token = Base64.encodeToString(bytes, Base64.DEFAULT);
-       mPreferences.edit().putString("token", _token).apply();
-       setToken(_token);
+       //mPreferences.edit().putString("token", _token).apply();
+       _token = ("Authentication: " + _token).trim();
+       Call<ResponseBody> call = userService.createToken(_token);
+       call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-       //Toast.makeText(getApplicationContext(),
-         //      "Token obtained properly", Toast.LENGTH_SHORT).show();
+                            if (response.body() != null){
+                                try {
+                                    String token = response.body().string().split(":")[1];
+                                    token = token.substring(2, token.length()-2);
+                                    setToken(token);
+                                    Log.d("Login completed", token);
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else{
+                                try {
+                                    Log.d("Login completed", response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.d("Login failed", t.getMessage());
+                        }
+                    });
+
 
 
    }
 
    public void setToken (String token){
 
-        this.token = token;
+        mPreferences.edit().putString("token", token).apply();
    }
 
    public String getUsername()

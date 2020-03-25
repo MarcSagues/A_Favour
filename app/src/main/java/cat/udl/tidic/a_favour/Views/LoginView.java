@@ -68,8 +68,8 @@ public class LoginView extends AppCompatActivity {
         ProfileViewModel profileViewModel = new ProfileViewModel();
         profileViewModel.setUser(username, password);
 
-
-
+        Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+        startActivity(intent);
 
 
 
@@ -80,9 +80,9 @@ public class LoginView extends AppCompatActivity {
         Intent intent = new Intent (v.getContext(), RegisterView.class);
         startActivityForResult(intent, 0);
     }
-        public void sendMessage(String message){
-            Toast.makeText(LoginView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
-        }
+    public void sendMessage(String message){
+        Toast.makeText(LoginView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
+    }
 
 
 }
