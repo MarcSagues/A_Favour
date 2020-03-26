@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.nio.charset.StandardCharsets;
@@ -25,6 +27,7 @@ public class LoginView extends AppCompatActivity {
     private EditText pwd_txt;
     private Button register_btn;
     private Button login_btn;
+    private TextView title;
     private SharedPreferences mPreferences;
 
     @Override
@@ -54,9 +57,9 @@ public class LoginView extends AppCompatActivity {
         pwd_txt = findViewById(R.id.pwd_txt);
         register_btn = findViewById(R.id.register_btn);
         login_btn = findViewById(R.id.login_btn);
-
-
-
+        title = findViewById(R.id.title);
+        String a = getColoredSpanned("A","#ff3b5b");
+        title.setText(Html.fromHtml(a + " Favour"));
     }
 
     public void clickOnLogin(View v) {
@@ -76,6 +79,10 @@ public class LoginView extends AppCompatActivity {
 
     }
 
+    private String getColoredSpanned(String text, String color) {
+        String input = "<font color=" + color + ">" + text + "</font>";
+        return input;
+    }
     public void clickOnRegister(View v){
         Intent intent = new Intent (v.getContext(), RegisterView.class);
         startActivityForResult(intent, 0);
