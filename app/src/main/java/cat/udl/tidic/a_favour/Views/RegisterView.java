@@ -2,11 +2,14 @@ package cat.udl.tidic.a_favour.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -34,6 +37,8 @@ public class RegisterView extends AppCompatActivity {
     private UserServices userService;
     private EditText email_txt;
     private EditText phone_txt;
+    private TextView join_txt;
+    private TextView go_to_login_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,12 @@ public class RegisterView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ClickOnRegister(v);
+            }
+        });
+        go_to_login_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLogin(v);
             }
         });
 
@@ -67,6 +78,17 @@ public class RegisterView extends AppCompatActivity {
 
     }
 
+    public void goToLogin(View v) {
+
+
+        Intent intent = new Intent (getApplicationContext(), LoginView.class);
+        startActivity(intent);
+
+
+
+
+    }
+
 
     public void iniComponents(){
         user_txt = findViewById(R.id.user_txt);
@@ -77,7 +99,18 @@ public class RegisterView extends AppCompatActivity {
         gmail_btn = findViewById(R.id.gmail_btn);
         email_txt = findViewById(R.id.email_txt);
         phone_txt = findViewById(R.id.mobile_txt);
+        join_txt = findViewById(R.id.join_txt);
+        String join = getColoredSpanned("Join", "#000000");
+        String a = getColoredSpanned("A", "#FF3B5B");
+        String favour = getColoredSpanned("Favour", "#000000");
+        join_txt.setText(Html.fromHtml(join+" "+a+" "+favour));
+        go_to_login_txt = findViewById(R.id.go_to_login_txt);
 
+    }
+
+    private String getColoredSpanned(String text, String color) {
+        String input = "<font color=" + color + ">" + text + "</font>";
+        return input;
     }
 
     public void sendMessage(String message){
