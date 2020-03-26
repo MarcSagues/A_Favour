@@ -172,6 +172,7 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
+        android:foregroundGravity="clip_vertical"
         android:gravity="center_vertical"
         android:onClick="@{() -> ProfileViewModel.showLocationBtn()}"
         android:text="Show Location"
