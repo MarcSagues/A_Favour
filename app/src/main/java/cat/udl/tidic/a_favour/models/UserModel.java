@@ -1,4 +1,4 @@
-package cat.udl.tidic.a_favour.Models;
+package cat.udl.tidic.a_favour.models;
 
 import androidx.annotation.NonNull;
 

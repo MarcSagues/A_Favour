@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="ProfileViewModel"
+            type="cat.udl.tidic.a_favour.models.ProfileViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Views.ProfileView">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/up_panel"
@@ -23,8 +32,19 @@
         android:layout_width="35dp"
         android:layout_height="23dp"
         android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
         android:layout_marginTop="16dp"
+        android:onClick="backArrowAction"
+        app:layout_constraintStart_toStartOf="@+id/up_panel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow" />
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="35dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="360dp"
+        android:layout_marginTop="16dp"
+        android:onClick="backArrowAction"
         app:layout_constraintStart_toStartOf="@+id/up_panel"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow" />
@@ -150,12 +170,13 @@
         android:layout_width="119dp"
         android:layout_height="29dp"
         android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
+        android:foregroundGravity="clip_vertical"
         android:gravity="center_vertical"
+        android:onClick="@{() -> ProfileViewModel.showLocationBtn()}"
         android:text="Show Location"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="#FF3B5B"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/user_location"
         app:layout_constraintTop_toBottomOf="@+id/favours_info"
@@ -166,16 +187,17 @@
         android:layout_width="415dp"
         android:layout_height="54dp"
         android:layout_marginTop="12dp"
-        android:background="@android:color/background_light"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/show_location"
-        tools:layout_editor_absoluteX="-1dp">
+        app:layout_constraintBottom_toTopOf="@+id/favours_table"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_location">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/cardview_light_background"
+            android:background="#000000"
             android:gravity="center_horizontal">
 
             <Button
@@ -184,6 +206,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
+                android:onClick="@{() -> ProfileViewModel.favoursBtn()}"
                 android:padding="?android:attr/scrollbarSize"
                 android:text="Favours"
                 android:textAllCaps="false" />
@@ -202,6 +225,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
+                android:onClick="@{() -> ProfileViewModel.favouritesBtn()}"
                 android:text="Favorites"
                 android:textAllCaps="false"
                 android:textColor="#8C8C8C" />
@@ -220,6 +244,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
+                android:onClick="@{() -> ProfileViewModel.opinionsBtn()}"
                 android:text="Opinons"
                 android:textAllCaps="false"
                 android:textColor="#8C8C8C" />
@@ -241,242 +266,69 @@
         app:layout_constraintTop_toBottomOf="@+id/Options">
 
         <LinearLayout
+            android:id="@+id/table_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/Fila1"
+                android:id="@+id/row_parent"
                 android:layout_width="match_parent"
-                android:layout_height="261dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="?android:attr/scrollbarSize"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
-                <TableRow
-                    android:id="@+id/tablerow1"
+                <LinearLayout
+                    android:id="@+id/row1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
+                    android:layout_weight="3"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/FavourCell"
+                    <ImageView
+                        android:id="@+id/imgfavour"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
+                        android:layout_height="151dp"
+                        app:srcCompat="@drawable/ic_launcher_background" />
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textSize="24sp" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+                </LinearLayout>
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tablerow2"
+                <LinearLayout
+                    android:id="@+id/row2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
+                    android:layout_weight="3"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/FavourCell"
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
+                        android:layout_height="151dp"
+                        app:srcCompat="@drawable/ic_launcher_background" />
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        android:textSize="24sp" />
 
-                            <ImageView
-                                android:id="@+id/favour_image"
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:id="@+id/favour_money"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Fila2"
-                android:layout_width="match_parent"
-                android:layout_height="261dp"
-                android:layout_margin="?android:attr/scrollbarSize"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="1">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="70dp"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="217dp"
-                                app:srcCompat="@drawable/ic_launcher_background" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0">
-
-                            <TextView
-                                android:id="@+id/favour_money"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="TextView"
-                                android:textSize="24sp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:id="@+id/favour_desc"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="TextView" />
-
-                        </TableRow>
-
-                    </LinearLayout>
-                </TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -484,3 +336,4 @@
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,10 +4,12 @@ import com.google.gson.JsonObject;
 
 import java.util.Map;
 
-import cat.udl.tidic.a_favour.Models.UserModel;
+import cat.udl.tidic.a_favour.models.UserModel;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -32,10 +34,11 @@ public interface UserServices
     @POST("/users/register")
     Call<Void> registerUser3(@Body JsonObject userJson);
 
+
+
     Call<UserModel> getUserProfile();
 
-    /*
-    @POST (createToken)
-    Call<ResponeBody> createToken(@Header Authoistation tokenAuth
-    */
+    @POST ("/account/create_token")
+    Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);
+
 }
