@@ -38,6 +38,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow" />
 
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="35dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="360dp"
+        android:layout_marginTop="16dp"
+        android:onClick="backArrowAction"
+        app:layout_constraintStart_toStartOf="@+id/up_panel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow" />
+
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -159,13 +170,12 @@
         android:layout_width="119dp"
         android:layout_height="29dp"
         android:layout_marginStart="13dp"
-        android:layout_marginLeft="13dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:gravity="center_vertical"
-        android:text="Show Location"
         android:onClick="@{() -> ProfileViewModel.showLocationBtn()}"
-        android:textColor="@android:color/holo_red_light"
+        android:text="Show Location"
+        android:textColor="#FF3B5B"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/user_location"
         app:layout_constraintTop_toBottomOf="@+id/favours_info"
@@ -176,7 +186,6 @@
         android:layout_width="415dp"
         android:layout_height="54dp"
         android:layout_marginTop="12dp"
-        android:background="@android:color/background_light"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/favours_table"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +196,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/cardview_light_background"
+            android:background="#000000"
             android:gravity="center_horizontal">
 
             <Button
