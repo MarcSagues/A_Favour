@@ -58,6 +58,7 @@ public class LoginView extends AppCompatActivity {
 
     public void clickOnLogin(View v) {
 
+
         String username = userTxt.getText().toString();
         String password = pwdTxt.getText().toString();
 

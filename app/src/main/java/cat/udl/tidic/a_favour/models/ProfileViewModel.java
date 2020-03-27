@@ -3,6 +3,7 @@ package cat.udl.tidic.a_favour.models;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
+import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import okhttp3.ResponseBody;
@@ -72,12 +74,13 @@ public class ProfileViewModel
            @Override
            public void onFailure(Call<UserModel> call, Throwable t)
            {
-               //view.setErrorLayout();
+
                Log.e("ProfileViewModel",  t.getMessage());
                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
            }
        });
    }
+
 
    public void setUser(String username, String password){
 

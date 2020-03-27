@@ -12,5 +12,9 @@
     <string name="edit">Edit profile</string>
     <string name="back_arrow">Go to previous page</string>
     <string name="location">Location</string>
+    <string name="dialogMessage">Cannot connect to databse server</string>
+    <string name="dialogTitle">Conexion error</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -49,6 +50,7 @@ public class ProfileView extends AppCompatActivity
         startActivityForResult(intent, 0);
     }
 
+
     private void getAllActivityData()
     {
         backArrow = findViewById(R.id.back_arrow);
@@ -61,6 +63,7 @@ public class ProfileView extends AppCompatActivity
         userLocation = findViewById(R.id.user_location);
         showLocation = findViewById(R.id.show_location);
 
+        setErrorLayout();
         favoursBtn = findViewById(R.id.favours_btn);
         favouritesBtn = findViewById(R.id.favourites_btn);
         opinionsBtn = findViewById(R.id.opinions_btn);
@@ -89,8 +92,23 @@ public class ProfileView extends AppCompatActivity
         userLocation.setText(profileViewModel.getLocation());
     }
 
+
     public void setErrorLayout()
     {
         //Si falla la connexió s'haura de posar un layout de "error"
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.dialogMessage).setTitle(R.string.dialogTitle);
+
+        builder.setPositiveButton(R.string.retry, (dialog, id) ->
+        {
+            profileViewModel = new ProfileViewModel();
+        });
+        builder.setNegativeButton(R.string.cancel, (dialog, id) ->
+        {
+            dialog.cancel();
+        });
+
+        AlertDialog dialog = builder.show();
     }
 }
