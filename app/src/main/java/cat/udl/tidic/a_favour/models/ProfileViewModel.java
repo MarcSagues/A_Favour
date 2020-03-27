@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.models;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
@@ -141,11 +142,16 @@ public class ProfileViewModel
         return this.user.getValue().getStars();
     }
 
-    public String getFavoursInfo()
+    public String getFavoursDone()
     {
         int favoursDone = this.user.getValue().getFavoursDone();
+        return Integer.toString(favoursDone);
+    }
+
+    public String getTimesHelped()
+    {
         int timesHelped = this.user.getValue().getTimesHelped();
-        return Integer.toString(favoursDone) + " favours done, " + Integer.toString(timesHelped) + " times helped";
+        return Integer.toString(timesHelped);
     }
 
     public String  getLocation()

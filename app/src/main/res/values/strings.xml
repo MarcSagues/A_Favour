@@ -2,7 +2,9 @@
     <string name="app_name">A_Favour</string>
     <string name="title_activity_register">Register</string>
     <string name="showLocation">Show location</string>
-    <string name="favoursInfo">favours done, times helped</string>
+    <string name="favoursDone">favours done</string>
+    <string name="timesHelped">times helped</string>
+    <string name="UserName">User Name</string>
     <string name="favours">Favours</string>
     <string name="favourites">Favourites</string>
     <string name="opinions">Opinions</string>
