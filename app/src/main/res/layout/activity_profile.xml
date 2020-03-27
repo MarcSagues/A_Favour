@@ -33,6 +33,7 @@
         android:layout_height="23dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/back_arrow"
         android:onClick="backArrowAction"
         app:layout_constraintStart_toStartOf="@+id/up_panel"
         app:layout_constraintTop_toTopOf="parent"
@@ -53,19 +54,20 @@
         android:transformPivotY="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
-        android:theme="@style/RatingBar"/>/>
+        android:theme="@style/RatingBar"/>
 
 
     <ImageView
         android:id="@+id/edit"
-        android:layout_width="35dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="360dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="46dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="348dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/edit"
         android:onClick="backArrowAction"
         app:layout_constraintStart_toStartOf="@+id/up_panel"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow" />
+        app:srcCompat="@drawable/pencil" />
 
     <TextView
         android:id="@+id/name"
@@ -73,11 +75,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
-        android:text="User Name"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="@color/tecxtColor"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_panel" />
+        app:layout_constraintTop_toBottomOf="@+id/up_panel"
+        tools:text="User Name" />
 
     <ImageView
         android:id="@+id/profile_image"
@@ -85,7 +87,7 @@
         android:layout_height="133dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:contentDescription="@string/profileImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up_panel"
         app:srcCompat="@drawable/example_person" />
@@ -95,8 +97,8 @@
         android:layout_width="34dp"
         android:layout_height="33dp"
         android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
         android:layout_marginTop="10dp"
+        android:contentDescription="@string/favours"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image"
         app:srcCompat="@drawable/handshacke" />
@@ -106,22 +108,20 @@
         android:layout_width="207dp"
         android:layout_height="33dp"
         android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:text="7 favours, 4 times helped "
-        android:textColor="@color/cardview_dark_background"
+        android:text="@string/favoursInfo"
+        android:textColor="@color/tecxtColor"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/favours_icon"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image"
-        tools:text="7 favours, 4 times helped " />
+        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
     <ImageView
         android:id="@+id/location_icon"
         android:layout_width="23dp"
         android:layout_height="32dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:contentDescription="@string/location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/favours_icon"
         app:srcCompat="@drawable/location" />
@@ -131,14 +131,13 @@
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
         android:layout_marginTop="4dp"
         android:gravity="center_vertical"
-        android:text="08700, Igualada"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="@color/tecxtColor"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/location_icon"
-        app:layout_constraintTop_toBottomOf="@+id/favours_info" />
+        app:layout_constraintTop_toBottomOf="@+id/favours_info"
+        tools:text="08700, Igualada" />
 
     <TextView
         android:id="@+id/show_location"
@@ -150,7 +149,6 @@
         android:foregroundGravity="clip_vertical"
         android:gravity="center_vertical"
         android:onClick="@{() -> ProfileViewModel.showLocationBtn()}"
-        android:text="Show Location"
         android:textColor="#FF3B5B"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/user_location"
@@ -183,7 +181,7 @@
                 android:background="#E8E8E8"
                 android:onClick="@{() -> ProfileViewModel.favoursBtn()}"
                 android:padding="?android:attr/scrollbarSize"
-                android:text="Favours"
+                android:text="@string/favours"
                 android:textAllCaps="false" />
         </TableRow>
 
@@ -201,7 +199,7 @@
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
                 android:onClick="@{() -> ProfileViewModel.favouritesBtn()}"
-                android:text="Favorites"
+                android:text="@string/favourites"
                 android:textAllCaps="false"
                 android:textColor="#8C8C8C" />
         </TableRow>
@@ -220,7 +218,7 @@
                 android:layout_gravity="center"
                 android:background="#E8E8E8"
                 android:onClick="@{() -> ProfileViewModel.opinionsBtn()}"
-                android:text="Opinons"
+                android:text="@string/opinions"
                 android:textAllCaps="false"
                 android:textColor="#8C8C8C" />
         </TableRow>

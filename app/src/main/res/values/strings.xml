@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">A_Favour</string>
     <string name="title_activity_register">Register</string>
+    <string name="showLocation">Show location</string>
+    <string name="favoursInfo">favours done, times helped</string>
+    <string name="favours">Favours</string>
+    <string name="favourites">Favourites</string>
+    <string name="opinions">Opinions</string>
+
+    <!---Image Descriptions-->
+    <string name="profileImage">Opinions</string>
+    <string name="edit">Edit profile</string>
+    <string name="back_arrow">Go to previous page</string>
+    <string name="location">Location</string>
+
 </resources>
