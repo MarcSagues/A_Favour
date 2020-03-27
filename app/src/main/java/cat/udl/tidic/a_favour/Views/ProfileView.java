@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,16 +21,16 @@ public class ProfileView extends AppCompatActivity
     ProfileViewModel profileViewModel;
 
     //Layout elements
-    ImageView back_arrow;
-    TextView user_name;
-    ImageView[] stars;
-    ImageView profil_image;
-    TextView favours_info;
-    TextView user_location;
-    TextView show_location;
-    Button favours_btn;
-    Button favourites_btn;
-    Button opinions_btn;
+    ImageView backArrow;
+    TextView userName;
+    RatingBar stars;
+    ImageView profilImage;
+    TextView favoursInfo;
+    TextView userLocation;
+    TextView showLocation;
+    Button favoursBtn;
+    Button favouritesBtn;
+    Button opinionsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,24 +51,19 @@ public class ProfileView extends AppCompatActivity
 
     private void getAllActivityData()
     {
-        back_arrow = findViewById(R.id.back_arrow);
-        user_name = findViewById(R.id.name);
+        backArrow = findViewById(R.id.back_arrow);
+        userName = findViewById(R.id.name);
 
-        stars = new ImageView[5];
-        stars[0] = findViewById(R.id.star1);
-        stars[1] = findViewById(R.id.star2);
-        stars[2] = findViewById(R.id.star3);
-        stars[3] = findViewById(R.id.star4);
-        stars[4] = findViewById(R.id.star5);
+        stars = findViewById(R.id.stars);
 
-        profil_image = findViewById(R.id.profile_image);
-        favours_info = findViewById(R.id.favours_info);
-        user_location = findViewById(R.id.user_location);
-        show_location = findViewById(R.id.show_location);
+        profilImage = findViewById(R.id.profile_image);
+        favoursInfo = findViewById(R.id.favours_info);
+        userLocation = findViewById(R.id.user_location);
+        showLocation = findViewById(R.id.show_location);
 
-        favours_btn = findViewById(R.id.favours_btn);
-        favourites_btn = findViewById(R.id.favourites_btn);
-        opinions_btn = findViewById(R.id.opinions_btn);
+        favoursBtn = findViewById(R.id.favours_btn);
+        favouritesBtn = findViewById(R.id.favourites_btn);
+        opinionsBtn = findViewById(R.id.opinions_btn);
         //Falta crear tot lo relacionat amb els anuncis que ha publicat
     }
 
@@ -81,20 +77,20 @@ public class ProfileView extends AppCompatActivity
         //profil_image.setImageResource();
 
         //El nom de l'usuari
-        user_name.setText(profileViewModel.getUsername());
+        userName.setText(profileViewModel.getUsername());
 
         //Poso les estrelles necessaries
-        stars = profileViewModel.getStars(stars);
+        stars.setRating(profileViewModel.getStars());
 
         //Informació dels facvors que ha fet i que ha rebut
-        favours_info.setText(profileViewModel.getFavoursInfo());
+        favoursInfo.setText(profileViewModel.getFavoursInfo());
 
         //Informació de l'ubicació de l'usuari
-        user_location.setText(profileViewModel.getLocation());
+        userLocation.setText(profileViewModel.getLocation());
     }
 
     public void setErrorLayout()
     {
-
+        //Si falla la connexió s'haura de posar un layout de "error"
     }
 }
