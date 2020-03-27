@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.app.NavUtils;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -51,7 +52,7 @@ public class ProfileViewModel
         getUser();
     }
 
-   void getUser()
+   public void getUser()
    {
        Map<String, String> map = new HashMap<>();
        map.put("Authorization", token);
@@ -75,6 +76,7 @@ public class ProfileViewModel
            public void onFailure(Call<UserModel> call, Throwable t)
            {
 
+               user.setValue(null);
                Log.e("ProfileViewModel",  t.getMessage());
                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
            }

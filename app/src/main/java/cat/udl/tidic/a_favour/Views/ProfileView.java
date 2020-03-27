@@ -2,6 +2,7 @@ package cat.udl.tidic.a_favour.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -63,7 +64,6 @@ public class ProfileView extends AppCompatActivity
         userLocation = findViewById(R.id.user_location);
         showLocation = findViewById(R.id.show_location);
 
-        setErrorLayout();
         favoursBtn = findViewById(R.id.favours_btn);
         favouritesBtn = findViewById(R.id.favourites_btn);
         opinionsBtn = findViewById(R.id.opinions_btn);
@@ -77,23 +77,28 @@ public class ProfileView extends AppCompatActivity
 
     private void onGetUserData(UserModel u)
     {
-        //profil_image.setImageResource();
 
-        //El nom de l'usuari
-        userName.setText(profileViewModel.getUsername());
+        if(u == null)
+        {
+            setErrorLayout(true);
+        }
+        else {
+            //El nom de l'usuari
+            userName.setText(profileViewModel.getUsername());
 
-        //Poso les estrelles necessaries
-        stars.setRating(profileViewModel.getStars());
+            //Poso les estrelles necessaries
+            stars.setRating(profileViewModel.getStars());
 
-        //Informació dels facvors que ha fet i que ha rebut
-        favoursInfo.setText(profileViewModel.getFavoursInfo());
+            //Informació dels facvors que ha fet i que ha rebut
+            favoursInfo.setText(profileViewModel.getFavoursInfo());
 
-        //Informació de l'ubicació de l'usuari
-        userLocation.setText(profileViewModel.getLocation());
+            //Informació de l'ubicació de l'usuari
+            userLocation.setText(profileViewModel.getLocation());
+        }
     }
 
 
-    public void setErrorLayout()
+    public void setErrorLayout(boolean a)
     {
         //Si falla la connexió s'haura de posar un layout de "error"
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -102,7 +107,7 @@ public class ProfileView extends AppCompatActivity
 
         builder.setPositiveButton(R.string.retry, (dialog, id) ->
         {
-            profileViewModel = new ProfileViewModel();
+            profileViewModel.getUser();
         });
         builder.setNegativeButton(R.string.cancel, (dialog, id) ->
         {

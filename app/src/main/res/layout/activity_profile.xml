@@ -149,6 +149,7 @@
         android:foregroundGravity="clip_vertical"
         android:gravity="center_vertical"
         android:onClick="@{() -> ProfileViewModel.showLocationBtn()}"
+        android:text="@string/showLocation"
         android:textColor="#FF3B5B"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/user_location"
