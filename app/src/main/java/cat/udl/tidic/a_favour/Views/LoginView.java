@@ -23,6 +23,8 @@ public class LoginView extends AppCompatActivity {
     private Button loginBtn;
     private TextView title;
     private SharedPreferences mPreferences;
+    private ProfileViewModel profileViewModel;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,15 @@ public class LoginView extends AppCompatActivity {
         title = findViewById(R.id.title);
         String a = getColoredSpanned("A","#ff3b5b");
         title.setText(Html.fromHtml(a + " Favour"));
+        profileViewModel = new ProfileViewModel();
+        //comprobar si hi ha token guardat
+        if (profileViewModel.existToken()){
+            Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+            startActivity(intent);
+        }
+
+
+
     }
 
     public void clickOnLogin(View v) {
@@ -62,7 +73,7 @@ public class LoginView extends AppCompatActivity {
         String username = userTxt.getText().toString();
         String password = pwdTxt.getText().toString();
 
-        ProfileViewModel profileViewModel = new ProfileViewModel();
+
         profileViewModel.setUser(username, password);
 
         Intent intent = new Intent (getApplicationContext(), ProfileView.class);

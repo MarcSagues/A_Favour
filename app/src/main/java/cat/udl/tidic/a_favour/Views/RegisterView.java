@@ -20,8 +20,7 @@ public class RegisterView extends AppCompatActivity {
     private EditText pwdTxt;
     private EditText userTxt;
     private EditText confirmPwdTxt;
-    private Button register_btn;
-    private Button facebookBtn;
+    private Button registerBtn;
     private Button gmailBtn;
     private UserServices userService;
     private EditText emailTxt;
@@ -34,7 +33,7 @@ public class RegisterView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         iniComponents();
-        register_btn.setOnClickListener(new View.OnClickListener() {
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ClickOnRegister(v);
@@ -73,8 +72,8 @@ public class RegisterView extends AppCompatActivity {
         userTxt = findViewById(R.id.user_txt);
         pwdTxt = findViewById(R.id.pwd_txt);
         confirmPwdTxt = findViewById(R.id.confirm_pwd_txt);
-        register_btn = findViewById(R.id.register_btn);
-        facebookBtn = findViewById(R.id.facebook_btn);
+        registerBtn = findViewById(R.id.register_btn);
+        Button facebookBtn = findViewById(R.id.facebook_btn);
         gmailBtn = findViewById(R.id.gmail_btn);
         emailTxt = findViewById(R.id.email_txt);
         phoneTxt = findViewById(R.id.mobile_txt);

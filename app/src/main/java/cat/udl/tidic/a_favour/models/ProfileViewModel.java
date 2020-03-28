@@ -1,6 +1,7 @@
 package cat.udl.tidic.a_favour.models;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
@@ -82,6 +83,10 @@ public class ProfileViewModel
                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
            }
        });
+   }
+
+   public boolean existToken(){
+       return !token.equals("");
    }
 
 
