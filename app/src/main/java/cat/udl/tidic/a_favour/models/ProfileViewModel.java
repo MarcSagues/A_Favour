@@ -1,12 +1,14 @@
 package cat.udl.tidic.a_favour.models;
 
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.app.NavUtils;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -20,10 +22,8 @@ import java.util.Objects;
 
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
-import cat.udl.tidic.a_favour.User;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
-import cat.udl.tidic.a_favour.Views.LoginView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
@@ -53,7 +53,7 @@ public class ProfileViewModel
         getUser();
     }
 
-   void getUser()
+   public void getUser()
    {
        Map<String, String> map = new HashMap<>();
        map.put("Authorization", token);
@@ -66,7 +66,6 @@ public class ProfileViewModel
            @Override
            public void onResponse(Call<UserModel> call, Response<UserModel> response)
            {
-
                try
                {
                    user.setValue(response.body());
@@ -77,21 +76,23 @@ public class ProfileViewModel
            @Override
            public void onFailure(Call<UserModel> call, Throwable t)
            {
-               //view.setErrorLayout();
+
+               user.setValue(null);
                Log.e("ProfileViewModel",  t.getMessage());
                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
            }
        });
    }
 
+
    public void setUser(String username, String password){
 
-       String token_decoded = username + ":" + password;
-       byte[] bytes = token_decoded.getBytes(StandardCharsets.UTF_8);
-       String _token = Base64.encodeToString(bytes, Base64.DEFAULT);
-       //mPreferences.edit().putString("token", _token).apply();
-       _token = ("Authentication: " + _token).trim();
-       Call<ResponseBody> call = userService.createToken(_token);
+       String tokenDecoded = username + ":" + password;
+       byte[] bytes = tokenDecoded.getBytes(StandardCharsets.UTF_8);
+       String tokenAux = Base64.encodeToString(bytes, Base64.DEFAULT);
+       //mPreferences.edit().putString("token", tokenAux).apply();
+       tokenAux = ("Authentication: " + tokenAux).trim();
+       Call<ResponseBody> call = userService.createToken(tokenAux);
        call.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -120,9 +121,6 @@ public class ProfileViewModel
                             Log.d("Login failed", t.getMessage());
                         }
                     });
-
-
-
    }
 
    public void setToken (String token){
@@ -139,35 +137,21 @@ public class ProfileViewModel
         return this.user.getValue().getPassword();
    }
 
-    public float getStars_()
+    public float getStars()
     {
         return this.user.getValue().getStars();
     }
 
-    public ImageView[] getStars(ImageView[] stars)
-    {
-        float roundedStars = Math.round(getStars_() * 2) / 2.0f;
-        int fullStars = (int) roundedStars;
-        float decimalpart =  roundedStars - (int) roundedStars;
-
-        for (int i =0; i < stars.length ; i++)
-        {
-            if (i < fullStars) { stars[i].setImageResource(R.drawable.star_full); }
-            else if ( i == fullStars)
-            {
-                if (decimalpart != 0.0f) { stars[i].setImageResource(R.drawable.star_half); }
-            }
-            else { stars[i].setImageResource(R.drawable.star_empty); }
-        }
-
-        return stars;
-    }
-
-    public String getFavoursInfo()
+    public String getFavoursDone()
     {
         int favoursDone = this.user.getValue().getFavoursDone();
+        return Integer.toString(favoursDone);
+    }
+
+    public String getTimesHelped()
+    {
         int timesHelped = this.user.getValue().getTimesHelped();
-        return Integer.toString(favoursDone) + " favours done, " + Integer.toString(timesHelped) + " times helped";
+        return Integer.toString(timesHelped);
     }
 
     public String  getLocation()
@@ -204,17 +188,14 @@ public class ProfileViewModel
             // Course API requires passwords in sha-256 in passlib format so:
             String p = password1;
             String salt = "16";
-            String encode_hash = Utils.encode(p,salt,29000);
-            System.out.println("PASSWORD_ENCRYPTED " + encode_hash);
-
+            String encodeHash = Utils.encode(p,salt,29000);
+            System.out.println("PASSWORD_ENCRYPTED " + encodeHash);
 
             JsonObject user_json = new JsonObject();
             user_json.addProperty("username", user);
             user_json.addProperty("email", email);
             user_json.addProperty("phone", phone);
-            user_json.addProperty("password", encode_hash);
-
-
+            user_json.addProperty("password", encodeHash);
 
             Call<Void> call = userService.registerUser3(user_json);
             call.enqueue(new Callback<Void>() {
@@ -236,14 +217,11 @@ public class ProfileViewModel
                     sendMessage("Error", extra);
                 }
             });
-
         }
-
     }
 
-    public void sendMessage(String message, RegisterView extra){
+    public void sendMessage(String message, RegisterView extra)
+    {
         Toast.makeText(extra,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
     }
-
-
 }
