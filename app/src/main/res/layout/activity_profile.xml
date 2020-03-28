@@ -25,7 +25,7 @@
             android:id="@+id/up_panel"
             android:layout_width="411dp"
             android:layout_height="45dp"
-            android:background="#E8E8E8"
+            android:background="@color/AfavourColor"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
@@ -164,158 +164,61 @@
             app:layout_constraintTop_toBottomOf="@+id/favoursInfo"
             tools:text="Show location" />
 
-        <LinearLayout
-            android:id="@+id/Options"
-            android:layout_width="415dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/favours_table"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/show_location">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#000000"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/favours_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="#E8E8E8"
-                    android:onClick="@{() -> ProfileViewModel.favoursBtn()}"
-                    android:padding="?android:attr/scrollbarSize"
-                    android:text="@string/favours"
-                    android:textAllCaps="false" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/cardview_light_background"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/favourites_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="#E8E8E8"
-                    android:onClick="@{() -> ProfileViewModel.favouritesBtn()}"
-                    android:text="@string/favourites"
-                    android:textAllCaps="false"
-                    android:textColor="#8C8C8C" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/cardview_light_background"
-                android:gravity="center_horizontal">
-
-                <Button
-                    android:id="@+id/opinions_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="#E8E8E8"
-                    android:onClick="@{() -> ProfileViewModel.opinionsBtn()}"
-                    android:text="@string/opinions"
-                    android:textAllCaps="false"
-                    android:textColor="#8C8C8C" />
-            </TableRow>
-        </LinearLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/favours_table"
-            android:layout_width="415dp"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/main_layout"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginRight="2dp"
-            android:fillViewport="true"
+            android:layout_marginTop="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Options">
+            app:layout_constraintTop_toBottomOf="@+id/show_location"
+            tools:context=".MainActivity"
+            tools:ignore="MissingConstraints">
 
-            <LinearLayout
-                android:id="@+id/table_parent"
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:elevation="6dp">
 
-                <LinearLayout
-                    android:id="@+id/row_parent"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#FF3B5B"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:elevation="0dp"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="?android:attr/scrollbarSize"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
+                    android:layout_below="@+id/toolbar"
+                    android:background="#FF3B5B"
+                    android:minHeight="?attr/actionBarSize"
+                    app:elevation="0dp"
+                    app:tabIndicatorColor="#FFFFFF"
+                    app:tabIndicatorHeight="2dp"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="#ffffff"
+                    app:tabTextColor="#d3d3d3" />
 
-                    <LinearLayout
-                        android:id="@+id/row1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="?android:attr/scrollbarSize"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
+            </com.google.android.material.appbar.AppBarLayout>
 
-                        <ImageView
-                            android:id="@+id/imgfavour"
-                            android:layout_width="match_parent"
-                            android:layout_height="151dp"
-                            app:srcCompat="@drawable/ic_launcher_background" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/row2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="?android:attr/scrollbarSize"
-                        android:layout_weight="3"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="151dp"
-                            app:srcCompat="@drawable/ic_launcher_background" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="TextView" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tab_layout"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <RelativeLayout
             android:id="@+id/loadingPanel"

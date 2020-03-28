@@ -1,20 +1,34 @@
 package cat.udl.tidic.a_favour.Views;
-
+import cat.udl.tidic.a_favour.BlankFragment;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
+
+import cat.udl.tidic.a_favour.RecyclerViewManager;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
@@ -22,8 +36,10 @@ import cat.udl.tidic.a_favour.models.UserModel;
 
 public class ProfileView extends AppCompatActivity
 {
+    boolean dev;
     ProfileViewModel profileViewModel;
     RelativeLayout loadingbar;
+    RecyclerViewManager recyclerManager;
 
     //Layout elements
     ConstraintLayout layout;
@@ -34,24 +50,35 @@ public class ProfileView extends AppCompatActivity
     TextView favoursInfo;
     TextView userLocation;
     TextView showLocation;
-    Button favoursBtn;
-    Button favouritesBtn;
-    Button opinionsBtn;
     String favoursDone;
     String timesHelped;
+    Toolbar toolbar;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        dev = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        //Binding Data
         ActivityProfileBinding activityProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         profileViewModel = new ProfileViewModel();
         activityProfileBinding.setProfileViewModel(profileViewModel);
+
+        //The recycle Manager
+        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this);
+
+        //Get all the layout data
         getAllActivityData();
+        setUpRecyclerView();
+        getRecyclerData();
         setUpProfileListeners();
     }
+
 
     public void backArrowAction(View v){
         Intent intent = new Intent (v.getContext(), LoginView.class);
@@ -59,6 +86,17 @@ public class ProfileView extends AppCompatActivity
     }
 
 
+    private void setUpRecyclerView()
+    {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        viewPager = findViewById(R.id.viewpager);
+        viewPager.setAdapter(recyclerManager);
+        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+    }
     private void getAllActivityData()
     {
         layout = findViewById(R.id.constraint);
@@ -71,12 +109,22 @@ public class ProfileView extends AppCompatActivity
         userLocation = findViewById(R.id.user_location);
         showLocation = findViewById(R.id.show_location);
 
-        favoursBtn = findViewById(R.id.favours_btn);
-        favouritesBtn = findViewById(R.id.favourites_btn);
-        opinionsBtn = findViewById(R.id.opinions_btn);
+        if (dev) {loadingbar.setVisibility(View.GONE);}
+
+        //favoursBtn = findViewById(R.id.favours_btn);
+        //favouritesBtn = findViewById(R.id.favourites_btn);
+        //opinionsBtn = findViewById(R.id.opinions_btn);
         //Falta crear tot lo relacionat amb els anuncis que ha publicat
     }
 
+    private void getRecyclerData()
+    {
+        for (int i = 0; i < tabLayout.getTabCount(); i++)
+        {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(recyclerManager.getTabView(i));
+        }
+    }
     private void setUpProfileListeners()
     {
         profileViewModel.getUserProfile().observe(this, this::onGetUserData);
@@ -86,10 +134,14 @@ public class ProfileView extends AppCompatActivity
     private void onGetUserData(UserModel u)
     {
 
-        if(u == null)
+        if (dev)
         {
             loadingbar.setVisibility(View.GONE);
-            setErrorLayout(true);
+        }
+        else if(u == null)
+        {
+            loadingbar.setVisibility(View.GONE);
+            setErrorLayout();
         }
         else {
 
@@ -114,7 +166,7 @@ public class ProfileView extends AppCompatActivity
     }
 
 
-    public void setErrorLayout(boolean a)
+    public void setErrorLayout()
     {
         //Si falla la connexió s'haura de posar un layout de "error"
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -137,4 +189,30 @@ public class ProfileView extends AppCompatActivity
 
         AlertDialog dialog = builder.show();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+    /*
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Log.d("" + item.getItemId() ,"asdDDDDDDDDDD");
+        //if (id == R.id.action_settings) {
+        //return true;
+        //}
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }
+

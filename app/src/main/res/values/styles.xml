@@ -26,4 +26,8 @@
         <item name="colorControlActivated">@color/starFull</item>
     </style>
 
+    <style name="AppThemee" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- ....... -->
+    </style>
+
 </resources>
