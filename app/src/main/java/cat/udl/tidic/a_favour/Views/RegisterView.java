@@ -66,6 +66,12 @@ public class RegisterView extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToProfile()
+    {
+        Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+        startActivity(intent);
+    }
+
 
     public void iniComponents()
     {
@@ -93,5 +99,4 @@ public class RegisterView extends AppCompatActivity {
     public void sendMessage(String message){
         Toast.makeText(RegisterView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
     }
-
 }

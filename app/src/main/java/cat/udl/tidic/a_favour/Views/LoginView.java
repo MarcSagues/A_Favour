@@ -1,11 +1,13 @@
 package cat.udl.tidic.a_favour.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompatSideChannelService;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +52,8 @@ public class LoginView extends AppCompatActivity {
 
     }
 
-    public void iniComponents(){
+    public void iniComponents()
+    {
         userTxt = findViewById(R.id.user_txt);
         pwdTxt = findViewById(R.id.pwd_txt);
         registerBtn = findViewById(R.id.register_btn);
@@ -61,30 +64,24 @@ public class LoginView extends AppCompatActivity {
         profileViewModel = new ProfileViewModel();
         userModel = new UserModel();
         //comprobar si hi ha token guardat
-        /*if (profileViewModel.existToken()){
-            Intent intent = new Intent (getApplicationContext(), ProfileView.class);
-            startActivity(intent);
+        if (profileViewModel.existToken())
+        {
+            Log.d("A TOKEN ALREDY EXIST, OPENING PROFILE", "THE LOOOOOOOOOOOOG");
+            openProfile();
         }
-*/
-
+        else
+        {
+            Log.d("NO TOKEN FOUND", "THE LOOOOOOOOOOOOG");
+        }
 
     }
 
-    public void clickOnLogin(View v) {
-
-
+    public void clickOnLogin(View v)
+    {
         String username = userTxt.getText().toString();
         String password = pwdTxt.getText().toString();
 
-        profileViewModel.setUser(username, password);
-
-        if (ProfileViewModel.bool){
-            openProfile();
-        } else {
-             sendMessage("Login Failed");
-        }
-
-
+        profileViewModel.setUser(username, password,this);
     }
 
     public void openProfile(){

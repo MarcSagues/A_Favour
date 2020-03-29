@@ -1,15 +1,10 @@
 package cat.udl.tidic.a_favour.models;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.core.app.NavUtils;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -21,12 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
 import cat.udl.tidic.a_favour.Views.LoginView;
-import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import okhttp3.ResponseBody;
@@ -41,7 +34,6 @@ public class ProfileViewModel
     private SharedPreferences mPreferences;
     private String token;
     private UserModel userModel;
-    public static boolean bool;
 
 
     public MutableLiveData<UserModel> user = new MutableLiveData<>();
@@ -55,15 +47,14 @@ public class ProfileViewModel
         token = mPreferences.getString("token", "");
         Log.d("Token:", token);
         userModel = new UserModel();
-        bool = false;
         getUser();
     }
 
    public void getUser()
    {
        Map<String, String> map = new HashMap<>();
-       map.put("Authorization", token);
-
+       Log.d("IS TOKEN EMPTY? TOKEN = ", mPreferences.getString("token", ""));
+       map.put("Authorization", mPreferences.getString("token", ""));
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
        Call<UserModel> call = userService.getUserProfile(map);
 
@@ -90,40 +81,42 @@ public class ProfileViewModel
        });
    }
 
-   public boolean existToken(){
+   public boolean existToken()
+   {
+       Log.d("The token value is", token);
        return !token.equals("");
    }
 
 
-   public void setUser(String username, String password){
+   public void setUser(String username, String password, LoginView loginView)
+   {
 
        String tokenDecoded = username + ":" + password;
-
        byte[] bytes = tokenDecoded.getBytes(StandardCharsets.UTF_8);
        String tokenAux = Base64.encodeToString(bytes, Base64.DEFAULT);
        //mPreferences.edit().putString("token", tokenAux).apply();
        tokenAux = ("Authentication: " + tokenAux).trim();
        Call<ResponseBody> call = userService.createToken(tokenAux);
-       call.enqueue(new Callback<ResponseBody>() {
+       call.enqueue(new Callback<ResponseBody>()
+       {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                             if (response.body() != null){
                                 try {
-                                    bool = true;
-                                    userModel.setLogin(true);
                                     String token = response.body().string().split(":")[1];
                                     token = token.substring(2, token.length()-2);
                                     setToken(token);
                                     Log.d("Login completed", token);
+                                    loginView.openProfile();
 
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                             } else{
                                 try {
-                                    userModel.setLogin(false);
                                     Log.d("Login error", response.errorBody().string());
+                                    loginView.sendMessage("Error on Login");
 
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -134,15 +127,14 @@ public class ProfileViewModel
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
                             Log.d("Login failed", t.getMessage());
+                            loginView.sendMessage("Error on Login");
                         }
                     });
-
    }
 
-   public void setToken (String token){
-
+   public void setToken (String token)
+   {
         mPreferences.edit().putString("token", token).apply();
-
    }
 
    public String getUsername()
@@ -195,7 +187,7 @@ public class ProfileViewModel
     public void registerUser(String user, String password1, String password2, String email, String phone, RegisterView extra){
         if (!password1.equals(password2)){ //comprovem que les contrasenyes siguin iguals
 
-            sendMessage("Las contraseñas no coinciden", extra);
+            sendMessage("Las contraseñas no coincideixen", extra);
 
         } else if(password1.length() < 5){
 
@@ -218,7 +210,8 @@ public class ProfileViewModel
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.code() == 200){
+                    if (response.code() == 200)
+                    {
                         sendMessage("Usuario registrado", extra);
                     }else{
                         try { //Atrapar error usuari existent / correu existent
