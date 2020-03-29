@@ -25,6 +25,7 @@ import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
+import cat.udl.tidic.a_favour.Views.LoginView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
@@ -39,6 +40,8 @@ public class ProfileViewModel
     private UserServices userService;
     private SharedPreferences mPreferences;
     private String token;
+    private UserModel userModel;
+    public static boolean bool;
 
 
     public MutableLiveData<UserModel> user = new MutableLiveData<>();
@@ -51,6 +54,8 @@ public class ProfileViewModel
         mPreferences = PreferencesProvider.providePreferences();
         token = mPreferences.getString("token", "");
         Log.d("Token:", token);
+        userModel = new UserModel();
+        bool = false;
         getUser();
     }
 
@@ -93,6 +98,7 @@ public class ProfileViewModel
    public void setUser(String username, String password){
 
        String tokenDecoded = username + ":" + password;
+
        byte[] bytes = tokenDecoded.getBytes(StandardCharsets.UTF_8);
        String tokenAux = Base64.encodeToString(bytes, Base64.DEFAULT);
        //mPreferences.edit().putString("token", tokenAux).apply();
@@ -104,6 +110,8 @@ public class ProfileViewModel
 
                             if (response.body() != null){
                                 try {
+                                    bool = true;
+                                    userModel.setLogin(true);
                                     String token = response.body().string().split(":")[1];
                                     token = token.substring(2, token.length()-2);
                                     setToken(token);
@@ -114,7 +122,9 @@ public class ProfileViewModel
                                 }
                             } else{
                                 try {
-                                    Log.d("Login completed", response.errorBody().string());
+                                    userModel.setLogin(false);
+                                    Log.d("Login error", response.errorBody().string());
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -126,11 +136,13 @@ public class ProfileViewModel
                             Log.d("Login failed", t.getMessage());
                         }
                     });
+
    }
 
    public void setToken (String token){
 
         mPreferences.edit().putString("token", token).apply();
+
    }
 
    public String getUsername()

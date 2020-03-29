@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
+import cat.udl.tidic.a_favour.models.UserModel;
 
 public class LoginView extends AppCompatActivity {
 
@@ -24,7 +25,8 @@ public class LoginView extends AppCompatActivity {
     private TextView title;
     private SharedPreferences mPreferences;
     private ProfileViewModel profileViewModel;
-    String token;
+    private String token;
+    private UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +59,13 @@ public class LoginView extends AppCompatActivity {
         String a = getColoredSpanned("A","#ff3b5b");
         title.setText(Html.fromHtml(a + " Favour"));
         profileViewModel = new ProfileViewModel();
+        userModel = new UserModel();
         //comprobar si hi ha token guardat
-        if (profileViewModel.existToken()){
+        /*if (profileViewModel.existToken()){
             Intent intent = new Intent (getApplicationContext(), ProfileView.class);
             startActivity(intent);
         }
-
+*/
 
 
     }
@@ -73,9 +76,18 @@ public class LoginView extends AppCompatActivity {
         String username = userTxt.getText().toString();
         String password = pwdTxt.getText().toString();
 
-
         profileViewModel.setUser(username, password);
 
+        if (ProfileViewModel.bool){
+            openProfile();
+        } else {
+             sendMessage("Login Failed");
+        }
+
+
+    }
+
+    public void openProfile(){
         Intent intent = new Intent (getApplicationContext(), ProfileView.class);
         startActivity(intent);
     }
