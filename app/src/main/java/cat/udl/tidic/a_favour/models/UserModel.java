@@ -45,7 +45,7 @@ public class UserModel {
     }
 
 
-    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String genere, String password, float stars, int favoursDone, int timesHelped, String location, boolean login)
+    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String genere, String password, float stars, int favoursDone, int timesHelped, String location, String token)
     {
         this.created_at = created_at;
         this.username = username;
@@ -59,8 +59,7 @@ public class UserModel {
         this.favoursDone = favoursDone;
         this.timesHelped = timesHelped;
         this.location = location;
-        this.token = "656e50e154865a5dc469b80437ed2f963b8f58c8857b66c9bf";
-        this.login = login;
+        this.token = token;
     }
 
     public String getCreated_at() {
