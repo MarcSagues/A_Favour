@@ -20,6 +20,7 @@ import retrofit2.Response;
 
 public class RegisterViewModel
 {
+
     UserServices userService;
     public RegisterViewModel()
     {
