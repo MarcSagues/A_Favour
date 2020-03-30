@@ -36,6 +36,7 @@ import cat.udl.tidic.a_favour.models.UserModel;
 
 public class ProfileView extends AppCompatActivity
 {
+
     boolean dev;
     ProfileViewModel profileViewModel;
     RelativeLayout loadingbar;
@@ -60,7 +61,7 @@ public class ProfileView extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        dev = true;
+        dev = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -130,7 +131,6 @@ public class ProfileView extends AppCompatActivity
         profileViewModel.getUserProfile().observe(this, this::onGetUserData);
     }
 
-    @SuppressLint("SetTextI18n")
     private void onGetUserData(UserModel u)
     {
 
@@ -138,30 +138,35 @@ public class ProfileView extends AppCompatActivity
         {
             loadingbar.setVisibility(View.GONE);
         }
-        else if(u == null)
+        else
         {
-            loadingbar.setVisibility(View.GONE);
-            setErrorLayout();
-        }
-        else {
+            if(u == null)
+            {
+                Log.d("THE USER IS NULL", "ASD");
+                loadingbar.setVisibility(View.GONE);
+                setErrorLayout();
+            }
+            else
+            {
 
-            loadingbar.setVisibility(View.GONE);
-            layout.setVisibility(View.VISIBLE);
-            //El nom de l'usuari
-            userName.setText(profileViewModel.getUsername());
+                loadingbar.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
+                //El nom de l'usuari
+                userName.setText(profileViewModel.getUsername());
 
-            //Poso les estrelles necessaries
-            stars.setRating(profileViewModel.getStars());
+                //Poso les estrelles necessaries
+                stars.setRating(profileViewModel.getStars());
 
-            //Informació dels facvors que ha fet i que ha rebut
-            favoursDone = profileViewModel.getFavoursDone();
-            timesHelped = profileViewModel.getTimesHelped();
-            String favoursDoneString = getResources().getString(R.string.favoursDone);
-            String timesHelpedString = getResources().getString(R.string.timesHelped);
-            favoursInfo.setText(favoursDone + " " + favoursDoneString + ", " + timesHelped +  " " + timesHelpedString);
+                //Informació dels facvors que ha fet i que ha rebut
+                favoursDone = profileViewModel.getFavoursDone();
+                timesHelped = profileViewModel.getTimesHelped();
+                String favoursDoneString = getResources().getString(R.string.favoursDone);
+                String timesHelpedString = getResources().getString(R.string.timesHelped);
+                favoursInfo.setText(favoursDone + " " + favoursDoneString + ", " + timesHelped +  " " + timesHelpedString);
 
-            //Informació de l'ubicació de l'usuari
-            userLocation.setText(profileViewModel.getLocation());
+                //Informació de l'ubicació de l'usuari
+                userLocation.setText(profileViewModel.getLocation());
+            }
         }
     }
 

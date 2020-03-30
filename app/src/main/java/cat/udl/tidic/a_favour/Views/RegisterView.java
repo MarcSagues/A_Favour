@@ -14,60 +14,43 @@ import android.widget.Toast;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
+import cat.udl.tidic.a_favour.models.RegisterViewModel;
 
 public class RegisterView extends AppCompatActivity {
 
+    RegisterViewModel registerViewModel;
     private EditText pwdTxt;
     private EditText userTxt;
     private EditText confirmPwdTxt;
     private Button registerBtn;
     private Button gmailBtn;
-    private UserServices userService;
     private EditText emailTxt;
     private EditText phoneTxt;
     private TextView joinTxt;
     private TextView goToLoginTxt;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        registerViewModel = new RegisterViewModel();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         iniComponents();
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClickOnRegister(v);
-            }
-        });
-        goToLoginTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToLogin(v);
-            }
-        });
-
+        setOnClickListeners();
     }
 
-    public void ClickOnRegister(View v) {
-
+    public void ClickOnRegister(View v)
+    {
         String password1 = pwdTxt.getText().toString();
         String password2 = confirmPwdTxt.getText().toString();
         String user = userTxt.getText().toString();
         String email = emailTxt.getText().toString();
         String phone = phoneTxt.getText().toString();
 
-        ProfileViewModel profileViewModel = new ProfileViewModel();
-        profileViewModel.registerUser(user, password1, password2, email, phone, RegisterView.this);
+        registerViewModel.registerUser(user, password1, password2, email, phone, RegisterView.this);
     }
 
-    public void goToLogin(View v) {
-
-        Intent intent = new Intent (getApplicationContext(), LoginView.class);
-        startActivity(intent);
-    }
-
-
-    public void iniComponents()
+    private void iniComponents()
     {
         userTxt = findViewById(R.id.user_txt);
         pwdTxt = findViewById(R.id.pwd_txt);
@@ -85,13 +68,42 @@ public class RegisterView extends AppCompatActivity {
         goToLoginTxt = findViewById(R.id.go_to_login_txt);
     }
 
-    private String getColoredSpanned(String text, String color) {
+    private void setOnClickListeners()
+    {
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClickOnRegister(v);
+            }
+        });
+        goToLoginTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLogin(v);
+            }
+        });
+    }
+
+    private String getColoredSpanned(String text, String color)
+    {
         String input = "<font color=" + color + ">" + text + "</font>";
         return input;
     }
 
-    public void sendMessage(String message){
-        Toast.makeText(RegisterView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
+    public void goToLogin(View v)
+    {
+        Intent intent = new Intent (getApplicationContext(), LoginView.class);
+        startActivity(intent);
     }
 
+    public void openProfile()
+    {
+        Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+        startActivity(intent);
+    }
+
+    public void sendMessage(String message)
+    {
+        Toast.makeText(RegisterView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
+    }
 }
