@@ -184,14 +184,14 @@ public class ProfileViewModel
         Log.d("Profile", "S'ha premut l'opció OPINIONS");
     }
 
-    public void registerUser(String user, String password1, String password2, String email, String phone, RegisterView extra){
+    public void registerUser(String user, String password1, String password2, String email, String phone, RegisterView regiserView){
         if (!password1.equals(password2)){ //comprovem que les contrasenyes siguin iguals
 
-            sendMessage("Las contraseñas no coincideixen", extra);
+            sendMessage("Las contraseñas no coincideixen", regiserView);
 
         } else if(password1.length() < 5){
 
-            sendMessage("La contraseña tiene que tener mínimo 5 caracteres", extra);
+            sendMessage("La contraseña tiene que tener mínimo 5 caracteres", regiserView);
 
         } else {
             // Course API requires passwords in sha-256 in passlib format so:
@@ -212,10 +212,10 @@ public class ProfileViewModel
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.code() == 200)
                     {
-                        sendMessage("Usuario registrado", extra);
+                        sendMessage("Usuario registrado", regiserView);
                     }else{
                         try { //Atrapar error usuari existent / correu existent
-                            sendMessage(Objects.requireNonNull(response.errorBody().string()), extra);
+                            sendMessage(Objects.requireNonNull(response.errorBody().string()), regiserView);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -224,7 +224,7 @@ public class ProfileViewModel
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    sendMessage("Error", extra);
+                    sendMessage("Error", regiserView);
                 }
             });
         }
