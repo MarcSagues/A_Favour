@@ -57,7 +57,7 @@ public class LoginView extends AppCompatActivity {
     public void checkLogin()
     {
         //Comprobar si hi ha token guardat
-        if (PreferencesProvider.existToken("token")) { openProfile(); }
+        if (PreferencesProvider.existToken("token")) { openMainPage();}
     }
 
     public void setButtonListeners()
@@ -77,9 +77,9 @@ public class LoginView extends AppCompatActivity {
         });
     }
 
-    public void openProfile()
+    public void openMainPage()
     {
-        Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+        Intent intent = new Intent (getApplicationContext(), MainPage.class);
         startActivity(intent);
     }
 

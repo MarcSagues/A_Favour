@@ -3,6 +3,7 @@ package cat.udl.tidic.a_favour.models;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
@@ -16,6 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import cat.udl.tidic.a_favour.MyAdapter;
+import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
@@ -167,6 +170,64 @@ public class ProfileViewModel
     {
         String location = this.user.getValue().getLocation() == null ? "No location" : this.user.getValue().getLocation();
         return location;
+    }
+
+    public String[] getTitles(MyAdapter.OPTION ID)
+    {
+        try
+        {
+            String[] titles = new String[]{"test 0","test one", "test two", "test three", "test four", "test five", "test six", "test seven", "test eight", "test nine"};
+            return titles;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Impossible agafar els titols de l'usuari");
+            return  null;
+        }
+    }
+
+    public String[] getDesc(MyAdapter.OPTION ID)
+    {
+        try
+        {
+            String[] desc = new String[]{"desc 0 ","desc one", "desc two", "desc 2", "desc 3", "desc 5", "desc 6", "desc 7", "desc 8", "desc 9"};
+            return desc;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Impossible agafar les descripcions de l'usuari");
+            return  null;
+        }
+    }
+
+    public ImageView[] getImage(MyAdapter.OPTION ID)
+    {
+        try
+        {
+            ImageView image = new ImageView(null);
+            image.setImageResource(R.drawable.handshacke);
+            image.setTag(R.drawable.handshacke);
+            return new ImageView[]{image,image,image,image,image,image,image,image,image};
+        }
+        catch(Exception e)
+        {
+            System.out.println("Impossible agafar la imatge de l'usuari");
+            return  null;
+        }
+    }
+
+    public float[] getOpinionStars()
+    {
+        try
+        {
+            float[] stars = new float[]{0.5f, 5, 3.5f, 4,5,5,5,5,5,8};
+            return stars;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Impossible agafar les estrelles de les opinions");
+            return  null;
+        }
     }
 
     public void showLocationBtn()

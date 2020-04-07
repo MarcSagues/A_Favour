@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:name=".App">
+        <activity android:name=".Views.MainPage"></activity>
         <activity android:name=".Views.RegisterView"></activity>
         <activity android:name=".Views.ProfileView"></activity>
         <activity android:name=".Views.LoginView">

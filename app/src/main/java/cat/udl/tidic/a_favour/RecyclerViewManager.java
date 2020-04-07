@@ -18,9 +18,37 @@ public class RecyclerViewManager extends FragmentPagerAdapter
     String tabTitles[] = new String[] { "Favours", "Favourites", "Opinions" };
     Context context;
 
-    public RecyclerViewManager(FragmentManager fm, Context context) {
+    public RecyclerViewManager(FragmentManager fm, Context context)
+    {
         super(fm);
         this.context = context;
+    }
+
+    @Override
+    public Fragment getItem(int position)
+    {
+
+        switch (position) {
+            case 0:
+                //Opinions
+                return new BlankFragment(0);
+            case 1:
+                //Favourites
+                return new BlankFragment(1);
+            case 2:
+                //Favours
+                return new BlankFragment(2);
+        }
+
+        return null;
+    }
+
+    public View setTabTittles(int position)
+    {
+        View tab = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
+        TextView tv = (TextView) tab.findViewById(R.id.custom_text);
+        tv.setText(tabTitles[position]);
+        return tab;
     }
 
     @Override
@@ -28,33 +56,13 @@ public class RecyclerViewManager extends FragmentPagerAdapter
         return tabTitles.length;
     }
 
-    @Override
-    public Fragment getItem(int position) {
 
-        switch (position) {
-            case 0:
-                return new BlankFragment();
-            case 1:
-                return new BlankFragment();
-            case 2:
-                return new BlankFragment();
-        }
 
-        return null;
+    public void addTab()
+    {
+
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-        return tabTitles[position];
-    }
 
-    public View getTabView(int position) {
-        Log.d("himini" ,"asdDDDDDDDDDD");
-        View tab = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
-        TextView tv = (TextView) tab.findViewById(R.id.custom_text);
-        tv.setText(tabTitles[position]);
-        return tab;
-    }
 
 }

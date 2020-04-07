@@ -54,7 +54,7 @@ public class LoginViewModel
                         token = token.substring(2, token.length()-2);
                         setToken(token);
                         Log.d("Login completed", token);
-                        loginView.openProfile();
+                        loginView.openMainPage();
 
                     } catch (IOException e) {
                         e.printStackTrace();
