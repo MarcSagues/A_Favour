@@ -31,16 +31,16 @@ public class ProfileViewModel
     public MutableLiveData<UserModel> user = new MutableLiveData<>();
     public LiveData<UserModel> getUserProfile(){ return user; }
 
-    public ProfileViewModel()
-    {
-        userService = RetrofitClientInstance.
+   public ProfileViewModel()
+   {
+       userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
         mPreferences = PreferencesProvider.providePreferences();
         token = mPreferences.getString("token", "");
         Log.d("Token:", token);
         userModel = new UserModel();
         getUser();
-    }
+   }
 
    public void getUser()
    {
@@ -114,8 +114,7 @@ public class ProfileViewModel
     {
         try
         {
-            String[] titles = new String[]{"test 0","test one", "test two", "test three", "test four", "test five", "test six", "test seven", "test eight", "test nine"};
-            return titles;
+            return new String[]{"test 0","test one", "test two", "test three", "test four", "test five", "test six", "test seven", "test eight", "test nine"};
         }
         catch(Exception e)
         {
@@ -128,8 +127,7 @@ public class ProfileViewModel
     {
         try
         {
-            String[] desc = new String[]{"desc 0 ","desc one", "desc two", "desc 2", "desc 3", "desc 5", "desc 6", "desc 7", "desc 8", "desc 9"};
-            return desc;
+            return new String[]{"desc 0 ","desc one", "desc two", "desc 2", "desc 3", "desc 5", "desc 6", "desc 7", "desc 8", "desc 9"};
         }
         catch(Exception e)
         {
@@ -158,8 +156,7 @@ public class ProfileViewModel
     {
         try
         {
-            float[] stars = new float[]{0.5f, 5, 3.5f, 4,5,5,5,5,5,8};
-            return stars;
+            return new float[]{0.5f, 5, 3.5f, 4,5,5,5,5,5,8};
         }
         catch(Exception e)
         {
@@ -176,12 +173,7 @@ public class ProfileViewModel
     {
         Log.d("Profile", "S'ha premut l'opció DE TIRAR ENRRERE");
     }
-    public void favoursBtn() { Log.d("Profile", "S'ha premut l'opció DE FAVOURS"); }
-    public void favouritesBtn() { Log.d("Profile", "S'ha premut l'opció FAVOURITES"); }
-    public void opinionsBtn()
-    {
-        Log.d("Profile", "S'ha premut l'opció OPINIONS");
-    }
+
 
 
 }
