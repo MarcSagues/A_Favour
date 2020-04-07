@@ -71,9 +71,15 @@ public class ProfileView extends AppCompatActivity
     }
 
 
-    public void backArrowAction(View v){
-        Intent intent = new Intent (v.getContext(), LoginView.class);
-        startActivityForResult(intent, 0);
+    public void backArrowAction(View v)
+    {
+       onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
     }
 
 
