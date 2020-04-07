@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="toolbarMenu">
+        <item name="icon">@drawable/menulist</item>
+        <item name="android:colorPrimary">@color/AfavourColor</item>
+        <item name="android:background">@color/AfavourColor</item>
+    </style>
+
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
