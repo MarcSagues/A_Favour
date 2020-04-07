@@ -1,4 +1,4 @@
-package cat.udl.tidic.a_favour;
+package cat.udl.tidic.a_favour.MainPageClasses;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.R;
 
 public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 

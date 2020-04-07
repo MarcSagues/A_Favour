@@ -1,31 +1,20 @@
 package cat.udl.tidic.a_favour.models;
 
 import android.content.SharedPreferences;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-import cat.udl.tidic.a_favour.MyAdapter;
+import cat.udl.tidic.a_favour.ProfileClasses.MyAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
-import cat.udl.tidic.a_favour.Utils;
-import cat.udl.tidic.a_favour.Views.LoginView;
-import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

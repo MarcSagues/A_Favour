@@ -82,7 +82,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
             android:background="#FFFFFF"
-            android:text="User Name"
             android:textColor="@color/tecxtColor"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
