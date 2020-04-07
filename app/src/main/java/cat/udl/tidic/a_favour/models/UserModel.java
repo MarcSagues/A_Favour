@@ -53,7 +53,7 @@ public class UserModel {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
-        this.genere = genere;
+        //this.genere = genere;
         this.password = password;
         this.stars = stars;
         this.favoursDone = favoursDone;
