@@ -45,4 +45,21 @@
     <string name="imageicon">Image Icon icon</string>
     <string name="stars">Stars icon</string>
 
+    <!--Pujar/Editar anunci-->
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="amount">Amount</string>
+    <string name="selectCategory">Select a category</string>
+    <string name="uploadFavour">Upload favour</string>
+    <string name="editFavour">Edit favour</string>
+    <string name="upload">Upload</string>
+    <string name="edit_">Edit</string>
+
+    <string name="daytoday">Day to day things</string>
+    <string name="computing">Computing</string>
+    <string name="reparations">Reparations</string>
+    <string name="others">Others</string>
+
+
+
 </resources>
