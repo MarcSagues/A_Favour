@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 
 public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
@@ -18,12 +17,13 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
     int layoutResourceId;
     DataModel data[] = null;
 
-    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data) {
-
+    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data)
+    {
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.mContext = mContext;
-        this.data = data;
+        if (data != null) { this.data = data;}
+
     }
 
     @Override
@@ -34,14 +34,23 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         listItem = inflater.inflate(layoutResourceId, parent, false);
 
-        ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.imageViewIcon);
-        TextView textViewName = (TextView) listItem.findViewById(R.id.textViewName);
+
+        ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.iv_image);
+        TextView textViewName = (TextView) listItem.findViewById(R.id.tv_text);
+        TextView textViewDesc = (TextView) listItem.findViewById(R.id.desc);
+        TextView amount = (TextView) listItem.findViewById(R.id.tv_amount);
 
         DataModel folder = data[position];
 
-
         imageViewIcon.setImageResource(folder.icon);
         textViewName.setText(folder.name);
+        if (textViewDesc != null) { textViewDesc.setText(folder.desc); }
+        if (amount != null)
+        {
+            if(folder.amount != (int) folder.amount) {amount.setText("" + folder.amount + "€");}
+            else {amount.setText(""+(int)folder.amount + "€"); }
+        }
+
         return listItem;
     }
 }

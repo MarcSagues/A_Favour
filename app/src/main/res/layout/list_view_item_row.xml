@@ -6,7 +6,7 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/imageViewIcon"
+        android:id="@+id/iv_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
@@ -16,11 +16,11 @@
         android:paddingEnd="10dp" />
 
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/tv_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/imageViewIcon"
+        android:layout_toEndOf="@+id/iv_image"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
