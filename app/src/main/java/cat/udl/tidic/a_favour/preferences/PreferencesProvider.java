@@ -7,9 +7,7 @@ import android.util.Log;
 public class PreferencesProvider
 {
 
-        private static String SHARED_PREFERENCES = "mPreferences";
-
-        private static SharedPreferences sPreferences;
+    private static SharedPreferences sPreferences;
 
         public static SharedPreferences providePreferences() {
             return sPreferences;
@@ -17,6 +15,7 @@ public class PreferencesProvider
 
         public static void init(Context context)
         {
+            String SHARED_PREFERENCES = "mPreferences";
             sPreferences = context.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         }
 

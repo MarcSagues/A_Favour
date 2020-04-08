@@ -1,10 +1,6 @@
 package cat.udl.tidic.a_favour;
 
 
-import android.content.Context;
-import android.view.View;
-import android.widget.Toast;
-
 import org.bouncycastle.crypto.digests.SHA256Digest;
 import org.bouncycastle.crypto.generators.PKCS5S2ParametersGenerator;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -13,7 +9,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Locale;
 
-import cat.udl.tidic.a_favour.Views.LoginView;
 
 public class Utils {
 
@@ -40,7 +35,4 @@ public class Utils {
                 "$%s$%d$%s$%s", algorithm, iterations, salt_hash, hash);
     }
 
-    public void sendMessage(String message, Context c){
-        Toast.makeText(c,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
-    }
 }

@@ -9,7 +9,7 @@ import cat.udl.tidic.a_favour.Views.MainPage;
 
 public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
-    MainPage p;
+    private MainPage p;
     public  DrawerItemClickListener(MainPage p)
     {
         this.p = p;

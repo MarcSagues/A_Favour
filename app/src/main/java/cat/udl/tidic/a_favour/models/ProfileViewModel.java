@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import cat.udl.tidic.a_favour.ProfileClasses.MyAdapter;
 import cat.udl.tidic.a_favour.R;
@@ -24,11 +25,9 @@ public class ProfileViewModel
     //private UserModel user = new UserModel();
     private UserServices userService;
     private SharedPreferences mPreferences;
-    private String token;
-    private UserModel userModel;
 
 
-    public MutableLiveData<UserModel> user = new MutableLiveData<>();
+    private MutableLiveData<UserModel> user = new MutableLiveData<>();
     public LiveData<UserModel> getUserProfile(){ return user; }
 
    public ProfileViewModel()
@@ -36,9 +35,8 @@ public class ProfileViewModel
        userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
         mPreferences = PreferencesProvider.providePreferences();
-        token = mPreferences.getString("token", "");
+       String token = mPreferences.getString("token", "");
         Log.d("Token:", token);
-        userModel = new UserModel();
         getUser();
    }
 
@@ -72,7 +70,7 @@ public class ProfileViewModel
            {
 
                user.setValue(null);
-               Log.e("ProfileViewModel",  t.getMessage());
+               Log.e("ProfileViewModel", Objects.requireNonNull(t.getMessage()));
                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
            }
        });
@@ -80,37 +78,36 @@ public class ProfileViewModel
 
    public String getUsername()
    {
-       return this.user.getValue().getUsername();
+       return Objects.requireNonNull(this.user.getValue()).getUsername();
    }
 
    public String getPassword(){
-        return this.user.getValue().getPassword();
+        return Objects.requireNonNull(this.user.getValue()).getPassword();
    }
 
     public float getStars()
     {
-        return this.user.getValue().getStars();
+        return Objects.requireNonNull(this.user.getValue()).getStars();
     }
 
     public String getFavoursDone()
     {
-        int favoursDone = this.user.getValue().getFavoursDone();
+        int favoursDone = Objects.requireNonNull(this.user.getValue()).getFavoursDone();
         return Integer.toString(favoursDone);
     }
 
     public String getTimesHelped()
     {
-        int timesHelped = this.user.getValue().getTimesHelped();
+        int timesHelped = Objects.requireNonNull(this.user.getValue()).getTimesHelped();
         return Integer.toString(timesHelped);
     }
 
     public String  getLocation()
     {
-        String location = this.user.getValue().getLocation() == null ? "No location" : this.user.getValue().getLocation();
-        return location;
+        return Objects.requireNonNull(this.user.getValue()).getLocation() == null ? "No location" : this.user.getValue().getLocation();
     }
 
-    public String[] getTitles(MyAdapter.OPTION ID)
+    public String[] getTitles()
     {
         try
         {
@@ -123,7 +120,7 @@ public class ProfileViewModel
         }
     }
 
-    public String[] getDesc(MyAdapter.OPTION ID)
+    public String[] getDesc()
     {
         try
         {
@@ -136,7 +133,7 @@ public class ProfileViewModel
         }
     }
 
-    public ImageView[] getImage(MyAdapter.OPTION ID)
+    public ImageView[] getImage()
     {
         try
         {
@@ -169,13 +166,10 @@ public class ProfileViewModel
     {
         Log.d("Profile", "S'ha premut l'opció SHOW LOCATION");
     }
-    public void backArrowBtn()
-    {
-        Log.d("Profile", "S'ha premut l'opció DE TIRAR ENRRERE");
-    }
 
 
-    public float[] getAmount(MyAdapter.OPTION favours)
+
+    public float[] getAmount()
     {
         return new float[]{0.5f, 5, 3.5f, 4,5,5,5,5,5,8};
     }

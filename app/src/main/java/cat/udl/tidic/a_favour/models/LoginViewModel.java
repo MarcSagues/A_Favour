@@ -4,16 +4,15 @@ import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.LoginView;
-import cat.udl.tidic.a_favour.Views.RegisterView;
+
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -61,6 +60,7 @@ public class LoginViewModel
                     }
                 } else{
                     try {
+                        assert response.errorBody() != null;
                         Log.d("Login error", response.errorBody().string());
                         loginView.sendMessage("Error on Login");
 
@@ -72,13 +72,13 @@ public class LoginViewModel
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("Login failed", t.getMessage());
+                Log.d("Login failed", Objects.requireNonNull(t.getMessage()));
                 loginView.sendMessage("Error on Login");
             }
         });
     }
 
-    public void setToken (String token)
+    private void setToken(String token)
     {
         mPreferences.edit().putString("token", token).apply();
     }

@@ -78,7 +78,7 @@ public class UserModel {
         return login;
     }
 
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
@@ -129,7 +129,7 @@ public class UserModel {
     public void setPassword(String password){
         this.password = password;}
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
@@ -149,7 +149,7 @@ public class UserModel {
         this.photo = photo;
     }
 
-    public float getStars() {
+    float getStars() {
         return stars;
     }
 
@@ -157,7 +157,7 @@ public class UserModel {
         this.stars = stars;
     }
 
-    public int getFavoursDone() {
+    int getFavoursDone() {
         return favoursDone;
     }
 
@@ -165,7 +165,7 @@ public class UserModel {
         this.favoursDone = favoursDone;
     }
 
-    public int getTimesHelped() {
+    int getTimesHelped() {
         return timesHelped;
     }
 
@@ -173,7 +173,7 @@ public class UserModel {
         this.timesHelped = timesHelped;
     }
 
-    public String getLocation() {
+    String getLocation() {
         return location;
     }
 

@@ -1,4 +1,5 @@
 package cat.udl.tidic.a_favour.ProfileClasses;
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,59 +17,56 @@ import cat.udl.tidic.a_favour.R;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {
     public enum OPTION{Favours, Favourites, Opinions};
-    public OPTION current_option;
+    private OPTION current_option;
     private String[] titles;
     private String[] description;
-    private ImageView[] images;
     private float[] amounts;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder
+    static class MyViewHolder extends RecyclerView.ViewHolder
     {
-        public CardView mCardView;
-        public TextView title;
-        public TextView desc;
-        public ImageView image;
-        public RatingBar stars;
-        public TextView amount;
+        CardView mCardView;
+        TextView title;
+        TextView desc;
+        ImageView image;
+        RatingBar stars;
+        TextView amount;
 
 
-        public MyViewHolder(View v, OPTION id)
-        {
+        MyViewHolder(View v, OPTION id) {
+
             super(v);
-            mCardView = (CardView) v.findViewById(R.id.card_view);
-            title = (TextView) v.findViewById(R.id.tv_text);
-            desc = (TextView) v.findViewById(R.id.desc);
-            image = (ImageView) v.findViewById(R.id.iv_image);
+            mCardView = v.findViewById(R.id.card_view);
+            title =  v.findViewById(R.id.tv_text);
+            desc =  v.findViewById(R.id.desc);
+            image =  v.findViewById(R.id.iv_image);
 
-            if (id == OPTION.Favours)
-            {
+            if (id == OPTION.Favours) {
                 amount = v.findViewById(R.id.tv_amount);
             }
-            if (id == OPTION.Opinions)
-            {
-                stars = (RatingBar) v.findViewById(R.id.stars);
+            if (id == OPTION.Opinions) {
+                stars =  v.findViewById(R.id.stars);
             }
         }
     }
 
     //Favours
-    public MyAdapter(OPTION op, String[] titles, String[] description, ImageView[] images, float[] amount)
+    MyAdapter(OPTION op, String[] titles, String[] description, ImageView[] images, float[] amount)
     {
         this.titles = titles;
         this.description = description;
-        this.images = images;
         this.amounts = amount;
         this.current_option = op;
     }
 
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         Log.d("hola", "caracola");
         View v;
@@ -81,11 +79,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.opinions_list, parent, false);
         }
         // set the view's size, margins, paddings and layout parameters
-        MyViewHolder vh = new MyViewHolder(v, current_option);
-        return vh;
+        return new MyViewHolder(v, current_option);
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position)
     {

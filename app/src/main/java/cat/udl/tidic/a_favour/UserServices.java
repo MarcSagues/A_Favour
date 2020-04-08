@@ -22,21 +22,17 @@ public interface UserServices
     Call<UserModel> getUserProfile(@HeaderMap Map<String, String> headers);
 
 
-    @Headers({"Content-Type:application/json"})
-    @POST("/users/register")
-    Call<Void> registerUser(@Body UserModel user);
-
-    @Headers({"Content-Type:application/json"})
-    @POST("/users/register")
-    Call<Void> registerUser2(@Body String userJson);
+//    @Headers({"Content-Type:application/json"})
+//    @POST("/users/register")
+//    Call<Void> registerUser(@Body UserModel user);
+//
+//    @Headers({"Content-Type:application/json"})
+//    @POST("/users/register")
+//    Call<Void> registerUser2(@Body String userJson);
 
     @Headers({"Content-Type:application/json"})
     @POST("/users/register")
     Call<Void> registerUser3(@Body JsonObject userJson);
-
-
-
-    Call<UserModel> getUserProfile();
 
     @POST ("/account/create_token")
     Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);

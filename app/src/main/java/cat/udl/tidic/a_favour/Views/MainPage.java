@@ -11,7 +11,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
@@ -19,14 +18,15 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.models.ProfileViewModel;
 
 public class MainPage  extends AppCompatActivity
 {
     private DrawerLayout drawerLayout;
     private ListView llista;
     private ListView recyclerView;
-    private ProfileViewModel pviewM;
+
+    public MainPage() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

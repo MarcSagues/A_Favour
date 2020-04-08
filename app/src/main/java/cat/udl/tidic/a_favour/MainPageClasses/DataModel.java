@@ -2,10 +2,10 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 
 public class DataModel {
 
-    public int icon;
+    int icon;
     public String name;
-    public String desc;
-    public float amount;
+    String desc;
+    float amount;
 
     // Constructor.
     public DataModel(int icon, String name, String desc, float amount)

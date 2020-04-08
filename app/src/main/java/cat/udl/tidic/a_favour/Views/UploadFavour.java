@@ -1,13 +1,15 @@
 package cat.udl.tidic.a_favour.Views;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import cat.udl.tidic.a_favour.R;
 
+@SuppressLint("Registered")
 public class UploadFavour extends AppCompatActivity
 {
 
@@ -65,13 +67,11 @@ public class UploadFavour extends AppCompatActivity
         }
     }
 
-    private void setCategory()
-    {
+    //private void setCategory()
+    //{ }
 
-    }
-
-    private void setText(TextView tv, String text)
-    {
-        tv.setText(text);
-    }
+    //private void setText(TextView tv, String text)
+    //{
+    //    tv.setText(text);
+    //}
 }

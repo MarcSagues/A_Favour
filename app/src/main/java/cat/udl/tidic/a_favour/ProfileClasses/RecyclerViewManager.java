@@ -1,10 +1,12 @@
 package cat.udl.tidic.a_favour.ProfileClasses;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -14,8 +16,8 @@ import cat.udl.tidic.a_favour.R;
 public class RecyclerViewManager extends FragmentPagerAdapter
 {
 
-    String tabTitles[] = new String[] { "Favours", "Favourites", "Opinions" };
-    Context context;
+    private String[] tabTitles = new String[] { "Favours", "Favourites", "Opinions" };
+    private Context context;
 
     public RecyclerViewManager(FragmentManager fm, Context context)
     {
@@ -23,6 +25,7 @@ public class RecyclerViewManager extends FragmentPagerAdapter
         this.context = context;
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position)
     {
@@ -44,8 +47,8 @@ public class RecyclerViewManager extends FragmentPagerAdapter
 
     public View setTabTittles(int position)
     {
-        View tab = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
-        TextView tv = (TextView) tab.findViewById(R.id.custom_text);
+        @SuppressLint("InflateParams") View tab = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
+        TextView tv = tab.findViewById(R.id.custom_text);
         tv.setText(tabTitles[position]);
         return tab;
     }
@@ -57,10 +60,7 @@ public class RecyclerViewManager extends FragmentPagerAdapter
 
 
 
-    public void addTab()
-    {
-
-    }
+    //public void addTab() { }
 
 
 
