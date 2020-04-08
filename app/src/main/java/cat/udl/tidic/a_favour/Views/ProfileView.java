@@ -26,7 +26,7 @@ import cat.udl.tidic.a_favour.models.UserModel;
 public class ProfileView extends AppCompatActivity
 {
 
-    boolean dev = false;
+    boolean dev = true;
     ProfileViewModel profileViewModel;
     RelativeLayout loadingbar;
     RecyclerViewManager recyclerManager;

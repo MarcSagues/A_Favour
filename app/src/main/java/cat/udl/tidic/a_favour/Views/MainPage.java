@@ -11,6 +11,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Objects;
 
@@ -18,11 +19,14 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.models.ProfileViewModel;
 
 public class MainPage  extends AppCompatActivity
 {
     private DrawerLayout drawerLayout;
     private ListView llista;
+    private ListView recyclerView;
+    private ProfileViewModel pviewM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,11 +37,13 @@ public class MainPage  extends AppCompatActivity
         addListeners();
         setUpToolbar();
         createMenuList();
+        getAllEventList();
     }
 
     private void getAllActivityData()
     {
         drawerLayout = findViewById(R.id.drawer_layout);
+        recyclerView = findViewById(R.id.rv_recycler_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         llista = findViewById(R.id.left_drawer);
@@ -55,11 +61,22 @@ public class MainPage  extends AppCompatActivity
     private void createMenuList()
     {
         DataModel[] drawerItem = new DataModel[2];
-        drawerItem[0] = new DataModel(R.drawable.example_person, getResources().getString(R.string.goProfile));
-        drawerItem[1] = new DataModel(R.drawable.log_out, getResources().getString(R.string.logOut));
+        drawerItem[0] = new DataModel(R.drawable.example_person, getResources().getString(R.string.goProfile),null,-1);
+        drawerItem[1] = new DataModel(R.drawable.log_out, getResources().getString(R.string.logOut),null,-1);
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
         llista.setOnItemClickListener(new DrawerItemClickListener(this));
         llista.setAdapter(adapter);
+
+        DataModel[] eventList = new DataModel[5];
+        eventList[0] = new DataModel(R.drawable.handshacke, "Necessito ajuda per pujar la compra a casa",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie vitae dolor id faucibus. Fusce eu venenatis risus. Fusce malesuada, ipsum at hendrerit dignissim, mauris ligula accumsan elit, eget facilisis diam quam eget sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam mollis varius velit, vel ornare purus imperdiet et. Sed tempus turpis sed ex pellentesque, id dignissim mauris condimentum. Ut posuere quam quis nisi vestibulum semper. Vestibulum nec aliquet metus. Quisque sit amet velit in lorem bibendum vestibulum a et lectus."
+        ,25);
+        eventList[1] = new DataModel(R.drawable.handshacke, "Test2","test description 2",2.5f);
+        eventList[2] = eventList[0];
+        eventList[3] = eventList[0];
+        eventList[4] = eventList[0];
+        DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
+        recyclerView.setAdapter(adapter_event);
     }
 
     @Override
@@ -67,21 +84,28 @@ public class MainPage  extends AppCompatActivity
     {
         if (item.getItemId() == R.drawable.menulist) {
             Log.d("nani", "noni");
-            openOptions();
+            openOptions(true);
         } else {
-            openOptions();
+            openOptions(true);
         }
         return true;
     }
 
     @SuppressLint("RtlHardcoded")
-    public void openOptions()
+    public void openOptions(boolean open)
     {
-        drawerLayout.openDrawer(Gravity.LEFT);
+        if (open){drawerLayout.openDrawer(Gravity.LEFT);}
+        else{drawerLayout.closeDrawer(Gravity.LEFT);}
+    }
+
+    public void getAllEventList()
+    {
+
     }
 
     public void goToProfile()
     {
+        openOptions(false);
         Intent intent = new Intent (this, ProfileView.class);
         startActivityForResult(intent, 0);
     }

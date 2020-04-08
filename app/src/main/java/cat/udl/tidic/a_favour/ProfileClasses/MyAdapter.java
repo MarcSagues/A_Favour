@@ -1,4 +1,5 @@
 package cat.udl.tidic.a_favour.ProfileClasses;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -6,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +20,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
     private String[] titles;
     private String[] description;
     private ImageView[] images;
-    private float[] stars;
+    private float[] amounts;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -31,6 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
         public TextView desc;
         public ImageView image;
         public RatingBar stars;
+        public TextView amount;
 
 
         public MyViewHolder(View v, OPTION id)
@@ -41,6 +44,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
             desc = (TextView) v.findViewById(R.id.desc);
             image = (ImageView) v.findViewById(R.id.iv_image);
 
+            if (id == OPTION.Favours)
+            {
+                amount = v.findViewById(R.id.tv_amount);
+            }
             if (id == OPTION.Opinions)
             {
                 stars = (RatingBar) v.findViewById(R.id.stars);
@@ -49,30 +56,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
     }
 
     //Favours
-    public MyAdapter(String[] titles, String[] description, ImageView[] images)
+    public MyAdapter(OPTION op, String[] titles, String[] description, ImageView[] images, float[] amount)
     {
         this.titles = titles;
         this.description = description;
         this.images = images;
-        this.current_option = OPTION.Favours;
+        this.amounts = amount;
+        this.current_option = op;
     }
-
-    //Opinions
-    public MyAdapter(String[] titles, String[] description, ImageView[] profile, float[] stars)
-    {
-        this.titles = titles;
-        this.description = description;
-        this.images = images;
-        this.stars = stars;
-        this.current_option = OPTION.Opinions;
-    }
-
 
 
     // Create new views (invoked by the layout manager)
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+        Log.d("hola", "caracola");
         View v;
         if (this.current_option == OPTION.Favours)
         {
@@ -96,13 +94,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 
         if (current_option == OPTION.Favours)
         {
+            float amount_a = amounts[position];
             holder.image.setImageResource(R.drawable.handshacke);
-            //holder.stars.setRating(0);
+            if(amount_a != (int) amount_a) {holder.amount.setText("" + amount_a + "€");}
+            else {holder.amount.setText(""+(int)amount_a + "€"); }
         }
         if (current_option == OPTION.Opinions)
         {
             holder.image.setImageResource(R.drawable.example_person);
-            holder.stars.setRating(stars[position]);
+            holder.stars.setRating(amounts[position]);
         }
         /*int drawable = (Integer) images[position].getTag();
 

@@ -175,5 +175,8 @@ public class ProfileViewModel
     }
 
 
-
+    public float[] getAmount(MyAdapter.OPTION favours)
+    {
+        return new float[]{0.5f, 5, 3.5f, 4,5,5,5,5,5,8};
+    }
 }

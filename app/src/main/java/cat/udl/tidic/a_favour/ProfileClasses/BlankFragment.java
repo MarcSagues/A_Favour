@@ -4,6 +4,7 @@ import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class BlankFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
-        rv.setHasFixedSize(true);
+        //rv.setHasFixedSize(true);
 
         MyAdapter adapter;
 
@@ -47,7 +48,8 @@ public class BlankFragment extends Fragment
             String[] titles = pView.getTitles(MyAdapter.OPTION.Favours);
             String[] desc = pView.getDesc(MyAdapter.OPTION.Favours);
             ImageView[] images = pView.getImage(MyAdapter.OPTION.Favours);
-             adapter = new MyAdapter(titles, desc, images);
+            float[] amount = pView.getAmount(MyAdapter.OPTION.Favours);
+             adapter = new MyAdapter(MyAdapter.OPTION.Favours,titles, desc, images,amount);
         }
         //Opinions
         else
@@ -56,7 +58,7 @@ public class BlankFragment extends Fragment
             String[] desc = pView.getDesc(MyAdapter.OPTION.Opinions);
             ImageView[] images = pView.getImage(MyAdapter.OPTION.Opinions);
             float[] stars = pView.getOpinionStars();
-             adapter = new MyAdapter(titles, desc, images, stars);
+             adapter = new MyAdapter(MyAdapter.OPTION.Opinions,titles, desc, images, stars);
         }
         rv.setAdapter(adapter);
 
