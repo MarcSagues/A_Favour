@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="68dp" >
 
@@ -24,6 +25,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="-1dp"
                 android:layout_marginTop="0dp"
+                android:contentDescription="@string/handshackeIcon"
                 android:src="@drawable/abc_btn_radio_material"
                 card_view:srcCompat="@drawable/handshacke"></ImageView>
 
@@ -33,10 +35,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/iv_image"
-                android:gravity="center"></TextView>
+                android:layout_toEndOf="@+id/iv_image"
+                android:gravity="center"
+                android:textStyle="bold"
+                tools:text="Title"></TextView>
 
             <TextView
                 android:id="@+id/desc"
@@ -44,11 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_text"
                 android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_marginTop="-1dp"
                 android:layout_toEndOf="@+id/iv_image"
-                android:layout_toRightOf="@+id/iv_image"
-                android:text="blah blah blah......"></TextView>
+                tools:text="blah blah blah......"></TextView>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

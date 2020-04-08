@@ -1,4 +1,4 @@
-package cat.udl.tidic.a_favour;
+package cat.udl.tidic.a_favour.ProfileClasses;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import cat.udl.tidic.a_favour.R;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>
 {

@@ -1,22 +1,48 @@
 <resources>
     <string name="app_name">A_Favour</string>
-    <string name="title_activity_register">Register</string>
-    <string name="showLocation">Show location</string>
-    <string name="favoursDone">favours done</string>
-    <string name="timesHelped">times helped</string>
-    <string name="UserName">User Name</string>
-    <string name="favours">Favours</string>
-    <string name="favourites">Favourites</string>
-    <string name="opinions">Opinions</string>
-
-    <!---Image Descriptions-->
+    <string name="AFAVOUR">A FAVOUR</string>
+    <!---Profile-->
     <string name="profileImage">Opinions</string>
     <string name="edit">Edit profile</string>
     <string name="back_arrow">Go to previous page</string>
     <string name="location">Location</string>
     <string name="dialogMessage">Cannot connect to databse server</string>
     <string name="dialogTitle">Conexion error</string>
+    <string name="showLocation">Show location</string>
+    <string name="favoursDone">favours done</string>
+    <string name="timesHelped">times helped</string>
+    <string name="userName">User Name</string>
+    <string name="favours">Favours</string>
+    <string name="favourites">Favourites</string>
+    <string name="opinions">Opinions</string>
+
+    <!---Login-->
+    <string name="logIn">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="dontHaveAcconut"> You don\'t have acconut ?</string>
+    <string name="Register"> Register </string>
+
+    <!---Register-->
+    <string name="email">Email adress</string>
+    <string name="phone">Phone numbrer</string>
+    <string name="confirmPassword"> Confirm password </string>
+    <string name="joinAfavour"> Join A Favour </string>
+    <string name="or"> or </string>
+    <string name="alredyHaveAcconut"> Alredy have an account? </string>
+    <string name="regFacebook">Register with Facebook</string>
+    <string name="regGmail">Register with Gmail</string>
+
+
+    <!---MainPage-->
+    <string name="goProfile">Go to profile</string>
     <string name="retry">Retry</string>
     <string name="cancel">Cancel</string>
+    <string name="logOut">Log out</string>
+
+    <!---Image descriptions-->
+    <string name="logo">A favour Logo</string>
+    <string name="handshackeIcon">Handshake icon</string>
+    <string name="imageicon">Image Icon icon</string>
+    <string name="stars">Stars icon</string>
 
 </resources>

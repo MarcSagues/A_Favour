@@ -15,22 +15,24 @@
         android:layout_marginTop="272dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="User"
+        android:hint="@string/userName"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/email_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/email_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textPersonName"
+        android:hint="@string/email"
+        android:inputType="textEmailSubject"
         app:layout_constraintBottom_toTopOf="@+id/mobile_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -41,11 +43,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Phone"
-        android:inputType="textPersonName"
+        android:hint="@string/phone"
+        android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/pwd_txt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/pwd_txt"
@@ -53,11 +56,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/confirm_pwd_txt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/register_btn"
@@ -66,7 +70,7 @@
         android:layout_marginBottom="10dp"
         android:background="#FF3B5B"
         android:onClick="clickOnRegister"
-        android:text="register"
+        android:text="@string/Register"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/facebook_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,11 +82,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:ems="10"
-        android:hint="Confirm password"
+        android:hint="@string/confirmPassword"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/register_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/facebook_btn"
@@ -90,7 +95,7 @@
         android:layout_height="37dp"
         android:layout_marginBottom="10dp"
         android:background="#3846EB"
-        android:text="register with Facebook"
+        android:text="@string/regFacebook"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/gmail_btn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +107,7 @@
         android:layout_height="37dp"
         android:layout_marginBottom="144dp"
         android:background="#F61111"
-        android:text="register with gmail"
+        android:text="@string/regGmail"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +117,7 @@
         android:id="@+id/logo_img"
         android:layout_width="75dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/AFAVOUR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.217"
@@ -125,7 +131,7 @@
         android:layout_width="189dp"
         android:layout_height="51dp"
         android:layout_marginStart="24dp"
-        android:text="Join A Favour"
+        android:text="@string/joinAfavour"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -153,7 +159,7 @@
         android:layout_height="25dp"
         android:background="#FFFFFF"
         android:gravity="center"
-        android:text="o"
+        android:text="@string/or"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +170,7 @@
         android:id="@+id/go_to_login_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an account?"
+        android:text="@string/alredyHaveAcconut"
         android:textColor="#3F51B5"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"

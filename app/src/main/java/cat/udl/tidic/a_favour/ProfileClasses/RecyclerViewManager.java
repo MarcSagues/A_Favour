@@ -1,7 +1,6 @@
-package cat.udl.tidic.a_favour;
+package cat.udl.tidic.a_favour.ProfileClasses;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -10,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import cat.udl.tidic.a_favour.Views.ProfileView;
+import cat.udl.tidic.a_favour.R;
 
 public class RecyclerViewManager extends FragmentPagerAdapter
 {

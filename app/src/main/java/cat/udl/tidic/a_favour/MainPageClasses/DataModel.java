@@ -1,4 +1,4 @@
-package cat.udl.tidic.a_favour;
+package cat.udl.tidic.a_favour.MainPageClasses;
 
 public class DataModel {
 

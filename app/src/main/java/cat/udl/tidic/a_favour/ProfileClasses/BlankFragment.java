@@ -1,9 +1,8 @@
-package cat.udl.tidic.a_favour;
-import cat.udl.tidic.a_favour.MyAdapter;
-import cat.udl.tidic.a_favour.Views.ProfileView;
+package cat.udl.tidic.a_favour.ProfileClasses;
+import cat.udl.tidic.a_favour.ProfileClasses.MyAdapter;
+import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +39,7 @@ public class BlankFragment extends Fragment
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
 
-
         MyAdapter adapter;
-
 
         //Favours or Favourites
         if (id == 0 || id == 1)

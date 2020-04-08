@@ -2,7 +2,6 @@ package cat.udl.tidic.a_favour.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -18,7 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import cat.udl.tidic.a_favour.RecyclerViewManager;
+import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
@@ -27,7 +26,7 @@ import cat.udl.tidic.a_favour.models.UserModel;
 public class ProfileView extends AppCompatActivity
 {
 
-    boolean dev;
+    boolean dev = false;
     ProfileViewModel profileViewModel;
     RelativeLayout loadingbar;
     RecyclerViewManager recyclerManager;
@@ -51,7 +50,6 @@ public class ProfileView extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        dev = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -119,6 +117,7 @@ public class ProfileView extends AppCompatActivity
         for (int i = 0; i < tabLayout.getTabCount(); i++)
         {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
+            assert tab != null;
             tab.setCustomView(recyclerManager.setTabTittles(i));
         }
     }
@@ -158,7 +157,7 @@ public class ProfileView extends AppCompatActivity
                 timesHelped = profileViewModel.getTimesHelped();
                 String favoursDoneString = getResources().getString(R.string.favoursDone);
                 String timesHelpedString = getResources().getString(R.string.timesHelped);
-                favoursInfo.setText(favoursDone + " " + favoursDoneString + ", " + timesHelped +  " " + timesHelpedString);
+                favoursInfo.setText(String.format("%s %s, %s %s", favoursDone, favoursDoneString, timesHelped, timesHelpedString));
 
                 //Informació de l'ubicació de l'usuari
                 userLocation.setText(profileViewModel.getLocation());
@@ -183,12 +182,11 @@ public class ProfileView extends AppCompatActivity
         builder.setNegativeButton(R.string.cancel, (dialog, id) ->
         {
             dialog.cancel();
-            //TODO : Go to a default layout
             Intent intent = new Intent (this, LoginView.class);
             startActivityForResult(intent, 0);
         });
 
-        AlertDialog dialog = builder.show();
+        builder.show();
     }
 
     @Override
@@ -203,16 +201,16 @@ public class ProfileView extends AppCompatActivity
         return true;
     }*/
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        Log.d("" + item.getItemId() ,"asdDDDDDDDDDD");
+    //@Override
+    //public boolean onOptionsItemSelected(MenuItem item) {
+        //int id = item.getItemId();
+        //Log.d("" + item.getItemId() ,"asdDDDDDDDDDD");
         //if (id == R.id.action_settings) {
         //return true;
         //}
 
-        return super.onOptionsItemSelected(item);
-    }
+      //  return super.onOptionsItemSelected(item);
+    //}
 
 
 }

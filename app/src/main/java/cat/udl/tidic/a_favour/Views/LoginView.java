@@ -50,8 +50,10 @@ public class LoginView extends AppCompatActivity {
         registerBtn = findViewById(R.id.register_btn);
         loginBtn = findViewById(R.id.login_btn);
         title = findViewById(R.id.title);
-        String a = getColoredSpanned("A","#ff3b5b");
-        title.setText(Html.fromHtml(a + " Favour"));
+
+        //TODO
+        //String a = getColoredSpanned("A","#ff3b5b");
+        //title.setText(Html.fromHtml(a + " Favour"));
     }
 
     public void checkLogin()

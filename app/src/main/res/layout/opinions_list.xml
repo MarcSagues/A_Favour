@@ -25,6 +25,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="-1dp"
                 android:layout_marginTop="0dp"
+                android:contentDescription="@string/imageicon"
                 android:src="@drawable/abc_btn_radio_material"
                 card_view:srcCompat="@drawable/example_person"></ImageView>
 
@@ -34,10 +35,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/iv_image"
-                android:gravity="center"></TextView>
+                android:layout_toEndOf="@+id/iv_image"
+                android:gravity="center"
+                android:textStyle="bold"
+                tools:text="Title of opinion"></TextView>
 
             <TextView
                 android:id="@+id/desc"
@@ -45,20 +48,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_text"
                 android:layout_marginStart="5dp"
-                android:layout_marginLeft="0dp"
                 android:layout_marginTop="1dp"
                 android:layout_toEndOf="@+id/iv_image"
-                android:layout_toRightOf="@+id/iv_image"
-                android:text="blah blah blah......"></TextView>
+                tools:text="blah blah blah......"></TextView>
 
             <RatingBar
                 android:id="@+id/stars"
                 style="?android:attr/ratingBarStyleIndicator"
-                android:layout_width="wrap_content"
+                android:layout_width="183dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="11dp"
+                android:layout_marginEnd="-42dp"
+                android:contentDescription="@string/stars"
                 android:max="5"
                 android:rating="3.5"
                 android:scaleX="0.7"
@@ -67,7 +69,7 @@
                 android:transformPivotX="0dp"
                 android:transformPivotY="0dp"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toBottomOf="@+id/name" />
+                card_view:layout_constraintTop_toBottomOf="@id/tv_text" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
