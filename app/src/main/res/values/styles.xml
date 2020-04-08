@@ -12,6 +12,7 @@
         <item name="icon">@drawable/menulist</item>
         <item name="android:colorPrimary">@color/AfavourColor</item>
         <item name="android:background">@color/AfavourColor</item>
+        <item name="android:color">@color/Unselected</item>
     </style>
 
 
