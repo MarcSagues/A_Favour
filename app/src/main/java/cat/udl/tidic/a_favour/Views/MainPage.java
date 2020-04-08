@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class MainPage  extends AppCompatActivity
     private DrawerLayout drawerLayout;
     private ListView llista;
     private ListView recyclerView;
+    private Button uploadFavour;
 
     public MainPage() {
     }
@@ -47,9 +50,17 @@ public class MainPage  extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         llista = findViewById(R.id.left_drawer);
+        uploadFavour = findViewById(R.id.upload_afavour);
     }
 
     private void addListeners() {}
+
+    public void goToUploadPage(View v)
+    {
+        openOptions(false);
+        Intent intent = new Intent (v.getContext(), UploadFavour.class);
+        startActivityForResult(intent, 0);
+    }
 
     private void setUpToolbar()
     {

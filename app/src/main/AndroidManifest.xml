@@ -18,6 +18,7 @@
         <activity android:name=".Views.MainPage"></activity>
         <activity android:name=".Views.RegisterView"></activity>
         <activity android:name=".Views.ProfileView"></activity>
+        <activity android:name=".Views.UploadFavour"></activity>
         <activity android:name=".Views.LoginView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
