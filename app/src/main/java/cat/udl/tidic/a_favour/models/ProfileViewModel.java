@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import cat.udl.tidic.a_favour.ProfileClasses.MyAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;

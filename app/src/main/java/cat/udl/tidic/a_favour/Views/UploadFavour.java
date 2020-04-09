@@ -52,6 +52,12 @@ public class UploadFavour extends AppCompatActivity
         if(b != null) {upload_bool = b.getBoolean("upload");}
         Log.d("Open upload page", String.valueOf(upload_bool));
         prepareUpload(upload_bool);
+        if (!upload_bool)
+        {
+            DataModel d = (DataModel) b.getParcelable("data");
+            Log.d(d.name, "aaaaaaaaaaaaaaaaaaaaa");
+        }
+
     }
     @SuppressLint("ResourceType")
     private void prepareUpload(boolean upload_)
@@ -72,7 +78,7 @@ public class UploadFavour extends AppCompatActivity
 
     private void setAllData()
     {
-        DataModel dataModel = new DataModel(0,"Test edit", "This is a description", 2f, DataModel.CATEGORIES.daytodaythings);
+        DataModel dataModel = new DataModel(true,0,"Test edit", "This is a description", 2f, DataModel.CATEGORIES.daytodaythings);
         for (ImageView i : imageArrays)
         {
             if (i.getTag() == dataModel.getCat())
