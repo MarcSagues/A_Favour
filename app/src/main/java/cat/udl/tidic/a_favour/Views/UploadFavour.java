@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 
 public class UploadFavour extends AppCompatActivity
@@ -24,16 +25,16 @@ public class UploadFavour extends AppCompatActivity
     public static int DESCRIPTION_LENGTH = 600;
     public static int AMOUNT_LENGTH = 10;
     public static int INPUTS = 3;
+    boolean upload_bool;
 
-
-    public int total_categories=4;
+    public int total_categories=5;
 
     Button upload;
     ImageView[] imageArrays;
-
+    TextView uploadtTitle;
     TextView[] wordCounter;
     TextInputEditText[] inputEditTexts;
-
+    TextInputLayout amount_parent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,7 +42,47 @@ public class UploadFavour extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anunci);
         getComponents();
+        getBundle();
         setListeners();
+    }
+
+    private void getBundle()
+    {
+        Bundle b = getIntent().getExtras();
+        if(b != null) {upload_bool = b.getBoolean("upload");}
+        Log.d("Open upload page", String.valueOf(upload_bool));
+        prepareUpload(upload_bool);
+    }
+    @SuppressLint("ResourceType")
+    private void prepareUpload(boolean upload_)
+    {
+        if(!upload_)
+        {
+            uploadtTitle.setText(getResources().getString(R.string.editFavour));
+            upload.setText(getResources().getString(R.string.edit_));
+            setAllData();
+        }
+        else
+        {
+            uploadtTitle.setText(getResources().getString(R.string.uploadFavour));
+            upload.setText(getResources().getString(R.string.upload));
+
+        }
+    }
+
+    private void setAllData()
+    {
+        DataModel dataModel = new DataModel(0,"Test edit", "This is a description", 2f, DataModel.CATEGORIES.daytodaythings);
+        for (ImageView i : imageArrays)
+        {
+            if (i.getTag() == dataModel.getCat())
+            {
+                selectCategory(i);
+            }
+        }
+        inputEditTexts[0].setText(dataModel.getName());
+        inputEditTexts[1].setText(dataModel.getDesc());
+        inputEditTexts[2].setText(""+dataModel.getAmount());
     }
 
     private void getComponents()
@@ -50,12 +91,19 @@ public class UploadFavour extends AppCompatActivity
         inputEditTexts[0] = findViewById(R.id.title);
         inputEditTexts[1] = findViewById(R.id.description);
         inputEditTexts[2] = findViewById(R.id.amount);
+        uploadtTitle = findViewById(R.id.uploadtTitle);
 
         imageArrays = new ImageView[total_categories];
         imageArrays[0] = findViewById(R.id.daytoday);
+        imageArrays[0].setTag(DataModel.CATEGORIES.daytodaythings);
         imageArrays[1] = findViewById(R.id.computing);
+        imageArrays[1].setTag(DataModel.CATEGORIES.computing);
         imageArrays[2] = findViewById(R.id.reparation);
+        imageArrays[2].setTag(DataModel.CATEGORIES.reparation);
         imageArrays[3] = findViewById(R.id.others);
+        imageArrays[3].setTag(DataModel.CATEGORIES.others);
+        imageArrays[4] = findViewById(R.id.favourxfavour);
+        imageArrays[4].setTag(DataModel.CATEGORIES.favorxfavour);
 
         upload = findViewById(R.id.upload);
 
@@ -63,6 +111,8 @@ public class UploadFavour extends AppCompatActivity
         wordCounter[0] = findViewById(R.id.titleCounter);
         wordCounter[1] = findViewById(R.id.descCounter);
         wordCounter[2] = findViewById(R.id.amountCounter);
+
+        amount_parent = findViewById(R.id.amount_parent);
 
     }
 
@@ -134,6 +184,17 @@ public class UploadFavour extends AppCompatActivity
 
     private void selectCategory(ImageView imageView)
     {
+        if (imageView.getTag() != null)
+        {
+            if (imageView.getTag() == DataModel.CATEGORIES.favorxfavour)
+            {
+                Log.d("Category selected is ", "favour x favour");
+                amount_parent.setVisibility(View.GONE);
+            }
+            else {amount_parent.setVisibility(View.VISIBLE);}
+        }
+        else {amount_parent.setVisibility(View.VISIBLE);}
+
         unselecttAll(imageArrays);
         imageView.setBackgroundColor(getResources().getColor(R.color.AfavourColor,null));
     }

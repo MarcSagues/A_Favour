@@ -52,8 +52,20 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         if (textViewDesc != null) { textViewDesc.setText(folder.desc); }
         if (amount != null)
         {
-            if(folder.amount != (int) folder.amount) {amount.setText("" + folder.amount + "€");}
-            else {amount.setText(""+(int)folder.amount + "€"); }
+            if (folder.cat != DataModel.CATEGORIES.favorxfavour)
+            {
+                if (folder.amount != (int) folder.amount)
+                {
+                    amount.setText("" + folder.amount + "€");
+                } else
+                    {
+                    amount.setText("" + (int) folder.amount + "€");
+                }
+            }
+            else
+            {
+                amount.setText(R.string.favourxfavour);
+            }
         }
 
         return listItem;

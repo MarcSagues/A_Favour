@@ -47,6 +47,7 @@
 
     <!--Pujar/Editar anunci-->
     <string name="title">Title</string>
+    <string name="favourxfavour">Favour x favour</string>
     <string name="description">Description</string>
     <string name="amount">Amount</string>
     <string name="selectCategory">Select a category</string>
