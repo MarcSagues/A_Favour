@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -41,6 +42,7 @@ public class MainPage  extends AppCompatActivity
         setUpToolbar();
         createMenuList();
         getAllEventList();
+        setScrollListener();
     }
 
     private void getAllActivityData()
@@ -77,6 +79,7 @@ public class MainPage  extends AppCompatActivity
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
         llista.setOnItemClickListener(new DrawerItemClickListener(this));
         llista.setAdapter(adapter);
+        llista.getScrollX();
 
         DataModel[] eventList = new DataModel[5];
         eventList[0] = new DataModel(R.drawable.handshacke, "Necessito ajuda per pujar la compra a casa",
@@ -119,6 +122,36 @@ public class MainPage  extends AppCompatActivity
         openOptions(false);
         Intent intent = new Intent (this, ProfileView.class);
         startActivityForResult(intent, 0);
+    }
+
+    private void setScrollListener()
+    {
+        recyclerView.setOnScrollListener(new AbsListView.OnScrollListener()
+        {
+            private int mLastFirstVisibleItem;
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState)
+            {
+
+            }
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+                if (mLastFirstVisibleItem == 0)
+                {
+                    uploadFavour.animate().alpha(1.0f).setDuration(500).start();
+                    uploadFavour.setClickable(true);
+                }
+                else
+                {
+                    uploadFavour.animate().alpha(0.0f).setDuration(500).start();
+                    uploadFavour.setClickable(false);
+                }
+                mLastFirstVisibleItem=firstVisibleItem;
+            }
+        });
     }
 
 }
