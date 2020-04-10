@@ -50,7 +50,6 @@ public class BlankFragment extends Fragment
         rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
         ListView rv = rootView.findViewById(R.id.rv_recycler_view);
-        rv.setOnItemClickListener(new DrawerItemClickListener(null));
         DrawerItemCustomAdapter adapter;
 
 
@@ -65,7 +64,8 @@ public class BlankFragment extends Fragment
         if (id == 0 || id == 1)
         {
             adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, eventList);
-            rv.setOnItemClickListener(new DrawerItemClickListener(c));
+
+            if (id == 0) { rv.setOnItemClickListener(new DrawerItemClickListener(c));}
         }
         else {adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, eventList_op);}
 
