@@ -36,6 +36,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         View listItem;
 
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+        setLayoutMenu(position);
         listItem = inflater.inflate(layoutResourceId, parent, false);
 
         if (data instanceof DataModel.Favour[])
@@ -74,7 +75,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
         TextView textViewName = listItem.findViewById(R.id.tv_text);
         DataModel.MenuList folder = (DataModel.MenuList) data[position];
-        imageViewIcon.setImageResource(folder.icon);
+        if(imageViewIcon!=null)imageViewIcon.setImageResource(folder.icon);
         textViewName.setText(folder.name);
     }
 
@@ -91,5 +92,17 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         textViewName.setText(folder.name);
         textViewDesc.setText(folder.description);
         stars.setRating(folder.starRating);
+    }
+
+    void setLayoutMenu(int position)
+    {
+        if(position == 0 && data instanceof DataModel.MenuList[])
+        {
+            layoutResourceId = R.layout.list_view_item_profile;
+        }
+        else if (position != 0 && data instanceof DataModel.MenuList[])
+        {
+            layoutResourceId = R.layout.list_view_item_row ;
+        }
     }
 }

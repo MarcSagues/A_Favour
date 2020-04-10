@@ -31,14 +31,26 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         DataModel d = (DataModel) parent.getItemAtPosition(position);
         if (d instanceof DataModel.MenuList)
         {
-            if (position == 0) {
-                Log.d("Open profile", "a");
-                {
+            switch (position)
+            {
+                case 0:
+                    Log.d("Open profile", "clicked");
                     goToProfile();
-                }
-            } else if (position == 1) {
-                Log.d("Log out", "a");
+                    break;
+                case 1:
+                    Log.d("Messages", "clicked");
+                    break;
+                case 2:
+                    Log.d("Configuration", "clicked");
+                    break;
+                case 3:
+                    Log.d("Help", "clicked");
+                    break;
+                case 4:
+                    Log.d("Log out", "clicked");
+                    break;
             }
+
         }
         else if (d instanceof DataModel.Favour)
         {

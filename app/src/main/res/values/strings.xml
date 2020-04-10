@@ -60,7 +60,9 @@
     <string name="computing">Computing</string>
     <string name="reparations">Reparations</string>
     <string name="others">Others</string>
-
+    <string name="help">Help</string>
+    <string name="config">Configurtion</string>
+    <string name="messages">Messages</string>
 
 
 </resources>

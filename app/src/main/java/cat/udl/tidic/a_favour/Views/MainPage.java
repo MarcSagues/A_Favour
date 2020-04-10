@@ -88,9 +88,12 @@ public class MainPage  extends AppCompatActivity
 
     private void createMenuList()
     {
-        DataModel.MenuList[] drawerItem = new DataModel.MenuList[2];
+        DataModel.MenuList[] drawerItem = new DataModel.MenuList[5];
         drawerItem[0] = new DataModel.MenuList(R.drawable.example_person, getResources().getString(R.string.goProfile));
-        drawerItem[1] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.logOut));
+        drawerItem[1] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.messages));
+        drawerItem[2] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.config));
+        drawerItem[3] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.help));
+        drawerItem[4] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.logOut));
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
         llista.setOnItemClickListener(new DrawerItemClickListener(this));
         llista.setAdapter(adapter);
