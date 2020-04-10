@@ -119,57 +119,8 @@ public class ProfileViewModel
         }
     }
 
-    public String[] getDesc()
-    {
-        try
-        {
-            return new String[]{"desc 0 ","desc one", "desc two", "desc 2", "desc 3", "desc 5", "desc 6", "desc 7", "desc 8", "desc 9"};
-        }
-        catch(Exception e)
-        {
-            System.out.println("Impossible agafar les descripcions de l'usuari");
-            return  null;
-        }
-    }
-
-    public ImageView[] getImage()
-    {
-        try
-        {
-            ImageView image = new ImageView(null);
-            image.setImageResource(R.drawable.handshacke);
-            image.setTag(R.drawable.handshacke);
-            return new ImageView[]{image,image,image,image,image,image,image,image,image};
-        }
-        catch(Exception e)
-        {
-            System.out.println("Impossible agafar la imatge de l'usuari");
-            return  null;
-        }
-    }
-
-    public float[] getOpinionStars()
-    {
-        try
-        {
-            return new float[]{0.5f, 5, 3.5f, 4,5,5,5,5,5,8};
-        }
-        catch(Exception e)
-        {
-            System.out.println("Impossible agafar les estrelles de les opinions");
-            return  null;
-        }
-    }
-
     public void showLocationBtn()
     {
         Log.d("Profile", "S'ha premut l'opció SHOW LOCATION");
-    }
-
-
-
-    public float[] getAmount()
-    {
-        return new float[]{0.5f, 5, 3.5f, 4,5,5,5,5,5,8};
     }
 }

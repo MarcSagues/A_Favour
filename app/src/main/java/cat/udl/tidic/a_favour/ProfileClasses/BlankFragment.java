@@ -52,12 +52,6 @@ public class BlankFragment extends Fragment
         ListView rv = rootView.findViewById(R.id.rv_recycler_view);
         DrawerItemCustomAdapter adapter;
 
-
-        String[] titles = pView.getTitles();
-        String[] desc = pView.getDesc();
-        ImageView[] images = pView.getImage();
-        float[] amount = pView.getAmount();
-
         DataModel.Favour eventList[] = FORTESTING.getExampleList();
         DataModel.Opinion eventList_op[] = FORTESTING.getExampleListOPINION();
 

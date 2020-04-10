@@ -53,15 +53,11 @@ public class RecyclerViewManager extends FragmentPagerAdapter
         return tab;
     }
 
+
+
     @Override
     public int getCount() {
         return tabTitles.length;
     }
-
-
-
-    //public void addTab() { }
-
-
 
 }

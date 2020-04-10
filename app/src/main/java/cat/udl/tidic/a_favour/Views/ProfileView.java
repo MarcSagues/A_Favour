@@ -2,6 +2,7 @@ package cat.udl.tidic.a_favour.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -86,11 +87,10 @@ public class ProfileView extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(recyclerManager);
-        tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
+
     }
     private void getAllActivityData()
     {
@@ -193,24 +193,6 @@ public class ProfileView extends AppCompatActivity
     public void onResume() {
         super.onResume();
     }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
-
-    //@Override
-    //public boolean onOptionsItemSelected(MenuItem item) {
-        //int id = item.getItemId();
-        //Log.d("" + item.getItemId() ,"asdDDDDDDDDDD");
-        //if (id == R.id.action_settings) {
-        //return true;
-        //}
-
-      //  return super.onOptionsItemSelected(item);
-    //}
 
 
 }
