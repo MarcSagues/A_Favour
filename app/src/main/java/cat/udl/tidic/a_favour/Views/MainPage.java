@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.util.Objects;
 
+import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
@@ -73,7 +74,7 @@ public class MainPage  extends AppCompatActivity
         Intent intent = new Intent(this, UploadFavour.class);
         Bundle b = new Bundle();
         b.putBoolean("upload", false); //Your id
-        b.putParcelable("data", d);
+        //b.putParcelable("data", d);
         intent.putExtras(b); //Put your id to your next Intent
         startActivityForResult(intent, 0);
     }
@@ -87,21 +88,14 @@ public class MainPage  extends AppCompatActivity
 
     private void createMenuList()
     {
-        DataModel[] drawerItem = new DataModel[2];
-        drawerItem[0] = new DataModel(false,R.drawable.example_person, getResources().getString(R.string.goProfile),null,-1, null);
-        drawerItem[1] = new DataModel(false,R.drawable.log_out, getResources().getString(R.string.logOut),null,-1, null);
+        DataModel.MenuList[] drawerItem = new DataModel.MenuList[2];
+        drawerItem[0] = new DataModel.MenuList(R.drawable.example_person, getResources().getString(R.string.goProfile));
+        drawerItem[1] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.logOut));
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
         llista.setOnItemClickListener(new DrawerItemClickListener(this));
         llista.setAdapter(adapter);
 
-        DataModel[] eventList = new DataModel[5];
-        eventList[0] = new DataModel(false,R.drawable.handshacke, "Necessito ajuda per pujar la compra a casa",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc molestie vitae dolor id faucibus. Fusce eu venenatis risus. Fusce malesuada, ipsum at hendrerit dignissim, mauris ligula accumsan elit, eget facilisis diam quam eget sapien. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam mollis varius velit, vel ornare purus imperdiet et. Sed tempus turpis sed ex pellentesque, id dignissim mauris condimentum. Ut posuere quam quis nisi vestibulum semper. Vestibulum nec aliquet metus. Quisque sit amet velit in lorem bibendum vestibulum a et lectus."
-        ,25, DataModel.CATEGORIES.favorxfavour);
-        eventList[1] = new DataModel(false,android.R.drawable.ic_menu_agenda, "Test2","test description 2",2.5f, DataModel.CATEGORIES.computing);
-        eventList[2] = eventList[1];
-        eventList[3] = eventList[0];
-        eventList[4] = eventList[1];
+        DataModel.Favour eventList[] = FORTESTING.getExampleList();
         DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
         recyclerView.setAdapter(adapter_event);
     }

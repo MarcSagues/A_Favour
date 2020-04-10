@@ -1,110 +1,98 @@
 package cat.udl.tidic.a_favour.MainPageClasses;
 
+import android.app.Activity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class DataModel implements Parcelable
+import cat.udl.tidic.a_favour.R;
+
+public class DataModel extends Activity
 {
-    protected DataModel(Parcel in) {
-        icon = in.readInt();
-        name = in.readString();
-        desc = in.readString();
-        amount = in.readFloat();
-    }
-
-    public static final Creator<DataModel> CREATOR = new Creator<DataModel>() {
-        @Override
-        public DataModel createFromParcel(Parcel in) {
-            return new DataModel(in);
-        }
-
-        @Override
-        public DataModel[] newArray(int size) {
-            return new DataModel[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(icon);
-        dest.writeString(name);
-        dest.writeString(desc);
-        dest.writeFloat(amount);
-    }
-
     public enum CATEGORIES {favorxfavour, daytodaythings, computing, reparation, others}
     int icon;
     public String name;
-    String desc;
-    CATEGORIES cat;
-    float amount;
-
-    public boolean isMyfavour() {
-        return myfavour;
-    }
-
-    public void setMyfavour(boolean myfavour) {
-        this.myfavour = myfavour;
-    }
-
-    boolean myfavour;
 
     // Constructor.
-    public DataModel(boolean myfavour, int icon, String name, String desc, float amount, CATEGORIES cat)
+    public DataModel(int icon, String name)
     {
         this.icon = icon;
         this.name = name;
-        this.desc = desc;
-        this.amount = amount;
-        this.cat = cat;
-        this.myfavour = myfavour;
     }
 
-    public CATEGORIES getCat()
+    public static class MenuList extends DataModel
     {
-        return this.cat;
+        public MenuList(int icon, String name)
+        {
+            super(icon, name);
+        }
+
+        public String getName()
+        {
+            return this.name;
+        }
     }
 
-    public String getName() {
-        return name;
+    public static class Favour extends DataModel
+    {
+        String categoria;
+        String description;
+        float amount;
+
+        public Favour(int icon, String name, String description, float amount, String categoria)
+        {
+            super(icon, name);
+            this.description = description;
+            this.categoria = categoria;
+            this.amount = parseFloat(amount);
+        }
+
+        public String getName()
+        {
+           return  this.name;
+        }
+
+        public String getDescription()
+        {
+            return  this.description;
+        }
+
+        public float parseFloat(float amount)
+        {
+            if (amount != (int) amount) { return amount; }
+            else {return (int) amount; }
+        }
+
+        public String getCategoria()
+        {
+            return  this.categoria;
+        }
+        public String getAmount()
+        {
+            String favxfav = CATEGORIES.favorxfavour.name();
+            if (this.categoria.equals(CATEGORIES.favorxfavour.name()))
+            {
+                //TODO
+                return "Favour x favour";
+            }
+            else
+            {
+                return String.valueOf(this.amount);
+            }
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public static class Opinion extends DataModel
+    {
 
+        String description;
+        float starRating;
 
-    public int getIcon() {
-        return icon;
-    }
-
-    public void setIcon(int icon) {
-        this.icon = icon;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public void setCat(CATEGORIES cat) {
-        this.cat = cat;
-    }
-
-    public float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
+        public Opinion(int icon, String name, String description, float starRating)
+        {
+            super(icon, name);
+            this.description = description;
+            this.starRating = starRating;
+        }
     }
 
 }

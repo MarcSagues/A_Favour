@@ -54,11 +54,11 @@ public class UploadFavour extends AppCompatActivity
         prepareUpload(upload_bool);
         if (!upload_bool)
         {
-            DataModel d = (DataModel) b.getParcelable("data");
-            Log.d(d.name, "aaaaaaaaaaaaaaaaaaaaa");
+            //DataModel d = (DataModel) b.getParcelable("data");
         }
 
     }
+
     @SuppressLint("ResourceType")
     private void prepareUpload(boolean upload_)
     {
@@ -78,17 +78,20 @@ public class UploadFavour extends AppCompatActivity
 
     private void setAllData()
     {
-        DataModel dataModel = new DataModel(true,0,"Test edit", "This is a description", 2f, DataModel.CATEGORIES.daytodaythings);
+        DataModel.Favour dataModel = new DataModel.Favour(R.drawable.handshacke, "hola", "caracola,", 0, DataModel.CATEGORIES.favorxfavour.name());
+
         for (ImageView i : imageArrays)
         {
-            if (i.getTag() == dataModel.getCat())
+            if (i.getTag() == dataModel.getCategoria())
             {
                 selectCategory(i);
             }
         }
         inputEditTexts[0].setText(dataModel.getName());
-        inputEditTexts[1].setText(dataModel.getDesc());
-        inputEditTexts[2].setText(""+dataModel.getAmount());
+        inputEditTexts[1].setText(dataModel.getDescription());
+        if (dataModel.getCategoria() != DataModel.CATEGORIES.favorxfavour.name()) {
+            inputEditTexts[2].setText("" + dataModel.getAmount());
+        }
     }
 
     private void getComponents()
@@ -100,16 +103,21 @@ public class UploadFavour extends AppCompatActivity
         uploadtTitle = findViewById(R.id.uploadtTitle);
 
         imageArrays = new ImageView[total_categories];
+
         imageArrays[0] = findViewById(R.id.daytoday);
-        imageArrays[0].setTag(DataModel.CATEGORIES.daytodaythings);
+        imageArrays[0].setTag(DataModel.CATEGORIES.daytodaythings.name());
+
         imageArrays[1] = findViewById(R.id.computing);
-        imageArrays[1].setTag(DataModel.CATEGORIES.computing);
+        imageArrays[1].setTag(DataModel.CATEGORIES.computing.name());
+
         imageArrays[2] = findViewById(R.id.reparation);
-        imageArrays[2].setTag(DataModel.CATEGORIES.reparation);
+        imageArrays[2].setTag(DataModel.CATEGORIES.reparation.name());
+
         imageArrays[3] = findViewById(R.id.others);
-        imageArrays[3].setTag(DataModel.CATEGORIES.others);
+        imageArrays[3].setTag(DataModel.CATEGORIES.others.name());
+
         imageArrays[4] = findViewById(R.id.favourxfavour);
-        imageArrays[4].setTag(DataModel.CATEGORIES.favorxfavour);
+        imageArrays[4].setTag(DataModel.CATEGORIES.favorxfavour.name());
 
         upload = findViewById(R.id.upload);
 
@@ -192,7 +200,7 @@ public class UploadFavour extends AppCompatActivity
     {
         if (imageView.getTag() != null)
         {
-            if (imageView.getTag() == DataModel.CATEGORIES.favorxfavour)
+            if (imageView.getTag() == DataModel.CATEGORIES.favorxfavour.name())
             {
                 Log.d("Category selected is ", "favour x favour");
                 amount_parent.setVisibility(View.GONE);

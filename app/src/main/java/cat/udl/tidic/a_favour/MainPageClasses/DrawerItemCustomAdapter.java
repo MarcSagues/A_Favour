@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,8 +21,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
     private int layoutResourceId;
     private DataModel[] data;
 
-    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data)
-    {
+    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data) {
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.mContext = mContext;
@@ -32,42 +32,64 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
     @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent)
-    {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View listItem;
 
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         listItem = inflater.inflate(layoutResourceId, parent, false);
 
-
-        ImageView imageViewIcon =  listItem.findViewById(R.id.iv_image);
-        TextView textViewName =  listItem.findViewById(R.id.tv_text);
-        TextView textViewDesc =  listItem.findViewById(R.id.desc);
-        TextView amount =  listItem.findViewById(R.id.tv_amount);
-
-        DataModel folder = data[position];
-
-        imageViewIcon.setImageResource(folder.icon);
-        textViewName.setText(folder.name);
-        if (textViewDesc != null) { textViewDesc.setText(folder.desc); }
-        if (amount != null)
+        if (data instanceof DataModel.Favour[])
         {
-            if (folder.cat != DataModel.CATEGORIES.favorxfavour)
-            {
-                if (folder.amount != (int) folder.amount)
-                {
-                    amount.setText("" + folder.amount + "€");
-                } else
-                    {
-                    amount.setText("" + (int) folder.amount + "€");
-                }
-            }
-            else
-            {
-                amount.setText(R.string.favourxfavour);
-            }
+            inflateFavour(listItem,position);
+        }
+        else if (data instanceof DataModel.MenuList[])
+        {
+            inflateMenuList(listItem,position);
+        }
+        else
+        {
+            inflateOpinions(listItem,position);
         }
 
         return listItem;
+    }
+
+    void inflateFavour(View listItem, int position)
+    {
+        ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
+        TextView textViewName = listItem.findViewById(R.id.tv_text);
+        TextView textViewDesc = listItem.findViewById(R.id.desc);
+        TextView amount = listItem.findViewById(R.id.tv_amount);
+
+        DataModel.Favour folder = (DataModel.Favour) data[position];
+
+        imageViewIcon.setImageResource(folder.icon);
+        textViewName.setText(folder.name);
+        textViewDesc.setText(folder.description);
+        amount.setText("" + folder.getAmount());
+    }
+
+    void inflateMenuList(View listItem, int position)
+    {
+        ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
+        TextView textViewName = listItem.findViewById(R.id.tv_text);
+        DataModel.MenuList folder = (DataModel.MenuList) data[position];
+        imageViewIcon.setImageResource(folder.icon);
+        textViewName.setText(folder.name);
+    }
+
+    void inflateOpinions(View listItem, int position)
+    {
+        ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
+        TextView textViewName = listItem.findViewById(R.id.tv_text);
+        TextView textViewDesc = listItem.findViewById(R.id.desc);
+        RatingBar stars = listItem.findViewById(R.id.stars);
+
+        DataModel.Opinion folder = (DataModel.Opinion) data[position];
+
+        imageViewIcon.setImageResource(folder.icon);
+        textViewName.setText(folder.name);
+        textViewDesc.setText(folder.description);
+        stars.setRating(folder.starRating);
     }
 }

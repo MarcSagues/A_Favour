@@ -33,13 +33,13 @@ public class RecyclerViewManager extends FragmentPagerAdapter
         switch (position) {
             case 0:
                 //Opinions
-                return new BlankFragment(0);
+                return new BlankFragment(0,context);
             case 1:
                 //Favourites
-                return new BlankFragment(1);
+                return new BlankFragment(1, context);
             case 2:
                 //Favours
-                return new BlankFragment(2);
+                return new BlankFragment(2, context);
         }
 
         return null;
