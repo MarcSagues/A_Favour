@@ -21,6 +21,9 @@ public interface UserServices
     @GET("/account/profile")
     Call<UserModel> getUserProfile(@HeaderMap Map<String, String> headers);
 
+    @GET("/account/all_favours")
+    Call<UserModel> getFavours(@HeaderMap Map<String, String> headers);
+
 
 //    @Headers({"Content-Type:application/json"})
 //    @POST("/users/register")
@@ -36,5 +39,8 @@ public interface UserServices
 
     @POST ("/account/create_token")
     Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);
+
+    @POST("/users/all_favours")
+    Call<Void> setFavours(@Body JsonObject userJson);
 
 }

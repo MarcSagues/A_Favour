@@ -81,6 +81,11 @@ public class ProfileView extends AppCompatActivity
         super.onBackPressed();
     }
 
+    public void onEditClick(View v){
+        Intent intent = new Intent (v.getContext(), EditProfileView.class);
+        startActivityForResult(intent, 0);
+    }
+
 
     private void setUpRecyclerView()
     {

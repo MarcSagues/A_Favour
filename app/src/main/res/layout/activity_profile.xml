@@ -70,7 +70,7 @@
             android:layout_marginStart="348dp"
             android:layout_marginTop="8dp"
             android:contentDescription="@string/edit"
-            android:onClick="backArrowAction"
+            android:onClick="onEditClick"
             app:layout_constraintStart_toStartOf="@+id/up_panel"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pencil" />
