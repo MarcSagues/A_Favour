@@ -33,6 +33,7 @@
                     android:background="@color/AfavourColor"
                     android:gravity="center"
                     android:text="@string/uploadFavour"
+                    android:textAllCaps="true"
                     android:textColor="@color/design_default_color_background"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -52,7 +53,7 @@
                 android:paddingEnd="20dp"
                 android:text="@string/selectCategory"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -82,6 +83,7 @@
                             android:background="@drawable/roundborders"
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
+                            android:focusable="auto"
                             android:padding="5dp"
                             app:srcCompat="@drawable/daytodaythings" />
 
@@ -117,6 +119,7 @@
                             android:background="@drawable/roundborders"
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
+                            android:focusable="auto"
                             android:padding="5dp"
                             app:srcCompat="@drawable/handshacke" />
 
@@ -151,6 +154,7 @@
                             android:background="@drawable/roundborders"
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
+                            android:focusable="auto"
                             android:padding="5dp"
                             app:srcCompat="@drawable/computing" />
 
@@ -186,6 +190,7 @@
                             android:background="@drawable/roundborders"
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
+                            android:focusable="auto"
                             android:padding="5dp"
                             app:srcCompat="@drawable/reparation" />
 
@@ -221,6 +226,7 @@
                             android:background="@drawable/roundborders"
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
+                            android:focusable="auto"
                             android:padding="5dp"
                             app:srcCompat="@drawable/others" />
 
