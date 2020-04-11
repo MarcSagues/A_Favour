@@ -13,17 +13,14 @@ public class DataModel extends Activity
     int icon;
     public String name;
     // Constructor.
-    public DataModel(int icon, String name)
-    {
-        this.icon = icon;
-        this.name = name;
-    }
+    public DataModel() { }
 
     public static class MenuList extends DataModel
     {
         public MenuList(int icon, String name)
         {
-            super(icon, name);
+            this.icon = icon;
+            this.name = name;
         }
 
         public String getName()
@@ -38,9 +35,10 @@ public class DataModel extends Activity
         String description;
         float amount;
 
-        public Favour(int icon, String name, String description, float amount, String categoria)
+        public Favour(String name, String description, float amount, String categoria)
         {
-            super(icon, name);
+            this.icon = CategoryManager.getImageId(categoria);
+            this.name = name;
             this.description = description;
             this.categoria = categoria;
             this.amount = parseFloat(amount);
@@ -89,7 +87,8 @@ public class DataModel extends Activity
 
         public Opinion(int icon, String name, String description, float starRating)
         {
-            super(icon, name);
+            this.icon = icon;
+            this.name = name;
             this.description = description;
             this.starRating = starRating;
         }

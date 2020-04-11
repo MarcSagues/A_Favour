@@ -80,7 +80,7 @@ public class UploadFavour extends AppCompatActivity
 
     private void setAllData()
     {
-        DataModel.Favour dataModel = new DataModel.Favour(R.drawable.handshacke, "hola", "caracola,", 0, CategoryManager.CATEGORIES.favourxfavour.name());
+        DataModel.Favour dataModel = new DataModel.Favour("hola", "caracola,", 0, CategoryManager.CATEGORIES.favourxfavour.name());
 
         for (ImageView i : imageArrays)
         {
