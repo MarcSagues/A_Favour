@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -211,14 +212,14 @@ public class UploadFavour extends AppCompatActivity
         else {amount_parent.setVisibility(View.VISIBLE);}
 
         unselecttAll(imageArrays);
-        imageView.setBackgroundColor(getResources().getColor(R.color.AfavourColor,null));
+        imageView.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.AfavourColor)));
     }
 
     private void unselecttAll(ImageView[] imageViews)
     {
         for (ImageView i : imageViews)
         {
-            i.setBackgroundColor(getResources().getColor(R.color.Unselected, null));
+            i.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.Unselected)));
         }
     }
 
