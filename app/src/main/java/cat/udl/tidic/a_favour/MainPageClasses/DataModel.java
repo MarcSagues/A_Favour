@@ -6,12 +6,12 @@ import android.os.Parcelable;
 
 import cat.udl.tidic.a_favour.R;
 
+
 public class DataModel extends Activity
 {
-    public enum CATEGORIES {favorxfavour, daytodaythings, computing, reparation, others}
+
     int icon;
     public String name;
-
     // Constructor.
     public DataModel(int icon, String name)
     {
@@ -68,15 +68,15 @@ public class DataModel extends Activity
         }
         public String getAmount()
         {
-            String favxfav = CATEGORIES.favorxfavour.name();
-            if (this.categoria.equals(CATEGORIES.favorxfavour.name()))
+            String favxfav = CategoryManager.CATEGORIES.favourxfavour.name();
+            if (this.categoria.equals(CategoryManager.CATEGORIES.favourxfavour.name()))
             {
                 //TODO
                 return "Favour x favour";
             }
             else
             {
-                return String.valueOf(this.amount);
+                return String.valueOf(this.amount) + "€";
             }
         }
     }

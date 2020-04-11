@@ -98,7 +98,8 @@ public class MainPage  extends AppCompatActivity
         llista.setOnItemClickListener(new DrawerItemClickListener(this));
         llista.setAdapter(adapter);
 
-        DataModel.Favour eventList[] = FORTESTING.getExampleList();
+        FORTESTING F= new FORTESTING();
+        DataModel.Favour eventList[] = F.getExampleList();
         DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
         recyclerView.setAdapter(adapter_event);
     }

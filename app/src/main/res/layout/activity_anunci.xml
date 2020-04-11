@@ -65,7 +65,7 @@
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
                             android:padding="5dp"
-                            app:srcCompat="@android:drawable/ic_menu_month" />
+                            app:srcCompat="@drawable/daytodaythings" />
 
                         <TextView
                             android:id="@+id/daytoday_txt"
@@ -133,7 +133,7 @@
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
                             android:padding="5dp"
-                            app:srcCompat="@drawable/ic_launcher_foreground" />
+                            app:srcCompat="@drawable/computing" />
 
                         <TextView
                             android:id="@+id/computing_txt"
@@ -167,7 +167,7 @@
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
                             android:padding="5dp"
-                            app:srcCompat="@android:drawable/ic_menu_manage" />
+                            app:srcCompat="@drawable/reparation" />
 
                         <TextView
                             android:id="@+id/reparation_txt"
@@ -201,7 +201,7 @@
                             android:clickable="true"
                             android:contentDescription="@string/imageicon"
                             android:padding="5dp"
-                            app:srcCompat="@android:drawable/ic_menu_myplaces" />
+                            app:srcCompat="@drawable/others" />
 
                         <TextView
                             android:id="@+id/others_txt"
