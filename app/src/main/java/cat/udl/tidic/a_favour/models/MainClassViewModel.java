@@ -42,8 +42,7 @@ public class MainClassViewModel {
     public void getFavours()
     {
         Map<String, String> map = new HashMap<>();
-        Log.d("IS TOKEN EMPTY? TOKEN = ", mPreferences.getString("token", ""));
-        map.put("Authorization", mPreferences.getString("all_favours", ""));
+        map.put("Authorization", mPreferences.getString("favours", ""));
 
         //Esta hardcodejat perque falta fer la gestió d'errors al agafar els valors
         //De moment mostra les dades de l'usuari 1
@@ -59,17 +58,17 @@ public class MainClassViewModel {
             {
                 try
                 {
-                    System.out.println(response.body().name);
+                   Log.d("------------------", response.body().name);
                 }
-                catch (Exception e) { Log.e("ProfileViewModel", e.getMessage() + "ERROR");}
+                catch (Exception e) { Log.d("------------------", e.getMessage() + "ERROR");}
             }
 
             @Override
             public void onFailure(Call<DataModel.Favour> call, Throwable t)
             {
 
-                user.setValue(null);
-                Log.e("ProfileViewModel", Objects.requireNonNull(t.getMessage()));
+
+                Log.e("---------------", Objects.requireNonNull(t.getMessage()));
                 //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

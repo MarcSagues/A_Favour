@@ -22,7 +22,7 @@ public interface UserServices
     @GET("/account/profile")
     Call<UserModel> getUserProfile(@HeaderMap Map<String, String> headers);
 
-    @GET("/account/all_favours")
+    @GET("/users/favours")
     Call<DataModel.Favour> getFavours(@HeaderMap Map<String, String> headers);
 
 
@@ -41,7 +41,7 @@ public interface UserServices
     @POST ("/account/create_token")
     Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);
 
-    @POST("/users/all_favours")
+    @POST("/users/favours")
     Call<Void> setFavours(@Body JsonObject userJson);
 
 }

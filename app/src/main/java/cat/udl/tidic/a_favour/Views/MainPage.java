@@ -22,6 +22,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.models.MainClassViewModel;
 
 public class MainPage  extends AppCompatActivity
 {
@@ -44,6 +45,8 @@ public class MainPage  extends AppCompatActivity
         createMenuList();
         getAllEventList();
         setScrollListener();
+        MainClassViewModel mainClassViewModel = new MainClassViewModel();
+
     }
 
     private void getAllActivityData()
