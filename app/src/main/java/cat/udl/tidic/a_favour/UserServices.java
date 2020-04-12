@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.Map;
 
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.models.UserModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,7 +23,7 @@ public interface UserServices
     Call<UserModel> getUserProfile(@HeaderMap Map<String, String> headers);
 
     @GET("/account/all_favours")
-    Call<UserModel> getFavours(@HeaderMap Map<String, String> headers);
+    Call<DataModel.Favour> getFavours(@HeaderMap Map<String, String> headers);
 
 
 //    @Headers({"Content-Type:application/json"})

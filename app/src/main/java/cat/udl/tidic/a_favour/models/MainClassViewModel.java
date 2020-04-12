@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
@@ -49,22 +50,22 @@ public class MainClassViewModel {
         //map.put("Authorization", "656e50e154865a5dc469b80437ed2f963b8f58c8857b66c9bf");
 
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
-        Call<UserModel> call = userService.getFavours(map);
+        Call<DataModel.Favour> call = userService.getFavours(map);
 
-        call.enqueue(new Callback<UserModel>()
+        call.enqueue(new Callback<DataModel.Favour>()
         {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response)
+            public void onResponse(Call<DataModel.Favour> call, Response<DataModel.Favour> response)
             {
                 try
                 {
-                    //user.setValue(response.body());
+                    System.out.println(response.body().name);
                 }
                 catch (Exception e) { Log.e("ProfileViewModel", e.getMessage() + "ERROR");}
             }
 
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t)
+            public void onFailure(Call<DataModel.Favour> call, Throwable t)
             {
 
                 user.setValue(null);
