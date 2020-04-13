@@ -40,7 +40,7 @@ public class DataModel extends Activity
         public String category;
         @SerializedName("name")
         public String name;
-        @SerializedName("description")
+        @SerializedName("desc")
         public String description;
         @SerializedName("amount")
         public float amount;
@@ -51,15 +51,20 @@ public class DataModel extends Activity
 
         public Favour(String name, String description, float amount, String category, int id, String user)
         {
-            this.icon = CategoryManager.getImageId(category);
+            this.category = category;
             this.name = name;
             this.description = description;
-            this.category = category;
             this.amount = parseFloat(amount);
             this.user = user;
             this.id = id;
+            setIcon();
+
         }
 
+        public String toString()
+        {
+            return "ICON: " + this.icon + " NAME: " + this.name + " DESC: " + this.description +" CAT: " + this.category +" AMOUNT: " + this.amount;
+        }
         public String getName()
         {
            return  this.name;
@@ -92,6 +97,11 @@ public class DataModel extends Activity
             {
                 return String.valueOf(this.amount) + "€";
             }
+        }
+
+        public void setIcon()
+        {
+            this.icon = CategoryManager.getImageId(this.category);
         }
     }
 

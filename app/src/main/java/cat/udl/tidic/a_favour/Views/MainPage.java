@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import java.util.List;
 import java.util.Objects;
 
 import cat.udl.tidic.a_favour.FORTESTING;
@@ -30,6 +31,7 @@ public class MainPage  extends AppCompatActivity
     private ListView llista;
     private ListView recyclerView;
     private Button uploadFavour;
+    MainClassViewModel mainClassViewModel;
 
     public MainPage() {
     }
@@ -45,10 +47,23 @@ public class MainPage  extends AppCompatActivity
         createMenuList();
         getAllEventList();
         setScrollListener();
-        MainClassViewModel mainClassViewModel = new MainClassViewModel();
+        mainClassViewModel = new MainClassViewModel();
+        setUpObserver();
+
 
     }
 
+    private void setUpObserver()
+    {
+        mainClassViewModel.getAllFavours().observe(this, this::onGetFavoursData);
+    }
+
+    private void onGetFavoursData(List<DataModel.Favour> all_f)
+    {
+        DataModel.Favour eventList[] = all_f.toArray(new DataModel.Favour[0]);
+        DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
+        recyclerView.setAdapter(adapter_event);
+    }
     private void getAllActivityData()
     {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -100,11 +115,6 @@ public class MainPage  extends AppCompatActivity
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
         llista.setOnItemClickListener(new DrawerItemClickListener(this));
         llista.setAdapter(adapter);
-
-        FORTESTING F= new FORTESTING();
-        DataModel.Favour eventList[] = F.getExampleList();
-        DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
-        recyclerView.setAdapter(adapter_event);
     }
 
     @Override

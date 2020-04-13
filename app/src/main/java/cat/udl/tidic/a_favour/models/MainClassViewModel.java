@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,14 +21,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainClassViewModel {
+public class MainClassViewModel
+{
     //private UserModel user = new UserModel();
     private UserServices userService;
     private SharedPreferences mPreferences;
+    private MutableLiveData<List<DataModel.Favour>> allFavours = new MutableLiveData<>();
+    public LiveData<List<DataModel.Favour>> getAllFavours(){ return allFavours; }
 
-
-    private MutableLiveData<UserModel> user = new MutableLiveData<>();
-    public LiveData<UserModel> getUserProfile(){ return user; }
 
     public MainClassViewModel()
     {
@@ -49,22 +50,27 @@ public class MainClassViewModel {
         //map.put("Authorization", "656e50e154865a5dc469b80437ed2f963b8f58c8857b66c9bf");
 
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
-        Call<DataModel.Favour> call = userService.getFavours(map);
+        Call<List<DataModel.Favour>> call = userService.getFavours(map);
 
-        call.enqueue(new Callback<DataModel.Favour>()
+        call.enqueue(new Callback<List<DataModel.Favour>>()
         {
             @Override
-            public void onResponse(Call<DataModel.Favour> call, Response<DataModel.Favour> response)
+            public void onResponse(Call<List<DataModel.Favour>> call, Response<List<DataModel.Favour>> response)
             {
                 try
                 {
-                   Log.d("------------------", response.body().name);
+                   List<DataModel.Favour> response_ = (List<DataModel.Favour>) response.body();
+                    for (int i =0; i < response_.size(); i++)
+                    {
+                        response_.get(i).setIcon();
+                    }
+                    allFavours.setValue(response_);
                 }
                 catch (Exception e) { Log.d("------------------", e.getMessage() + "ERROR");}
             }
 
             @Override
-            public void onFailure(Call<DataModel.Favour> call, Throwable t)
+            public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
             {
 
 

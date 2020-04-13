@@ -2,6 +2,7 @@ package cat.udl.tidic.a_favour;
 
 import com.google.gson.JsonObject;
 
+import java.util.List;
 import java.util.Map;
 
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
@@ -22,8 +23,8 @@ public interface UserServices
     @GET("/account/profile")
     Call<UserModel> getUserProfile(@HeaderMap Map<String, String> headers);
 
-    @GET("/users/favours")
-    Call<DataModel.Favour> getFavours(@HeaderMap Map<String, String> headers);
+    @GET("/favours")
+    Call <  List<DataModel.Favour>> getFavours(@HeaderMap Map<String, String> headers);
 
 
 //    @Headers({"Content-Type:application/json"})
