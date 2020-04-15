@@ -49,8 +49,6 @@ public class MainPage  extends AppCompatActivity
         setScrollListener();
         mainClassViewModel = new MainClassViewModel();
         setUpObserver();
-
-
     }
 
     private void setUpObserver()

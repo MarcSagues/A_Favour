@@ -27,7 +27,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="3dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="7dp"
                 android:contentDescription="@string/handshackeIcon"
                 android:src="@drawable/abc_btn_radio_material"
                 card_view:srcCompat="@drawable/handshacke"></ImageView>
@@ -43,7 +43,6 @@
                 android:layout_toEndOf="@+id/iv_image"
                 android:textColor="@color/design_default_color_on_secondary"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 tools:text="Title"></TextView>
 
             <TextView
@@ -60,17 +59,6 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 tools:text="Amount"></TextView>
-
-            <TextView
-                android:id="@+id/desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_text"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="-1dp"
-                android:layout_toEndOf="@+id/iv_image"
-                android:textColor="@color/tecxtColor"
-                tools:text="DescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexrDescriptiontexr"></TextView>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

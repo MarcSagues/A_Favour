@@ -66,7 +66,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 
         imageViewIcon.setImageResource(folder.icon);
         textViewName.setText(folder.name);
-        textViewDesc.setText(folder.description);
+        if(textViewDesc !=null){textViewDesc.setText(folder.description);}
         amount.setText("" + folder.getAmount());
     }
 
@@ -90,7 +90,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 
         imageViewIcon.setImageResource(folder.icon);
         textViewName.setText(folder.name);
-        textViewDesc.setText(folder.description);
+        if(folder.description != ""){textViewDesc.setText(folder.description);}
         stars.setRating(folder.starRating);
     }
 

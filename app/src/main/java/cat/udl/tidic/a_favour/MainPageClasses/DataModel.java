@@ -116,7 +116,7 @@ public class DataModel extends Activity
         {
             this.icon = icon;
             this.name = name;
-            this.description = description;
+            if(description != null) {this.description = description;}
             this.starRating = starRating;
         }
     }
