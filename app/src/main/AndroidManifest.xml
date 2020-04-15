@@ -13,6 +13,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <permission
+        android:name="cat.udl.tidic.a_favour.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
     <application
 
         android:name=".App"
