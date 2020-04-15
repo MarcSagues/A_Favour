@@ -11,6 +11,7 @@ import android.widget.ListView;
 import androidx.core.app.ActivityCompat;
 
 import cat.udl.tidic.a_favour.ProfileClasses.BlankFragment;
+import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.Views.MainPage;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.UploadFavour;
@@ -54,7 +55,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         }
         else if (d instanceof DataModel.Favour)
         {
-            goToEditFavour();
+            goToSeeAnunci();
         }
     }
 
@@ -69,6 +70,13 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         Intent intent = new Intent (c, UploadFavour.class);
         Bundle b= new Bundle();
         b.putBoolean("upload", false);
+        startActivity(c,intent,b);
+    }
+
+    private void goToSeeAnunci()
+    {
+        Intent intent = new Intent (c, AnunciView.class);
+        Bundle b= new Bundle();
         startActivity(c,intent,b);
     }
 

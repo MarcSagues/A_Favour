@@ -53,7 +53,17 @@ public class MainPage  extends AppCompatActivity
 
     private void setUpObserver()
     {
-        mainClassViewModel.getAllFavours().observe(this, this::onGetFavoursData);
+        if (!FORTESTING.dev)
+        {
+            mainClassViewModel.getAllFavours().observe(this, this::onGetFavoursData);
+        }
+        else
+        {
+            DataModel.Favour eventList[] = FORTESTING.getExampleList();
+            DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
+            recyclerView.setAdapter(adapter_event);
+            recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
+        }
     }
 
     private void onGetFavoursData(List<DataModel.Favour> all_f)

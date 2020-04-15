@@ -36,11 +36,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
         <activity android:name=".Views.EditProfileView" />
-        <activity android:name=".Views.MainPage" />
         <activity android:name=".Views.RegisterView" />
         <activity android:name=".Views.ProfileView" />
         <activity android:name=".Views.UploadFavour" />
-        <activity android:name=".Views.AnunciView">
+        <activity android:name=".Views.AnunciView" />
+        <activity android:name=".Views.MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

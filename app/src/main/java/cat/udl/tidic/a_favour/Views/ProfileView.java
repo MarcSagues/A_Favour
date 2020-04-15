@@ -2,7 +2,6 @@ package cat.udl.tidic.a_favour.Views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -18,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
@@ -26,8 +26,6 @@ import cat.udl.tidic.a_favour.models.UserModel;
 
 public class ProfileView extends AppCompatActivity
 {
-
-    boolean dev = false;
     ProfileViewModel profileViewModel;
     RelativeLayout loadingbar;
     RecyclerViewManager recyclerManager;
@@ -109,7 +107,7 @@ public class ProfileView extends AppCompatActivity
         userLocation = findViewById(R.id.user_location);
         showLocation = findViewById(R.id.show_location);
 
-        if (dev) {loadingbar.setVisibility(View.GONE);}
+        if (FORTESTING.dev) {loadingbar.setVisibility(View.GONE);}
 
         //favoursBtn = findViewById(R.id.favours_btn);
         //favouritesBtn = findViewById(R.id.favourites_btn);
@@ -134,7 +132,7 @@ public class ProfileView extends AppCompatActivity
     private void onGetUserData(UserModel u)
     {
 
-        if (dev)
+        if (FORTESTING.dev)
         {
             loadingbar.setVisibility(View.GONE);
         }
