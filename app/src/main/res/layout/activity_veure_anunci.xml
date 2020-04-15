@@ -7,11 +7,42 @@
     android:background="@color/common_google_signin_btn_text_dark_pressed"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="42dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/back_arrow"
+            android:onClick="backArrowAction"
+            app:layout_constraintStart_toStartOf="@+id/up_panel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrow" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="42dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/edit"
+            android:onClick="onEditClick"
+            app:layout_constraintStart_toStartOf="@+id/up_panel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/pencil" />
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/anunci"

@@ -75,8 +75,13 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
     private void goToSeeAnunci()
     {
+
+        boolean isMyfavour = c.getClass().equals(ProfileView.class);
+        Log.d(String.valueOf(isMyfavour), " Is my favour");
         Intent intent = new Intent (c, AnunciView.class);
         Bundle b= new Bundle();
+        b.putBoolean("myfavour", isMyfavour);
+        intent.putExtras(b);
         startActivity(c,intent,b);
     }
 
