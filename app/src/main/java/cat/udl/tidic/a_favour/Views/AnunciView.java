@@ -11,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -39,9 +40,17 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
         // Add a marker in Sydney, Australia,
         // and move the map's camera to the same location.
         System.out.println("Hola mundo....haha xd");
-        LatLng sydney = new LatLng(-33.852, 151.211);
-        googleMap.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney"));
+        LatLng sydney = new LatLng(41.591677, 1.614331);
+        //googleMap.addMarker(new MarkerOptions().position(sydney)
+        //.title("Marker in Sydney"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        googleMap.addCircle(new CircleOptions()
+                .center(sydney)
+                .radius(120)
+                .strokeWidth(3f)
+                .strokeColor(getResources().getColor(R.color.AfavourColor))
+                .fillColor(getResources().getColor(R.color.MapFillColor))
+        );
+        googleMap.setMinZoomPreference(16);
     }
 }
