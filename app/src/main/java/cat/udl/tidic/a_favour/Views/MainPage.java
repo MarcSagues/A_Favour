@@ -49,6 +49,13 @@ public class MainPage  extends AppCompatActivity
         setScrollListener();
         mainClassViewModel = new MainClassViewModel();
         setUpObserver();
+        openOptions(false);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        openOptions(false);
     }
 
     private void setUpObserver()

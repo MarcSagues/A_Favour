@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.MainPageClasses;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +13,13 @@ import androidx.core.app.ActivityCompat;
 
 import cat.udl.tidic.a_favour.ProfileClasses.BlankFragment;
 import cat.udl.tidic.a_favour.Views.AnunciView;
+import cat.udl.tidic.a_favour.Views.ConfigurationView;
+import cat.udl.tidic.a_favour.Views.HelpView;
 import cat.udl.tidic.a_favour.Views.MainPage;
+import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.UploadFavour;
+import cat.udl.tidic.a_favour.models.ProfileViewModel;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
@@ -36,16 +41,19 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
             {
                 case 0:
                     Log.d("Open profile", "clicked");
-                    goToProfile();
+                    goTo(ProfileView.class);
                     break;
                 case 1:
                     Log.d("Messages", "clicked");
+                    goTo(MessagesView.class);
                     break;
                 case 2:
                     Log.d("Configuration", "clicked");
+                    goTo(ConfigurationView.class);
                     break;
                 case 3:
                     Log.d("Help", "clicked");
+                    goTo(HelpView.class);
                     break;
                 case 4:
                     Log.d("Log out", "clicked");
@@ -59,7 +67,12 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         }
     }
 
-    private void goToProfile()
+    private void goTo(Class classe)
+    {
+        Intent intent = new Intent (c, classe);
+        startActivity(c,intent,Bundle.EMPTY);
+    }
+    private void goToConfiguration()
     {
         Intent intent = new Intent (c, ProfileView.class);
         startActivity(c,intent,Bundle.EMPTY);

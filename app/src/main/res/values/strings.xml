@@ -22,6 +22,15 @@
     <string name="dontHaveAcconut"> You don\'t have acconut ?</string>
     <string name="Register"> Register </string>
 
+    <!---Configuration-->
+    <string name="enable_noti">App notifications</string>
+    <string name="message_noti">Messages notifications</string>
+    <string name="Lenguage">Lenguage</string>
+    <string name="english">English</string>
+    <string name="spanish">Spanish</string>
+
+
+
     <!---Register-->
     <string name="email">Email adress</string>
     <string name="phone">Phone numbrer</string>
