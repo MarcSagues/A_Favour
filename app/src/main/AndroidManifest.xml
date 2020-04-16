@@ -47,7 +47,8 @@
         <activity android:name=".Views.ProfileView" />
         <activity android:name=".Views.UploadFavour" />
         <activity android:name=".Views.AnunciView" />
-        <activity android:name=".Views.MainPage">
+        <activity android:name=".Views.MainPage" />
+        <activity android:name=".Views.LoginView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

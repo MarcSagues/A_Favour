@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import android.view.View;
@@ -13,6 +16,9 @@ import android.widget.EditText;
 
 import android.widget.Toast;
 
+import java.util.Locale;
+
+import cat.udl.tidic.a_favour.LenguageManager;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.LoginViewModel;
 
@@ -31,11 +37,24 @@ public class LoginView extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getLenguage();
         iniComponents();
-        //checkLogin();
+        checkLogin();
         setButtonListeners();
     }
 
+    private void getLenguage()
+    {
+        SharedPreferences shared = PreferencesProvider.providePreferences();
+        String lang = shared.getString("lenguage","en");
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Resources res = getBaseContext().getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+        config.locale = locale;
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        Intent i = getIntent();
+    }
     public void iniComponents()
     {
         loginViewModel = new LoginViewModel();

@@ -61,27 +61,25 @@ public class LenguagesArrayAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent)
     {
         View v = super.getView(position, convertView, parent);
-        TextView a = v.findViewById(tv);
+        TextView a = v.findViewById(R.id.lenguage);
         ImageView iv = v.findViewById(R.id.lengauge_icon);
         a.setTextColor(Color.BLACK);
 
-        if(firstTime)
-        {
             SharedPreferences shared = PreferencesProvider.providePreferences();
             String lenguage = shared.getString("lenguage","en");
             Log.d("The lengauge on shared is", lenguage);
-            a.setText(LenguageManager.getLengugeName(lenguage));
+            a.setText(cv.getLengugeName(lenguage));
             iv.setImageResource(LenguageManager.getLenguageImage(lenguage));
-            firstTime = false;
-        }
-        else {
 
-            a.setText(items.get(position));
-            iv.setImageResource(LenguageManager.getLenguageImage(position));
+            //a.setText(items.get(position));
+            //iv.setImageResource(LenguageManager.getLenguageImage(position));
             Log.d("The actual value of position is", String.valueOf(position));
-            cv.changeLengauge(position);
-        }
 
+            if(!firstTime) {
+                cv.changeLengauge(position);
+            }
+        //}
+        firstTime = false;
         return v;
 
     }

@@ -1,8 +1,10 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.media.VolumeShaper;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -84,24 +87,11 @@ public class ConfigurationView extends AppCompatActivity
     void setOnclick()
     {
 
-        lengauges.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
-        });
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                ConfigurationView.super.onBackPressed();
+                onBackPressed();
             }
         });
 
@@ -120,6 +110,12 @@ public class ConfigurationView extends AppCompatActivity
         });
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(this, MainPage.class);
+        startActivityForResult(i, 1);
+    }
     public static boolean getAppNotifications()
     {
         SharedPreferences shared = PreferencesProvider.providePreferences();
@@ -138,13 +134,34 @@ public class ConfigurationView extends AppCompatActivity
         SharedPreferences shared = PreferencesProvider.providePreferences();
         String lang = LenguageManager.lang[pos];
         shared.edit().putString("lenguage", LenguageManager.lang[pos]).apply();
-
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.setLocale(locale);
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        //this.recreate();
+
+        Resources res = getBaseContext().getResources();
+        Configuration config = new Configuration(res.getConfiguration());
+        config.locale = locale;
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        Intent i = getIntent();
+        finish();
+        startActivity(i);
+    }
+
+    public String getLengugeName(String leng)
+    {
+        if (leng.equals("en"))
+        {
+            Context c = App.getAppContext();
+            return getResources().getString(R.string.english);
+        }
+        else if (leng.equals("es"))
+        {
+            Context c = App.getAppContext();
+            return getResources().getString(R.string.spanish);
+        }
+        else
+        {
+            return "";
+        }
     }
 
 

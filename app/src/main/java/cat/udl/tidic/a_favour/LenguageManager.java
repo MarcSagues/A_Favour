@@ -35,24 +35,6 @@ public class LenguageManager
         }
     }
 
-    public static String getLengugeName(String leng)
-    {
-        if (leng.equals("en"))
-        {
-            Context c = App.getAppContext();
-            return c.getResources().getString(R.string.english);
-        }
-        else if (leng.equals("es"))
-        {
-            Context c = App.getAppContext();
-            return c.getResources().getString(R.string.spanish);
-        }
-        else
-        {
-            return "";
-        }
-    }
-
     public static int getLenguageImage(String leng)
     {
 
