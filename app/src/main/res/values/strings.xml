@@ -3,48 +3,48 @@
     <string name="AFAVOUR" translatable="false">A FAVOUR</string>
     <!---Profile-->
     <string name="profileImage">Opinions</string>
-    <string name="edit" translatable="false">Edit profile</string>
+    <string name="edit">Edit profile</string>
     <string name="back_arrow" translatable="false">Go to previous page</string>
-    <string name="location" translatable="false">Location</string>
-    <string name="dialogMessage" translatable="false">Cannot connect to databse server</string>
-    <string name="dialogTitle" translatable="false">Conexion error</string>
-    <string name="showLocation" translatable="false">Show location</string>
-    <string name="favoursDone" translatable="false">favours done</string>
-    <string name="timesHelped" translatable="false">times helped</string>
+    <string name="location">Location</string>
+    <string name="dialogMessage">Cannot connect to databse server</string>
+    <string name="dialogTitle">Conexion error</string>
+    <string name="showLocation">Show location</string>
+    <string name="favoursDone">favours done</string>
+    <string name="timesHelped">times helped</string>
     <string name="userName">User Name</string>
-    <string name="favours" translatable="false">Favours</string>
-    <string name="favourites" translatable="false">Favourites</string>
-    <string name="opinions" translatable="false">Opinions</string>
+    <string name="favours">Favours</string>
+    <string name="favourites">Favourites</string>
+    <string name="opinions">Opinions</string>
 
     <!---Login-->
-    <string name="logIn" translatable="false">LOGIN</string>
-    <string name="password" translatable="false">Password</string>
-    <string name="dontHaveAcconut" translatable="false"> You don\'t have acconut ?</string>
-    <string name="Register" translatable="false"> Register </string>
+    <string name="logIn">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="dontHaveAcconut"> You don\'t have acconut ?</string>
+    <string name="Register"> Register </string>
 
     <!---Configuration-->
-    <string name="enable_noti" translatable="false">App notifications</string>
-    <string name="message_noti" translatable="false">Messages notifications</string>
-    <string name="Lenguage" translatable="false">Lenguage</string>
+    <string name="enable_noti">App notifications</string>
+    <string name="message_noti">Messages notifications</string>
+    <string name="Lenguage">Lenguage</string>
     <string name="english">English</string>
     <string name="spanish">Spanish</string>
 
 
 
     <!---Register-->
-    <string name="email" translatable="false">Email adress</string>
-    <string name="phone" translatable="false">Phone numbrer</string>
-    <string name="confirmPassword" translatable="false"> Confirm password </string>
-    <string name="joinAfavour" translatable="false"> Join A Favour </string>
-    <string name="or" translatable="false"> or </string>
-    <string name="alredyHaveAcconut" translatable="false"> Alredy have an account? </string>
-    <string name="regFacebook" translatable="false">Register with Facebook</string>
-    <string name="regGmail" translatable="false">Register with Gmail</string>
+    <string name="email">Email adress</string>
+    <string name="phone">Phone numbrer</string>
+    <string name="confirmPassword"> Confirm password </string>
+    <string name="joinAfavour"> Join A Favour </string>
+    <string name="or"> or </string>
+    <string name="alredyHaveAcconut"> Alredy have an account? </string>
+    <string name="regFacebook">Register with Facebook</string>
+    <string name="regGmail">Register with Gmail</string>
 
 
     <!---MainPage-->
-    <string name="goProfile" translatable="false">Go to profile</string>
-    <string name="retry" translatable="false">Retry</string>
+    <string name="goProfile">Go to profile</string>
+    <string name="retry">Retry</string>
     <string name="cancel">Cancel</string>
     <string name="logOut">Log out</string>
 

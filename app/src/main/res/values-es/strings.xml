@@ -23,4 +23,31 @@
     <string name="cancel">Cancelar</string>
     <string name="profileImage">Opiniones</string>
     <string name="english" translatable="false">Inglés</string>
+    <string name="edit" translatable="false">Editar perfil</string>
+    <string name="location">Ubicación</string>
+    <string name="dialogMessage" translatable="false">No se pudo establecer connexión con la base de datos</string>
+    <string name="dialogTitle" translatable="false">Error de connexión</string>
+    <string name="showLocation">Ver ubicación</string>
+    <string name="favoursDone">favores realizados</string>
+    <string name="timesHelped" translatable="false">veces ayudado</string>
+    <string name="favours">Favores</string>
+    <string name="favourites" translatable="false">Favoritos</string>
+    <string name="opinions" translatable="false">Opiniones</string>
+    <string name="logIn">ENTRAR</string>
+    <string name="password">Contraseña</string>
+    <string name="dontHaveAcconut">¿No tienes una cuenta?</string>
+    <string name="Register">Registrarse</string>
+    <string name="enable_noti">Notificaciones de la app</string>
+    <string name="message_noti">Notificación de mensajes</string>
+    <string name="Lenguage">Idioma</string>
+    <string name="email">Dirección de correo electrónico</string>
+    <string name="phone">Número de telefono</string>
+    <string name="confirmPassword" translatable="false">Confirmar contraseña</string>
+    <string name="joinAfavour" translatable="false">Unete A Favour</string>
+    <string name="or" translatable="false">o</string>
+    <string name="alredyHaveAcconut" translatable="false">¿Ya tienes una cuenta?</string>
+    <string name="regFacebook" translatable="false">Registrarse con Facebook</string>
+    <string name="regGmail">Registrarse con Gmail</string>
+    <string name="goProfile">Ir al perfil</string>
+    <string name="retry" translatable="false">Intentar de nuevo</string>
 </resources>

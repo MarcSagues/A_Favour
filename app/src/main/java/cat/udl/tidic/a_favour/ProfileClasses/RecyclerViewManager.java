@@ -16,13 +16,16 @@ import cat.udl.tidic.a_favour.R;
 public class RecyclerViewManager extends FragmentPagerAdapter
 {
 
-    private String[] tabTitles = new String[] { "Favours", "Favourites", "Opinions" };
+    private String[] tabTitles;
     private Context context;
 
     public RecyclerViewManager(FragmentManager fm, Context context)
     {
         super(fm);
         this.context = context;
+        tabTitles = new String[] { context.getResources().getString(R.string.favours),
+                                   context.getResources().getString(R.string.favourites),
+                                   context.getResources().getString(R.string.opinions)};
     }
 
     @NonNull
