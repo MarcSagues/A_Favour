@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
 import cat.udl.tidic.a_favour.ProfileClasses.BlankFragment;
+import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.Views.HelpView;
+import cat.udl.tidic.a_favour.Views.LoginView;
 import cat.udl.tidic.a_favour.Views.MainPage;
 import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
@@ -57,6 +60,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
                     break;
                 case 4:
                     Log.d("Log out", "clicked");
+                    ShowDialog();
                     break;
             }
 
@@ -96,6 +100,26 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         b.putBoolean("myfavour", isMyfavour);
         intent.putExtras(b);
         startActivity(c,intent,b);
+    }
+
+    private void ShowDialog()
+    {
+        //Si falla la connexió s'haura de posar un layout de "error"
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+
+        builder.setMessage(R.string.dialogMessage).setTitle(R.string.dialogTitle);
+
+        builder.setPositiveButton(R.string.retry, (dialog, id) ->
+        {
+
+        });
+        builder.setNegativeButton(R.string.cancel, (dialog, id) ->
+        {
+            dialog.cancel();
+
+        });
+
+        builder.show();
     }
 
 }

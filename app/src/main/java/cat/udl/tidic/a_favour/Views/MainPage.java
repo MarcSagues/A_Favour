@@ -2,6 +2,8 @@ package cat.udl.tidic.a_favour.Views;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,14 +18,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import cat.udl.tidic.a_favour.FORTESTING;
+import cat.udl.tidic.a_favour.LenguageManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 public class MainPage  extends AppCompatActivity
 {

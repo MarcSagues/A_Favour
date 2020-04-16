@@ -1,32 +1,74 @@
 package cat.udl.tidic.a_favour;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
+
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 public class LenguageManager
 {
-    public static String[] array_idiomes = {"English","Spanish"};
+
+    public static String[] lang = {"en","es"};
 
     public static int getLenguageImage(int position)
     {
-        Context c = App.getAppContext();
-        return c.getResources().getIdentifier(array_idiomes[position].toLowerCase(),"drawable",c.getPackageName());
+
+        if (position == 0)
+        {
+            Context c = App.getAppContext();
+            return c.getResources().getIdentifier("english","drawable",c.getPackageName());
+        }
+        else if (position == 1)
+        {
+            Context c = App.getAppContext();
+            return c.getResources().getIdentifier("spanish","drawable",c.getPackageName());
+        }
+        else
+        {
+            return 0;
+        }
     }
 
-    public static int getLenguageImagebyString(String name)
+    public static String getLengugeName(String leng)
     {
-        Context c = App.getAppContext();
-        int image = 0;
-
-        for(int i =0; i< array_idiomes.length; i++)
+        if (leng.equals("en"))
         {
-            if (array_idiomes[i].equals(name))
-            {
-                 image = c.getResources().getIdentifier(array_idiomes[i].toLowerCase(),"drawable",c.getPackageName());
-            }
+            Context c = App.getAppContext();
+            return c.getResources().getString(R.string.english);
         }
-        return image;
+        else if (leng.equals("es"))
+        {
+            Context c = App.getAppContext();
+            return c.getResources().getString(R.string.spanish);
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public static int getLenguageImage(String leng)
+    {
+
+        if (leng.equals("en"))
+        {
+            Context c = App.getAppContext();
+            return c.getResources().getIdentifier("english","drawable",c.getPackageName());
+        }
+        else if (leng.equals("es"))
+        {
+            Context c = App.getAppContext();
+            return c.getResources().getIdentifier("spanish","drawable",c.getPackageName());
+        }
+        else
+        {
+            return 0;
+        }
     }
 }
