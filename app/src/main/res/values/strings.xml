@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">A_Favour</string>
     <string name="AFAVOUR" translatable="false">A FAVOUR</string>
+
+    <!--Alert-->
+    <string name="alertLogoutD">Are you sure you wold like to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+
     <!---Profile-->
     <string name="profileImage">Opinions</string>
     <string name="edit">Edit profile</string>
@@ -82,6 +89,17 @@
     <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
     <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_anunci_view_" translatable="false">Map</string>
+    <string name="faqs" translatable="true">Frequent questions</string>
+    <string name="faqst1">How i can upload a Favour?</string>
+    <string name="faqsd1">To upload a favor just go to the main menu and press the "Upload a favor" button.</string>
+    <string name="privacity">Privacity</string>
+    <string name="privacityt1">Our privacy policy</string>
+    <string name="privacityd1">BLA BLA BLA</string>
+    <string name="security">Security</string>
+    <string name="securityt1">Security of information</string>
+    <string name="securityd1">BLA BLA BLA 2</string>
+
+
 
 
 </resources>

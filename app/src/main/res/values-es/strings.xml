@@ -50,4 +50,20 @@
     <string name="regGmail">Registrarse con Gmail</string>
     <string name="goProfile">Ir al perfil</string>
     <string name="retry" translatable="false">Intentar de nuevo</string>
+    <string name="faqs">Preguntas frequentes</string>
+    <string name="faqst1">¿Cómo puedo subir un favor?</string>
+    <string name="faqsd1">Para subir un favor sólo hace falta ir al menu pricipal i pulsar el botón de "Subir un favor".</string>
+    <string name="privacity">Privacidad</string>
+    <string name="privacityt1">Nuestra política de privacidad</string>
+    <string name="privacityd1">BLA BLA BLA</string>
+    <string name="security">Seguridad</string>
+    <string name="securityt1">Seguridad de la información</string>
+    <string name="securityd1">BLA BLA BLA 2</string>
+
+    <!--Alert-->
+    <string name="alertLogoutD">¿Estás seguro de que quieres cerrar sesión?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+
+
 </resources>

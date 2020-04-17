@@ -107,13 +107,13 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         //Si falla la connexió s'haura de posar un layout de "error"
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
 
-        builder.setMessage(R.string.dialogMessage).setTitle(R.string.dialogTitle);
+        builder.setMessage(R.string.alertLogoutD).setTitle(R.string.logOut);
 
-        builder.setPositiveButton(R.string.retry, (dialog, id) ->
+        builder.setPositiveButton(R.string.no, (dialog, id) ->
         {
 
         });
-        builder.setNegativeButton(R.string.cancel, (dialog, id) ->
+        builder.setNegativeButton(R.string.yes, (dialog, id) ->
         {
             dialog.cancel();
 
