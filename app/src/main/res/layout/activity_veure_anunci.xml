@@ -15,15 +15,16 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            android:layout_height="50dp" />
 
         <ImageView
             android:id="@+id/back_arrow"
+            style="@style/backArrow"
             android:layout_width="42dp"
             android:layout_height="24dp"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:contentDescription="@string/back_arrow"
             android:onClick="backArrowAction"
             app:layout_constraintStart_toStartOf="@+id/up_panel"
@@ -35,7 +36,7 @@
             android:layout_width="42dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:contentDescription="@string/edit"
             android:onClick="onEditClick"

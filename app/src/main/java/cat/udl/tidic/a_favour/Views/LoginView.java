@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.LenguageManager;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.LoginViewModel;
@@ -39,6 +40,11 @@ public class LoginView extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getLenguage();
         iniComponents();
+
+        if (FORTESTING.dev)
+        {
+            openMainPage();
+        }
         checkLogin();
         setButtonListeners();
     }

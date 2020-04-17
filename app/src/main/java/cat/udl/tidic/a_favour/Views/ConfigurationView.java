@@ -115,6 +115,7 @@ public class ConfigurationView extends AppCompatActivity
     {
         Intent i = new Intent(this, MainPage.class);
         startActivityForResult(i, 1);
+        finish();
     }
     public static boolean getAppNotifications()
     {

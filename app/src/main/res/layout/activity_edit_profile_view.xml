@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/up_panel2"
         android:layout_width="411dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:background="@color/AfavourColor"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -20,6 +20,7 @@
 
     <ImageView
         android:id="@+id/back_arrow2"
+        style="@style/backArrow"
         android:layout_width="35dp"
         android:layout_height="23dp"
         android:layout_marginStart="12dp"
