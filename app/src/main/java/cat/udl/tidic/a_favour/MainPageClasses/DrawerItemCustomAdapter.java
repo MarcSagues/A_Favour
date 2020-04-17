@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.R;
 
 public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
@@ -75,7 +76,11 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
         TextView textViewName = listItem.findViewById(R.id.tv_text);
         DataModel.MenuList folder = (DataModel.MenuList) data[position];
-        if(imageViewIcon!=null)imageViewIcon.setImageResource(folder.icon);
+        if(imageViewIcon!=null)
+        {
+            imageViewIcon.setImageResource(folder.icon);
+            imageViewIcon.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageViewIcon, ImageHelper.ROUND));
+        }
         textViewName.setText(folder.name);
     }
 
@@ -89,6 +94,8 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         DataModel.Opinion folder = (DataModel.Opinion) data[position];
 
         imageViewIcon.setImageResource(folder.icon);
+        imageViewIcon.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageViewIcon, ImageHelper.ROUND));
+
         textViewName.setText(folder.name);
         if(folder.description != ""){textViewDesc.setText(folder.description);}
         stars.setRating(folder.starRating);

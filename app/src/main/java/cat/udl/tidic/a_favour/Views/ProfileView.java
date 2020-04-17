@@ -1,5 +1,7 @@
 package cat.udl.tidic.a_favour.Views;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import cat.udl.tidic.a_favour.FORTESTING;
+import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
@@ -103,6 +106,7 @@ public class ProfileView extends AppCompatActivity
         userName = findViewById(R.id.name);
         stars = findViewById(R.id.stars);
         profilImage = findViewById(R.id.profile_image);
+        profilImage.setImageBitmap(ImageHelper.getRoundedCornerBitmap(profilImage, ImageHelper.ROUND));
         favoursInfo = findViewById(R.id.favoursInfo);
         userLocation = findViewById(R.id.user_location);
         showLocation = findViewById(R.id.show_location);
@@ -154,7 +158,6 @@ public class ProfileView extends AppCompatActivity
 
                 //Poso les estrelles necessaries
                 stars.setRating(profileViewModel.getStars());
-
                 //Informació dels facvors que ha fet i que ha rebut
                 favoursDone = profileViewModel.getFavoursDone();
                 timesHelped = profileViewModel.getTimesHelped();
