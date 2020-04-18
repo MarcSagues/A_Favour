@@ -48,12 +48,34 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         {
             inflateMenuList(listItem,position);
         }
+        else if (data instanceof  DataModel.Message[])
+        {
+            inflateMessagePreview(listItem,position);
+        }
         else
         {
             inflateOpinions(listItem,position);
         }
 
         return listItem;
+    }
+
+    private void inflateMessagePreview(View listItem, int position)
+    {
+        ImageView imageViewIcon = listItem.findViewById(R.id.userImage);
+        TextView otherUsername = listItem.findViewById(R.id.otherUserName);
+        TextView titleofFavour = listItem.findViewById(R.id.favourTitle);
+        TextView lastMessage = listItem.findViewById(R.id.lastMessage);
+        TextView lastMessageDate = listItem.findViewById(R.id.dateLastMessage);
+
+        DataModel.Message folder = (DataModel.Message) data[position];
+        imageViewIcon.setImageResource(R.drawable.example_person);
+        imageViewIcon.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageViewIcon, ImageHelper.ROUND));
+
+        otherUsername.setText(folder.otherUsername);
+        titleofFavour.setText(folder.favourName);
+        lastMessage.setText(folder.lastMessage);
+        lastMessageDate.setText(folder.lastMessageDate);
     }
 
     void inflateFavour(View listItem, int position)

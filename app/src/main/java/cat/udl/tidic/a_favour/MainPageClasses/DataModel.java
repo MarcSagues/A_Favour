@@ -121,4 +121,20 @@ public class DataModel extends Activity
         }
     }
 
+    public static class Message extends DataModel
+    {
+        public String otherUsername;
+        public String favourName;
+        public String lastMessage;
+        public String lastMessageDate;
+
+        public Message(String otherUsername, String favourName, String lastMessage, String lastMessageDate)
+        {
+            this.otherUsername = otherUsername;
+            this.favourName = favourName;
+            this.lastMessage = lastMessage;
+            this.lastMessageDate = lastMessageDate;
+        }
+    }
+
 }
