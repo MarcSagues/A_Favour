@@ -27,6 +27,8 @@ import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
 import cat.udl.tidic.a_favour.models.UserModel;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 public class ProfileView extends AppCompatActivity
 {
     ProfileViewModel profileViewModel;
@@ -47,6 +49,8 @@ public class ProfileView extends AppCompatActivity
     Toolbar toolbar;
     ViewPager viewPager;
     TabLayout tabLayout;
+    Boolean ismyProfile;
+    ImageView edit;
 
 
     @Override
@@ -59,18 +63,28 @@ public class ProfileView extends AppCompatActivity
         ActivityProfileBinding activityProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         profileViewModel = new ProfileViewModel();
         activityProfileBinding.setProfileViewModel(profileViewModel);
-
-        //The recycle Manager
-        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this);
-
-        //Get all the layout data
         getAllActivityData();
+        preparePage();
+        //The recycle Manager
+        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile);
+        //Get all the layout data
+
         setUpRecyclerView();
         getRecyclerData();
         setUpProfileListeners();
     }
 
-
+    private void preparePage()
+    {
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+        {
+            Log.d("YYY La variable is my profile és :", String.valueOf(b.getBoolean("myprofile")));
+            ismyProfile = b.getBoolean("myprofile");
+            edit.setVisibility(View.GONE);
+        }
+        else { Log.d("És el meu perfil", "");ismyProfile = true; }
+    }
     public void backArrowAction(View v)
     {
        onBackPressed();
@@ -96,7 +110,6 @@ public class ProfileView extends AppCompatActivity
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(recyclerManager);
-
     }
     private void getAllActivityData()
     {
@@ -110,7 +123,7 @@ public class ProfileView extends AppCompatActivity
         favoursInfo = findViewById(R.id.favoursInfo);
         userLocation = findViewById(R.id.user_location);
         showLocation = findViewById(R.id.show_location);
-
+        edit = findViewById(R.id.edit);
         if (FORTESTING.dev) {loadingbar.setVisibility(View.GONE);}
 
         //favoursBtn = findViewById(R.id.favours_btn);

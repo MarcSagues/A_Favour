@@ -19,13 +19,21 @@ public class RecyclerViewManager extends FragmentPagerAdapter
     private String[] tabTitles;
     private Context context;
 
-    public RecyclerViewManager(FragmentManager fm, Context context)
+    public RecyclerViewManager(FragmentManager fm, Context context, Boolean myprofile)
     {
         super(fm);
         this.context = context;
-        tabTitles = new String[] { context.getResources().getString(R.string.favours),
-                                   context.getResources().getString(R.string.favourites),
-                                   context.getResources().getString(R.string.opinions)};
+        if (myprofile)
+        {
+            tabTitles = new String[]{context.getResources().getString(R.string.favours),
+                    context.getResources().getString(R.string.favourites),
+                    context.getResources().getString(R.string.opinions)};
+        }
+        else
+        {
+            tabTitles = new String[]{context.getResources().getString(R.string.favours),
+                    context.getResources().getString(R.string.opinions)};
+        }
     }
 
     @NonNull

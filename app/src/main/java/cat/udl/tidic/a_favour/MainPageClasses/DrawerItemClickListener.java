@@ -69,6 +69,10 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         {
             goToSeeAnunci();
         }
+        else
+        {
+            Log.d("No type", "mafren");
+        }
     }
 
     private void goTo(Class classe)

@@ -48,6 +48,7 @@ public class DataModel extends Activity
         public int id;
         @SerializedName("user")
         public String user;
+        private Boolean favourite;
 
         public Favour(String name, String description, float amount, String category, int id, String user)
         {
@@ -57,10 +58,15 @@ public class DataModel extends Activity
             this.amount = parseFloat(amount);
             this.user = user;
             this.id = id;
+            this.favourite = false;
             setIcon();
 
         }
 
+        public boolean isFavourite()
+        {
+            return favourite;
+        }
         public String toString()
         {
             return "ICON: " + this.icon + " NAME: " + this.name + " DESC: " + this.description +" CAT: " + this.category +" AMOUNT: " + this.amount;

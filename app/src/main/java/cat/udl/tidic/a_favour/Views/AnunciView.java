@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,8 +42,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
     Boolean isMyFavour;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_veure_anunci);
         isMyFavourvoid();
@@ -54,66 +54,78 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
         setClickListeners();
     }
 
-    private void isMyFavourvoid()
-    {
-            Bundle b = getIntent().getExtras();
-            if (b != null)
-            {
-                Log.d("YYY La variable is my favour és :", String.valueOf(b.getBoolean("myfavour")));
-                isMyFavour =  b.getBoolean("myfavour");
-            }
-            else
-            {
-                Log.d("YYY La variable is my favour és :", "NO HI HA");
-                isMyFavour = false;
-            }
+    private void isMyFavourvoid() {
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            Log.d("YYY La variable is my favour és :", String.valueOf(b.getBoolean("myfavour")));
+            isMyFavour = b.getBoolean("myfavour");
+        } else {
+            Log.d("YYY La variable is my favour és :", "NO HI HA");
+            isMyFavour = false;
+        }
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         super.onBackPressed();
     }
 
-    private void preparePage()
-    {
-        if (isMyFavour)
-        {
+    private void preparePage() {
+        if (isMyFavour) {
             edit.setImageResource(R.drawable.pencil);
             valoracio.setVisibility(View.GONE);
-        }
-        else
-        {
+        } else {
             edit.setImageResource(R.drawable.heart);
+            setTag();
             valoracio.setVisibility(View.VISIBLE);
         }
     }
-    private void setClickListeners()
-    {
 
-        back.setOnClickListener(new View.OnClickListener()
-        {
+    private void setClickListeners() {
+
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 onBackPressed();
             }
         });
 
-        edit.setOnClickListener(new View.OnClickListener()
-        {
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                if (isMyFavour){goToEditFavour();}
-                else {addFvaourites();}
+            public void onClick(View v) {
+                if (isMyFavour) {
+                    goToEditFavour();
+                } else {
+                    addFvaourites();
+                }
             }
         });
     }
 
+
+    private void setTag()
+    {
+        setImageandTag(favour[0].isFavourite() ? R.drawable.hearthfull : R.drawable.heart);
+    }
+
+    private void setImageandTag(int tag)
+    {
+        edit.setImageResource(tag);
+        edit.setTag(tag);
+    }
+
     private void addFvaourites()
     {
-        Log.d("Favourites pressed", "ma fren");
+        int currentImageTag = (int) edit.getTag();
+        if (currentImageTag == R.drawable.heart)
+        {
+            //Posar a favoritos en la base de dades
+        }
+        else
+        {
+            //Treure de favoritos en la base de dades
+        }
+        setImageandTag(currentImageTag == R.drawable.heart ? R.drawable.hearthfull : R.drawable.heart);
     }
     private void goToEditFavour()
     {
@@ -137,7 +149,20 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
         userOpinion = new DataModel.Opinion[1];
         userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, "Username","",2.4f);
         DrawerItemCustomAdapter userOpinion_adapter = new DrawerItemCustomAdapter(this, R.layout.user_opinion, userOpinion);
+        valoracio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Log.d("Carregant el profile", "");
+                Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+                Bundle b= new Bundle();
+                b.putBoolean("myprofile", false);
+                intent.putExtras(b);
+                startActivity(intent,b);
+            }
+        });
         valoracio.setAdapter(userOpinion_adapter);
+
     }
 
     private void setAnunci()
