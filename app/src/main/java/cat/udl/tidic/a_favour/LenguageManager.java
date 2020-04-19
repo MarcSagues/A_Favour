@@ -1,22 +1,13 @@
 package cat.udl.tidic.a_favour;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.util.Log;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Locale;
-
-import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 public class LenguageManager
 {
 
     public static String[] lang = {"en","es"};
 
-    public static int getLenguageImage(int position)
+    static int getLenguageImage(int position)
     {
 
         if (position == 0)
@@ -35,7 +26,7 @@ public class LenguageManager
         }
     }
 
-    public static int getLenguageImage(String leng)
+    static int getLenguageImage(String leng)
     {
 
         if (leng.equals("en"))

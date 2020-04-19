@@ -48,7 +48,8 @@ public class RegisterViewModel
             user_json.addProperty("password", encodeHash);
 
             Call<Void> call = userService.registerUser3(user_json);
-            call.enqueue(new Callback<Void>() {
+                //noinspection NullableProblems
+                call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response)
                 {

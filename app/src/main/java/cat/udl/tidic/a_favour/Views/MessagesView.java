@@ -1,12 +1,9 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
@@ -46,7 +43,6 @@ public class MessagesView extends AppCompatActivity
 
     void setListeners()
     {
-        backArrow.setOnClickListener(new View.OnClickListener()
-        {@Override public void onClick(View v) { MessagesView.super.onBackPressed(); }});
+        backArrow.setOnClickListener(v -> MessagesView.super.onBackPressed());
     }
 }

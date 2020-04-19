@@ -1,21 +1,18 @@
 package cat.udl.tidic.a_favour.MainPageClasses;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.content.Context;
 
 import com.google.gson.annotations.SerializedName;
 
+import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.R;
 
-
+@SuppressLint("Registered")
 public class DataModel extends Activity
 {
-
-
-
     int icon;
-    // Constructor.
     public DataModel() { }
 
     public static class MenuList extends DataModel
@@ -67,10 +64,7 @@ public class DataModel extends Activity
         {
             return favourite;
         }
-        public String toString()
-        {
-            return "ICON: " + this.icon + " NAME: " + this.name + " DESC: " + this.description +" CAT: " + this.category +" AMOUNT: " + this.amount;
-        }
+
         public String getName()
         {
            return  this.name;
@@ -93,15 +87,15 @@ public class DataModel extends Activity
         }
         public String getAmount()
         {
-            String favxfav = CategoryManager.CATEGORIES.favourxfavour.name();
             if (this.category.equals(CategoryManager.CATEGORIES.favourxfavour.name()))
             {
-                //TODO
-                return "Favour x favour";
+                Context c;
+                c = App.getAppContext();
+                return c.getResources().getString(R.string.favourxfavour);
             }
             else
             {
-                return String.valueOf(this.amount) + "€";
+                return this.amount + "€";
             }
         }
 

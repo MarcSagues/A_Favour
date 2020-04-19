@@ -3,12 +3,10 @@ import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
 
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
@@ -54,10 +54,10 @@ public class UploadFavour extends AppCompatActivity
         if(b != null) {upload_bool = b.getBoolean("upload");}
         Log.d("Open upload page", String.valueOf(upload_bool));
         prepareUpload(upload_bool);
-        if (!upload_bool)
-        {
+        //if (!upload_bool)
+        //{
             //DataModel d = (DataModel) b.getParcelable("data");
-        }
+        //}
 
     }
 
@@ -78,6 +78,7 @@ public class UploadFavour extends AppCompatActivity
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setAllData()
     {
         DataModel.Favour dataModel = new DataModel.Favour("hola", "caracola,", 0, CategoryManager.CATEGORIES.favourxfavour.name(), 7, "user1");
@@ -91,7 +92,7 @@ public class UploadFavour extends AppCompatActivity
         }
         inputEditTexts[0].setText(dataModel.getName());
         inputEditTexts[1].setText(dataModel.getDescription());
-        if (dataModel.getCategoria() != CategoryManager.CATEGORIES.favourxfavour.name()) {
+        if (!dataModel.getCategoria().equals(CategoryManager.CATEGORIES.favourxfavour.name())) {
             inputEditTexts[2].setText("" + dataModel.getAmount());
         }
     }
@@ -142,14 +143,7 @@ public class UploadFavour extends AppCompatActivity
         for (int i=0; i < inputEditTexts.length; i++)
         {
             int finalI = i;
-            inputEditTexts[i].setOnFocusChangeListener(new View.OnFocusChangeListener()
-            {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus)
-                {
-                    enableTextCount(hasFocus, finalI);
-                }
-            });
+            inputEditTexts[i].setOnFocusChangeListener((v, hasFocus) -> enableTextCount(hasFocus, finalI));
 
             inputEditTexts[i].addTextChangedListener(new TextWatcher()
             {
@@ -172,9 +166,10 @@ public class UploadFavour extends AppCompatActivity
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setCount(int i)
     {
-        int words = getMaxLength(wordCounter[i]) - inputEditTexts[i].getText().length();
+        int words = getMaxLength(wordCounter[i]) - Objects.requireNonNull(inputEditTexts[i].getText()).length();
         wordCounter[i].setText(""+words);
     }
     private void enableTextCount(boolean hasFocus, int i)
@@ -198,6 +193,7 @@ public class UploadFavour extends AppCompatActivity
     }
 
 
+    @SuppressWarnings("deprecation")
     private void selectCategory(ImageView imageView)
     {
         if (imageView.getTag() != null)
@@ -215,6 +211,7 @@ public class UploadFavour extends AppCompatActivity
         imageView.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.AfavourColor)));
     }
 
+    @SuppressWarnings("deprecation")
     private void unselecttAll(ImageView[] imageViews)
     {
         for (ImageView i : imageViews)

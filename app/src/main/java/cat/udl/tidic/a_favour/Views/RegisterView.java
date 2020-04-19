@@ -1,7 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -46,14 +45,15 @@ public class RegisterView extends AppCompatActivity {
         registerViewModel.registerUser(user, password1, password2, email, phone, RegisterView.this);
     }
 
+    @SuppressWarnings("deprecation")
     private void iniComponents()
     {
         userTxt = findViewById(R.id.user_txt);
         pwdTxt = findViewById(R.id.pwd_txt);
         confirmPwdTxt = findViewById(R.id.confirm_pwd_txt);
         registerBtn = findViewById(R.id.register_btn);
-        Button facebookBtn = findViewById(R.id.facebook_btn);
-        Button gmailBtn = findViewById(R.id.gmail_btn);
+        //Button facebookBtn = findViewById(R.id.facebook_btn);
+        //Button gmailBtn = findViewById(R.id.gmail_btn);
         emailTxt = findViewById(R.id.email_txt);
         phoneTxt = findViewById(R.id.mobile_txt);
         TextView joinTxt = findViewById(R.id.join_txt);

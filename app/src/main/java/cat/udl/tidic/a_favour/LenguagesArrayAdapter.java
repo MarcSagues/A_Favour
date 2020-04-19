@@ -1,46 +1,36 @@
 package cat.udl.tidic.a_favour;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.List;
-import java.util.Locale;
-
-import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
+import androidx.annotation.NonNull;
+
 
 public class LenguagesArrayAdapter extends ArrayAdapter<String> {
 
     private List<String> items;
-    // Your sent context
-    private Context context;
-    private int layout;
     private int tv;
-    ConfigurationView cv;
-    Boolean firstTime = true;
+    private ConfigurationView cv;
+    private Boolean firstTime = true;
 
 
-    public LenguagesArrayAdapter(ConfigurationView cv, Context context, int layout, int tv, List<String> items) {
+    public LenguagesArrayAdapter(ConfigurationView cv, Context context, int layout, int tv, List<String> items)
+    {
         super(context, layout,tv, items);
-        this.context = context;
+        // Your sent context
         this.items = items;
-        this.layout = layout;
         this.tv = tv;
         this.cv = cv;
     }
-
-
 
     @Override
     public int getCount(){
@@ -57,8 +47,9 @@ public class LenguagesArrayAdapter extends ArrayAdapter<String> {
         return position;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(int position, View convertView, @androidx.annotation.NonNull ViewGroup parent)
     {
         View v = super.getView(position, convertView, parent);
         TextView a = v.findViewById(R.id.lenguage);
@@ -85,7 +76,7 @@ public class LenguagesArrayAdapter extends ArrayAdapter<String> {
     }
 
     @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent)
+    public View getDropDownView(int position, View convertView, @androidx.annotation.NonNull ViewGroup parent)
     {
         View v = super.getDropDownView(position, convertView, parent);
         TextView a = v.findViewById(tv);

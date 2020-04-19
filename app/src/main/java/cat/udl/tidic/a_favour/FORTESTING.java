@@ -1,9 +1,5 @@
 package cat.udl.tidic.a_favour;
 
-import android.provider.ContactsContract;
-
-import java.util.HashMap;
-
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 

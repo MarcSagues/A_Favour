@@ -5,35 +5,23 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.content.ContextCompat;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.models.LoginViewModel;
-import cat.udl.tidic.a_favour.models.UserModel;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-public class AnunciView extends AppCompatActivity implements OnMapReadyCallback {
-
+public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
+{
     ListView anunci;
     ListView valoracio;
     DataModel.Favour[] favour;
@@ -84,22 +72,11 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
 
     private void setClickListeners() {
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        back.setOnClickListener(v -> onBackPressed());
 
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isMyFavour) {
-                    goToEditFavour();
-                } else {
-                    addFvaourites();
-                }
-            }
+        edit.setOnClickListener(v -> {
+            if (isMyFavour) { goToEditFavour(); }
+            else { addFvaourites();}
         });
     }
 
@@ -118,6 +95,8 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
     private void addFvaourites()
     {
         int currentImageTag = (int) edit.getTag();
+
+        /*
         if (currentImageTag == R.drawable.heart)
         {
             //Posar a favoritos en la base de dades
@@ -125,7 +104,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
         else
         {
             //Treure de favoritos en la base de dades
-        }
+        }*/
         setImageandTag(currentImageTag == R.drawable.heart ? R.drawable.hearthfull : R.drawable.heart);
     }
     private void goToEditFavour()
@@ -150,17 +129,13 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
         userOpinion = new DataModel.Opinion[1];
         userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, "Username","",2.4f);
         DrawerItemCustomAdapter userOpinion_adapter = new DrawerItemCustomAdapter(this, R.layout.user_opinion, userOpinion);
-        valoracio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Log.d("Carregant el profile", "");
-                Intent intent = new Intent (getApplicationContext(), ProfileView.class);
-                Bundle b= new Bundle();
-                b.putBoolean("myprofile", false);
-                intent.putExtras(b);
-                startActivity(intent,b);
-            }
+        valoracio.setOnItemClickListener((parent, view, position, id) -> {
+            Log.d("Carregant el profile", "");
+            Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+            Bundle b= new Bundle();
+            b.putBoolean("myprofile", false);
+            intent.putExtras(b);
+            startActivity(intent,b);
         });
         valoracio.setAdapter(userOpinion_adapter);
 
@@ -180,6 +155,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
     {
         SupportMapFragment mMap = ((SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map));
+        assert mMap != null;
         mMap.getMapAsync(this);
     }
 
@@ -191,8 +167,8 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
                 .center(igualada1)
                 .radius(120)
                 .strokeWidth(3f)
-                .strokeColor(getResources().getColor(R.color.AfavourColor))
-                .fillColor(getResources().getColor(R.color.MapFillColor))
+                .strokeColor(ContextCompat.getColor(getBaseContext(),R.color.AfavourColor))
+                .fillColor(ContextCompat.getColor(getBaseContext(),R.color.MapFillColor))
         );
         googleMap.setMinZoomPreference(16);
         LatLng puntoblanco = new LatLng(41.586645, 1.615023);

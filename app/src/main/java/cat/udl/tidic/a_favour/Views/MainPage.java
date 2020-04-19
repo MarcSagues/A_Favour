@@ -2,33 +2,24 @@ package cat.udl.tidic.a_favour.Views;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ListView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-
 import cat.udl.tidic.a_favour.FORTESTING;
-import cat.udl.tidic.a_favour.LenguageManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
-import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 public class MainPage  extends AppCompatActivity
 {
@@ -50,7 +41,6 @@ public class MainPage  extends AppCompatActivity
         addListeners();
         setUpToolbar();
         createMenuList();
-        getAllEventList();
         setScrollListener();
         mainClassViewModel = new MainClassViewModel();
         setUpObserver();
@@ -71,7 +61,7 @@ public class MainPage  extends AppCompatActivity
         }
         else
         {
-            DataModel.Favour eventList[] = FORTESTING.getExampleList();
+            DataModel.Favour[] eventList = FORTESTING.getExampleList();
             DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
             recyclerView.setAdapter(adapter_event);
             recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
@@ -80,7 +70,7 @@ public class MainPage  extends AppCompatActivity
 
     private void onGetFavoursData(List<DataModel.Favour> all_f)
     {
-        DataModel.Favour eventList[] = all_f.toArray(new DataModel.Favour[0]);
+        DataModel.Favour[] eventList = all_f.toArray(new DataModel.Favour[0]);
         DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
         recyclerView.setAdapter(adapter_event);
     }
@@ -106,6 +96,7 @@ public class MainPage  extends AppCompatActivity
         startActivityForResult(intent, 0);
     }
 
+    /*
     public void goToEditPage(DataModel d)
     {
         openOptions(false);
@@ -115,7 +106,7 @@ public class MainPage  extends AppCompatActivity
         //b.putParcelable("data", d);
         intent.putExtras(b); //Put your id to your next Intent
         startActivityForResult(intent, 0);
-    }
+    }*/
 
     private void setUpToolbar()
     {
@@ -155,17 +146,13 @@ public class MainPage  extends AppCompatActivity
         else{drawerLayout.closeDrawer(Gravity.LEFT);}
     }
 
-    public void getAllEventList()
-    {
 
-    }
-
-    public void goToProfile()
+    /*public void goToProfile()
     {
         openOptions(false);
         Intent intent = new Intent (this, ProfileView.class);
         startActivityForResult(intent, 0);
-    }
+    }*/
 
     private void setScrollListener()
     {

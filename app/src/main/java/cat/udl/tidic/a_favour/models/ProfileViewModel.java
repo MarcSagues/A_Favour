@@ -85,7 +85,7 @@ public class ProfileViewModel
 
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
        Call<UserModel> call = userService.getUserProfile(map);
-
+       //noinspection NullableProblems
        call.enqueue(new Callback<UserModel>()
        {
            @Override
@@ -138,19 +138,6 @@ public class ProfileViewModel
     public String  getLocation()
     {
         return Objects.requireNonNull(this.user.getValue()).getLocation() == null ? "No location" : this.user.getValue().getLocation();
-    }
-
-    public String[] getTitles()
-    {
-        try
-        {
-            return new String[]{"test 0","test one", "test two", "test three", "test four", "test five", "test six", "test seven", "test eight", "test nine"};
-        }
-        catch(Exception e)
-        {
-            System.out.println("Impossible agafar els titols de l'usuari");
-            return  null;
-        }
     }
 
     public void showLocationBtn()

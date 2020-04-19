@@ -3,16 +3,12 @@ package cat.udl.tidic.a_favour.models;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import android.util.Log;
-
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.LoginView;
-
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -20,8 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel
-{  //private UserModel user = new UserModel();
-
+{
     private UserServices userService;
     private SharedPreferences mPreferences;
 
@@ -42,6 +37,7 @@ public class LoginViewModel
         //mPreferences.edit().putString("token", tokenAux).apply();
         tokenAux = ("Authentication: " + tokenAux).trim();
         Call<ResponseBody> call = userService.createToken(tokenAux);
+        //noinspection NullableProblems
         call.enqueue(new Callback<ResponseBody>()
         {
             @Override

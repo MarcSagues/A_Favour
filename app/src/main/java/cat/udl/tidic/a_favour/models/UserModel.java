@@ -1,12 +1,10 @@
 package cat.udl.tidic.a_favour.models;
 
 import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.SerializedName;
 
-
-public class UserModel {
-
+public class UserModel
+{
     @SerializedName("created_at")
     private String created_at;
     @SerializedName("password")
@@ -21,8 +19,6 @@ public class UserModel {
     private String surname;
     @SerializedName("birthday")
     private String birthday;
-    @SerializedName("genere")
-    private String genere;
     @SerializedName("phone")
     private String phone;
     @SerializedName("photo")
@@ -40,12 +36,7 @@ public class UserModel {
     @SerializedName("login")
     private boolean login;
 
-
-    public UserModel() {
-    }
-
-
-    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String genere, String password, float stars, int favoursDone, int timesHelped, String location, String token)
+    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String password, float stars, int favoursDone, int timesHelped, String location, String token)
     {
         this.created_at = created_at;
         this.username = username;
@@ -53,7 +44,6 @@ public class UserModel {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
-        //this.genere = genere;
         this.password = password;
         this.stars = stars;
         this.favoursDone = favoursDone;
@@ -61,6 +51,7 @@ public class UserModel {
         this.location = location;
         this.token = token;
     }
+
 
     public String getCreated_at() {
         return created_at;
@@ -116,14 +107,6 @@ public class UserModel {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public String getGenere() {
-        return genere;
-    }
-
-    public void setGenere(String genere) {
-        this.genere = genere;
     }
 
     public void setPassword(String password){

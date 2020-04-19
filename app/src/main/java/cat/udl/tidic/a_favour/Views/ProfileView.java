@@ -1,7 +1,5 @@
 package cat.udl.tidic.a_favour.Views;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,16 +7,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
-
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
@@ -26,8 +21,6 @@ import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
 import cat.udl.tidic.a_favour.models.UserModel;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class ProfileView extends AppCompatActivity
 {
@@ -88,7 +81,7 @@ public class ProfileView extends AppCompatActivity
                 edit.setVisibility(View.GONE);
             }
 
-            System.out.println(String.valueOf(b.getBoolean("myprofile",true)));
+            System.out.println(b.getBoolean("myprofile", true));
 
         }
         else

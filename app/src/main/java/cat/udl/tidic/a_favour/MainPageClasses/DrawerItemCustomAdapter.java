@@ -78,7 +78,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         lastMessageDate.setText(folder.lastMessageDate);
     }
 
-    void inflateFavour(View listItem, int position)
+    private void inflateFavour(View listItem, int position)
     {
         ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
         TextView textViewName = listItem.findViewById(R.id.tv_text);
@@ -90,10 +90,10 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         imageViewIcon.setImageResource(folder.icon);
         textViewName.setText(folder.name);
         if(textViewDesc !=null){textViewDesc.setText(folder.description);}
-        amount.setText("" + folder.getAmount());
+        amount.setText(String.format("%s", folder.getAmount()));
     }
 
-    void inflateMenuList(View listItem, int position)
+    private void inflateMenuList(View listItem, int position)
     {
         ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
         TextView textViewName = listItem.findViewById(R.id.tv_text);
@@ -106,7 +106,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         textViewName.setText(folder.name);
     }
 
-    void inflateOpinions(View listItem, int position)
+    private void inflateOpinions(View listItem, int position)
     {
         ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
         TextView textViewName = listItem.findViewById(R.id.tv_text);
@@ -119,11 +119,11 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         imageViewIcon.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageViewIcon, ImageHelper.ROUND));
 
         textViewName.setText(folder.name);
-        if(folder.description != ""){textViewDesc.setText(folder.description);}
+        if(!folder.description.equals("")){textViewDesc.setText(folder.description);}
         stars.setRating(folder.starRating);
     }
 
-    void setLayoutMenu(int position)
+    private void setLayoutMenu(int position)
     {
         if(position == 0 && data instanceof DataModel.MenuList[])
         {

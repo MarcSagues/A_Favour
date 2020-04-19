@@ -1,26 +1,16 @@
 package cat.udl.tidic.a_favour.ProfileClasses;
-import cat.udl.tidic.a_favour.FORTESTING;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 
-import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
-
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 
 public class BlankFragment extends Fragment
 {
@@ -29,8 +19,8 @@ public class BlankFragment extends Fragment
     public int id;
     private Context c;
     private Boolean myprofile;
-    int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
-    int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
+    private int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
+    private int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
 
 
 
