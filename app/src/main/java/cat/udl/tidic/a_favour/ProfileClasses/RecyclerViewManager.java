@@ -2,6 +2,7 @@ package cat.udl.tidic.a_favour.ProfileClasses;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -18,11 +19,13 @@ public class RecyclerViewManager extends FragmentPagerAdapter
 
     private String[] tabTitles;
     private Context context;
+    private Boolean myprofile;
 
     public RecyclerViewManager(FragmentManager fm, Context context, Boolean myprofile)
     {
         super(fm);
         this.context = context;
+        this.myprofile = myprofile;
         if (myprofile)
         {
             tabTitles = new String[]{context.getResources().getString(R.string.favours),
@@ -44,13 +47,14 @@ public class RecyclerViewManager extends FragmentPagerAdapter
         switch (position) {
             case 0:
                 //Opinions
-                return new BlankFragment(0,context);
+                return new BlankFragment(0,context, myprofile);
             case 1:
                 //Favourites
-                return new BlankFragment(1, context);
+                Log.d("Myprofile is ", String.valueOf(myprofile));
+                return new BlankFragment(1, context, myprofile);
             case 2:
                 //Favours
-                return new BlankFragment(2, context);
+                return new BlankFragment(2, context, myprofile);
         }
 
         return null;

@@ -44,7 +44,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
             {
                 case 0:
                     Log.d("Open profile", "clicked");
-                    goTo(ProfileView.class);
+                    goToProfile();
                     break;
                 case 1:
                     Log.d("Messages", "clicked");
@@ -79,6 +79,14 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
     {
         Intent intent = new Intent (c, classe);
         startActivity(c,intent,Bundle.EMPTY);
+    }
+
+    private void goToProfile()
+    {
+        Intent intent = new Intent (c, ProfileView.class);
+        Bundle b= new Bundle();
+        b.putBoolean("myprofile", true);
+        startActivity(c,intent,b);
     }
     private void goToConfiguration()
     {

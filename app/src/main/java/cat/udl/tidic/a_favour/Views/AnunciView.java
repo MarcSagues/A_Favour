@@ -1,6 +1,7 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -184,15 +185,20 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng sydney = new LatLng(41.591677, 1.614331);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng igualada1 = new LatLng(41.591677, 1.614331);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(igualada1));
         googleMap.addCircle(new CircleOptions()
-                .center(sydney)
+                .center(igualada1)
                 .radius(120)
                 .strokeWidth(3f)
                 .strokeColor(getResources().getColor(R.color.AfavourColor))
                 .fillColor(getResources().getColor(R.color.MapFillColor))
         );
         googleMap.setMinZoomPreference(16);
+        LatLng puntoblanco = new LatLng(41.586645, 1.615023);
+
+        float[] res = new float[1];
+        Location.distanceBetween(igualada1.latitude,igualada1.longitude, puntoblanco.latitude, puntoblanco.longitude, res);
+        Log.d(String.valueOf(res[0]), "Metros de distancia");
     }
 }

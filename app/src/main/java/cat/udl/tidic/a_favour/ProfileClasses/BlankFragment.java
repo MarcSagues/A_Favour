@@ -28,8 +28,15 @@ public class BlankFragment extends Fragment
     private ProfileViewModel pView;
     public int id;
     private Context c;
-    BlankFragment(int id, Context c)
+    private Boolean myprofile;
+    int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
+    int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
+
+
+
+    BlankFragment(int id, Context c, Boolean myprofile)
     {
+        this.myprofile = myprofile;
         pView = new ProfileViewModel();
         this.id = id;
         this.c = c;
@@ -43,28 +50,34 @@ public class BlankFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View rootView;
         rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
         ListView rv = rootView.findViewById(R.id.rv_recycler_view);
         DrawerItemCustomAdapter adapter;
-        FORTESTING F= new FORTESTING();
-        DataModel.Favour eventList[] = F.getExampleList();
-        DataModel.Opinion eventList_op[] = FORTESTING.getExampleListOPINION();
-
-        if (id == 0 || id == 1)
+        if (this.myprofile)
         {
-            adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, eventList);
-
-            if (id == 0) { rv.setOnItemClickListener(new DrawerItemClickListener(c));}
+            if (id ==0 || id == 1){rv.setOnItemClickListener(new DrawerItemClickListener(c));}
+            ProfileViewModel.LISTOFTYPE type = ProfileViewModel.LISTOFTYPE.values()[id];
+            adapter = new DrawerItemCustomAdapter(getContext(), layout_listPROFILE[id],pView.getListOf(type, this.myprofile));
         }
-        else {adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, eventList_op);}
+        else
+        {
+            ProfileViewModel.LISTOFTYPE type;
+            if (id == 0)
+            {
+                type = ProfileViewModel.LISTOFTYPE.Favours;
+                rv.setOnItemClickListener(new DrawerItemClickListener(c));
+            }
+            else {type = ProfileViewModel.LISTOFTYPE.Opinions; }
 
-        //Opinions
+            adapter = new DrawerItemCustomAdapter(getContext(), layout_listOTHER[id],pView.getListOf(type, this.myprofile));
+        }
+
         rv.setAdapter(adapter);
         return rootView;
     }
+
 }

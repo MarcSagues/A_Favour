@@ -74,16 +74,25 @@ public class ProfileView extends AppCompatActivity
         setUpProfileListeners();
     }
 
+
+
     private void preparePage()
     {
+
         Bundle b = getIntent().getExtras();
         if (b != null)
         {
-            Log.d("YYY La variable is my profile és :", String.valueOf(b.getBoolean("myprofile")));
-            ismyProfile = b.getBoolean("myprofile");
-            edit.setVisibility(View.GONE);
+            ismyProfile = b.getBoolean("myprofile",true);
+            if (!ismyProfile)
+            {
+                edit.setVisibility(View.GONE);
+            }
+
+            System.out.println(String.valueOf(b.getBoolean("myprofile",true)));
+
         }
-        else { Log.d("És el meu perfil", "");ismyProfile = true; }
+        else
+            { Log.d("No s'ha passat cap variable",""); ismyProfile =true ;}
     }
     public void backArrowAction(View v)
     {

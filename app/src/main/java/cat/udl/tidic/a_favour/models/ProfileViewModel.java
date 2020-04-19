@@ -2,7 +2,6 @@ package cat.udl.tidic.a_favour.models;
 
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.ImageView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.FORTESTING;
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
@@ -24,6 +24,7 @@ public class ProfileViewModel
     //private UserModel user = new UserModel();
     private UserServices userService;
     private SharedPreferences mPreferences;
+    public enum LISTOFTYPE { Favours, Favourites, Opinions}
 
 
     private MutableLiveData<UserModel> user = new MutableLiveData<>();
@@ -38,6 +39,39 @@ public class ProfileViewModel
         Log.d("Token:", token);
         getUser();
    }
+
+   public DataModel[] getListOf(LISTOFTYPE type, boolean myprofile)
+   {
+       if (myprofile)
+       {
+           if (type.equals(LISTOFTYPE.Favours)) { return getMyFavours(); }
+           if (type.equals(LISTOFTYPE.Favourites)) { return getMyFavourites(); }
+           else if (type.equals(LISTOFTYPE.Opinions)) { return getMyOpinions(); }
+       }
+       else
+       {
+           if (type.equals(LISTOFTYPE.Favours)) { return getMyFavours(); }
+           if (type.equals(LISTOFTYPE.Favourites)) { return getMyFavourites(); }
+           else if (type.equals(LISTOFTYPE.Opinions)) { return getMyOpinions(); }
+       }
+
+       return null;
+   }
+
+    private DataModel.Opinion[] getMyOpinions()
+    {
+        return FORTESTING.getExampleListOPINION();
+    }
+
+    private DataModel.Favour[] getMyFavours()
+    {
+       return FORTESTING.getExampleList();
+    }
+
+    private DataModel.Favour[] getMyFavourites()
+    {
+        return FORTESTING.getExampleList();
+    }
 
    public void getUser()
    {
