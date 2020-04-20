@@ -71,12 +71,13 @@ public class ConfigurationView extends AppCompatActivity
 
     void setOnclick()
     {
-
         back_arrow.setOnClickListener(v -> onBackPressed());
 
-        enableAppNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> shared.edit().putBoolean(SHAREDNOT, isChecked).apply());
+        enableAppNotifications.setOnCheckedChangeListener((buttonView, isChecked) ->
+                shared.edit().putBoolean(SHAREDNOT, isChecked).apply());
 
-        enableMessNotifications.setOnCheckedChangeListener((buttonView, isChecked) -> shared.edit().putBoolean(SHAREDMESS, isChecked).apply());
+        enableMessNotifications.setOnCheckedChangeListener((buttonView, isChecked) ->
+                shared.edit().putBoolean(SHAREDMESS, isChecked).apply());
     }
 
     @Override
