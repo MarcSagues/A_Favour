@@ -38,7 +38,8 @@ public class DataModel extends Activity
     //Tot el que necessiten els favors
     public static class Favour extends DataModel
     {
-
+        @SerializedName("EventTypeEnum")
+        public CategoryManager.CATEGORIES cat;
         @SerializedName("category")
         public String category;
         @SerializedName("name")
@@ -55,6 +56,7 @@ public class DataModel extends Activity
 
         public Favour(String name, String description, float amount, String category, int id, String user)
         {
+            this.cat = CategoryManager.CATEGORIES.computing;
             this.category = category;
             this.name = name;
             this.description = description;
