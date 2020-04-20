@@ -26,10 +26,17 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         this.c = c;
     }
 
+    //Aquesta classe afegeix un "OnClcickListener" a cada item de la llista.
+    //Exemple : Tinc la llista recyclerView
+    //Per a fer que els items de la llista es puguin clickar ...
+    //... haig de fer : recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
+    //on "this" és el context de la classe
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         DataModel d = (DataModel) parent.getItemAtPosition(position);
+        //Si el item que s'ha clickat és de la classe MenuList(el menu de la pàgina principal...)
         if (d instanceof DataModel.MenuList)
         {
             switch (position)
@@ -57,6 +64,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
             }
 
         }
+        //Si el item que s'ha clickat és un favor...
         else if (d instanceof DataModel.Favour)
         {
             goToSeeAnunci();
@@ -95,6 +103,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
     private void ShowDialog()
     {
         //Si falla la connexió s'haura de posar un layout de "error"
+        //Aixó simplement mostra un dialog d'error
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
 
         builder.setMessage(R.string.alertLogoutD).setTitle(R.string.logOut);

@@ -13,8 +13,13 @@ import cat.udl.tidic.a_favour.R;
 public class DataModel extends Activity
 {
     int icon;
+
+    //Cunstructor vuit de DataModel
+    //S'ha utilitzat "herència" per a que sigui més fàcil crear i retornar arrays de
+    //DataModel sense que la funció requereixi un tipus específic
     public DataModel() { }
 
+    //Tot el que necessita la llista de la pàgina principal
     public static class MenuList extends DataModel
     {
         public String name;
@@ -30,6 +35,7 @@ public class DataModel extends Activity
         }
     }
 
+    //Tot el que necessiten els favors
     public static class Favour extends DataModel
     {
 
@@ -105,6 +111,7 @@ public class DataModel extends Activity
         }
     }
 
+    //Les opinions dels usuaris
     public static class Opinion extends DataModel
     {
 
@@ -121,6 +128,8 @@ public class DataModel extends Activity
         }
     }
 
+    //TODO
+    //Els missaatges
     public static class Message extends DataModel
     {
         public String otherUsername;

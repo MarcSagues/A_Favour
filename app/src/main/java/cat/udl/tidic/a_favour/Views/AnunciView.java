@@ -43,7 +43,9 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         setClickListeners();
     }
 
-    private void isMyFavourvoid() {
+    private void isMyFavourvoid()
+    {
+        //Mira si estem en un favor que és nostre o no
         Bundle b = getIntent().getExtras();
         if (b != null) {
             Log.d("YYY La variable is my favour és :", String.valueOf(b.getBoolean("myfavour")));
@@ -59,13 +61,20 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         super.onBackPressed();
     }
 
-    private void preparePage() {
-        if (isMyFavour) {
+    private void preparePage()
+    {
+        if (isMyFavour)
+        {
+            //Si és el meu favor, poso l'opció d'editar-lo
             edit.setImageResource(R.drawable.pencil);
+            //Trec la valoració de l'usuari, perque sóc jo mateix
             valoracio.setVisibility(View.GONE);
-        } else {
+        }
+        else {
+            //Si NO és el meu favor, trec l'opció de poguer editar-lo i afegeixo un cor
             edit.setImageResource(R.drawable.heart);
             setTag();
+            //Poso la valaoració de l'usuari de l'anunci
             valoracio.setVisibility(View.VISIBLE);
         }
     }
@@ -74,8 +83,11 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 
         back.setOnClickListener(v -> onBackPressed());
 
-        edit.setOnClickListener(v -> {
+        edit.setOnClickListener(v ->
+        {
+            //Si es el meu favor, vaig a la pàgina d'edita favor
             if (isMyFavour) { goToEditFavour(); }
+            //Sino, doncs l'afageixo a favoritos
             else { addFvaourites();}
         });
     }

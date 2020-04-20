@@ -22,12 +22,21 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
     private int layoutResourceId;
     private DataModel[] data;
 
-    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data) {
+    //Aquesta classe s'encarrega "d'inflar" les llistes segons l'array que li passem (DataModel[] data)
+    //Exemple :
+    // DataModel.Favour[] eventList = new DataModel.Favour[1]; --> Aixó és la nostre array
+    //ListView list --> Aixó es la llista que inflarem;
+    //Creem un nou adaptador amb el layout amb el que volem inflar la llista (R.layout.x) i li passem la llista
+    //DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, list);
+    //Posem el adaptador a la llista
+    //list.setAdapter(adapter_event)
+
+    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data)
+    {
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.mContext = mContext;
         this.data = data;
-
     }
 
     @SuppressLint({"ViewHolder", "SetTextI18n"})
@@ -40,18 +49,24 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         setLayoutMenu(position);
         listItem = inflater.inflate(layoutResourceId, parent, false);
 
+        //Depenent del tipus d'array que li passem, s'inflara la llista d'una forma o un altre
+
+        //Si la llista que li passem és de favors...
         if (data instanceof DataModel.Favour[])
         {
             inflateFavour(listItem,position);
         }
+        //Si la llista que li passem és del menú
         else if (data instanceof DataModel.MenuList[])
         {
             inflateMenuList(listItem,position);
         }
+        //Si la llista que li passem és de missatges...
         else if (data instanceof  DataModel.Message[])
         {
             inflateMessagePreview(listItem,position);
         }
+        //Si la llista que li passem és d'opinions
         else
         {
             inflateOpinions(listItem,position);

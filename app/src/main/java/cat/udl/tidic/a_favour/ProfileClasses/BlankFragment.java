@@ -19,10 +19,9 @@ public class BlankFragment extends Fragment
     public int id;
     private Context c;
     private Boolean myprofile;
+    //Les seguents arrays defineixen el layout que anira a cada pestaña del profile
     private int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
     private int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
-
-
 
     BlankFragment(int id, Context c, Boolean myprofile)
     {
@@ -30,14 +29,10 @@ public class BlankFragment extends Fragment
         pView = new ProfileViewModel();
         this.id = id;
         this.c = c;
-        // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -47,8 +42,13 @@ public class BlankFragment extends Fragment
 
         ListView rv = rootView.findViewById(R.id.rv_recycler_view);
         DrawerItemCustomAdapter adapter;
+
+        //Aquesta booleana determina si s'ha de carregar el meu perfil o és el perfil d'un altre usuari
         if (this.myprofile)
         {
+            //El id es refereix a la pestaña que estem infalnt
+            //(En el teu profile hi ha 3 pestañes : Favours, Favourites i Opinions)
+            //(En el perfil públic d'un usuari n'hi han 2 --> Favours i Opinions)
             if (id ==0 || id == 1){rv.setOnItemClickListener(new DrawerItemClickListener(c));}
             ProfileViewModel.LISTOFTYPE type = ProfileViewModel.LISTOFTYPE.values()[id];
             adapter = new DrawerItemCustomAdapter(getContext(), layout_listPROFILE[id],pView.getListOf(type, this.myprofile));
