@@ -44,7 +44,7 @@ public interface UserServices
     @POST ("/account/create_token")
     Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);
 
-    @PUT("/favours/post")
+    @POST("/favours/post")
     Call<Void> setFavours(@Body JsonObject userJson);
 
     @DELETE("/favours/delete")
