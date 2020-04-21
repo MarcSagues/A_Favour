@@ -68,7 +68,10 @@ public class LoginView extends AppCompatActivity {
     public void checkLogin()
     {
         //Comprobar si hi ha token guardat
-        if (PreferencesProvider.existToken("token")) { openMainPage();}
+        if (PreferencesProvider.existToken("token") && PreferencesProvider.existToken("id"))
+        {
+            openMainPage();
+        }
     }
 
     public void setButtonListeners()

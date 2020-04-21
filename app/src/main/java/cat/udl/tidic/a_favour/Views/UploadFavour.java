@@ -1,6 +1,7 @@
 package cat.udl.tidic.a_favour.Views;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
@@ -23,6 +24,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
@@ -221,8 +223,8 @@ public class UploadFavour extends AppCompatActivity
 
         if (currentFavour == null)
         {
-            //TODO ID HARDCODEJAT
-            currentFavour = new DataModel.Favour("","",0,"", 3,"");
+            SharedPreferences mPreferences = PreferencesProvider.providePreferences();
+            currentFavour = new DataModel.Favour("","",0,"", mPreferences.getInt("id",0),"");
         }
         currentFavour.setName(inputEditTexts[0].getText().toString());
         currentFavour.setDescription(inputEditTexts[1].getText().toString());
