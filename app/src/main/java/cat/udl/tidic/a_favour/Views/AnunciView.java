@@ -111,12 +111,13 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
             else { addFvaourites();}
         });
 
+        AnunciView a = this;
         eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 UploadFavourModel vm = new UploadFavourModel();
-                vm.eliminarFavor(currentFavour.id);
+                vm.eliminarFavor(currentFavour.id, a);
             }
         });
 

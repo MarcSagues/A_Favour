@@ -114,6 +114,25 @@ public class UploadFavour extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
+        if (upload_bool) {
+            Intent i = new Intent(this, MainPage.class);
+            startActivityForResult(i, 1);
+            finish();
+        }
+        else
+        {
+            Intent i = new Intent(this, AnunciView.class);
+            Bundle b= new Bundle();
+            b.putBoolean("myfavour", true);
+            i.putExtras(b);
+            i.putExtra("favour", currentFavour);
+            startActivityForResult(i, 1);
+            finish();
+        }
+    }
+
+    public void onSucces()
+    {
         Intent i = new Intent(this, AnunciView.class);
         Bundle b= new Bundle();
         b.putBoolean("myfavour", true);
@@ -190,17 +209,18 @@ public class UploadFavour extends AppCompatActivity
             });
         }
 
+        UploadFavour u = this;
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                if (!upload_bool)
-                {
-                    uploadFavourModel.editFavour(getCurrentFavourData());
-                }
-                else
-                {
-                    uploadFavourModel.postFavour(getCurrentFavourData());
+                currentFavour = getCurrentFavourData();
+                if (currentFavour != null) {
+                    if (!upload_bool) {
+                        uploadFavourModel.editFavour(getCurrentFavourData(),u);
+                    } else {
+                        uploadFavourModel.postFavour(getCurrentFavourData(),u);
+                    }
                 }
             }
         });
@@ -220,26 +240,33 @@ public class UploadFavour extends AppCompatActivity
 
     public DataModel.Favour getCurrentFavourData()
     {
-
-        if (currentFavour == null)
+        try
         {
-            SharedPreferences mPreferences = PreferencesProvider.providePreferences();
-            currentFavour = new DataModel.Favour("","",0,"", mPreferences.getInt("id",0),"");
-        }
-        currentFavour.setName(inputEditTexts[0].getText().toString());
-        currentFavour.setDescription(inputEditTexts[1].getText().toString());
-        currentFavour.setCategory(getSelectedCategory());
+            if (currentFavour == null)
+            {
+                SharedPreferences mPreferences = PreferencesProvider.providePreferences();
+                currentFavour = new DataModel.Favour("", "", 0, "", mPreferences.getInt("id", 0), "");
+            }
+            currentFavour.setName(Objects.requireNonNull(inputEditTexts[0].getText()).toString());
+            currentFavour.setDescription(Objects.requireNonNull(inputEditTexts[1].getText()).toString());
+            currentFavour.setCategory(getSelectedCategory());
 
-        if (!currentFavour.category.equals(CategoryManager.CATEGORIES.favourxfavour.name()))
-        {
-            currentFavour.setAmount(Float.parseFloat(inputEditTexts[2].getText().toString()));
-        }
-        else
-        {
-            currentFavour.setAmount(0);
-        }
+            if (!currentFavour.category.equals(CategoryManager.CATEGORIES.favourxfavour.name()))
+            {
+                currentFavour.setAmount(Float.parseFloat(Objects.requireNonNull(inputEditTexts[2].getText()).toString()));
+            }
+            else
+                {
+                currentFavour.setAmount(0);
+            }
 
-        return currentFavour;
+            return currentFavour;
+        }
+        catch (Exception e)
+        {
+            uploadFavourModel.sendMessage("ERROR : Check that all the fields are filled ");
+            return null;
+        }
     }
 
     @SuppressLint("SetTextI18n")

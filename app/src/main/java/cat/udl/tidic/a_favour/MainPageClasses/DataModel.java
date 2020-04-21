@@ -98,8 +98,8 @@ public class DataModel extends Activity
 
         public float parseFloat(float amount)
         {
-            if (amount != (int) amount) { return amount; }
-            else {return (int) amount; }
+            if(amount % 1 != 0) {return  amount;}
+            else { return (int) amount;}
         }
 
         public String getCategoria()
@@ -116,7 +116,8 @@ public class DataModel extends Activity
             }
             else
             {
-                return this.amount + "€";
+                float am = parseFloat(this.amount);
+                return String.format("%.0f",am) + "€";
             }
         }
 

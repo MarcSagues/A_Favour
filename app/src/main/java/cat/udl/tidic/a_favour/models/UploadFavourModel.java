@@ -15,7 +15,9 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
+import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
+import cat.udl.tidic.a_favour.Views.UploadFavour;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +33,7 @@ public class UploadFavourModel
                 getRetrofitInstance().create(UserServices.class);
     }
 
-    public void editFavour(DataModel.Favour fav)
+    public void editFavour(DataModel.Favour fav, UploadFavour upFav)
     {
         JsonObject user_json = new JsonObject();
             user_json.addProperty("name", fav.name);
@@ -49,7 +51,8 @@ public class UploadFavourModel
                 if (response.code() == 200)
                 {
                     response.body();
-                    sendMessage("Favour Updatet! :D");
+                    sendMessage("Favour updatet");
+                    upFav.onSucces();
                 }
                 else
                 {
@@ -73,13 +76,13 @@ public class UploadFavourModel
         });
     }
 
-    private void sendMessage(String message)
+    public void sendMessage(String message)
     {
         Context c = App.getAppContext();
         Toast.makeText(c , message, Toast.LENGTH_SHORT).show();
     }
 
-    public void eliminarFavor(int id)
+    public void eliminarFavor(int id, AnunciView anclass)
     {
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<Void> call = userService.deleteFavour(token,id);
@@ -91,7 +94,8 @@ public class UploadFavourModel
                 if (response.code() == 200)
                 {
                     response.body();
-                    sendMessage("Favour Deleted! :D");
+                    sendMessage("Favour deleted");
+                    anclass.onBackPressed();
                 }
                 else
                 {
@@ -115,7 +119,7 @@ public class UploadFavourModel
         });
     }
 
-    public void postFavour(DataModel.Favour currentFavourData)
+    public void postFavour(DataModel.Favour currentFavourData, UploadFavour upFav)
     {
         String token = PreferencesProvider.providePreferences().getString("token","");
         JsonObject user_json = new JsonObject();
@@ -133,7 +137,8 @@ public class UploadFavourModel
                 if (response.code() == 200)
                 {
                     response.body();
-                    sendMessage("Favour UPLOADED! :D");
+                    sendMessage("Favour uploaded");
+                    upFav.onSucces();
                 }
                 else
                 {
