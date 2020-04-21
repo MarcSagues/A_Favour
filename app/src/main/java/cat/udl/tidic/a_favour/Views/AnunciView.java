@@ -22,6 +22,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.models.UploadFavourModel;
 
 public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 {
@@ -29,6 +30,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
     ListView valoracio;
     DataModel.Opinion[] userOpinion;
     ImageView back;
+    ImageView eliminar;
     ImageView edit;
     Boolean isMyFavour;
     DataModel.Favour currentFavour;
@@ -76,6 +78,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
             edit.setImageResource(R.drawable.pencil);
             //Trec la valoració de l'usuari, perque sóc jo mateix
             valoracio.setVisibility(View.GONE);
+            eliminar.setVisibility(View.VISIBLE);
         }
         else {
             //Si NO és el meu favor, trec l'opció de poguer editar-lo i afegeixo un cor
@@ -83,6 +86,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
             setTag();
             //Poso la valaoració de l'usuari de l'anunci
             valoracio.setVisibility(View.VISIBLE);
+            eliminar.setVisibility(View.GONE);
         }
     }
 
@@ -97,6 +101,16 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
             //Sino, doncs l'afageixo a favoritos
             else { addFvaourites();}
         });
+
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                UploadFavourModel vm = new UploadFavourModel();
+                vm.eliminarFavor();
+            }
+        });
+
     }
 
 
@@ -137,6 +151,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 
     private void getAllData()
     {
+        eliminar = findViewById(R.id.eliminar);
         anunci = findViewById(R.id.anunci);
         valoracio = findViewById(R.id.valoracio);
         back = findViewById(R.id.back_arrow);

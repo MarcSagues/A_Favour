@@ -78,5 +78,10 @@ public class UploadFavourModel
         Context c = App.getAppContext();
         Toast.makeText(c , message, Toast.LENGTH_SHORT).show();
     }
+
+    public void eliminarFavor()
+    {
+        Log.d("PROBANT D'ELIMINAR FAVOR","");
+    }
 }
 

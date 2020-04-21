@@ -32,6 +32,18 @@
             app:srcCompat="@drawable/arrow" />
 
         <ImageView
+            android:id="@+id/eliminar"
+            android:layout_width="42dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="62dp"
+            android:contentDescription="@string/edit"
+            app:layout_constraintStart_toStartOf="@+id/up_panel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_delete" />
+
+        <ImageView
             android:id="@+id/edit"
             android:layout_width="42dp"
             android:layout_height="30dp"
