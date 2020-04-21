@@ -221,6 +221,7 @@ public class UploadFavour extends AppCompatActivity
 
         if (currentFavour == null)
         {
+            //TODO ID HARDCODEJAT
             currentFavour = new DataModel.Favour("","",0,"", 3,"");
         }
         currentFavour.setName(inputEditTexts[0].getText().toString());
