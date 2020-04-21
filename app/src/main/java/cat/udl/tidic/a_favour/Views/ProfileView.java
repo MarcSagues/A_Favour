@@ -14,8 +14,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.List;
+
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.ImageHelper;
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
@@ -59,11 +63,10 @@ public class ProfileView extends AppCompatActivity
         getAllActivityData();
         preparePage();
         //The recycle Manager
-        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile);
         //Get all the layout data
 
-        setUpRecyclerView();
-        getRecyclerData();
+        //setUpRecyclerView();
+        //getRecyclerData();
         setUpProfileListeners();
     }
 
@@ -136,6 +139,10 @@ public class ProfileView extends AppCompatActivity
 
     private void getRecyclerData()
     {
+
+
+
+        setUpRecyclerView();
         for (int i = 0; i < tabLayout.getTabCount(); i++)
         {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
@@ -146,10 +153,19 @@ public class ProfileView extends AppCompatActivity
     private void setUpProfileListeners()
     {
         profileViewModel.getUserProfile().observe(this, this::onGetUserData);
+        profileViewModel.getMyFavours_().observe(this,this::setMyFavoursList);
+    }
+
+    private void setMyFavoursList(List<DataModel.Favour> favours)
+    {
+        DataModel.Favour[] eventList = favours.toArray(new DataModel.Favour[0]);
+        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile, eventList );
+        getRecyclerData();
     }
 
     private void onGetUserData(UserModel u)
     {
+
 
         if (FORTESTING.dev)
         {
@@ -182,6 +198,7 @@ public class ProfileView extends AppCompatActivity
 
                 //Informació de l'ubicació de l'usuari
                 userLocation.setText(profileViewModel.getLocation());
+                profileViewModel.getMyFavoursVoid("3");
             }
         }
     }

@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -29,6 +30,8 @@ public class ProfileViewModel
 
     private MutableLiveData<UserModel> user = new MutableLiveData<>();
     public LiveData<UserModel> getUserProfile(){ return user; }
+    private MutableLiveData<List<DataModel.Favour>> myFavours = new MutableLiveData<>();
+    public LiveData<List<DataModel.Favour>> getMyFavours_(){ return myFavours; }
 
    public ProfileViewModel()
    {
@@ -108,6 +111,43 @@ public class ProfileViewModel
            }
        });
    }
+
+    public void getMyFavoursVoid(String userID)
+    {
+        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
+        String token = PreferencesProvider.providePreferences().getString("token","");
+        Call<List<DataModel.Favour>> call = userService.getFavours(userID,token);
+        //noinspection NullableProblems
+        call.enqueue(new Callback<List<DataModel.Favour>>()
+        {
+            @Override
+            public void onResponse(Call<List<DataModel.Favour>> call, Response<List<DataModel.Favour>> response)
+            {
+                try
+                {
+
+                    List<DataModel.Favour> response_ = response.body();
+
+                    assert response_ != null;
+                    for (int i = 0; i < response_.size(); i++)
+                    {
+                        response_.get(i).setIcon();
+                    }
+                    myFavours.setValue(response_);
+                }
+                catch (Exception e) { Log.d("Salta el catch -------", e.getMessage() + "ERROR");}
+            }
+
+            @Override
+            public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
+            {
+
+
+                Log.e("---------------", Objects.requireNonNull(t.getMessage()));
+                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
    public String getUsername()
    {

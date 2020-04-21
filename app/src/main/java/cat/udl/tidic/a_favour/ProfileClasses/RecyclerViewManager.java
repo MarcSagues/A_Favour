@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 
 public class RecyclerViewManager extends FragmentPagerAdapter
@@ -18,13 +19,15 @@ public class RecyclerViewManager extends FragmentPagerAdapter
     private String[] tabTitles;
     private Context context;
     private Boolean myprofile;
+    private DataModel.Favour[] my_favours;
 
     @SuppressWarnings("deprecation")
-    public RecyclerViewManager(FragmentManager fm, Context context, Boolean myprofile)
+    public RecyclerViewManager(FragmentManager fm, Context context, Boolean myprofile, DataModel.Favour[] my_favours)
     {
         super(fm);
         this.context = context;
         this.myprofile = myprofile;
+        this.my_favours = my_favours;
         if (myprofile)
         {
             tabTitles = new String[]{context.getResources().getString(R.string.favours),
@@ -46,16 +49,16 @@ public class RecyclerViewManager extends FragmentPagerAdapter
         switch (position) {
             case 0:
                 //Opinions
-                return new BlankFragment(0,context, myprofile);
+                return new BlankFragment(0,context, myprofile,  my_favours);
             case 1:
                 //Favourites
-                return new BlankFragment(1, context, myprofile);
+                return new BlankFragment(1, context, myprofile,my_favours);
             case 2:
                 //Favours
-                return new BlankFragment(2, context, myprofile);
+                return new BlankFragment(2, context, myprofile,my_favours);
         }
 
-        return new BlankFragment(0,context,myprofile);
+        return new BlankFragment(0,context,myprofile,my_favours);
     }
 
     public View setTabTittles(int position)

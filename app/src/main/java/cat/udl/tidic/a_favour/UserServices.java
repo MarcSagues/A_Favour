@@ -46,9 +46,13 @@ public interface UserServices
     @POST ("/account/create_token")
     Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);
 
+
+    @POST("/favours/post/{favour_id}")
+    Call<Void> postFavour(@Header ("Authorization") String tokenAuth,  @Path (value = "favour_id") int favour_id, @Body JsonObject userJson);
+
     @POST("/favours/update/{favour_id}")
     Call<Void> setFavours(@Header ("Authorization") String tokenAuth,  @Path (value = "favour_id") int favour_id, @Body JsonObject userJson);
 
-    @DELETE("/favours/delete")
-    Call<Void> deleteFavour(@Body JsonObject userJson);
+    @GET("/favours/delete")
+    Call<Void> deleteFavour(@Header ("Authorization") String tokenAuth, @Body JsonObject userJson);
 }

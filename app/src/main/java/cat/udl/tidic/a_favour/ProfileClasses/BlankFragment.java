@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.ProfileClasses;
 
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
@@ -22,13 +23,15 @@ public class BlankFragment extends Fragment
     //Les seguents arrays defineixen el layout que anira a cada pestaña del profile
     private int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
     private int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
+    private DataModel.Favour[] data;
 
-    BlankFragment(int id, Context c, Boolean myprofile)
+    BlankFragment(int id, Context c, Boolean myprofile, DataModel[] data)
     {
         this.myprofile = myprofile;
         pView = new ProfileViewModel();
         this.id = id;
         this.c = c;
+        this.data = (DataModel.Favour[]) data;
     }
 
     @Override
@@ -50,8 +53,7 @@ public class BlankFragment extends Fragment
             //(En el teu profile hi ha 3 pestañes : Favours, Favourites i Opinions)
             //(En el perfil públic d'un usuari n'hi han 2 --> Favours i Opinions)
             if (id ==0 || id == 1){rv.setOnItemClickListener(new DrawerItemClickListener(c));}
-            ProfileViewModel.LISTOFTYPE type = ProfileViewModel.LISTOFTYPE.values()[id];
-            adapter = new DrawerItemCustomAdapter(getContext(), layout_listPROFILE[id],pView.getListOf(type, this.myprofile));
+            adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, (DataModel.Favour[]) data);
         }
         else
         {
