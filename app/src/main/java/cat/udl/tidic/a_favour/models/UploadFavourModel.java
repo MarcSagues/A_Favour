@@ -79,9 +79,40 @@ public class UploadFavourModel
         Toast.makeText(c , message, Toast.LENGTH_SHORT).show();
     }
 
-    public void eliminarFavor()
+    public void eliminarFavor(int id)
     {
-        Log.d("PROBANT D'ELIMINAR FAVOR","");
+        String token = PreferencesProvider.providePreferences().getString("token","");
+        Call<Void> call = userService.deleteFavour(token,id);
+        //noinspection NullableProblems
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response)
+            {
+                if (response.code() == 200)
+                {
+                    response.body();
+                    sendMessage("Favour Deleted! :D");
+                }
+                else
+                {
+                    try
+                    { //Atrapar error usuari existent / correu existent
+                        assert response.errorBody() != null;
+                        sendMessage(Objects.requireNonNull(response.errorBody().string()));
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t)
+            {
+                sendMessage("Error en eliminar el Favor");
+            }
+        });
     }
 }
 

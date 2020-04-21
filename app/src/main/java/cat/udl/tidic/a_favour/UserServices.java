@@ -53,6 +53,6 @@ public interface UserServices
     @POST("/favours/update/{favour_id}")
     Call<Void> setFavours(@Header ("Authorization") String tokenAuth,  @Path (value = "favour_id") int favour_id, @Body JsonObject userJson);
 
-    @GET("/favours/delete")
-    Call<Void> deleteFavour(@Header ("Authorization") String tokenAuth, @Body JsonObject userJson);
+    @GET("/favours/delete/{id}")
+    Call<Void> deleteFavour(@Header ("Authorization") String tokenAuth,  @Path (value = "id") int id);
 }
