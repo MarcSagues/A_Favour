@@ -17,6 +17,8 @@ import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UserServices
 {
@@ -26,7 +28,7 @@ public interface UserServices
     Call<UserModel> getUserProfile(@HeaderMap Map<String, String> headers);
 
     @GET("/favours")
-    Call <  List<DataModel.Favour>> getFavours(@HeaderMap Map<String, String> headers);
+    Call <  List<DataModel.Favour>> getFavours(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);
 
 
 //    @Headers({"Content-Type:application/json"})
@@ -44,8 +46,8 @@ public interface UserServices
     @POST ("/account/create_token")
     Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);
 
-    @POST("/favours/post")
-    Call<Void> setFavours(@Body JsonObject userJson);
+    @POST("/favours/post/{favour_id}")
+    Call<Void> setFavours(@Header ("Authorization") String tokenAuth,  @Path (value = "favour_id") int favour_id, @Body JsonObject userJson);
 
     @DELETE("/favours/delete")
     Call<Void> deleteFavour(@Body JsonObject userJson);

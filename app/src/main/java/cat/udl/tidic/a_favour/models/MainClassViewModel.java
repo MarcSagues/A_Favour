@@ -37,10 +37,9 @@ public class MainClassViewModel
 
     private void getFavours()
     {
-        Map<String, String> map = new HashMap<>();
-        map.put("Authorization", mPreferences.getString("favours", ""));
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
-        Call<List<DataModel.Favour>> call = userService.getFavours(map);
+        String token = PreferencesProvider.providePreferences().getString("token","");
+        Call<List<DataModel.Favour>> call = userService.getFavours(null,token);
         //noinspection NullableProblems
         call.enqueue(new Callback<List<DataModel.Favour>>()
         {

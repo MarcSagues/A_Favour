@@ -16,6 +16,7 @@ import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
 import cat.udl.tidic.a_favour.Views.RegisterView;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +39,8 @@ public class UploadFavourModel
             user_json.addProperty("category", fav.category);
             user_json.addProperty("amount", fav.amount);
 
-        Call<Void> call = userService.setFavours(user_json);
+            String token = PreferencesProvider.providePreferences().getString("token","");
+        Call<Void> call = userService.setFavours(token,fav.id,user_json);
         //noinspection NullableProblems
         call.enqueue(new Callback<Void>() {
             @Override
