@@ -4,7 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+import java.util.EnumMap;
 
 import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.R;
@@ -36,12 +42,13 @@ public class DataModel extends Activity
     }
 
     //Tot el que necessiten els favors
-    public static class Favour extends DataModel
+    public static class Favour extends DataModel implements Serializable
     {
-        @SerializedName("EventTypeEnum")
-        public CategoryManager.CATEGORIES cat;
+
         @SerializedName("category")
         public String category;
+        //@SerializedName("category")
+        //public String category;
         @SerializedName("name")
         public String name;
         @SerializedName("desc")
@@ -52,11 +59,10 @@ public class DataModel extends Activity
         public int id;
         @SerializedName("user")
         public String user;
-        private Boolean favourite;
+        private boolean favourite;
 
         public Favour(String name, String description, float amount, String category, int id, String user)
         {
-            this.cat = CategoryManager.CATEGORIES.computing;
             this.category = category;
             this.name = name;
             this.description = description;
@@ -65,7 +71,14 @@ public class DataModel extends Activity
             this.id = id;
             this.favourite = false;
             setIcon();
+        }
 
+        @NonNull
+        @Override
+        public String toString()
+        {
+            return "ANUNCI:" + " CAT " + this.category + " Nom del anunci " + this.name + " Descripció " +this.description + " Amount " + this.amount + " User " + this.user
+                    + " id " + this.id + " favourite " + String.valueOf(this.favourite);
         }
 
         public boolean isFavourite()
@@ -110,6 +123,11 @@ public class DataModel extends Activity
         public void setIcon()
         {
             this.icon = CategoryManager.getImageId(this.category);
+        }
+
+        public int getIcon()
+        {
+            return this.icon = CategoryManager.getImageId(this.category);
         }
     }
 

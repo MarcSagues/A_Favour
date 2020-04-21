@@ -15,6 +15,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.Serializable;
+
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
@@ -24,11 +27,11 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 {
     ListView anunci;
     ListView valoracio;
-    DataModel.Favour[] favour;
     DataModel.Opinion[] userOpinion;
     ImageView back;
     ImageView edit;
     Boolean isMyFavour;
+    DataModel.Favour currentFavour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,13 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
     {
         //Mira si estem en un favor que és nostre o no
         Bundle b = getIntent().getExtras();
-        if (b != null) {
+        if (b != null)
+        {
             Log.d("YYY La variable is my favour és :", String.valueOf(b.getBoolean("myfavour")));
             isMyFavour = b.getBoolean("myfavour");
+            currentFavour = (DataModel.Favour) getIntent().getSerializableExtra("favour");
+            Log.d(currentFavour.toString(),"aw");
+
         } else {
             Log.d("YYY La variable is my favour és :", "NO HI HA");
             isMyFavour = false;
@@ -95,7 +102,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 
     private void setTag()
     {
-        setImageandTag(favour[0].isFavourite() ? R.drawable.hearthfull : R.drawable.heart);
+        setImageandTag(currentFavour.isFavourite() ? R.drawable.hearthfull : R.drawable.heart);
     }
 
     private void setImageandTag(int tag)
@@ -124,6 +131,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         Intent intent = new Intent (this, UploadFavour.class);
         Bundle b= new Bundle();
         b.putBoolean("upload", false);
+        intent.putExtra("favour", (Serializable) currentFavour);
         startActivity(intent,b);
     }
 
@@ -133,8 +141,8 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         valoracio = findViewById(R.id.valoracio);
         back = findViewById(R.id.back_arrow);
         edit = findViewById(R.id.edit);
-        favour = new DataModel.Favour[1];
-        favour[0] = new DataModel.Favour("Necessito ajuda per a noseque","Aixo és una descripció una mica més llarga per a veure com qeudaria hahahah molt be lore ipsum ole ole",2, CategoryManager.CATEGORIES.computing.name(),1,"asd");
+        DataModel.Favour[] favour = new DataModel.Favour[1];
+        favour[0] = currentFavour;
         DrawerItemCustomAdapter favour_adapter = new DrawerItemCustomAdapter(this, R.layout.favour_list_profile, favour);
         anunci.setAdapter(favour_adapter);
 

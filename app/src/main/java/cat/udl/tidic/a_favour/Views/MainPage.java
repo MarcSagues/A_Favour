@@ -73,6 +73,8 @@ public class MainPage  extends AppCompatActivity
         DataModel.Favour[] eventList = all_f.toArray(new DataModel.Favour[0]);
         DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
         recyclerView.setAdapter(adapter_event);
+        recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
+
     }
     private void getAllActivityData()
     {

@@ -49,7 +49,9 @@ public class MainClassViewModel
             {
                 try
                 {
+
                    List<DataModel.Favour> response_ = response.body();
+
                     assert response_ != null;
                     for (int i = 0; i < response_.size(); i++)
                     {
@@ -57,7 +59,7 @@ public class MainClassViewModel
                     }
                     allFavours.setValue(response_);
                 }
-                catch (Exception e) { Log.d("------------------", e.getMessage() + "ERROR");}
+                catch (Exception e) { Log.d("Salta el catch -------", e.getMessage() + "ERROR");}
             }
 
             @Override

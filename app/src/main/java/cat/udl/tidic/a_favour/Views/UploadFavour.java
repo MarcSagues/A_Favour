@@ -37,6 +37,7 @@ public class UploadFavour extends AppCompatActivity
     TextView[] wordCounter;
     TextInputEditText[] inputEditTexts;
     TextInputLayout amount_parent;
+    DataModel.Favour currentFavour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,7 +52,11 @@ public class UploadFavour extends AppCompatActivity
     private void getBundle()
     {
         Bundle b = getIntent().getExtras();
-        if(b != null) {upload_bool = b.getBoolean("upload");}
+        if(b != null)
+        {
+            upload_bool = b.getBoolean("upload");
+            currentFavour = (DataModel.Favour) getIntent().getSerializableExtra("favour");
+        }
         Log.d("Open upload page", String.valueOf(upload_bool));
         prepareUpload(upload_bool);
         //if (!upload_bool)
@@ -81,19 +86,19 @@ public class UploadFavour extends AppCompatActivity
     @SuppressLint("SetTextI18n")
     private void setAllData()
     {
-        DataModel.Favour dataModel = new DataModel.Favour("hola", "caracola,", 0, CategoryManager.CATEGORIES.favourxfavour.name(), 7, "user1");
+
 
         for (ImageView i : imageArrays)
         {
-            if (i.getTag() == dataModel.getCategoria())
+            if (i.getTag().equals(currentFavour.getCategoria()))
             {
                 selectCategory(i);
             }
         }
-        inputEditTexts[0].setText(dataModel.getName());
-        inputEditTexts[1].setText(dataModel.getDescription());
-        if (!dataModel.getCategoria().equals(CategoryManager.CATEGORIES.favourxfavour.name())) {
-            inputEditTexts[2].setText("" + dataModel.getAmount());
+        inputEditTexts[0].setText(currentFavour.getName());
+        inputEditTexts[1].setText(currentFavour.getDescription());
+        if (!currentFavour.getCategoria().equals(CategoryManager.CATEGORIES.favourxfavour.name())) {
+            inputEditTexts[2].setText("" + currentFavour.amount);
         }
     }
 

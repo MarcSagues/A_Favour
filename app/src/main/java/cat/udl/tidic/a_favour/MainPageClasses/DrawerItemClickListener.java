@@ -3,11 +3,15 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
+
+import java.io.Serializable;
+
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
@@ -67,7 +71,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         //Si el item que s'ha clickat és un favor...
         else if (d instanceof DataModel.Favour)
         {
-            goToSeeAnunci();
+            goToSeeAnunci(d);
         }
         else
         {
@@ -89,14 +93,16 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         startActivity(c,intent,b);
     }
 
-    private void goToSeeAnunci()
+    private void goToSeeAnunci(DataModel d)
     {
         boolean isMyfavour = c.getClass().equals(ProfileView.class);
         Log.d(String.valueOf(isMyfavour), " Is my favour");
+        Log.d("!!!!!!!!!!!!!!!!!!", d.toString());
         Intent intent = new Intent (c, AnunciView.class);
         Bundle b= new Bundle();
         b.putBoolean("myfavour", isMyfavour);
         intent.putExtras(b);
+        intent.putExtra("favour", (Serializable) d);
         startActivity(c,intent,b);
     }
 

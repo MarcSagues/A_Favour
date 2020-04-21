@@ -102,7 +102,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 
         DataModel.Favour folder = (DataModel.Favour) data[position];
 
-        imageViewIcon.setImageResource(folder.icon);
+        imageViewIcon.setImageResource(folder.getIcon());
         textViewName.setText(folder.name);
         if(textViewDesc !=null){textViewDesc.setText(folder.description);}
         amount.setText(String.format("%s", folder.getAmount()));
