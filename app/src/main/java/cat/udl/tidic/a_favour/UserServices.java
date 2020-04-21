@@ -48,7 +48,7 @@ public interface UserServices
 
 
     @POST("/favours/post/{favour_id}")
-    Call<Void> postFavour(@Header ("Authorization") String tokenAuth,  @Path (value = "favour_id") int favour_id, @Body JsonObject userJson);
+    Call<Void> postFavour(@Header ("Authorization") String tokenAuth, @Body JsonObject userJson);
 
     @POST("/favours/update/{favour_id}")
     Call<Void> setFavours(@Header ("Authorization") String tokenAuth,  @Path (value = "favour_id") int favour_id, @Body JsonObject userJson);

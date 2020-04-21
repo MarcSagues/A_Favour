@@ -114,5 +114,47 @@ public class UploadFavourModel
             }
         });
     }
+
+    public void postFavour(DataModel.Favour currentFavourData)
+    {
+        String token = PreferencesProvider.providePreferences().getString("token","");
+        JsonObject user_json = new JsonObject();
+        user_json.addProperty("username", currentFavourData.user);
+        user_json.addProperty("name", currentFavourData.name);
+        user_json.addProperty("desc", currentFavourData.description);
+        user_json.addProperty("category", currentFavourData.category);
+        user_json.addProperty("amount", currentFavourData.amount);
+        Call<Void> call = userService.postFavour(token,user_json);
+        //noinspection NullableProblems
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response)
+            {
+                if (response.code() == 200)
+                {
+                    response.body();
+                    sendMessage("Favour UPLOADED! :D");
+                }
+                else
+                {
+                    try
+                    { //Atrapar error usuari existent / correu existent
+                        assert response.errorBody() != null;
+                        sendMessage(Objects.requireNonNull(response.errorBody().string()));
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t)
+            {
+                sendMessage("Error en eliminar el Favor");
+            }
+        });
+    }
 }
 

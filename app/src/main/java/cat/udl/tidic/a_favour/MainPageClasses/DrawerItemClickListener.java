@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.MainPageClasses;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -104,6 +105,10 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         intent.putExtras(b);
         intent.putExtra("favour", (Serializable) d);
         startActivity(c,intent,b);
+        if (isMyfavour)
+        {
+            ((Activity) c).finish();
+        }
     }
 
     private void ShowDialog()

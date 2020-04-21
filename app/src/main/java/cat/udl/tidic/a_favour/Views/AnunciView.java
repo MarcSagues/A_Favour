@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 {
@@ -67,7 +70,13 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (isMyFavour)
+        {
+            Intent i = new Intent(this, ProfileView.class);
+            startActivityForResult(i, 1);
+            finish();
+        }
+        else { super.onBackPressed();}
     }
 
     private void preparePage()
@@ -147,6 +156,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         b.putBoolean("upload", false);
         intent.putExtra("favour", (Serializable) currentFavour);
         startActivity(intent,b);
+        finish();
     }
 
     private void getAllData()

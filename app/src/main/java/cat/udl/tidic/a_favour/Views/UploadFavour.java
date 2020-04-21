@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,12 +16,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 public class UploadFavour extends AppCompatActivity
 {
@@ -105,6 +109,17 @@ public class UploadFavour extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        Intent i = new Intent(this, AnunciView.class);
+        Bundle b= new Bundle();
+        b.putBoolean("myfavour", true);
+        i.putExtras(b);
+        i.putExtra("favour", (Serializable) getCurrentFavourData());
+        startActivityForResult(i, 1);
+        finish();
+    }
     private void getComponents()
     {
         inputEditTexts = new TextInputEditText[INPUTS];
@@ -181,6 +196,10 @@ public class UploadFavour extends AppCompatActivity
                 {
                     uploadFavourModel.editFavour(getCurrentFavourData());
                 }
+                else
+                {
+                    uploadFavourModel.postFavour(getCurrentFavourData());
+                }
             }
         });
     }
@@ -199,6 +218,11 @@ public class UploadFavour extends AppCompatActivity
 
     public DataModel.Favour getCurrentFavourData()
     {
+
+        if (currentFavour == null)
+        {
+            currentFavour = new DataModel.Favour("","",0,"", 3,"");
+        }
         currentFavour.setName(inputEditTexts[0].getText().toString());
         currentFavour.setDescription(inputEditTexts[1].getText().toString());
         currentFavour.setCategory(getSelectedCategory());

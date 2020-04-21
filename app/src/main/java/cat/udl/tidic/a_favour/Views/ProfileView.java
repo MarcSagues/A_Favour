@@ -139,9 +139,6 @@ public class ProfileView extends AppCompatActivity
 
     private void getRecyclerData()
     {
-
-
-
         setUpRecyclerView();
         for (int i = 0; i < tabLayout.getTabCount(); i++)
         {
@@ -165,8 +162,6 @@ public class ProfileView extends AppCompatActivity
 
     private void onGetUserData(UserModel u)
     {
-
-
         if (FORTESTING.dev)
         {
             loadingbar.setVisibility(View.GONE);
@@ -228,7 +223,8 @@ public class ProfileView extends AppCompatActivity
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
     }
 
