@@ -13,8 +13,7 @@ public class FORTESTING
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "Testdescription, Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             2.5f,
-
-            CategoryManager.CATEGORIES.daytodaythings.name(), 1, "user1");
+            CategoryManager.CATEGORIES.daytodaythings.name(), 2, "user1");
     eventList[1] = new DataModel.Favour(
             "Lorem ipsum dolor sit amet",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",

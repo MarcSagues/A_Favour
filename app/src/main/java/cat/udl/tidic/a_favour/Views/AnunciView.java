@@ -147,7 +147,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         anunci.setAdapter(favour_adapter);
 
         userOpinion = new DataModel.Opinion[1];
-        userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, "Username","",2.4f);
+        userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, currentFavour.user,"",2.4f);
         DrawerItemCustomAdapter userOpinion_adapter = new DrawerItemCustomAdapter(this, R.layout.user_opinion, userOpinion);
         valoracio.setOnItemClickListener((parent, view, position, id) -> {
             Log.d("Carregant el profile", "");

@@ -10,11 +10,13 @@ import cat.udl.tidic.a_favour.models.UserModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface UserServices
 {
@@ -42,7 +44,9 @@ public interface UserServices
     @POST ("/account/create_token")
     Call<ResponseBody> createToken(@Header ("Authorization") String tokenAuth);
 
-    @POST("/users/favours")
+    @PUT("/favours/post")
     Call<Void> setFavours(@Body JsonObject userJson);
 
+    @DELETE("/favours/delete")
+    Call<Void> deleteFavour(@Body JsonObject userJson);
 }

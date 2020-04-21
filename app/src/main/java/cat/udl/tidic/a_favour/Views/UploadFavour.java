@@ -20,6 +20,7 @@ import java.util.Objects;
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.models.UploadFavourModel;
 
 public class UploadFavour extends AppCompatActivity
 {
@@ -38,6 +39,7 @@ public class UploadFavour extends AppCompatActivity
     TextInputEditText[] inputEditTexts;
     TextInputLayout amount_parent;
     DataModel.Favour currentFavour;
+    UploadFavourModel uploadFavourModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +49,7 @@ public class UploadFavour extends AppCompatActivity
         getComponents();
         getBundle();
         setListeners();
+        uploadFavourModel = new UploadFavourModel();
     }
 
     private void getBundle()
@@ -169,6 +172,47 @@ public class UploadFavour extends AppCompatActivity
                 }
             });
         }
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                if (!upload_bool)
+                {
+                    uploadFavourModel.editFavour(getCurrentFavourData());
+                }
+            }
+        });
+    }
+
+    private String getSelectedCategory()
+    {
+        for (ImageView iv: imageArrays)
+        {
+            if (iv.getBackgroundTintList().equals(ColorStateList.valueOf(getResources().getColor(R.color.AfavourColor))))
+            {
+                return iv.getTag().toString();
+            }
+        }
+        return null;
+    }
+
+    public DataModel.Favour getCurrentFavourData()
+    {
+        currentFavour.setName(inputEditTexts[0].getText().toString());
+        currentFavour.setDescription(inputEditTexts[1].getText().toString());
+        currentFavour.setCategory(getSelectedCategory());
+
+        if (!currentFavour.category.equals(CategoryManager.CATEGORIES.favourxfavour.name()))
+        {
+            currentFavour.setAmount(Float.parseFloat(inputEditTexts[2].getText().toString()));
+        }
+        else
+        {
+            currentFavour.setAmount(0);
+        }
+
+        return currentFavour;
     }
 
     @SuppressLint("SetTextI18n")

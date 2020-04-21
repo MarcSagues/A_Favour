@@ -129,6 +129,26 @@ public class DataModel extends Activity
         {
             return this.icon = CategoryManager.getImageId(this.category);
         }
+
+        public void setCategory(String category)
+        {
+            this.category = category;
+        }
+
+        public void setAmount(float amount)
+        {
+            this.amount = amount;
+        }
+
+        public void setName(String name)
+        {
+            this.name = name;
+        }
+
+        public void setDescription(String description)
+        {
+            this.description = description;
+        }
     }
 
     //Les opinions dels usuaris
