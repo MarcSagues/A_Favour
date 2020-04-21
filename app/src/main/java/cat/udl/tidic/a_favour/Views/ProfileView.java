@@ -193,8 +193,6 @@ public class ProfileView extends AppCompatActivity
 
                 //Informació de l'ubicació de l'usuari
                 userLocation.setText(profileViewModel.getLocation());
-                //TODO ID HARDCODEJAT
-                profileViewModel.getMyFavoursVoid("3");
             }
         }
     }

@@ -35,12 +35,12 @@ public class ProfileViewModel
 
    public ProfileViewModel()
    {
-       userService = RetrofitClientInstance.
-                getRetrofitInstance().create(UserServices.class);
+       userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         mPreferences = PreferencesProvider.providePreferences();
-       String token = mPreferences.getString("token", "");
+        String token = mPreferences.getString("token", "");
         Log.d("Token:", token);
         getUser();
+        getMyFavoursVoid(String.valueOf(mPreferences.getInt("id",0)));
    }
 
    public DataModel[] getListOf(LISTOFTYPE type, boolean myprofile)

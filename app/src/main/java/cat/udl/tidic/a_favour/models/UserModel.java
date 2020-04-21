@@ -35,8 +35,11 @@ public class UserModel
     private String token;
     @SerializedName("login")
     private boolean login;
+    @SerializedName("id")
+    private int id;
 
-    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String password, float stars, int favoursDone, int timesHelped, String location, String token)
+
+    public UserModel(String created_at, int id, String username, String email, String name, String surname, String birthday, String password, float stars, int favoursDone, int timesHelped, String location, String token)
     {
         this.created_at = created_at;
         this.username = username;
@@ -50,9 +53,14 @@ public class UserModel
         this.timesHelped = timesHelped;
         this.location = location;
         this.token = token;
+        this.id = id;
     }
 
 
+    public int getId()
+    {
+        return this.id;
+    }
     public String getCreated_at() {
         return created_at;
     }
