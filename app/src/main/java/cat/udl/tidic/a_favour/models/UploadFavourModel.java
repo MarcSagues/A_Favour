@@ -157,7 +157,7 @@ public class UploadFavourModel
             @Override
             public void onFailure(Call<Void> call, Throwable t)
             {
-                sendMessage("Error en eliminar el Favor");
+                sendMessage("Error en pujar el Favor");
             }
         });
     }
