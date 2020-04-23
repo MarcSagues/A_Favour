@@ -1,12 +1,10 @@
 package cat.udl.tidic.a_favour.models;
 
 import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.SerializedName;
 
-
-public class UserModel {
-
+public class UserModel
+{
     @SerializedName("created_at")
     private String created_at;
     @SerializedName("password")
@@ -21,8 +19,6 @@ public class UserModel {
     private String surname;
     @SerializedName("birthday")
     private String birthday;
-    @SerializedName("genere")
-    private String genere;
     @SerializedName("phone")
     private String phone;
     @SerializedName("photo")
@@ -39,13 +35,11 @@ public class UserModel {
     private String token;
     @SerializedName("login")
     private boolean login;
+    @SerializedName("id")
+    private int id;
 
 
-    public UserModel() {
-    }
-
-
-    public UserModel(String created_at, String username, String email, String name, String surname, String birthday, String genere, String password, float stars, int favoursDone, int timesHelped, String location, String token)
+    public UserModel(String created_at, int id, String username, String email, String name, String surname, String birthday, String password, float stars, int favoursDone, int timesHelped, String location, String token)
     {
         this.created_at = created_at;
         this.username = username;
@@ -53,15 +47,20 @@ public class UserModel {
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
-        //this.genere = genere;
         this.password = password;
         this.stars = stars;
         this.favoursDone = favoursDone;
         this.timesHelped = timesHelped;
         this.location = location;
         this.token = token;
+        this.id = id;
     }
 
+
+    public int getId()
+    {
+        return this.id;
+    }
     public String getCreated_at() {
         return created_at;
     }
@@ -78,7 +77,7 @@ public class UserModel {
         return login;
     }
 
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
@@ -118,18 +117,10 @@ public class UserModel {
         this.birthday = birthday;
     }
 
-    public String getGenere() {
-        return genere;
-    }
-
-    public void setGenere(String genere) {
-        this.genere = genere;
-    }
-
     public void setPassword(String password){
         this.password = password;}
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
@@ -149,7 +140,7 @@ public class UserModel {
         this.photo = photo;
     }
 
-    public float getStars() {
+    float getStars() {
         return stars;
     }
 
@@ -157,7 +148,7 @@ public class UserModel {
         this.stars = stars;
     }
 
-    public int getFavoursDone() {
+    int getFavoursDone() {
         return favoursDone;
     }
 
@@ -165,7 +156,7 @@ public class UserModel {
         this.favoursDone = favoursDone;
     }
 
-    public int getTimesHelped() {
+    int getTimesHelped() {
         return timesHelped;
     }
 
@@ -173,7 +164,7 @@ public class UserModel {
         this.timesHelped = timesHelped;
     }
 
-    public String getLocation() {
+    String getLocation() {
         return location;
     }
 

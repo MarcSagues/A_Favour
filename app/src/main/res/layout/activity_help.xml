@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/config_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/help"
+            android:textAllCaps="true"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="42dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="false"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="0dp"
+            android:contentDescription="@string/back_arrow"
+            android:onClick="goBack"
+            app:layout_constraintStart_toStartOf="@+id/up_panel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/arrow" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/faqsButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#1FC5C5C5"
+        android:onClick="enableFAQS"
+        android:paddingStart="10dp"
+        android:text="@string/faqs"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/faqsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:onClick="enableFAQS"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/faqsSourceT1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/faqst1"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/faqsSourceT2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/faqsd1"
+            android:textColor="@color/tecxtColor" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/privacityButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#1FC5C5C5"
+        android:onClick="enablePrivacity"
+        android:paddingStart="10dp"
+        android:text="@string/privacity"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/privacityContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:onClick="enablePrivacity"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/privacityT1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacityt1"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/privacityD1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/privacityd1"
+            android:textColor="@color/tecxtColor" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/securityButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#1FC5C5C5"
+        android:onClick="enableSecurity"
+        android:paddingStart="10dp"
+        android:text="@string/security"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/securityContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp"
+        android:onClick="enableSecurity"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/securityT1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/securityt1"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/securityD1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/securityd1"
+            android:textColor="@color/tecxtColor" />
+
+    </LinearLayout>
+
+</LinearLayout>

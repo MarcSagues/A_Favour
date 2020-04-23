@@ -1,34 +1,26 @@
 package cat.udl.tidic.a_favour.Views;
-import cat.udl.tidic.a_favour.BlankFragment;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 
-import cat.udl.tidic.a_favour.RecyclerViewManager;
+import java.util.List;
+
+import cat.udl.tidic.a_favour.FORTESTING;
+import cat.udl.tidic.a_favour.ImageHelper;
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
@@ -36,8 +28,6 @@ import cat.udl.tidic.a_favour.models.UserModel;
 
 public class ProfileView extends AppCompatActivity
 {
-
-    boolean dev;
     ProfileViewModel profileViewModel;
     RelativeLayout loadingbar;
     RecyclerViewManager recyclerManager;
@@ -56,12 +46,13 @@ public class ProfileView extends AppCompatActivity
     Toolbar toolbar;
     ViewPager viewPager;
     TabLayout tabLayout;
+    Boolean ismyProfile;
+    ImageView edit;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        dev = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -69,20 +60,49 @@ public class ProfileView extends AppCompatActivity
         ActivityProfileBinding activityProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
         profileViewModel = new ProfileViewModel();
         activityProfileBinding.setProfileViewModel(profileViewModel);
-
-        //The recycle Manager
-        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this);
-
-        //Get all the layout data
         getAllActivityData();
-        setUpRecyclerView();
-        getRecyclerData();
+        preparePage();
+        //The recycle Manager
+        //Get all the layout data
+
+        //setUpRecyclerView();
+        //getRecyclerData();
         setUpProfileListeners();
     }
 
 
-    public void backArrowAction(View v){
-        Intent intent = new Intent (v.getContext(), LoginView.class);
+
+    private void preparePage()
+    {
+
+        Bundle b = getIntent().getExtras();
+        if (b != null)
+        {
+            ismyProfile = b.getBoolean("myprofile",true);
+            if (!ismyProfile)
+            {
+                edit.setVisibility(View.GONE);
+            }
+
+            System.out.println(b.getBoolean("myprofile", true));
+
+        }
+        else
+            { Log.d("No s'ha passat cap variable",""); ismyProfile =true ;}
+    }
+    public void backArrowAction(View v)
+    {
+       onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+    }
+
+    public void onEditClick(View v){
+        Intent intent = new Intent (v.getContext(), EditProfileView.class);
         startActivityForResult(intent, 0);
     }
 
@@ -92,11 +112,9 @@ public class ProfileView extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(recyclerManager);
-        tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
     }
     private void getAllActivityData()
     {
@@ -106,11 +124,12 @@ public class ProfileView extends AppCompatActivity
         userName = findViewById(R.id.name);
         stars = findViewById(R.id.stars);
         profilImage = findViewById(R.id.profile_image);
+        profilImage.setImageBitmap(ImageHelper.getRoundedCornerBitmap(profilImage, ImageHelper.ROUND));
         favoursInfo = findViewById(R.id.favoursInfo);
         userLocation = findViewById(R.id.user_location);
         showLocation = findViewById(R.id.show_location);
-
-        if (dev) {loadingbar.setVisibility(View.GONE);}
+        edit = findViewById(R.id.edit);
+        if (FORTESTING.dev) {loadingbar.setVisibility(View.GONE);}
 
         //favoursBtn = findViewById(R.id.favours_btn);
         //favouritesBtn = findViewById(R.id.favourites_btn);
@@ -120,21 +139,30 @@ public class ProfileView extends AppCompatActivity
 
     private void getRecyclerData()
     {
+        setUpRecyclerView();
         for (int i = 0; i < tabLayout.getTabCount(); i++)
         {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(recyclerManager.getTabView(i));
+            assert tab != null;
+            tab.setCustomView(recyclerManager.setTabTittles(i));
         }
     }
     private void setUpProfileListeners()
     {
         profileViewModel.getUserProfile().observe(this, this::onGetUserData);
+        profileViewModel.getMyFavours_().observe(this,this::setMyFavoursList);
+    }
+
+    private void setMyFavoursList(List<DataModel.Favour> favours)
+    {
+        DataModel.Favour[] eventList = favours.toArray(new DataModel.Favour[0]);
+        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile, eventList );
+        getRecyclerData();
     }
 
     private void onGetUserData(UserModel u)
     {
-
-        if (dev)
+        if (FORTESTING.dev)
         {
             loadingbar.setVisibility(View.GONE);
         }
@@ -156,13 +184,12 @@ public class ProfileView extends AppCompatActivity
 
                 //Poso les estrelles necessaries
                 stars.setRating(profileViewModel.getStars());
-
                 //Informació dels facvors que ha fet i que ha rebut
                 favoursDone = profileViewModel.getFavoursDone();
                 timesHelped = profileViewModel.getTimesHelped();
                 String favoursDoneString = getResources().getString(R.string.favoursDone);
                 String timesHelpedString = getResources().getString(R.string.timesHelped);
-                favoursInfo.setText(favoursDone + " " + favoursDoneString + ", " + timesHelped +  " " + timesHelpedString);
+                favoursInfo.setText(String.format("%s %s, %s %s", favoursDone, favoursDoneString, timesHelped, timesHelpedString));
 
                 //Informació de l'ubicació de l'usuari
                 userLocation.setText(profileViewModel.getLocation());
@@ -187,35 +214,17 @@ public class ProfileView extends AppCompatActivity
         builder.setNegativeButton(R.string.cancel, (dialog, id) ->
         {
             dialog.cancel();
-            //TODO : Go to a default layout
             Intent intent = new Intent (this, LoginView.class);
             startActivityForResult(intent, 0);
         });
 
-        AlertDialog dialog = builder.show();
+        builder.show();
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
-    }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        Log.d("" + item.getItemId() ,"asdDDDDDDDDDD");
-        //if (id == R.id.action_settings) {
-        //return true;
-        //}
-
-        return super.onOptionsItemSelected(item);
     }
 
 

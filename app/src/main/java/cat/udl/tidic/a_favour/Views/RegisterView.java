@@ -1,7 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -9,11 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.UserServices;
-import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.models.RegisterViewModel;
 
 public class RegisterView extends AppCompatActivity {
@@ -23,10 +20,8 @@ public class RegisterView extends AppCompatActivity {
     private EditText userTxt;
     private EditText confirmPwdTxt;
     private Button registerBtn;
-    private Button gmailBtn;
     private EditText emailTxt;
     private EditText phoneTxt;
-    private TextView joinTxt;
     private TextView goToLoginTxt;
 
     @Override
@@ -50,17 +45,18 @@ public class RegisterView extends AppCompatActivity {
         registerViewModel.registerUser(user, password1, password2, email, phone, RegisterView.this);
     }
 
+    @SuppressWarnings("deprecation")
     private void iniComponents()
     {
         userTxt = findViewById(R.id.user_txt);
         pwdTxt = findViewById(R.id.pwd_txt);
         confirmPwdTxt = findViewById(R.id.confirm_pwd_txt);
         registerBtn = findViewById(R.id.register_btn);
-        Button facebookBtn = findViewById(R.id.facebook_btn);
-        gmailBtn = findViewById(R.id.gmail_btn);
+        //Button facebookBtn = findViewById(R.id.facebook_btn);
+        //Button gmailBtn = findViewById(R.id.gmail_btn);
         emailTxt = findViewById(R.id.email_txt);
         phoneTxt = findViewById(R.id.mobile_txt);
-        joinTxt = findViewById(R.id.join_txt);
+        TextView joinTxt = findViewById(R.id.join_txt);
         String join = getColoredSpanned("Join", "#000000");
         String a = getColoredSpanned("A", "#FF3B5B");
         String favour = getColoredSpanned("Favour", "#000000");
@@ -70,24 +66,13 @@ public class RegisterView extends AppCompatActivity {
 
     private void setOnClickListeners()
     {
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClickOnRegister(v);
-            }
-        });
-        goToLoginTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToLogin(v);
-            }
-        });
+        registerBtn.setOnClickListener(this::ClickOnRegister);
+        goToLoginTxt.setOnClickListener(this::goToLogin);
     }
 
     private String getColoredSpanned(String text, String color)
     {
-        String input = "<font color=" + color + ">" + text + "</font>";
-        return input;
+        return "<font color=" + color + ">" + text + "</font>";
     }
 
     public void goToLogin(View v)
@@ -96,14 +81,14 @@ public class RegisterView extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openProfile()
-    {
-        Intent intent = new Intent (getApplicationContext(), ProfileView.class);
-        startActivity(intent);
-    }
-
-    public void sendMessage(String message)
-    {
-        Toast.makeText(RegisterView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
-    }
+//    public void openProfile()
+//    {
+//        Intent intent = new Intent (getApplicationContext(), ProfileView.class);
+//        startActivity(intent);
+//    }
+//
+//    public void sendMessage(String message)
+//    {
+//        Toast.makeText(RegisterView.this,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
+//    }
 }

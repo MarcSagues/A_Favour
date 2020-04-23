@@ -1,6 +1,5 @@
 package cat.udl.tidic.a_favour.models;
 
-import android.content.Intent;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -11,8 +10,6 @@ import java.util.Objects;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
-import cat.udl.tidic.a_favour.Views.LoginView;
-import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,7 +18,7 @@ import retrofit2.Response;
 public class RegisterViewModel
 {
 
-    UserServices userService;
+    private UserServices userService;
     public RegisterViewModel()
     {
         userService = RetrofitClientInstance.
@@ -40,9 +37,8 @@ public class RegisterViewModel
         else
             {
             // Course API requires passwords in sha-256 in passlib format so:
-            String p = password1;
-            String salt = "16";
-            String encodeHash = Utils.encode(p,salt,29000);
+                String salt = "16";
+            String encodeHash = Utils.encode(password1,salt,29000);
             System.out.println("PASSWORD_ENCRYPTED " + encodeHash);
 
             JsonObject user_json = new JsonObject();
@@ -52,7 +48,8 @@ public class RegisterViewModel
             user_json.addProperty("password", encodeHash);
 
             Call<Void> call = userService.registerUser3(user_json);
-            call.enqueue(new Callback<Void>() {
+                //noinspection NullableProblems
+                call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response)
                 {
@@ -64,6 +61,7 @@ public class RegisterViewModel
                         {
                         try
                         { //Atrapar error usuari existent / correu existent
+                            assert response.errorBody() != null;
                             sendMessage(Objects.requireNonNull(response.errorBody().string()), extra);
                         }
                         catch (IOException e)
@@ -81,7 +79,7 @@ public class RegisterViewModel
         }
     }
 
-    public void sendMessage(String message, RegisterView extra)
+    private void sendMessage(String message, RegisterView extra)
     {
         Toast.makeText(extra,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
     }

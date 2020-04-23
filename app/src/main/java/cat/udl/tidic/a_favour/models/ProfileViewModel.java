@@ -1,28 +1,21 @@
 package cat.udl.tidic.a_favour.models;
 
 import android.content.SharedPreferences;
-import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import cat.udl.tidic.a_favour.FORTESTING;
+import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
-import cat.udl.tidic.a_favour.Utils;
-import cat.udl.tidic.a_favour.Views.LoginView;
-import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,22 +25,55 @@ public class ProfileViewModel
     //private UserModel user = new UserModel();
     private UserServices userService;
     private SharedPreferences mPreferences;
-    private String token;
-    private UserModel userModel;
+    public enum LISTOFTYPE { Favours, Favourites, Opinions}
 
 
-    public MutableLiveData<UserModel> user = new MutableLiveData<>();
+    private MutableLiveData<UserModel> user = new MutableLiveData<>();
     public LiveData<UserModel> getUserProfile(){ return user; }
+    private MutableLiveData<List<DataModel.Favour>> myFavours = new MutableLiveData<>();
+    public LiveData<List<DataModel.Favour>> getMyFavours_(){ return myFavours; }
 
-    public ProfileViewModel()
-    {
-        userService = RetrofitClientInstance.
-                getRetrofitInstance().create(UserServices.class);
+   public ProfileViewModel()
+   {
+       userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         mPreferences = PreferencesProvider.providePreferences();
-        token = mPreferences.getString("token", "");
+        String token = mPreferences.getString("token", "");
         Log.d("Token:", token);
-        userModel = new UserModel();
         getUser();
+        getMyFavoursVoid(String.valueOf(mPreferences.getInt("id",0)));
+   }
+
+   public DataModel[] getListOf(LISTOFTYPE type, boolean myprofile)
+   {
+       if (myprofile)
+       {
+           if (type.equals(LISTOFTYPE.Favours)) { return getMyFavours(); }
+           if (type.equals(LISTOFTYPE.Favourites)) { return getMyFavourites(); }
+           else if (type.equals(LISTOFTYPE.Opinions)) { return getMyOpinions(); }
+       }
+       else
+       {
+           if (type.equals(LISTOFTYPE.Favours)) { return getMyFavours(); }
+           if (type.equals(LISTOFTYPE.Favourites)) { return getMyFavourites(); }
+           else if (type.equals(LISTOFTYPE.Opinions)) { return getMyOpinions(); }
+       }
+
+       return null;
+   }
+
+    private DataModel.Opinion[] getMyOpinions()
+    {
+        return FORTESTING.getExampleListOPINION();
+    }
+
+    private DataModel.Favour[] getMyFavours()
+    {
+       return FORTESTING.getExampleList();
+    }
+
+    private DataModel.Favour[] getMyFavourites()
+    {
+        return FORTESTING.getExampleList();
     }
 
    public void getUser()
@@ -62,7 +88,7 @@ public class ProfileViewModel
 
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
        Call<UserModel> call = userService.getUserProfile(map);
-
+       //noinspection NullableProblems
        call.enqueue(new Callback<UserModel>()
        {
            @Override
@@ -80,58 +106,82 @@ public class ProfileViewModel
            {
 
                user.setValue(null);
-               Log.e("ProfileViewModel",  t.getMessage());
+               Log.e("ProfileViewModel", Objects.requireNonNull(t.getMessage()));
                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
            }
        });
    }
 
+    public void getMyFavoursVoid(String userID)
+    {
+        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
+        String token = PreferencesProvider.providePreferences().getString("token","");
+        Call<List<DataModel.Favour>> call = userService.getFavours(userID,token);
+        //noinspection NullableProblems
+        call.enqueue(new Callback<List<DataModel.Favour>>()
+        {
+            @Override
+            public void onResponse(Call<List<DataModel.Favour>> call, Response<List<DataModel.Favour>> response)
+            {
+                try
+                {
+
+                    List<DataModel.Favour> response_ = response.body();
+
+                    assert response_ != null;
+                    for (int i = 0; i < response_.size(); i++)
+                    {
+                        response_.get(i).setIcon();
+                    }
+                    myFavours.setValue(response_);
+                }
+                catch (Exception e) { Log.d("Salta el catch -------", e.getMessage() + "ERROR");}
+            }
+
+            @Override
+            public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
+            {
+
+
+                Log.e("---------------", Objects.requireNonNull(t.getMessage()));
+                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
    public String getUsername()
    {
-       return this.user.getValue().getUsername();
+       return Objects.requireNonNull(this.user.getValue()).getUsername();
    }
 
    public String getPassword(){
-        return this.user.getValue().getPassword();
+        return Objects.requireNonNull(this.user.getValue()).getPassword();
    }
 
     public float getStars()
     {
-        return this.user.getValue().getStars();
+        return Objects.requireNonNull(this.user.getValue()).getStars();
     }
 
     public String getFavoursDone()
     {
-        int favoursDone = this.user.getValue().getFavoursDone();
+        int favoursDone = Objects.requireNonNull(this.user.getValue()).getFavoursDone();
         return Integer.toString(favoursDone);
     }
 
     public String getTimesHelped()
     {
-        int timesHelped = this.user.getValue().getTimesHelped();
+        int timesHelped = Objects.requireNonNull(this.user.getValue()).getTimesHelped();
         return Integer.toString(timesHelped);
     }
 
     public String  getLocation()
     {
-        String location = this.user.getValue().getLocation() == null ? "No location" : this.user.getValue().getLocation();
-        return location;
+        return Objects.requireNonNull(this.user.getValue()).getLocation() == null ? "No location" : this.user.getValue().getLocation();
     }
 
     public void showLocationBtn()
     {
         Log.d("Profile", "S'ha premut l'opció SHOW LOCATION");
     }
-    public void backArrowBtn()
-    {
-        Log.d("Profile", "S'ha premut l'opció DE TIRAR ENRRERE");
-    }
-    public void favoursBtn() { Log.d("Profile", "S'ha premut l'opció DE FAVOURS"); }
-    public void favouritesBtn() { Log.d("Profile", "S'ha premut l'opció FAVOURITES"); }
-    public void opinionsBtn()
-    {
-        Log.d("Profile", "S'ha premut l'opció OPINIONS");
-    }
-
-
 }

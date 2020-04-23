@@ -24,7 +24,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/up_panel"
             android:layout_width="411dp"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:background="@color/AfavourColor"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
@@ -35,6 +35,7 @@
 
         <ImageView
             android:id="@+id/back_arrow"
+            style="@style/backArrow"
             android:layout_width="35dp"
             android:layout_height="23dp"
             android:layout_marginStart="12dp"
@@ -70,7 +71,7 @@
             android:layout_marginStart="348dp"
             android:layout_marginTop="8dp"
             android:contentDescription="@string/edit"
-            android:onClick="backArrowAction"
+            android:onClick="onEditClick"
             app:layout_constraintStart_toStartOf="@+id/up_panel"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pencil" />
@@ -82,7 +83,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
             android:background="#FFFFFF"
-            android:text="User Name"
             android:textColor="@color/tecxtColor"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
