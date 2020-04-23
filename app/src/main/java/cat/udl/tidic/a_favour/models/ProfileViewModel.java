@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.models;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -15,6 +16,7 @@ import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
+import cat.udl.tidic.a_favour.Views.LoadingPanel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,21 +28,20 @@ public class ProfileViewModel
     private UserServices userService;
     private SharedPreferences mPreferences;
     public enum LISTOFTYPE { Favours, Favourites, Opinions}
-
-
     private MutableLiveData<UserModel> user = new MutableLiveData<>();
     public LiveData<UserModel> getUserProfile(){ return user; }
     private MutableLiveData<List<DataModel.Favour>> myFavours = new MutableLiveData<>();
     public LiveData<List<DataModel.Favour>> getMyFavours_(){ return myFavours; }
+    Context c;
 
-   public ProfileViewModel()
+   public ProfileViewModel(Context c)
    {
+       this.c = c;
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
-        mPreferences = PreferencesProvider.providePreferences();
-        String token = mPreferences.getString("token", "");
-        Log.d("Token:", token);
-        getUser();
-        getMyFavoursVoid(String.valueOf(mPreferences.getInt("id",0)));
+       mPreferences = PreferencesProvider.providePreferences();
+       String token = mPreferences.getString("token", "");
+       getUser();
+       getMyFavoursVoid(String.valueOf(mPreferences.getInt("id",0)));
    }
 
    public DataModel[] getListOf(LISTOFTYPE type, boolean myprofile)
@@ -82,9 +83,7 @@ public class ProfileViewModel
        Log.d("IS TOKEN EMPTY? TOKEN = ", mPreferences.getString("token", ""));
        map.put("Authorization", mPreferences.getString("token", ""));
 
-       //Esta hardcodejat perque falta fer la gestió d'errors al agafar els valors
-       //De moment mostra les dades de l'usuari 1
-       //map.put("Authorization", "656e50e154865a5dc469b80437ed2f963b8f58c8857b66c9bf");
+      LoadingPanel.enableLoading(c, true);
 
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
        Call<UserModel> call = userService.getUserProfile(map);
@@ -97,13 +96,23 @@ public class ProfileViewModel
                try
                {
                    user.setValue(response.body());
+                   LoadingPanel.enableLoading(c, false);
                }
-               catch (Exception e) { Log.e("ProfileViewModel", e.getMessage() + "ERROR");}
+               catch (Exception e)
+               {
+                   //Generate ALERT DIALOG
+                   try { LoadingPanel.setErrorDialog(c,() -> { getUser();return null; });}
+                   catch (Exception ex) { ex.printStackTrace();}
+                   Log.e("ProfileViewModel", e.getMessage() + "ERROR");
+               }
            }
 
            @Override
            public void onFailure(Call<UserModel> call, Throwable t)
            {
+               //Generate ALERT DIALOG
+               try { LoadingPanel.setErrorDialog(c,() -> { getUser();return null; });}
+               catch (Exception e) { e.printStackTrace();}
 
                user.setValue(null);
                Log.e("ProfileViewModel", Objects.requireNonNull(t.getMessage()));
@@ -118,6 +127,7 @@ public class ProfileViewModel
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<List<DataModel.Favour>> call = userService.getFavours(userID,token);
         //noinspection NullableProblems
+        LoadingPanel.enableLoading(c,true);
         call.enqueue(new Callback<List<DataModel.Favour>>()
         {
             @Override
@@ -135,16 +145,23 @@ public class ProfileViewModel
                     }
                     myFavours.setValue(response_);
                 }
-                catch (Exception e) { Log.d("Salta el catch -------", e.getMessage() + "ERROR");}
+                catch (Exception e)
+                {
+                    Log.d("Salta el catch -------", e.getMessage() + "ERROR");
+
+                    //Generate ALERT DIALOG
+                    try { LoadingPanel.setErrorDialog(c,() -> { getMyFavoursVoid(userID);return null; });}
+                    catch (Exception ex) { e.printStackTrace();}
+                }
             }
 
             @Override
             public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
             {
-
-
                 Log.e("---------------", Objects.requireNonNull(t.getMessage()));
-                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Generate ALERT DIALOG
+                try { LoadingPanel.setErrorDialog(c,() -> { getMyFavoursVoid(userID);return null; });}
+                catch (Exception e) { e.printStackTrace();}
             }
         });
     }

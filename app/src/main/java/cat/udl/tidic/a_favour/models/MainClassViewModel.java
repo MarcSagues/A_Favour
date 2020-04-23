@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.models;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
@@ -8,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.Callable;
+
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
@@ -25,26 +28,27 @@ public class MainClassViewModel
     private SharedPreferences mPreferences;
     private MutableLiveData<List<DataModel.Favour>> allFavours = new MutableLiveData<>();
     public LiveData<List<DataModel.Favour>> getAllFavours(){ return allFavours; }
+    private Context c;
 
 
-    public MainClassViewModel(MainPage mainPage)
+    public MainClassViewModel(Context c)
     {
+        this.c = c;
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
         mPreferences = PreferencesProvider.providePreferences();
         String token = mPreferences.getString("all_favours", "");
         Log.d("Token:", token);
-        getFavours(mainPage);
+        getFavours();
     }
 
-    public void getFavours(MainPage mainPage)
+    public void getFavours()
     {
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<List<DataModel.Favour>> call = userService.getFavours(null,token);
-        //mainPage.enableLoadinggPanel(true);
         //noinspection NullableProblems
-        LoadingPanel.getInstance().enableLoading(mainPage,true);
+        LoadingPanel.enableLoading(c,true);
         call.enqueue(new Callback<List<DataModel.Favour>>()
         {
             @Override
@@ -61,8 +65,7 @@ public class MainClassViewModel
                         response_.get(i).setIcon();
                     }
                     allFavours.setValue(response_);
-                    LoadingPanel.getInstance().enableLoading(mainPage,false);
-                    //mainPage.enableLoadinggPanel(false);
+                    LoadingPanel.enableLoading(c,false);
                 }
                 catch (Exception e) { Log.d("Salta el catch -------", e.getMessage() + "ERROR");}
             }
@@ -70,14 +73,10 @@ public class MainClassViewModel
             @Override
             public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
             {
-                LoadingPanel.getInstance().enableLoading(mainPage,false);
+                try { LoadingPanel.setErrorDialog(c,() -> { getFavours();return null; });}
+                catch (Exception e) { e.printStackTrace();}
                 Log.e("---------------", Objects.requireNonNull(t.getMessage()));
-                //mainPage.generatAlertDialog();
-                //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-
 }

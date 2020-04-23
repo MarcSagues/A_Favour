@@ -5,7 +5,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 
 public class FORTESTING
 {
-    public static Boolean dev = false;
+    public static Boolean dev = true;
     public static DataModel.Favour[] getExampleList()
 {
     DataModel.Favour[] eventList = new DataModel.Favour[10];

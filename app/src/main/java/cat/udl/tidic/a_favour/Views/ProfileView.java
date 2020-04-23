@@ -29,7 +29,6 @@ import cat.udl.tidic.a_favour.models.UserModel;
 public class ProfileView extends AppCompatActivity
 {
     ProfileViewModel profileViewModel;
-    RelativeLayout loadingbar;
     RecyclerViewManager recyclerManager;
 
     //Layout elements
@@ -55,26 +54,17 @@ public class ProfileView extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         //Binding Data
         ActivityProfileBinding activityProfileBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile);
-        profileViewModel = new ProfileViewModel();
+        profileViewModel = new ProfileViewModel(this);
         activityProfileBinding.setProfileViewModel(profileViewModel);
         getAllActivityData();
         preparePage();
-        //The recycle Manager
-        //Get all the layout data
-
-        //setUpRecyclerView();
-        //getRecyclerData();
         setUpProfileListeners();
     }
 
-
-
     private void preparePage()
     {
-
         Bundle b = getIntent().getExtras();
         if (b != null)
         {
@@ -106,6 +96,19 @@ public class ProfileView extends AppCompatActivity
         startActivityForResult(intent, 0);
     }
 
+    private void getAllActivityData()
+    {
+        layout = findViewById(R.id.constraint);
+        backArrow = findViewById(R.id.back_arrow);
+        userName = findViewById(R.id.name);
+        stars = findViewById(R.id.stars);
+        profilImage = findViewById(R.id.profile_image);
+        profilImage.setImageBitmap(ImageHelper.getRoundedCornerBitmap(profilImage, ImageHelper.ROUND));
+        favoursInfo = findViewById(R.id.favoursInfo);
+        userLocation = findViewById(R.id.user_location);
+        showLocation = findViewById(R.id.show_location);
+        edit = findViewById(R.id.edit);
+    }
 
     private void setUpRecyclerView()
     {
@@ -116,26 +119,7 @@ public class ProfileView extends AppCompatActivity
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setAdapter(recyclerManager);
     }
-    private void getAllActivityData()
-    {
-        layout = findViewById(R.id.constraint);
-        loadingbar = findViewById(R.id.loadingPanel);
-        backArrow = findViewById(R.id.back_arrow);
-        userName = findViewById(R.id.name);
-        stars = findViewById(R.id.stars);
-        profilImage = findViewById(R.id.profile_image);
-        profilImage.setImageBitmap(ImageHelper.getRoundedCornerBitmap(profilImage, ImageHelper.ROUND));
-        favoursInfo = findViewById(R.id.favoursInfo);
-        userLocation = findViewById(R.id.user_location);
-        showLocation = findViewById(R.id.show_location);
-        edit = findViewById(R.id.edit);
-        if (FORTESTING.dev) {loadingbar.setVisibility(View.GONE);}
 
-        //favoursBtn = findViewById(R.id.favours_btn);
-        //favouritesBtn = findViewById(R.id.favourites_btn);
-        //opinionsBtn = findViewById(R.id.opinions_btn);
-        //Falta crear tot lo relacionat amb els anuncis que ha publicat
-    }
 
     private void getRecyclerData()
     {
@@ -150,13 +134,23 @@ public class ProfileView extends AppCompatActivity
     private void setUpProfileListeners()
     {
         profileViewModel.getUserProfile().observe(this, this::onGetUserData);
-        profileViewModel.getMyFavours_().observe(this,this::setMyFavoursList);
+        if(FORTESTING.dev)
+        {
+            DataModel.Favour[] list = FORTESTING.getExampleList();
+            DataModel.Opinion[] op = FORTESTING.getExampleListOPINION();
+            recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile,
+                    list, list, op );
+            getRecyclerData();
+        }
+        else {profileViewModel.getMyFavours_().observe(this,this::setMyFavoursList);}
     }
 
     private void setMyFavoursList(List<DataModel.Favour> favours)
     {
         DataModel.Favour[] eventList = favours.toArray(new DataModel.Favour[0]);
-        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile, eventList );
+        DataModel.Opinion[] opinions = FORTESTING.getExampleListOPINION();
+        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile,
+                eventList, eventList, opinions );
         getRecyclerData();
     }
 
@@ -164,20 +158,16 @@ public class ProfileView extends AppCompatActivity
     {
         if (FORTESTING.dev)
         {
-            loadingbar.setVisibility(View.GONE);
+
         }
         else
         {
             if(u == null)
             {
                 Log.d("THE USER IS NULL", "ASD");
-                loadingbar.setVisibility(View.GONE);
-                setErrorLayout();
             }
             else
             {
-
-                loadingbar.setVisibility(View.GONE);
                 layout.setVisibility(View.VISIBLE);
                 //El nom de l'usuari
                 userName.setText(profileViewModel.getUsername());
@@ -196,30 +186,8 @@ public class ProfileView extends AppCompatActivity
             }
         }
     }
-
-
-    public void setErrorLayout()
-    {
-        //Si falla la connexió s'haura de posar un layout de "error"
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(R.string.dialogMessage).setTitle(R.string.dialogTitle);
-
-        builder.setPositiveButton(R.string.retry, (dialog, id) ->
-        {
-            profileViewModel.getUser();
-            loadingbar.setVisibility(View.VISIBLE);
-
-        });
-        builder.setNegativeButton(R.string.cancel, (dialog, id) ->
-        {
-            dialog.cancel();
-            Intent intent = new Intent (this, LoginView.class);
-            startActivityForResult(intent, 0);
-        });
-
-        builder.show();
-    }
+    //Intent intent = new Intent (this, LoginView.class);
+    //startActivityForResult(intent, 0);
 
     @Override
     public void onResume()

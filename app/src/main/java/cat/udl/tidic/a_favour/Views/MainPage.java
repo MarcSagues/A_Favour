@@ -45,7 +45,6 @@ public class MainPage extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        //getLoadingPanel();
         getAllActivityData();
         addListeners();
         setUpToolbar();
@@ -58,7 +57,8 @@ public class MainPage extends AppCompatActivity
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
         super.onStop();
         openOptions(false);
     }
@@ -86,6 +86,7 @@ public class MainPage extends AppCompatActivity
         recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
 
     }
+
     private void getAllActivityData()
     {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -107,18 +108,6 @@ public class MainPage extends AppCompatActivity
         intent.putExtras(b); //Put your id to your next Intent
         startActivityForResult(intent, 0);
     }
-
-    /*
-    public void goToEditPage(DataModel d)
-    {
-        openOptions(false);
-        Intent intent = new Intent(this, UploadFavour.class);
-        Bundle b = new Bundle();
-        b.putBoolean("upload", false); //Your id
-        //b.putParcelable("data", d);
-        intent.putExtras(b); //Put your id to your next Intent
-        startActivityForResult(intent, 0);
-    }*/
 
     private void setUpToolbar()
     {
@@ -159,13 +148,6 @@ public class MainPage extends AppCompatActivity
     }
 
 
-    /*public void goToProfile()
-    {
-        openOptions(false);
-        Intent intent = new Intent (this, ProfileView.class);
-        startActivityForResult(intent, 0);
-    }*/
-
     private void setScrollListener()
     {
         recyclerView.setOnScrollListener(new AbsListView.OnScrollListener()
@@ -197,39 +179,4 @@ public class MainPage extends AppCompatActivity
     }
 
 
-    /*
-    @Override
-    public void getLoadingPanel()
-    {
-        loadingpanel = findViewById(R.id.loadingPanel);
-    }
-
-    @Override
-    public void enableLoadinggPanel(boolean enable)
-    {
-        if (enable){loadingpanel.setVisibility(View.VISIBLE);}
-        else{loadingpanel.setVisibility(View.GONE);}
-    }
-
-    @Override
-    public void generatAlertDialog()
-    {
-        //Si falla la connexió s'haura de posar un layout de "error"
-        enableLoadinggPanel(false);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(R.string.dialogMessage).setTitle(R.string.dialogTitle);
-
-        builder.setPositiveButton(R.string.retry, (dialog, id) ->
-        {
-           mainClassViewModel.getFavours(this);
-        });
-        builder.setNegativeButton(R.string.cancel, (dialog, id) ->
-        {
-            dialog.cancel();
-        });
-
-        builder.show();
-    }
-    */
 }
