@@ -11,6 +11,8 @@ import java.util.Objects;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
+import cat.udl.tidic.a_favour.Views.LoadingPanel;
+import cat.udl.tidic.a_favour.Views.MainPage;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,22 +27,24 @@ public class MainClassViewModel
     public LiveData<List<DataModel.Favour>> getAllFavours(){ return allFavours; }
 
 
-    public MainClassViewModel()
+    public MainClassViewModel(MainPage mainPage)
     {
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
         mPreferences = PreferencesProvider.providePreferences();
         String token = mPreferences.getString("all_favours", "");
         Log.d("Token:", token);
-        getFavours();
+        getFavours(mainPage);
     }
 
-    private void getFavours()
+    public void getFavours(MainPage mainPage)
     {
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<List<DataModel.Favour>> call = userService.getFavours(null,token);
+        //mainPage.enableLoadinggPanel(true);
         //noinspection NullableProblems
+        LoadingPanel.getInstance().enableLoading(mainPage,true);
         call.enqueue(new Callback<List<DataModel.Favour>>()
         {
             @Override
@@ -57,6 +61,8 @@ public class MainClassViewModel
                         response_.get(i).setIcon();
                     }
                     allFavours.setValue(response_);
+                    LoadingPanel.getInstance().enableLoading(mainPage,false);
+                    //mainPage.enableLoadinggPanel(false);
                 }
                 catch (Exception e) { Log.d("Salta el catch -------", e.getMessage() + "ERROR");}
             }
@@ -64,12 +70,14 @@ public class MainClassViewModel
             @Override
             public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
             {
-
-
+                LoadingPanel.getInstance().enableLoading(mainPage,false);
                 Log.e("---------------", Objects.requireNonNull(t.getMessage()));
+                //mainPage.generatAlertDialog();
                 //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 
 }
