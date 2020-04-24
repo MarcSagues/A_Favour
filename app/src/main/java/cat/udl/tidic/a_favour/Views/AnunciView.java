@@ -116,7 +116,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v)
             {
-                UploadFavourModel vm = new UploadFavourModel();
+                UploadFavourModel vm = new UploadFavourModel(a);
                 vm.eliminarFavor(currentFavour.id, a);
             }
         });

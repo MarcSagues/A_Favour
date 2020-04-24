@@ -65,5 +65,10 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
 
+    <string name="favorUploaded">Favor subido</string>
+    <string name="favorUpdated">Favor actualizado</string>
+    <string name="favourDeleted">Favor eliminado</string>
+    <string name="errorfilled">ERROR : Verifique que todos los campos estén llenos</string>
+
 
 </resources>

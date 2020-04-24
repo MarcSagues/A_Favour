@@ -7,6 +7,13 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!---UPLOAD EDIT DELETE FAVOUR-->
+    <string name="favorUploaded">Favour uploaded</string>
+    <string name="favorUpdated">Favour updated</string>
+    <string name="favourDeleted">Favour uploaded</string>
+    <string name="errorfilled">ERROR : Check that all the fields are filled</string>
+
+
 
     <!---Profile-->
     <string name="profileImage">Opinions</string>

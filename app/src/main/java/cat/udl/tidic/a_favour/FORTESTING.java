@@ -5,7 +5,9 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 
 public class FORTESTING
 {
-    public static Boolean dev = true;
+    //Si dev és FALSE --> Es fan les crides a l'API
+    //Si dev és TRUE --> S'hagafen favors/opinions hardcoded
+    public static Boolean dev = false;
     public static DataModel.Favour[] getExampleList()
 {
     DataModel.Favour[] eventList = new DataModel.Favour[10];

@@ -21,6 +21,27 @@
         tools:context=".Views.ProfileView"
         tools:visibility="visible">
 
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BCFFFFFF"
+            android:backgroundTintMode="screen"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            tools:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/up_panel"
             android:layout_width="411dp"
@@ -217,7 +238,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tab_layout"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+            </androidx.viewpager.widget.ViewPager>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

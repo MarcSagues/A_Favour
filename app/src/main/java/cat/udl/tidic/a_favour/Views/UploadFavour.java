@@ -55,7 +55,7 @@ public class UploadFavour extends AppCompatActivity
         getComponents();
         getBundle();
         setListeners();
-        uploadFavourModel = new UploadFavourModel();
+        uploadFavourModel = new UploadFavourModel(this);
     }
 
     private void getBundle()
@@ -264,7 +264,7 @@ public class UploadFavour extends AppCompatActivity
         }
         catch (Exception e)
         {
-            uploadFavourModel.sendMessage("ERROR : Check that all the fields are filled ");
+            LoadingPanel.sendMessage(getResources().getString(R.string.errorfilled));
             return null;
         }
     }
