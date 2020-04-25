@@ -1,6 +1,5 @@
 package cat.udl.tidic.a_favour.Views;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,16 +15,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-
-import java.io.Serializable;
-
-import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 {
@@ -60,6 +53,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
             Log.d("YYY La variable is my favour és :", String.valueOf(b.getBoolean("myfavour")));
             isMyFavour = b.getBoolean("myfavour");
             currentFavour = (DataModel.Favour) getIntent().getSerializableExtra("favour");
+            assert currentFavour != null;
             Log.d(currentFavour.toString(),"aw");
 
         } else {
@@ -112,13 +106,9 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         });
 
         AnunciView a = this;
-        eliminar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                UploadFavourModel vm = new UploadFavourModel(a);
-                vm.eliminarFavor(currentFavour.id, a);
-            }
+        eliminar.setOnClickListener(v -> {
+            UploadFavourModel vm = new UploadFavourModel(a);
+            vm.eliminarFavor(currentFavour.id, a);
         });
 
     }
@@ -150,12 +140,13 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         }*/
         setImageandTag(currentImageTag == R.drawable.heart ? R.drawable.hearthfull : R.drawable.heart);
     }
+
     private void goToEditFavour()
     {
         Intent intent = new Intent (this, UploadFavour.class);
         Bundle b= new Bundle();
         b.putBoolean("upload", false);
-        intent.putExtra("favour", (Serializable) currentFavour);
+        intent.putExtra("favour", currentFavour);
         startActivity(intent,b);
         finish();
     }

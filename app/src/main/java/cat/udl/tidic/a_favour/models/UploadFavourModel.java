@@ -1,24 +1,15 @@
 package cat.udl.tidic.a_favour.models;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.google.gson.JsonObject;
-
 import java.io.IOException;
 import java.util.Objects;
-
-import cat.udl.tidic.a_favour.App;
-import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
-import cat.udl.tidic.a_favour.Utils;
 import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.Views.LoadingPanel;
-import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.Views.UploadFavour;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
@@ -54,7 +45,6 @@ public class UploadFavourModel
             {
                 if (response.code() == 200)
                 {
-                    response.body();
                     LoadingPanel.sendMessage(c.getString(R.string.favorUpdated));
                     upFav.onSucces();
                 }
@@ -89,15 +79,14 @@ public class UploadFavourModel
     {
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<Void> call = userService.deleteFavour(token,id);
-        //noinspection NullableProblems
         LoadingPanel.enableLoading(c,true);
+        //noinspection NullableProblems
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response)
             {
                 if (response.code() == 200)
                 {
-                    response.body();
                     LoadingPanel.sendMessage(c.getString(R.string.favourDeleted));
                     anclass.onBackPressed();
                 }
@@ -136,15 +125,14 @@ public class UploadFavourModel
         user_json.addProperty("category", currentFavourData.category);
         user_json.addProperty("amount", currentFavourData.amount);
         Call<Void> call = userService.postFavour(token,user_json);
-        //noinspection NullableProblems
         LoadingPanel.enableLoading(c,true);
+        //noinspection NullableProblems
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response)
             {
                 if (response.code() == 200)
                 {
-                    response.body();
                     LoadingPanel.sendMessage(c.getString(R.string.favorUploaded));
                     upFav.onSucces();
                 }

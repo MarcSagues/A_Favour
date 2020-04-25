@@ -1,7 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,16 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 import cat.udl.tidic.a_favour.FORTESTING;
@@ -35,7 +28,6 @@ public class MainPage extends AppCompatActivity
     private ListView recyclerView;
     private Button uploadFavour;
     MainClassViewModel mainClassViewModel;
-    RelativeLayout loadingpanel;
 
     public MainPage() {
     }

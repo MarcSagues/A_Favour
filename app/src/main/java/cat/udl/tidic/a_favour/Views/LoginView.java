@@ -85,6 +85,7 @@ public class LoginView extends AppCompatActivity {
     {
         Intent intent = new Intent (getApplicationContext(), MainPage.class);
         startActivity(intent);
+        finish();
     }
 
     public void clickOnRegister(View v)

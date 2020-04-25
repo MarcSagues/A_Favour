@@ -5,17 +5,12 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.Callable;
-
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.LoadingPanel;
-import cat.udl.tidic.a_favour.Views.MainPage;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +20,6 @@ public class MainClassViewModel
 {
     //private UserModel user = new UserModel();
     private UserServices userService;
-    private SharedPreferences mPreferences;
     private MutableLiveData<List<DataModel.Favour>> allFavours = new MutableLiveData<>();
     public LiveData<List<DataModel.Favour>> getAllFavours(){ return allFavours; }
     private Context c;
@@ -36,19 +30,19 @@ public class MainClassViewModel
         this.c = c;
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
-        mPreferences = PreferencesProvider.providePreferences();
+        SharedPreferences mPreferences = PreferencesProvider.providePreferences();
         String token = mPreferences.getString("all_favours", "");
         Log.d("Token:", token);
         getFavours();
     }
 
-    public void getFavours()
+    private void getFavours()
     {
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<List<DataModel.Favour>> call = userService.getFavours(null,token);
-        //noinspection NullableProblems
         LoadingPanel.enableLoading(c,true);
+        //noinspection NullableProblems
         call.enqueue(new Callback<List<DataModel.Favour>>()
         {
             @Override

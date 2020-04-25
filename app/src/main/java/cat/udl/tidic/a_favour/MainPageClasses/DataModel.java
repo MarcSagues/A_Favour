@@ -3,15 +3,9 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-
 import androidx.annotation.NonNull;
-
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.EnumMap;
-
 import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.R;
 
@@ -78,7 +72,7 @@ public class DataModel extends Activity
         public String toString()
         {
             return "ANUNCI:" + " CAT " + this.category + " Nom del anunci " + this.name + " Descripció " +this.description + " Amount " + this.amount + " User " + this.user
-                    + " id " + this.id + " favourite " + String.valueOf(this.favourite);
+                    + " id " + this.id + " favourite " + this.favourite;
         }
 
         public boolean isFavourite()
@@ -106,6 +100,7 @@ public class DataModel extends Activity
         {
             return  this.category;
         }
+        @SuppressLint("DefaultLocale")
         public String getAmount()
         {
             if (this.category.equals(CategoryManager.CATEGORIES.favourxfavour.name()))

@@ -76,7 +76,7 @@ public class LoginViewModel
         });
     }
 
-    public void getUser(LoginView loginView)
+    private void getUser(LoginView loginView)
     {
         Map<String, String> map = new HashMap<>();
         Log.d("IS TOKEN EMPTY? TOKEN = ", mPreferences.getString("token", ""));
@@ -98,6 +98,7 @@ public class LoginViewModel
                 {
                     UserModel user;
                     user = response.body();
+                    assert user != null;
                     mPreferences.edit().putInt("id", user.getId()).apply();
                     Log.d("PUT THE ID " + user.getId(), "ON PREFERENCES");
                     loginView.openMainPage();

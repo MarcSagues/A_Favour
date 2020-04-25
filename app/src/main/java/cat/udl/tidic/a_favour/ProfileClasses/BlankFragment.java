@@ -21,7 +21,7 @@ public class BlankFragment extends Fragment
     private Context c;
     private Boolean myprofile;
     //Les seguents arrays defineixen el layout que anira a cada pestaña del profile
-    private int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
+    //private int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
     private int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
     private DataModel.Favour[] favours;
     private DataModel.Favour[] favourites;

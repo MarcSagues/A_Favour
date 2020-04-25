@@ -2,22 +2,12 @@ package cat.udl.tidic.a_favour.Views;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompatSideChannelService;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import java.lang.reflect.Method;
-import java.security.PublicKey;
 import java.util.concurrent.Callable;
-
 import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.R;
@@ -52,6 +42,7 @@ public class LoadingPanel
 
 
      }
+     @SuppressLint("InflateParams")
      private static void generateLoadingPanel(Context c)
      {
           final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) ((Activity) c)
@@ -60,7 +51,7 @@ public class LoadingPanel
           viewGroup.addView(child,viewGroup.getChildCount()-1);
      }
 
-     public static void setErrorDialog(Context c, Callable<Void> func) throws Exception
+     public static void setErrorDialog(Context c, Callable<Void> func)
      {
           if (FORTESTING.dev){return;}
           enableLoading(c,false);
@@ -88,6 +79,7 @@ public class LoadingPanel
                ad = builder.create();
                builder.show();
           }
+
      }
 
      public static void sendMessage(String message)

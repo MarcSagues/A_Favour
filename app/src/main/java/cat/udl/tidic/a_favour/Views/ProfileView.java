@@ -5,9 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -156,11 +154,8 @@ public class ProfileView extends AppCompatActivity
 
     private void onGetUserData(UserModel u)
     {
-        if (FORTESTING.dev)
-        {
 
-        }
-        else
+        if (!FORTESTING.dev)
         {
             if(u == null)
             {

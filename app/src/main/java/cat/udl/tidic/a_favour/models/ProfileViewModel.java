@@ -3,15 +3,12 @@ package cat.udl.tidic.a_favour.models;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
@@ -22,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileViewModel
+public class  ProfileViewModel
 {
     //private UserModel user = new UserModel();
     private UserServices userService;
@@ -32,14 +29,14 @@ public class ProfileViewModel
     public LiveData<UserModel> getUserProfile(){ return user; }
     private MutableLiveData<List<DataModel.Favour>> myFavours = new MutableLiveData<>();
     public LiveData<List<DataModel.Favour>> getMyFavours_(){ return myFavours; }
-    Context c;
+    private Context c;
 
    public ProfileViewModel(Context c)
    {
        this.c = c;
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
        mPreferences = PreferencesProvider.providePreferences();
-       String token = mPreferences.getString("token", "");
+       //String token = mPreferences.getString("token", "");
        getUser();
        getMyFavoursVoid(String.valueOf(mPreferences.getInt("id",0)));
    }
@@ -77,7 +74,7 @@ public class ProfileViewModel
         return FORTESTING.getExampleList();
     }
 
-   public void getUser()
+   private void getUser()
    {
        Map<String, String> map = new HashMap<>();
        Log.d("IS TOKEN EMPTY? TOKEN = ", mPreferences.getString("token", ""));
@@ -121,13 +118,13 @@ public class ProfileViewModel
        });
    }
 
-    public void getMyFavoursVoid(String userID)
+    private void getMyFavoursVoid(String userID)
     {
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<List<DataModel.Favour>> call = userService.getFavours(userID,token);
-        //noinspection NullableProblems
         LoadingPanel.enableLoading(c,true);
+        //noinspection NullableProblems
         call.enqueue(new Callback<List<DataModel.Favour>>()
         {
             @Override

@@ -11,22 +11,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.io.Serializable;
 import java.util.Objects;
-
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
-
-import static androidx.core.content.ContextCompat.startActivity;
 
 public class UploadFavour extends AppCompatActivity
 {
@@ -137,7 +130,7 @@ public class UploadFavour extends AppCompatActivity
         Bundle b= new Bundle();
         b.putBoolean("myfavour", true);
         i.putExtras(b);
-        i.putExtra("favour", (Serializable) getCurrentFavourData());
+        i.putExtra("favour", getCurrentFavourData());
         startActivityForResult(i, 1);
         finish();
     }
@@ -210,30 +203,25 @@ public class UploadFavour extends AppCompatActivity
         }
 
         UploadFavour u = this;
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                currentFavour = getCurrentFavourData();
-                if (currentFavour != null) {
-                    if (!upload_bool) {
-                        uploadFavourModel.editFavour(getCurrentFavourData(),u);
-                    } else {
-                        uploadFavourModel.postFavour(getCurrentFavourData(),u);
-                    }
+        upload.setOnClickListener(v -> {
+            currentFavour = getCurrentFavourData();
+            if (currentFavour != null) {
+                if (!upload_bool) {
+                    uploadFavourModel.editFavour(getCurrentFavourData(),u);
+                } else {
+                    uploadFavourModel.postFavour(getCurrentFavourData(),u);
                 }
             }
         });
     }
 
+    @SuppressWarnings("deprecation")
     private String getSelectedCategory()
     {
         for (ImageView iv: imageArrays)
         {
-            if (iv.getBackgroundTintList().equals(ColorStateList.valueOf(getResources().getColor(R.color.AfavourColor))))
-            {
+            if (Objects.requireNonNull(iv.getBackgroundTintList()).equals(ColorStateList.valueOf(getResources().getColor(R.color.AfavourColor))))
                 return iv.getTag().toString();
-            }
         }
         return null;
     }
