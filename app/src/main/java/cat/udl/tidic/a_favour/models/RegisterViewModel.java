@@ -37,6 +37,7 @@ public class RegisterViewModel
         else {
             if (password1.length() < PASSWORDLENGTH) { message = c.getString(R.string.fivechar); }
             if (!password1.equals(password2)) { message = c.getString(R.string.dontmach); }
+            if (!password1.matches(".*\\d.*")) { message = c.getString(R.string.containnumber); }
             if (!email.contains("@")) { message = c.getString(R.string.validEmail);}
         }
 

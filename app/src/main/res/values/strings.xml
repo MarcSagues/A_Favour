@@ -11,7 +11,7 @@
     <string name="favorUploaded">Favour uploaded</string>
     <string name="favorUpdated">Favour updated</string>
     <string name="favourDeleted">Favour uploaded</string>
-    <string name="errorfilled">ERROR : Check that all the fields are filled</string>
+    <string name="errorfilled">Check that all the fields are filled</string>
 
     <!---Register-->
     <string name="errorRegister">Error on register</string>
@@ -111,6 +111,7 @@
     <string name="securityt1">Security of information</string>
     <string name="securityd1">BLA BLA BLA 2</string>
     <string name="validEmail">Make sure to introduce a valid email</string>
+    <string name="containnumber">The password must contain at least one number</string>
 
 
 </resources>
