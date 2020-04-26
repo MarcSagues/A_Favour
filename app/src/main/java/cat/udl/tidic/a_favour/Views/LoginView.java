@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +71,8 @@ public class LoginView extends AppCompatActivity {
         //Comprobar si hi ha token guardat
         if (PreferencesProvider.existToken("token") && PreferencesProvider.existToken("id"))
         {
-            openMainPage();
+            if (FORTESTING.checkLogin) { openMainPage();}
+            else{ Log.d("No és fa el CHECK LOGIN","perque FORTESTING.checklogin és false"); }
         }
     }
 

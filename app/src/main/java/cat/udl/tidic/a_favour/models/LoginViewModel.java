@@ -103,7 +103,7 @@ public class LoginViewModel
                     Log.d("PUT THE ID " + user.getId(), "ON PREFERENCES");
                     loginView.openMainPage();
                 }
-                catch (Exception e) { Log.e("ProfileViewModel", e.getMessage() + "ERROR");}
+                catch (Exception e) { Log.e("LoginViewModel", e.getMessage() + "ERROR");}
             }
 
             @Override

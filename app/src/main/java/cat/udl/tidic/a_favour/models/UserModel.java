@@ -58,10 +58,8 @@ public class UserModel
     }
 
 
-    public int getId()
-    {
-        return this.id;
-    }
+    public int getId() { return this.id; }
+
     public String getCreated_at() {
         return created_at;
     }

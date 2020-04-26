@@ -9,15 +9,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
-
 import java.io.Serializable;
-
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.Views.HelpView;
 import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
+import cat.udl.tidic.a_favour.models.MainClassViewModel;
 
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -112,18 +111,10 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
     private void ShowDialog()
     {
-        //Si falla la connexió s'haura de posar un layout de "error"
-        //Aixó simplement mostra un dialog d'error
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
-
         builder.setMessage(R.string.alertLogoutD).setTitle(R.string.logOut);
-
-        builder.setPositiveButton(R.string.no, (dialog, id) ->
-        {
-
-        });
-        builder.setNegativeButton(R.string.yes, (dialog, id) -> dialog.cancel());
-
+        builder.setPositiveButton(R.string.no, (dialog, id) -> dialog.cancel());
+        builder.setNegativeButton(R.string.yes, (dialog, id) -> MainClassViewModel.logOut());
         builder.show();
     }
 
