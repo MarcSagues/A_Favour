@@ -50,6 +50,7 @@ public class MainClassViewModel
         Intent intent = new Intent(c, LoginView.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         c.startActivity(intent);
+
     }
 
     private void getFavours()

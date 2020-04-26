@@ -51,11 +51,13 @@ public class DataModel extends Activity
         public float amount;
         @SerializedName("id")
         public int id;
+        @SerializedName("owner_id")
+        public int owner_id;
         @SerializedName("user")
         public String user;
         private boolean favourite;
 
-        public Favour(String name, String description, float amount, String category, int id, String user)
+        public Favour(String name, String description, float amount, String category, int id, String user, int owner_id)
         {
             this.category = category;
             this.name = name;
@@ -63,6 +65,7 @@ public class DataModel extends Activity
             this.amount = parseFloat(amount);
             this.user = user;
             this.id = id;
+            this.owner_id = owner_id;
             this.favourite = false;
             setIcon();
         }
