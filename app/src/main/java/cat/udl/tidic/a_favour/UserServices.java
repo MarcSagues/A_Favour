@@ -25,6 +25,10 @@ public interface UserServices
     @GET("/account/profile")
     Call<UserModel> getUserProfile(@HeaderMap Map<String, String> headers);
 
+    @GET("/account/anotherprofile")
+    Call<UserModel> getAnotherUserProfile(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);
+
+
     @GET("/favours")
     Call <  List<DataModel.Favour>> getFavours(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);
 

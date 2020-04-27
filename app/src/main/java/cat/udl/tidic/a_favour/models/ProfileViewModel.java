@@ -116,6 +116,46 @@ public class  ProfileViewModel
        });
    }
 
+   public void getAnotherUser(String userId)
+   {
+       String token = mPreferences.getString("token", "");
+       LoadingPanel.enableLoading(c, true);
+       userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
+       Call<UserModel> call = userService.getAnotherUserProfile(userId,token);
+       //noinspection NullableProblems
+       call.enqueue(new Callback<UserModel>()
+       {
+           @Override
+           public void onResponse(Call<UserModel> call, Response<UserModel> response)
+           {
+               try
+               {
+                   user.setValue(response.body());
+                   LoadingPanel.enableLoading(c, false);
+               }
+               catch (Exception e)
+               {
+                   //Generate ALERT DIALOG
+                   try { LoadingPanel.setErrorDialog(c,() -> { getAnotherUser(userId);return null; });}
+                   catch (Exception ex) { ex.printStackTrace();}
+                   Log.e("ProfileViewModel", e.getMessage() + "ERROR");
+               }
+           }
+
+           @Override
+           public void onFailure(Call<UserModel> call, Throwable t)
+           {
+               //Generate ALERT DIALOG
+               try { LoadingPanel.setErrorDialog(c,() -> { getAnotherUser(userId);return null; });}
+               catch (Exception e) { e.printStackTrace();}
+
+               user.setValue(null);
+               Log.e("ProfileViewModel", Objects.requireNonNull(t.getMessage()));
+               //Toast.makeText(ProfileViewModel.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+           }
+       });
+   }
+
     public void getMyFavoursVoid(String userID)
     {
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);

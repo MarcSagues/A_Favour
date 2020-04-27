@@ -78,7 +78,7 @@ public class ProfileView extends AppCompatActivity
             if (!ismyProfile)
             {
                 edit.setVisibility(View.GONE);
-                profileViewModel.getUser();
+                profileViewModel.getAnotherUser(String.valueOf(currentFavour.owner_id));
                 profileViewModel.getMyFavoursVoid(String.valueOf((currentFavour.getOwner_id())));
             }
         }

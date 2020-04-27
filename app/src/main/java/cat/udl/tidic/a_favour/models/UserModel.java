@@ -76,7 +76,7 @@ public class UserModel
         return login;
     }
 
-    String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -139,7 +139,7 @@ public class UserModel
         this.photo = photo;
     }
 
-    float getStars() {
+    public float getStars() {
         return stars;
     }
 
