@@ -67,15 +67,8 @@ public class BlankFragment extends Fragment
         }
         else
         {
-            ProfileViewModel.LISTOFTYPE type;
-            if (id == 0)
-            {
-                type = ProfileViewModel.LISTOFTYPE.Favours;
-                rv.setOnItemClickListener(new DrawerItemClickListener(c));
-            }
-            else {type = ProfileViewModel.LISTOFTYPE.Opinions; }
-
-            adapter = new DrawerItemCustomAdapter(getContext(), layout_listOTHER[id],pView.getListOf(type, this.myprofile));
+            if (id == 0) adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, (favours));
+            else adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, (opinions));
         }
 
         rv.setAdapter(adapter);

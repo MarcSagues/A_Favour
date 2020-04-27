@@ -70,7 +70,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         //Si el item que s'ha clickat és un favor...
         else if (d instanceof DataModel.Favour)
         {
-            goToSeeAnunci(d);
+            goToSeeAnunci((DataModel.Favour)d);
         }
         else
         {
@@ -92,14 +92,14 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         startActivity(c,intent,b);
     }
 
-    private void goToSeeAnunci(DataModel d)
+    private void goToSeeAnunci(DataModel.Favour d)
     {
         boolean isMyfavour = c.getClass().equals(ProfileView.class);
         Log.d(String.valueOf(isMyfavour), " Is my favour");
-        Log.d("!!!!!!!!!!!!!!!!!!", d.toString());
         Intent intent = new Intent (c, AnunciView.class);
         Bundle b= new Bundle();
         b.putBoolean("myfavour", isMyfavour);
+        b.putInt("user_id", d.getOwner_id());
         intent.putExtras(b);
         intent.putExtra("favour", (Serializable) d);
         startActivity(c,intent,b);

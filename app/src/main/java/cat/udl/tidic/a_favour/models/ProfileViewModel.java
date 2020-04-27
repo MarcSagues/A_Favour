@@ -37,8 +37,6 @@ public class  ProfileViewModel
        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
        mPreferences = PreferencesProvider.providePreferences();
        //String token = mPreferences.getString("token", "");
-       getUser();
-       getMyFavoursVoid(String.valueOf(mPreferences.getInt("id",0)));
    }
 
    public DataModel[] getListOf(LISTOFTYPE type, boolean myprofile)
@@ -74,7 +72,7 @@ public class  ProfileViewModel
         return FORTESTING.getExampleList();
     }
 
-   private void getUser()
+   public void getUser()
    {
        Map<String, String> map = new HashMap<>();
        Log.d("IS TOKEN EMPTY? TOKEN = ", mPreferences.getString("token", ""));
@@ -118,7 +116,7 @@ public class  ProfileViewModel
        });
    }
 
-    private void getMyFavoursVoid(String userID)
+    public void getMyFavoursVoid(String userID)
     {
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
@@ -141,6 +139,8 @@ public class  ProfileViewModel
                         response_.get(i).setIcon();
                     }
                     myFavours.setValue(response_);
+                    LoadingPanel.enableLoading(c,false);
+
                 }
                 catch (Exception e)
                 {

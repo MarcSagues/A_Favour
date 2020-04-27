@@ -70,6 +70,10 @@ public class DataModel extends Activity
             setIcon();
         }
 
+        public int getOwner_id() {
+            return owner_id;
+        }
+
         @NonNull
         @Override
         public String toString()

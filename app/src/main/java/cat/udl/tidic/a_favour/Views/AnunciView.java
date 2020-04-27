@@ -15,6 +15,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.Serializable;
+
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
@@ -166,12 +169,14 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         userOpinion = new DataModel.Opinion[1];
         userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, currentFavour.user,"",2.4f);
         DrawerItemCustomAdapter userOpinion_adapter = new DrawerItemCustomAdapter(this, R.layout.user_opinion, userOpinion);
-        valoracio.setOnItemClickListener((parent, view, position, id) -> {
+        valoracio.setOnItemClickListener((parent, view, position, id) ->
+        {
             Log.d("Carregant el profile", "");
             Intent intent = new Intent (getApplicationContext(), ProfileView.class);
             Bundle b= new Bundle();
             b.putBoolean("myprofile", false);
             intent.putExtras(b);
+            intent.putExtra("favour", (Serializable) currentFavour);
             startActivity(intent,b);
         });
         valoracio.setAdapter(userOpinion_adapter);

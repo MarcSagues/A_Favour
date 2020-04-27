@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cat.udl.tidic.a_favour.FORTESTING;
@@ -23,6 +25,7 @@ import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
 import cat.udl.tidic.a_favour.models.UserModel;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 public class ProfileView extends AppCompatActivity
 {
@@ -63,20 +66,29 @@ public class ProfileView extends AppCompatActivity
 
     private void preparePage()
     {
+        SharedPreferences mPreferences = PreferencesProvider.providePreferences();
+
         Bundle b = getIntent().getExtras();
         if (b != null)
         {
-            ismyProfile = b.getBoolean("myprofile",true);
+            DataModel.Favour currentFavour = (DataModel.Favour) getIntent().getSerializableExtra("favour");
+            assert currentFavour != null;
+            ismyProfile = currentFavour.owner_id == mPreferences.getInt("id",-1);
+
             if (!ismyProfile)
             {
                 edit.setVisibility(View.GONE);
+                profileViewModel.getUser();
+                profileViewModel.getMyFavoursVoid(String.valueOf((currentFavour.getOwner_id())));
             }
-
-            System.out.println(b.getBoolean("myprofile", true));
-
         }
+        //Si no s'ha passat cap variable... vol dir que és el meu perfil
         else
-            { Log.d("No s'ha passat cap variable",""); ismyProfile =true ;}
+            { Log.d("No s'ha passat cap variable", "");
+                    ismyProfile = true;
+                    profileViewModel.getUser();
+                    profileViewModel.getMyFavoursVoid(String.valueOf(mPreferences.getInt("id",0)));
+            }
     }
     public void backArrowAction(View v)
     {
@@ -140,14 +152,16 @@ public class ProfileView extends AppCompatActivity
                     list, list, op );
             getRecyclerData();
         }
-        else {profileViewModel.getMyFavours_().observe(this,this::setMyFavoursList);}
+        else {
+            profileViewModel.getMyFavours_().observe(this,this::setMyFavoursList);
+        }
     }
 
     private void setMyFavoursList(List<DataModel.Favour> favours)
     {
         DataModel.Favour[] eventList = favours.toArray(new DataModel.Favour[0]);
         DataModel.Opinion[] opinions = FORTESTING.getExampleListOPINION();
-        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile,
+        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, this.ismyProfile,
                 eventList, eventList, opinions );
         getRecyclerData();
     }
