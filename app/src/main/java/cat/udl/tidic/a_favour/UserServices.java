@@ -28,6 +28,9 @@ public interface UserServices
     @GET("/account/anotherprofile")
     Call<UserModel> getAnotherUserProfile(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);
 
+    @GET("/account/logout")
+    Call <Void> logOut(@Header ("Authorization") String tokenAuth);
+
 
     @GET("/favours")
     Call <  List<DataModel.Favour>> getFavours(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);

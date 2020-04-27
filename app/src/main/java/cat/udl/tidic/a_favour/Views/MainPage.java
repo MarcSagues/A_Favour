@@ -37,12 +37,12 @@ public class MainPage extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+        mainClassViewModel = new MainClassViewModel(this);
         getAllActivityData();
         addListeners();
         setUpToolbar();
         createMenuList();
         setScrollListener();
-        mainClassViewModel = new MainClassViewModel(this);
         setUpObserver();
         openOptions(false);
 
@@ -66,7 +66,7 @@ public class MainPage extends AppCompatActivity
             DataModel.Favour[] eventList = FORTESTING.getExampleList();
             DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
             recyclerView.setAdapter(adapter_event);
-            recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
+            recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
         }
     }
 
@@ -75,7 +75,7 @@ public class MainPage extends AppCompatActivity
         DataModel.Favour[] eventList = all_f.toArray(new DataModel.Favour[0]);
         DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
         recyclerView.setAdapter(adapter_event);
-        recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
+        recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
 
     }
 
@@ -117,7 +117,7 @@ public class MainPage extends AppCompatActivity
         drawerItem[3] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.help));
         drawerItem[4] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.logOut));
         DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
-        llista.setOnItemClickListener(new DrawerItemClickListener(this));
+        llista.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
         llista.setAdapter(adapter);
     }
 

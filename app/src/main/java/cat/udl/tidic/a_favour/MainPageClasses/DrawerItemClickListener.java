@@ -26,11 +26,16 @@ import static androidx.core.content.ContextCompat.startActivity;
 public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
     private Context c;
+    private MainClassViewModel mc;
     public  DrawerItemClickListener(Context c)
     {
         this.c = c;
     }
-
+    public  DrawerItemClickListener(Context c, MainClassViewModel mc)
+    {
+        this.c = c;
+        this.mc = mc;
+    }
     //Aquesta classe afegeix un "OnClcickListener" a cada item de la llista.
     //Exemple : Tinc la llista recyclerView
     //Per a fer que els items de la llista es puguin clickar ...
@@ -116,7 +121,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
         builder.setMessage(R.string.alertLogoutD).setTitle(R.string.logOut);
         builder.setPositiveButton(R.string.no, (dialog, id) -> dialog.cancel());
-        builder.setNegativeButton(R.string.yes, (dialog, id) -> MainClassViewModel.logOut());
+        builder.setNegativeButton(R.string.yes, (dialog, id) -> mc.logOutAPI());
         builder.show();
     }
 

@@ -1,16 +1,20 @@
 package cat.udl.tidic.a_favour.models;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
 import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.LoadingPanel;
@@ -51,6 +55,48 @@ public class MainClassViewModel
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         c.startActivity(intent);
 
+
+    }
+
+    public void logOutAPI()
+    {
+        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
+        String token = PreferencesProvider.providePreferences().getString("token","");
+        Call<Void> call = userService.logOut(token);
+        LoadingPanel.enableLoading(c,true);
+        //noinspection NullableProblems
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response)
+            {
+                if (response.code() == 200)
+                {
+                    LoadingPanel.sendMessage("Log out OK");
+                    logOut();
+                }
+                else
+                {
+                    try
+                    { //Atrapar error usuari existent / correu existent
+                        assert response.errorBody() != null;
+                        LoadingPanel.sendMessage(Objects.requireNonNull(response.errorBody().string()));
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                LoadingPanel.enableLoading(c,false);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t)
+            {
+                //LoadingPanel.sendMessage("Error en eliminar el Favor");
+                try { LoadingPanel.setErrorDialog(c,() -> { logOutAPI();return null; });}
+                catch (Exception e) { e.printStackTrace();}
+            }
+        });
     }
 
     private void getFavours()
