@@ -10,7 +10,7 @@
     <!---UPLOAD EDIT DELETE FAVOUR-->
     <string name="favorUploaded">Favour uploaded</string>
     <string name="favorUpdated">Favour updated</string>
-    <string name="favourDeleted">Favour uploaded</string>
+    <string name="favourDeleted">Favour deleted</string>
     <string name="errorfilled">Check that all the fields are filled</string>
 
     <!---Register-->
