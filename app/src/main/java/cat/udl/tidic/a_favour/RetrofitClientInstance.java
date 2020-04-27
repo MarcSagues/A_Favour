@@ -8,6 +8,8 @@ public class RetrofitClientInstance {
 
     private static Retrofit retrofit;
     private static final String BASE_URL = BuildConfig.API_URL;
+    private static final String SALT = BuildConfig.SALT;
+    private static final int ITERATIONS = BuildConfig.ITERATIONS;
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
@@ -19,4 +21,7 @@ public class RetrofitClientInstance {
         }
         return retrofit;
     }
+
+    public static String getSalt() { return SALT;}
+    public static  int getIterations(){return ITERATIONS;}
 }

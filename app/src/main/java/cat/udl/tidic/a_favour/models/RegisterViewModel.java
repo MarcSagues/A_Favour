@@ -47,8 +47,9 @@ public class RegisterViewModel
         Log.d("Es fa la crida del register", "...............");
 
             // Course API requires passwords in sha-256 in passlib format so:
-            String salt = "16";
-            String encodeHash = Utils.encode(password1,salt,29000);
+            int iterations = RetrofitClientInstance.getIterations();
+            String salt = RetrofitClientInstance.getSalt();
+            String encodeHash = Utils.encode(password1,salt,iterations);
             System.out.println("PASSWORD_ENCRYPTED " + encodeHash);
 
             JsonObject user_json = new JsonObject();

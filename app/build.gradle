@@ -26,11 +26,27 @@ android {
             def api_url_ENV = System.getenv("API_URL")
             def api_url = api_url_ENV != null ? api_url_ENV : "\"http://10.0.2.2:8000\""
             buildConfigField "String", "API_URL", api_url
+
+            def salt_ENV = System.getenv("SALT")
+            def salt_url = salt_ENV != null ? salt_ENV : "\"16\""
+            buildConfigField "String", "SALT", salt_url
+
+            def iterations_ENV = System.getenv("ITERATIONS")
+            def iterations_URL = iterations_ENV != null ? iterations_ENV : "29000"
+            buildConfigField "int", "ITERATIONS", iterations_URL
         }
         debug {
             def api_url_ENV = System.getenv("API_URL")
             def api_url = api_url_ENV != null ? api_url_ENV : "\"http://10.0.2.2:8000\""
             buildConfigField "String", "API_URL", api_url
+
+            def salt_ENV = System.getenv("SALT")
+            def salt_url = salt_ENV != null ? salt_ENV : "\"16\""
+            buildConfigField "String", "SALT", salt_url
+
+            def iterations_ENV = System.getenv("ITERATIONS")
+            def iterations_URL = iterations_ENV != null ? iterations_ENV : "29000"
+            buildConfigField "int", "ITERATIONS", iterations_URL
         }
     }
 
