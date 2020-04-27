@@ -73,20 +73,22 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 
     private void onGetUserData(UserModel userModel)
     {
-        userOpinion = new DataModel.Opinion[1];
-        userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, userModel.getUsername(),"",userModel.getStars());
-        DrawerItemCustomAdapter userOpinion_adapter = new DrawerItemCustomAdapter(this, R.layout.user_opinion, userOpinion);
-        valoracio.setOnItemClickListener((parent, view, position, id) ->
-        {
-            Log.d("Carregant el profile", "");
-            Intent intent = new Intent (getApplicationContext(), ProfileView.class);
-            Bundle b= new Bundle();
-            b.putBoolean("myprofile", false);
-            intent.putExtras(b);
-            intent.putExtra("favour", (Serializable) currentFavour);
-            startActivity(intent,b);
-        });
-        valoracio.setAdapter(userOpinion_adapter);
+        if (userModel != null) {
+            userOpinion = new DataModel.Opinion[1];
+            userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, userModel.getUsername(), "", userModel.getStars());
+            DrawerItemCustomAdapter userOpinion_adapter = new DrawerItemCustomAdapter(this, R.layout.user_opinion, userOpinion);
+            valoracio.setOnItemClickListener((parent, view, position, id) ->
+            {
+                Log.d("Carregant el profile", "");
+                Intent intent = new Intent(getApplicationContext(), ProfileView.class);
+                Bundle b = new Bundle();
+                b.putBoolean("myprofile", false);
+                intent.putExtras(b);
+                intent.putExtra("favour", (Serializable) currentFavour);
+                startActivity(intent, b);
+            });
+            valoracio.setAdapter(userOpinion_adapter);
+        }
     }
 
     @Override

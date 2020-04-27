@@ -69,6 +69,7 @@ public class BlankFragment extends Fragment
         {
             if (id == 0) adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, (favours));
             else adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, (opinions));
+            rv.setOnItemClickListener(new DrawerItemClickListener(c));
         }
 
         rv.setAdapter(adapter);

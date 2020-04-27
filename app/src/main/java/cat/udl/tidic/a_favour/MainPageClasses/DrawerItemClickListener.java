@@ -3,6 +3,7 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import cat.udl.tidic.a_favour.Views.HelpView;
 import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -94,8 +96,8 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
     private void goToSeeAnunci(DataModel.Favour d)
     {
-        boolean isMyfavour = c.getClass().equals(ProfileView.class);
-        Log.d(String.valueOf(isMyfavour), " Is my favour");
+        SharedPreferences shp = PreferencesProvider.providePreferences();
+        boolean isMyfavour = d.owner_id == shp.getInt("id",-1);
         Intent intent = new Intent (c, AnunciView.class);
         Bundle b= new Bundle();
         b.putBoolean("myfavour", isMyfavour);
