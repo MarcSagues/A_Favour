@@ -1,15 +1,13 @@
 package cat.udl.tidic.a_favour.models;
 
-import android.widget.Toast;
-
+import android.content.Context;
+import android.util.Log;
 import com.google.gson.JsonObject;
-
-import java.io.IOException;
-import java.util.Objects;
-
+import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
+import cat.udl.tidic.a_favour.Views.LoadingPanel;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,27 +15,39 @@ import retrofit2.Response;
 
 public class RegisterViewModel
 {
-
+    private static final int PASSWORDLENGTH = 5;
+    private Context c;
     private UserServices userService;
-    public RegisterViewModel()
+
+    public RegisterViewModel(Context c)
     {
-        userService = RetrofitClientInstance.
-                getRetrofitInstance().create(UserServices.class);
+        userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
+        this.c = c;
     }
 
-    public void registerUser(String user, String password1, String password2, String email, String phone, RegisterView extra){
-        if (!password1.equals(password2))
-        { //comprovem que les contrasenyes siguin iguals
-            sendMessage("Las contraseñas no coincideixen", extra);
-        }
-        else if(password1.length() < 5)
+    public void registerUser(String user, String password1, String password2, String email, String phone, RegisterView extra)
+    {
+        String message = null;
+        //Primer comprovem que tot estigui ple
+        if (password1.equals("") || password2.equals("") || email.equals("") || phone.equals("") || user.equals(""))
         {
-            sendMessage("La contraseña tiene que tener mínimo 5 caracteres", extra);
+            message = c.getString(R.string.errorfilled);
         }
-        else
-            {
+        //En cas de que tot estigui ple...
+        else {
+            if (password1.length() < PASSWORDLENGTH) { message = c.getString(R.string.fivechar); }
+            if (!password1.equals(password2)) { message = c.getString(R.string.dontmach); }
+            if (!password1.matches(".*\\d.*")) { message = c.getString(R.string.containnumber); }
+            if (!email.contains("@")) { message = c.getString(R.string.validEmail);}
+        }
+
+        //Si hi ha algut algun error, el printem per pantall i no es fa la crida
+        if (message != null) { LoadingPanel.sendMessage(message);return; }
+
+        Log.d("Es fa la crida del register", "...............");
+
             // Course API requires passwords in sha-256 in passlib format so:
-                String salt = "16";
+            String salt = "16";
             String encodeHash = Utils.encode(password1,salt,29000);
             System.out.println("PASSWORD_ENCRYPTED " + encodeHash);
 
@@ -55,32 +65,20 @@ public class RegisterViewModel
                 {
                     if (response.code() == 200)
                     {
-                        sendMessage("Usuario registrado", extra);
+                        LoadingPanel.sendMessage(c.getString(R.string.Registergood));
+                        extra.goToLogin(null);
                     }
                     else
-                        {
-                        try
-                        { //Atrapar error usuari existent / correu existent
-                            assert response.errorBody() != null;
-                            sendMessage(Objects.requireNonNull(response.errorBody().string()), extra);
-                        }
-                        catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
+                    {
+                        LoadingPanel.sendMessage(c.getString(R.string.alredyExists));
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    sendMessage("Error", extra);
+                public void onFailure(Call<Void> call, Throwable t)
+                {
+                    LoadingPanel.sendMessage(c.getString(R.string.errorRegister));
                 }
             });
         }
-    }
-
-    private void sendMessage(String message, RegisterView extra)
-    {
-        Toast.makeText(extra,message, Toast.LENGTH_SHORT).show(); //enviem missatge a la pantalla
-    }
 }

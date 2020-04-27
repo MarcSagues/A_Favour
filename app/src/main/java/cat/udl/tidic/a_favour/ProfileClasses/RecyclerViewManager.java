@@ -20,14 +20,23 @@ public class RecyclerViewManager extends FragmentPagerAdapter
     private Context context;
     private Boolean myprofile;
     private DataModel.Favour[] my_favours;
+    private DataModel.Favour[] favourites;
+    private DataModel.Opinion[] opinions;
 
     @SuppressWarnings("deprecation")
-    public RecyclerViewManager(FragmentManager fm, Context context, Boolean myprofile, DataModel.Favour[] my_favours)
+    public RecyclerViewManager(FragmentManager fm, Context context,
+                               Boolean myprofile,
+                               DataModel.Favour[] my_favours,
+                               DataModel.Favour[] favourites,
+                               DataModel.Opinion[] opinions)
     {
         super(fm);
         this.context = context;
         this.myprofile = myprofile;
         this.my_favours = my_favours;
+        if (favourites != null){this.favourites = favourites;}
+        this.opinions = opinions;
+
         if (myprofile)
         {
             tabTitles = new String[]{context.getResources().getString(R.string.favours),
@@ -49,16 +58,16 @@ public class RecyclerViewManager extends FragmentPagerAdapter
         switch (position) {
             case 0:
                 //Opinions
-                return new BlankFragment(0,context, myprofile,  my_favours);
+                return new BlankFragment(0,context, myprofile,  my_favours, favourites, opinions );
             case 1:
                 //Favourites
-                return new BlankFragment(1, context, myprofile,my_favours);
+                return new BlankFragment(1, context, myprofile,my_favours, favourites, opinions);
             case 2:
                 //Favours
-                return new BlankFragment(2, context, myprofile,my_favours);
+                return new BlankFragment(2, context, myprofile,my_favours, favourites, opinions);
         }
 
-        return new BlankFragment(0,context,myprofile,my_favours);
+        return new BlankFragment(0,context,myprofile,my_favours,favourites, opinions);
     }
 
     public View setTabTittles(int position)

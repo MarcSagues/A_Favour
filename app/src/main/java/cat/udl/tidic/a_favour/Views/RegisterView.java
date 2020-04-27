@@ -27,7 +27,7 @@ public class RegisterView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        registerViewModel = new RegisterViewModel();
+        registerViewModel = new RegisterViewModel(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         iniComponents();
@@ -79,6 +79,7 @@ public class RegisterView extends AppCompatActivity {
     {
         Intent intent = new Intent (getApplicationContext(), LoginView.class);
         startActivity(intent);
+        finish();
     }
 
 //    public void openProfile()

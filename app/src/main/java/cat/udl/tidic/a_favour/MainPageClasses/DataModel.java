@@ -3,15 +3,9 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-
 import androidx.annotation.NonNull;
-
-import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.EnumMap;
-
 import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.R;
 
@@ -57,11 +51,13 @@ public class DataModel extends Activity
         public float amount;
         @SerializedName("id")
         public int id;
+        @SerializedName("owner_id")
+        public int owner_id;
         @SerializedName("user")
         public String user;
         private boolean favourite;
 
-        public Favour(String name, String description, float amount, String category, int id, String user)
+        public Favour(String name, String description, float amount, String category, int id, String user, int owner_id)
         {
             this.category = category;
             this.name = name;
@@ -69,8 +65,13 @@ public class DataModel extends Activity
             this.amount = parseFloat(amount);
             this.user = user;
             this.id = id;
+            this.owner_id = owner_id;
             this.favourite = false;
             setIcon();
+        }
+
+        public int getOwner_id() {
+            return owner_id;
         }
 
         @NonNull
@@ -78,7 +79,7 @@ public class DataModel extends Activity
         public String toString()
         {
             return "ANUNCI:" + " CAT " + this.category + " Nom del anunci " + this.name + " Descripció " +this.description + " Amount " + this.amount + " User " + this.user
-                    + " id " + this.id + " favourite " + String.valueOf(this.favourite);
+                    + " id " + this.id + " favourite " + this.favourite;
         }
 
         public boolean isFavourite()
@@ -106,6 +107,7 @@ public class DataModel extends Activity
         {
             return  this.category;
         }
+        @SuppressLint("DefaultLocale")
         public String getAmount()
         {
             if (this.category.equals(CategoryManager.CATEGORIES.favourxfavour.name()))

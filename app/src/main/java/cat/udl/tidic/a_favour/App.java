@@ -1,5 +1,6 @@
 package cat.udl.tidic.a_favour;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
@@ -10,6 +11,7 @@ import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 public class App extends Application
 {
 
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     @Override

@@ -7,6 +7,18 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!---UPLOAD EDIT DELETE FAVOUR-->
+    <string name="favorUploaded">Favour uploaded</string>
+    <string name="favorUpdated">Favour updated</string>
+    <string name="favourDeleted">Favour deleted</string>
+    <string name="errorfilled">Check that all the fields are filled</string>
+
+    <!---Register-->
+    <string name="errorRegister">Error on register</string>
+    <string name="Registergood">Registration completed successfully</string>
+    <string name="fivechar">The password must be at least 5 characters</string>
+    <string name="dontmach">Passwords do not match</string>
+    <string name="alredyExists">Alredy exist a user with this username. Please try another</string>
 
     <!---Profile-->
     <string name="profileImage">Opinions</string>
@@ -98,8 +110,8 @@
     <string name="security">Security</string>
     <string name="securityt1">Security of information</string>
     <string name="securityd1">BLA BLA BLA 2</string>
-
-
+    <string name="validEmail">Make sure to introduce a valid email</string>
+    <string name="containnumber">The password must contain at least one number</string>
 
 
 </resources>

@@ -1,7 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,16 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 import cat.udl.tidic.a_favour.FORTESTING;
@@ -35,7 +28,6 @@ public class MainPage extends AppCompatActivity
     private ListView recyclerView;
     private Button uploadFavour;
     MainClassViewModel mainClassViewModel;
-    RelativeLayout loadingpanel;
 
     public MainPage() {
     }
@@ -45,7 +37,6 @@ public class MainPage extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        //getLoadingPanel();
         getAllActivityData();
         addListeners();
         setUpToolbar();
@@ -58,7 +49,8 @@ public class MainPage extends AppCompatActivity
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
         super.onStop();
         openOptions(false);
     }
@@ -86,6 +78,7 @@ public class MainPage extends AppCompatActivity
         recyclerView.setOnItemClickListener(new DrawerItemClickListener(this));
 
     }
+
     private void getAllActivityData()
     {
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -107,18 +100,6 @@ public class MainPage extends AppCompatActivity
         intent.putExtras(b); //Put your id to your next Intent
         startActivityForResult(intent, 0);
     }
-
-    /*
-    public void goToEditPage(DataModel d)
-    {
-        openOptions(false);
-        Intent intent = new Intent(this, UploadFavour.class);
-        Bundle b = new Bundle();
-        b.putBoolean("upload", false); //Your id
-        //b.putParcelable("data", d);
-        intent.putExtras(b); //Put your id to your next Intent
-        startActivityForResult(intent, 0);
-    }*/
 
     private void setUpToolbar()
     {
@@ -159,13 +140,6 @@ public class MainPage extends AppCompatActivity
     }
 
 
-    /*public void goToProfile()
-    {
-        openOptions(false);
-        Intent intent = new Intent (this, ProfileView.class);
-        startActivityForResult(intent, 0);
-    }*/
-
     private void setScrollListener()
     {
         recyclerView.setOnScrollListener(new AbsListView.OnScrollListener()
@@ -197,39 +171,4 @@ public class MainPage extends AppCompatActivity
     }
 
 
-    /*
-    @Override
-    public void getLoadingPanel()
-    {
-        loadingpanel = findViewById(R.id.loadingPanel);
-    }
-
-    @Override
-    public void enableLoadinggPanel(boolean enable)
-    {
-        if (enable){loadingpanel.setVisibility(View.VISIBLE);}
-        else{loadingpanel.setVisibility(View.GONE);}
-    }
-
-    @Override
-    public void generatAlertDialog()
-    {
-        //Si falla la connexió s'haura de posar un layout de "error"
-        enableLoadinggPanel(false);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage(R.string.dialogMessage).setTitle(R.string.dialogTitle);
-
-        builder.setPositiveButton(R.string.retry, (dialog, id) ->
-        {
-           mainClassViewModel.getFavours(this);
-        });
-        builder.setNegativeButton(R.string.cancel, (dialog, id) ->
-        {
-            dialog.cancel();
-        });
-
-        builder.show();
-    }
-    */
 }

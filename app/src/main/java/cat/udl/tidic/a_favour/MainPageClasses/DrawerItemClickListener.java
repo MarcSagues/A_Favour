@@ -3,22 +3,22 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
-
 import java.io.Serializable;
-
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.Views.HelpView;
 import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
+import cat.udl.tidic.a_favour.models.MainClassViewModel;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 
 import static androidx.core.content.ContextCompat.startActivity;
@@ -72,7 +72,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         //Si el item que s'ha clickat és un favor...
         else if (d instanceof DataModel.Favour)
         {
-            goToSeeAnunci(d);
+            goToSeeAnunci((DataModel.Favour)d);
         }
         else
         {
@@ -94,14 +94,14 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         startActivity(c,intent,b);
     }
 
-    private void goToSeeAnunci(DataModel d)
+    private void goToSeeAnunci(DataModel.Favour d)
     {
-        boolean isMyfavour = c.getClass().equals(ProfileView.class);
-        Log.d(String.valueOf(isMyfavour), " Is my favour");
-        Log.d("!!!!!!!!!!!!!!!!!!", d.toString());
+        SharedPreferences shp = PreferencesProvider.providePreferences();
+        boolean isMyfavour = d.owner_id == shp.getInt("id",-1);
         Intent intent = new Intent (c, AnunciView.class);
         Bundle b= new Bundle();
         b.putBoolean("myfavour", isMyfavour);
+        b.putInt("user_id", d.getOwner_id());
         intent.putExtras(b);
         intent.putExtra("favour", (Serializable) d);
         startActivity(c,intent,b);
@@ -113,18 +113,10 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
     private void ShowDialog()
     {
-        //Si falla la connexió s'haura de posar un layout de "error"
-        //Aixó simplement mostra un dialog d'error
         AlertDialog.Builder builder = new AlertDialog.Builder(c);
-
         builder.setMessage(R.string.alertLogoutD).setTitle(R.string.logOut);
-
-        builder.setPositiveButton(R.string.no, (dialog, id) ->
-        {
-
-        });
-        builder.setNegativeButton(R.string.yes, (dialog, id) -> dialog.cancel());
-
+        builder.setPositiveButton(R.string.no, (dialog, id) -> dialog.cancel());
+        builder.setNegativeButton(R.string.yes, (dialog, id) -> MainClassViewModel.logOut());
         builder.show();
     }
 

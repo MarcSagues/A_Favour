@@ -21,17 +21,24 @@ public class BlankFragment extends Fragment
     private Context c;
     private Boolean myprofile;
     //Les seguents arrays defineixen el layout que anira a cada pestaña del profile
-    private int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
+    //private int[] layout_listPROFILE = new int[]{R.layout.favours_list, R.layout.favours_list,R.layout.opinions_list};
     private int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
-    private DataModel.Favour[] data;
+    private DataModel.Favour[] favours;
+    private DataModel.Favour[] favourites;
+    private DataModel.Opinion[] opinions;
 
-    BlankFragment(int id, Context c, Boolean myprofile, DataModel[] data)
+    BlankFragment(int id, Context c, Boolean myprofile,
+                  DataModel.Favour[] favours,
+                  DataModel.Favour[] favourites,
+                  DataModel.Opinion[] opinions)
     {
         this.myprofile = myprofile;
-        pView = new ProfileViewModel();
+        pView = new ProfileViewModel(c);
         this.id = id;
         this.c = c;
-        this.data = (DataModel.Favour[]) data;
+        this.favours = favours;
+        if (favourites != null){this.favourites = favourites;}
+        this.opinions = opinions;
     }
 
     @Override
@@ -53,19 +60,16 @@ public class BlankFragment extends Fragment
             //(En el teu profile hi ha 3 pestañes : Favours, Favourites i Opinions)
             //(En el perfil públic d'un usuari n'hi han 2 --> Favours i Opinions)
             if (id ==0 || id == 1){rv.setOnItemClickListener(new DrawerItemClickListener(c));}
-            adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, (DataModel.Favour[]) data);
+
+            if (id == 0) adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, (favours));
+            else if (id == 1) adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, (favourites));
+            else adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, (opinions));
         }
         else
         {
-            ProfileViewModel.LISTOFTYPE type;
-            if (id == 0)
-            {
-                type = ProfileViewModel.LISTOFTYPE.Favours;
-                rv.setOnItemClickListener(new DrawerItemClickListener(c));
-            }
-            else {type = ProfileViewModel.LISTOFTYPE.Opinions; }
-
-            adapter = new DrawerItemCustomAdapter(getContext(), layout_listOTHER[id],pView.getListOf(type, this.myprofile));
+            if (id == 0) adapter = new DrawerItemCustomAdapter(getContext(), R.layout.favours_list, (favours));
+            else adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, (opinions));
+            rv.setOnItemClickListener(new DrawerItemClickListener(c));
         }
 
         rv.setAdapter(adapter);

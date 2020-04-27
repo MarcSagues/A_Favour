@@ -3,6 +3,7 @@ package cat.udl.tidic.a_favour.models;
 import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class UserModel
 {
     @SerializedName("created_at")
@@ -57,10 +58,8 @@ public class UserModel
     }
 
 
-    public int getId()
-    {
-        return this.id;
-    }
+    public int getId() { return this.id; }
+
     public String getCreated_at() {
         return created_at;
     }
@@ -77,7 +76,7 @@ public class UserModel
         return login;
     }
 
-    String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -140,7 +139,7 @@ public class UserModel
         this.photo = photo;
     }
 
-    float getStars() {
+    public float getStars() {
         return stars;
     }
 
