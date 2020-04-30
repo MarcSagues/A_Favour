@@ -24,8 +24,7 @@ public class EditProfileViewModel {
     private static final int PASSWORDLENGTH = 5;
     private Context c;
     private UserServices userService;
-    private boolean passwordNull = true;
-    EditProfileView editProfileView;
+
 
 
     public EditProfileViewModel(Context c){
