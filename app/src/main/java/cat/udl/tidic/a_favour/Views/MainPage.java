@@ -80,18 +80,18 @@ public class MainPage extends AppCompatActivity
         DataModel.Favour[] eventList = all_f.toArray(new DataModel.Favour[0]);
 
         //Si el adaptador es nul, vol dir que no hi havien favors previament
-        if (adapter_event == null)
-        {
+       // if (adapter_event == null)
+        //{
             //Posem els favors que ens retorna la crida i ja esta
             adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
-        }
+        //}
         //En cas contrari, vol dir que hem carregat més favors
-        else
-        {
+       // else
+        //{
             //Concateno l'array de favors que ja teniem amb els que ens retorna la crida a al API
-            DataModel.Favour[] concatenateArray = (DataModel.Favour[]) ArrayUtils.appendToArray(adapter_event.getData(),eventList);
-            adapter_event.setData(concatenateArray);
-        }
+         //   DataModel.Favour[] concatenateArray = (DataModel.Favour[]) ArrayUtils.appendToArray(adapter_event.getData(),eventList);
+         //   adapter_event.setData(concatenateArray);
+       // }
         recyclerView.setAdapter(adapter_event);
         recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
 

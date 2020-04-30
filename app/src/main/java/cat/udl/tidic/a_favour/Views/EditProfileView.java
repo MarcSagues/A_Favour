@@ -43,7 +43,7 @@ public class EditProfileView extends AppCompatActivity {
         confirm_pwd = findViewById(R.id.confirm_pwd_txt3);
         phone_number = findViewById(R.id.mobile_txt3);
         update = findViewById(R.id.update_btn3);
-        editProfileViewModel = new EditProfileViewModel();
+        editProfileViewModel = new EditProfileViewModel(this);
         update.setOnClickListener(this::updateUser);
 
     }

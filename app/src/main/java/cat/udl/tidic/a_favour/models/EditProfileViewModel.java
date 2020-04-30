@@ -23,7 +23,7 @@ public class EditProfileViewModel {
     private UserServices userService;
 
 
-    public EditProfileViewModel(){
+    public EditProfileViewModel(Context c){
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         this.c = c;
     }
@@ -63,11 +63,13 @@ public class EditProfileViewModel {
         user_json.addProperty("password", encodeHash);
 
         Call<Void> call = userService.editProfile(token,user_json);
+        Log.d("tokenn",""+token);
         //noinspection NullableProblems
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response)
             {
+                Log.d("Update_user", ""+response.code());
                 if (response.code() == 200)
                 {
                     LoadingPanel.sendMessage(c.getString(R.string.Registergood));

@@ -31,7 +31,7 @@ public interface UserServices
     @GET("/account/logout")
     Call <Void> logOut(@Header ("Authorization") String tokenAuth);
 
-    @POST("/account/post/profile")
+    @POST("/account/update_profile")
     Call<Void> editProfile(@Header ("Authorization") String tokenAuth,  /*@Path (value = "user_id") String user_id,*/ @Body JsonObject userJson);
 
 
