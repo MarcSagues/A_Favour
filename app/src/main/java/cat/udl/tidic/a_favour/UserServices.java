@@ -31,6 +31,9 @@ public interface UserServices
     @GET("/account/logout")
     Call <Void> logOut(@Header ("Authorization") String tokenAuth);
 
+    @POST("/account/post/profile")
+    Call<Void> editProfile(@Header ("Authorization") String tokenAuth,  /*@Path (value = "user_id") String user_id,*/ @Body JsonObject userJson);
+
 
     @GET("/favours")
     Call <  List<DataModel.Favour>> getFavours(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);
@@ -60,4 +63,6 @@ public interface UserServices
 
     @GET("/favours/delete/{id}")
     Call<Void> deleteFavour(@Header ("Authorization") String tokenAuth,  @Path (value = "id") int id);
+
+
 }
