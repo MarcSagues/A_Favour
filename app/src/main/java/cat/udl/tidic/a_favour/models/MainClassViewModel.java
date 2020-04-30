@@ -116,7 +116,7 @@ public class MainClassViewModel
             {
                 try
                 {
-
+                    Log.d("MainClassViewModel",""+response.code());
                    List<DataModel.Favour> response_ = response.body();
 
                     assert response_ != null;

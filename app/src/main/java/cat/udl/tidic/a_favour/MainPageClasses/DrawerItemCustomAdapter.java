@@ -83,7 +83,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
                 //nextnilst = 1 ? --> S'han carregat els favors del 100 al 200
                 //etc...
                 nextnilst+=1;
-                mainPage.LoadMore(nextnilst);
+//                mainPage.LoadMore(nextnilst);
             }
 
             inflateFavour(listItem,position);

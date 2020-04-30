@@ -191,6 +191,6 @@ public class MainPage extends AppCompatActivity
 
     public void LoadMore(int listnumber)
     {
-        mainClassViewModel.getFavours(listnumber);
+       // mainClassViewModel.getFavours(listnumber);
     }
 }
