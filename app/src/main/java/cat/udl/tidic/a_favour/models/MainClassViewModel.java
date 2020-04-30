@@ -41,7 +41,7 @@ public class MainClassViewModel
         SharedPreferences mPreferences = PreferencesProvider.providePreferences();
         String token = mPreferences.getString("all_favours", "");
         Log.d("Token:", token);
-        getFavours();
+        getFavours(0);
     }
 
     public static void  logOut()
@@ -99,8 +99,11 @@ public class MainClassViewModel
         });
     }
 
-    private void getFavours()
+    public void getFavours(int listnumber)
     {
+
+        //TODO
+        //Aqui es fa la crida depenent del listnumber
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<List<DataModel.Favour>> call = userService.getFavours(null,token);
@@ -130,7 +133,7 @@ public class MainClassViewModel
             @Override
             public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
             {
-                try { LoadingPanel.setErrorDialog(c,() -> { getFavours();return null; });}
+                try { LoadingPanel.setErrorDialog(c,() -> { getFavours(listnumber);return null; });}
                 catch (Exception e) { e.printStackTrace();}
                 Log.e("---------------", Objects.requireNonNull(t.getMessage()));
             }

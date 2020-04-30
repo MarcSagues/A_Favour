@@ -3,6 +3,7 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,15 @@ import androidx.annotation.NonNull;
 
 import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.Views.MainPage;
 
 public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 
     private Context mContext;
     private int layoutResourceId;
     private DataModel[] data;
+    private int nextnilst;
+    private MainPage mainPage;
 
     //Aquesta classe s'encarrega "d'inflar" les llistes segons l'array que li passem (DataModel[] data)
     //Exemple :
@@ -31,12 +35,31 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
     //Posem el adaptador a la llista
     //list.setAdapter(adapter_event)
 
+    public DataModel[] getData()
+    {
+        return this.data;
+    }
+
+    public void setData(DataModel[] data)
+    {
+        this.data = data;
+    }
     public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data)
     {
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.mContext = mContext;
         this.data = data;
+    }
+
+    public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, DataModel[] data, MainPage mainPage)
+    {
+        super(mContext, layoutResourceId, data);
+        this.layoutResourceId = layoutResourceId;
+        this.mContext = mContext;
+        this.data = data;
+        this.nextnilst = 0;
+        this.mainPage = mainPage;
     }
 
     @SuppressLint({"ViewHolder", "SetTextI18n"})
@@ -48,12 +71,21 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
         setLayoutMenu(position);
         listItem = inflater.inflate(layoutResourceId, parent, false);
-
         //Depenent del tipus d'array que li passem, s'inflara la llista d'una forma o un altre
 
         //Si la llista que li passem és de favors...
         if (data instanceof DataModel.Favour[])
         {
+            if (position == data.length-1)
+            {
+                //Aquesta variable s'utilitzara per a saber quantes crides a l'API s'han fet
+                //nextnilst = 0 ? --> S'han carregat els primers 100 favors
+                //nextnilst = 1 ? --> S'han carregat els favors del 100 al 200
+                //etc...
+                nextnilst+=1;
+                mainPage.LoadMore(nextnilst);
+            }
+
             inflateFavour(listItem,position);
         }
         //Si la llista que li passem és del menú

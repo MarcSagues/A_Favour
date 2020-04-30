@@ -12,6 +12,9 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.gms.common.util.ArrayUtils;
+
 import java.util.List;
 import java.util.Objects;
 import cat.udl.tidic.a_favour.FORTESTING;
@@ -28,6 +31,8 @@ public class MainPage extends AppCompatActivity
     private ListView recyclerView;
     private Button uploadFavour;
     MainClassViewModel mainClassViewModel;
+    DrawerItemCustomAdapter adapter_event;
+
 
     public MainPage() {
     }
@@ -73,7 +78,20 @@ public class MainPage extends AppCompatActivity
     private void onGetFavoursData(List<DataModel.Favour> all_f)
     {
         DataModel.Favour[] eventList = all_f.toArray(new DataModel.Favour[0]);
-        DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
+
+        //Si el adaptador es nul, vol dir que no hi havien favors previament
+        if (adapter_event == null)
+        {
+            //Posem els favors que ens retorna la crida i ja esta
+            adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
+        }
+        //En cas contrari, vol dir que hem carregat més favors
+        else
+        {
+            //Concateno l'array de favors que ja teniem amb els que ens retorna la crida a al API
+            DataModel.Favour[] concatenateArray = (DataModel.Favour[]) ArrayUtils.appendToArray(adapter_event.getData(),eventList);
+            adapter_event.setData(concatenateArray);
+        }
         recyclerView.setAdapter(adapter_event);
         recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
 
@@ -171,4 +189,8 @@ public class MainPage extends AppCompatActivity
     }
 
 
+    public void LoadMore(int listnumber)
+    {
+        mainClassViewModel.getFavours(listnumber);
+    }
 }
