@@ -1,6 +1,7 @@
 package cat.udl.tidic.a_favour.models;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
@@ -11,6 +12,8 @@ import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Utils;
 import cat.udl.tidic.a_favour.Views.EditProfileView;
 import cat.udl.tidic.a_favour.Views.LoadingPanel;
+import cat.udl.tidic.a_favour.Views.MainPage;
+import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.RegisterView;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import retrofit2.Call;
@@ -21,6 +24,8 @@ public class EditProfileViewModel {
     private static final int PASSWORDLENGTH = 5;
     private Context c;
     private UserServices userService;
+    private boolean passwordNull = true;
+    EditProfileView editProfileView;
 
 
     public EditProfileViewModel(Context c){
@@ -28,20 +33,37 @@ public class EditProfileViewModel {
         this.c = c;
     }
 
-    public void updateUser(String user, String password1, String password2, String email, String phone, EditProfileView extra)
+
+
+    public void updateUser(String user, String password1, String password2, String email, String phone, EditProfileView editProfileView)
     {
         String message = null;
         //Primer comprovem que tot estigui ple
-        if (password1.equals("") || password2.equals("") || email.equals("") || phone.equals("") || user.equals(""))
+        if (email.equals("") || phone.equals("") || user.equals(""))
         {
             message = c.getString(R.string.errorfilled);
+        } else {
+            if (!email.contains("@")) {
+                message = c.getString(R.string.validEmail);
+            }
         }
+
         //En cas de que tot estigui ple...
-        else {
-            if (password1.length() < PASSWORDLENGTH) { message = c.getString(R.string.fivechar); }
-            if (!password1.equals(password2)) { message = c.getString(R.string.dontmach); }
-            if (!password1.matches(".*\\d.*")) { message = c.getString(R.string.containnumber); }
-            if (!email.contains("@")) { message = c.getString(R.string.validEmail);}
+        if (!password1.equals("") || !password2.equals("")) {
+            if (!password1.equals("") && !password2.equals("")){
+
+                if (password1.length() < PASSWORDLENGTH) {
+                    message = c.getString(R.string.fivechar);
+                }
+                if (!password1.equals(password2)) {
+                    message = c.getString(R.string.dontmach);
+                }
+                if (!password1.matches(".*\\d.*")) {
+                    message = c.getString(R.string.containnumber);
+                }
+            } else {
+                message = c.getString(R.string.errorfilled);
+            }
         }
 
         //Si hi ha algut algun error, el printem per pantall i no es fa la crida
@@ -62,6 +84,10 @@ public class EditProfileViewModel {
         user_json.addProperty("phone", phone);
         user_json.addProperty("password", encodeHash);
 
+
+
+
+
         Call<Void> call = userService.editProfile(token,user_json);
         Log.d("tokenn",""+token);
         //noinspection NullableProblems
@@ -72,19 +98,21 @@ public class EditProfileViewModel {
                 Log.d("Update_user", ""+response.code());
                 if (response.code() == 200)
                 {
-                    LoadingPanel.sendMessage(c.getString(R.string.Registergood));
+                    editProfileView.openProfile();
+                    LoadingPanel.sendMessage(c.getString(R.string.updateProfile));
+
 
                 }
                 else
                 {
-                    LoadingPanel.sendMessage(c.getString(R.string.alredyExists));
+                    LoadingPanel.sendMessage(c.getString(R.string.errorUpdate));
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t)
             {
-                LoadingPanel.sendMessage(c.getString(R.string.errorRegister));
+                LoadingPanel.sendMessage(c.getString(R.string.errorUpdate));
             }
         });
     }

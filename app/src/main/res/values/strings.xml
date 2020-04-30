@@ -20,6 +20,12 @@
     <string name="dontmach">Passwords do not match</string>
     <string name="alredyExists">Alredy exist a user with this username. Please try another</string>
 
+    <!---UpdateProfile-->
+    <string name="updateProfile">Profile updated successfully</string>
+    <string name="errorUpdate">Error updating profile</string>
+    <string name="update">Update profile</string>
+
+
     <!---Profile-->
     <string name="profileImage">Opinions</string>
     <string name="edit">Edit profile</string>

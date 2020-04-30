@@ -77,6 +77,10 @@
     <string name="alredyExists">Ya existe un usuario con este nombre. Por favor intente con otro</string>
     <string name="validEmail">Asegúrese de introducir un correo electrónico válido</string>
     <string name="containnumber">La contraseña debe contener al menos un número</string>
+    <string name="updateProfile">Perfil actualizado correctamente</string>
+    <string name="errorUpdate">Error al actualizar el perfil</string>
+
+    <string name="update">Actualiza el perfil</string>
 
 
 </resources>
