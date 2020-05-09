@@ -118,6 +118,8 @@
     <string name="securityd1">BLA BLA BLA 2</string>
     <string name="validEmail">Make sure to introduce a valid email</string>
     <string name="containnumber">The password must contain at least one number</string>
+    <string name="opinionUploaded" />
+    <string name="opinionUpdated" />
 
 
 </resources>
