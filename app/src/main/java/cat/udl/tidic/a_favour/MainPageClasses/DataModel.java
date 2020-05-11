@@ -158,7 +158,8 @@ public class DataModel extends Activity
     public static class Opinion extends DataModel
     {
 
-        String description;
+        public String description;
+        public Number mark;
         float starRating;
         public String name;
 

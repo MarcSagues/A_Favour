@@ -120,6 +120,8 @@
     <string name="containnumber">The password must contain at least one number</string>
     <string name="opinionUploaded" />
     <string name="opinionUpdated" />
+    <string name="editOpinion" />
+    <string name="uploadOpinion" />
 
 
 </resources>
