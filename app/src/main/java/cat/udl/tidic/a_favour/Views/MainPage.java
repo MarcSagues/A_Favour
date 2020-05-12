@@ -48,8 +48,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
 
-public class MainPage extends AppCompatActivity
-{
+public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     private DrawerLayout drawerLayout;
     private ListView llista;
     private ListView recyclerView;
@@ -59,6 +58,8 @@ public class MainPage extends AppCompatActivity
     TabLayout tabs;
     View googleMap;
     DataModel.Favour[] mapFavours;
+    Spinner filterSpinner;
+    Spinner filterSpinnerCategory;
 
 
 
@@ -299,7 +300,7 @@ public class MainPage extends AppCompatActivity
                     setSpinnerVisible(true);
                 } else{
                     setSpinnerVisible(false);
-                    listOfFavours = mainClassViewModel.orderList(selectedSpinner, 0);
+                    mainClassViewModel.orderList(selectedSpinner, 0);
                     //onGetFavoursData(listOfFavours);
 //                    onGetFavoursData(Arrays.asList(listOfFavours));
                 }
@@ -450,6 +451,11 @@ public class MainPage extends AppCompatActivity
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
 
