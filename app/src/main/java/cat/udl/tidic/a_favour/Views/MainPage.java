@@ -3,18 +3,25 @@ package cat.udl.tidic.a_favour.Views;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.common.util.ArrayUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import cat.udl.tidic.a_favour.FORTESTING;
@@ -30,8 +37,11 @@ public class MainPage extends AppCompatActivity
     private ListView llista;
     private ListView recyclerView;
     private Button uploadFavour;
+    private Spinner filterSpinner;
+    private Spinner filterSpinnerCategory;
     MainClassViewModel mainClassViewModel;
     DrawerItemCustomAdapter adapter_event;
+    DataModel.Favour[] listOfFavours;
 
 
     public MainPage() {
@@ -47,6 +57,8 @@ public class MainPage extends AppCompatActivity
         addListeners();
         setUpToolbar();
         createMenuList();
+        createSpinner();
+        createSpinnerCategory();
         setScrollListener();
         setUpObserver();
         openOptions(false);
@@ -188,9 +200,93 @@ public class MainPage extends AppCompatActivity
         });
     }
 
+    public void createSpinner(){
+
+        filterSpinner = (Spinner) findViewById(R.id.filterSpinner);
+
+
+        ArrayList<String> elements = new ArrayList<String>();
+        elements.add("Distance");
+        elements.add("Category"); //seleccionar categoria
+        elements.add("Amount");
+        //posar asc o desc
+        ArrayAdapter adp = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, elements);
+
+        filterSpinner.setAdapter(adp);
+        Log.d("sortttt fora","");
+        System.out.println("FORAAAAAAAAAAAAAAAA");
+        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedSpinner = filterSpinner.getSelectedItem().toString();
+
+                Log.d("sortttt","");
+                System.out.println("DINS filter");
+                if (selectedSpinner.equals("Category")){
+                    setSpinnerVisible(true);
+                } else{
+                    setSpinnerVisible(false);
+                    listOfFavours = mainClassViewModel.orderList(selectedSpinner, 0);
+                    //onGetFavoursData(listOfFavours);
+//                    onGetFavoursData(Arrays.asList(listOfFavours));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("Not sortttt","");
+                System.out.println("Nothing");
+            }
+        });
+
+
+    }
+
+    public void createSpinnerCategory(){
+        filterSpinnerCategory = findViewById(R.id.filterSpinnerCategory);
+        ArrayList<String> elements = new ArrayList<String>();
+        elements.add("Day to day things");
+        elements.add("Computing");
+        elements.add("Reparations"); //seleccionar categoria
+        elements.add("Others");
+        //posar asc o desc
+        ArrayAdapter adp = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, elements);
+
+        filterSpinnerCategory.setAdapter(adp);
+        filterSpinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String selectedSpinnerText = filterSpinnerCategory.getSelectedItem().toString();
+                System.out.println("SELECCIONAR CATEGORIA"+selectedSpinnerText);
+                mainClassViewModel.orderListCategory(selectedSpinnerText, 0);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        filterSpinnerCategory.setVisibility(View.GONE);
+        ;
+
+    }
+
 
     public void LoadMore(int listnumber)
     {
        // mainClassViewModel.getFavours(listnumber);
     }
+
+    public void setSpinnerVisible(Boolean visible) {
+        if (visible){
+            filterSpinnerCategory.setVisibility(View.VISIBLE);
+        } else{
+            filterSpinnerCategory.setVisibility(View.GONE);
+        }
+
+
+    }
 }
+

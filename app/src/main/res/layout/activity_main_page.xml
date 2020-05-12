@@ -24,6 +24,17 @@
                 layout="@layout/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
+
+            <Spinner
+                android:id="@+id/filterSpinner"
+                android:layout_width="151dp"
+                android:layout_height="match_parent" />
+
+            <Spinner
+                android:id="@+id/filterSpinnerCategory"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <FrameLayout
