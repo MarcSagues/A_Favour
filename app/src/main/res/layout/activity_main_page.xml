@@ -25,6 +25,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
 
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabmain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tablist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/list" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabmap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/map" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+
             <Spinner
                 android:id="@+id/filterSpinner"
                 android:layout_width="151dp"
@@ -41,6 +62,13 @@
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/googleMap"
+                class="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="398dp"
+                android:layout_gravity="center_horizontal" />
 
             <ListView
                 android:id="@+id/rv_recycler_view"

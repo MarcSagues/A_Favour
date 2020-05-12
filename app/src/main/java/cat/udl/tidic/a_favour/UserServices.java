@@ -64,5 +64,7 @@ public interface UserServices
     @GET("/favours/delete/{id}")
     Call<Void> deleteFavour(@Header ("Authorization") String tokenAuth,  @Path (value = "id") int id);
 
+    @POST("/opinions/{user_id}/add")
+    Call<Void> postOpinion(@Header ("Authorization") String token,  @Path (value = "user_id") int user_id, @Body JsonObject opinionJson);
 
 }

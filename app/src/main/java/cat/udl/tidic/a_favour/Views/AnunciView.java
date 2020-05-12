@@ -154,7 +154,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         edit.setTag(tag);
     }
 
-    private void addFvaourites()
+        private void addFvaourites()
     {
         int currentImageTag = (int) edit.getTag();
 
