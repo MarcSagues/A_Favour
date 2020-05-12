@@ -3,6 +3,7 @@ package cat.udl.tidic.a_favour.models;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -160,12 +161,24 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
         Log.d("ORDERLIST","");
         getAllFavours().observe( this, this::onGetFavoursData);
         DataModel.Favour[] listOfFavours = eventList;
+        float distance = 0;
+        Location locationA = new Location("point A");
+        Location locationB = new Location("point B");
 
         try{
             switch (selectedSpinner) {
 
 
                 case "Distance":
+                    for (int i = 0; i < favours.length; i++){
+//                        locationA.setLatitude();
+//                        locationA.setLongitude();
+//                        locationB.setLatitude();
+//                        locationB.setLongitude();
+//                        distance = locationA.distanceTo(locationB);
+                    }
+
+
 
                 case "Amount":
                     quicksort(favours, 0, favours.length-1);
