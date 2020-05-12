@@ -122,6 +122,8 @@
     <string name="opinionUpdated" />
     <string name="editOpinion" />
     <string name="uploadOpinion" />
+    <string name="list">List</string>
+    <string name="map">Map</string>
 
 
 </resources>

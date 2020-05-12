@@ -233,7 +233,7 @@ public class UploadFavour extends AppCompatActivity
             if (currentFavour == null)
             {
                 SharedPreferences mPreferences = PreferencesProvider.providePreferences();
-                currentFavour = new DataModel.Favour("", "", 0, "", mPreferences.getInt("id", 0), "",-1);
+                currentFavour = new DataModel.Favour("", "", 0, "", mPreferences.getInt("id", 0), "",-1,0,0);
             }
             currentFavour.setName(Objects.requireNonNull(inputEditTexts[0].getText()).toString());
             currentFavour.setDescription(Objects.requireNonNull(inputEditTexts[1].getText()).toString());

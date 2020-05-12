@@ -99,7 +99,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         startActivity(c,intent,b);
     }
 
-    private void goToSeeAnunci(DataModel.Favour d)
+    public void goToSeeAnunci(DataModel.Favour d)
     {
         SharedPreferences shp = PreferencesProvider.providePreferences();
         boolean isMyfavour = d.owner_id == shp.getInt("id",-1);

@@ -28,7 +28,7 @@ public class MainClassViewModel
 {
     //private UserModel user = new UserModel();
     private UserServices userService;
-    private MutableLiveData<List<DataModel.Favour>> allFavours = new MutableLiveData<>();
+        private MutableLiveData<List<DataModel.Favour>> allFavours = new MutableLiveData<>();
     public LiveData<List<DataModel.Favour>> getAllFavours(){ return allFavours; }
     private Context c;
 

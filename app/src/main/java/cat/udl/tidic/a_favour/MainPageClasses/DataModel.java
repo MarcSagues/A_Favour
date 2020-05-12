@@ -56,8 +56,13 @@ public class DataModel extends Activity
         @SerializedName("user")
         public String user;
         private boolean favourite;
+        @SerializedName("lat")
+        public double lat;
 
-        public Favour(String name, String description, float amount, String category, int id, String user, int owner_id)
+        @SerializedName("long")
+        public double long_;
+
+        public Favour(String name, String description, float amount, String category, int id, String user, int owner_id, double lat, double long_)
         {
             this.category = category;
             this.name = name;
@@ -67,11 +72,21 @@ public class DataModel extends Activity
             this.id = id;
             this.owner_id = owner_id;
             this.favourite = false;
+            this.lat = lat;
+            this.long_ = long_;
             setIcon();
         }
 
         public int getOwner_id() {
             return owner_id;
+        }
+
+        public double getLat() {
+            return lat;
+        }
+
+        public double getLong_() {
+            return long_;
         }
 
         @NonNull

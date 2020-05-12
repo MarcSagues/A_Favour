@@ -81,6 +81,8 @@
     <string name="errorUpdate">Error al actualizar el perfil</string>
 
     <string name="update">Actualiza el perfil</string>
+    <string name="list">Lista</string>
+    <string name="map">Mapa</string>
 
 
 </resources>

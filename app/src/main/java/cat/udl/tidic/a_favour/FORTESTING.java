@@ -7,7 +7,7 @@ public class FORTESTING
 {
     //Si dev és FALSE --> Es fan les crides a l'API
     //Si dev és TRUE --> S'hagafen favors/opinions hardcoded
-    public static Boolean dev = false;
+    public static Boolean dev = true;
     public static Boolean checkLogin = false;
     public static DataModel.Favour[] getExampleList()
 {
@@ -16,30 +16,30 @@ public class FORTESTING
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "Testdescription, Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             2.5f,
-            CategoryManager.CATEGORIES.daytodaythings.name(), 2, "user1", 1);
+            CategoryManager.CATEGORIES.daytodaythings.name(), 2, "user1", 1, 41.591677, 1.614331);
     eventList[1] = new DataModel.Favour(
             "Lorem ipsum dolor sit amet",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             2.5f,
-            CategoryManager.CATEGORIES.favourxfavour.name(), 2, "user2",2);
+            CategoryManager.CATEGORIES.favourxfavour.name(), 2, "user2",2, 41.589882, 1.615645);
 
     eventList[2] = new DataModel.Favour(
             "consectetur adipiscing elit.",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             2.5f,
-            CategoryManager.CATEGORIES.computing.name(), 3, "user1",1);
+            CategoryManager.CATEGORIES.computing.name(), 3, "user1",1, 41.590577, 1.612857);
 
     eventList[3] = new DataModel.Favour(
             "Necessito ajuda per pujar la compra a casa",
             "Testdescription helooooou, Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             2.5f,
-            CategoryManager.CATEGORIES.others.name(), 4, "user4",4);
+            CategoryManager.CATEGORIES.others.name(), 4, "user4",4, 441.592323, 1.615352);
 
     eventList[4] = new DataModel.Favour(
             "Necessito ajuda per pujar la compra a casa",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             2.5f,
-            CategoryManager.CATEGORIES.reparation.name(), 5, "user1",1);
+            CategoryManager.CATEGORIES.reparation.name(), 5, "user1",1,41.592010, 1.613517);
     eventList[5] = eventList[0];
     eventList[6] = eventList[0];
     eventList[7] = eventList[0];
