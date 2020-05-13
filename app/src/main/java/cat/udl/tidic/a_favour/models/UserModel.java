@@ -38,9 +38,14 @@ public class UserModel
     private boolean login;
     @SerializedName("id")
     private int id;
+    @SerializedName("longitud")
+    private float longitud;
+    @SerializedName("latitud")
+    private float latitud;
 
 
-    public UserModel(String created_at, int id, String username, String email, String name, String surname, String birthday, String password, float stars, int favoursDone, int timesHelped, String location, String token)
+
+    public UserModel(String created_at, int id, String username, String email, String name, String surname, String birthday, String password, float stars, int favoursDone, int timesHelped, String location, String token, float longitud, float latitud)
     {
         this.created_at = created_at;
         this.username = username;
@@ -55,6 +60,23 @@ public class UserModel
         this.location = location;
         this.token = token;
         this.id = id;
+        this.longitud = longitud;
+        this.latitud = latitud;
+    }
+
+    public float getLongitud(){
+        return longitud;
+    }
+
+    public float getLatitud(){
+        return latitud;
+    }
+
+    public void setLongitud(float longitud){
+        this.longitud = longitud;
+    }
+    public void setLatitud(float latitud){
+        this.latitud = latitud;
     }
 
 
@@ -175,6 +197,8 @@ public class UserModel
     {
         return token;
     }
+
+
 
     @NonNull
     @Override

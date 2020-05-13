@@ -1,13 +1,29 @@
 package cat.udl.tidic.a_favour.models;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.util.Base64;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
 import cat.udl.tidic.a_favour.RetrofitClientInstance;
 import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.LoginView;
@@ -17,18 +33,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginViewModel
-{
+public class LoginViewModel extends FragmentActivity implements OnMapReadyCallback {
     private UserServices userService;
     private SharedPreferences mPreferences;
+    private GoogleMap mMap;
+    private double longitud;
+    private double latitud;
 
 
-    public LoginViewModel()
-    {
+    public LoginViewModel() {
         mPreferences = PreferencesProvider.providePreferences();
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
     }
+
+
 
     public void checkCorrectLogin(String username, String password, LoginView loginView)
     {
@@ -100,7 +119,10 @@ public class LoginViewModel
                     user = response.body();
                     assert user != null;
                     mPreferences.edit().putInt("id", user.getId()).apply();
+                    mPreferences.edit().putFloat("longitud", user.getLongitud()).apply();
+                    mPreferences.edit().putFloat("latitud", user.getLatitud()).apply();
                     Log.d("PUT THE ID " + user.getId(), "ON PREFERENCES");
+
                     loginView.openMainPage();
                 }
                 catch (Exception e) { Log.e("LoginViewModel", e.getMessage() + "ERROR");}
@@ -118,5 +140,16 @@ public class LoginViewModel
     private void setToken(String token)
     {
         mPreferences.edit().putString("token", token).apply();
+    }
+
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
     }
 }

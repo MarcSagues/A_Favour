@@ -24,7 +24,9 @@ import java.util.Objects;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.models.UploadOpinionModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
-/*
+
+import static cat.udl.tidic.a_favour.Views.UploadFavour.INPUTS;
+
 public class UploadOpinion extends AppCompatActivity {
 
     public static int DESCRIPTION_LENGTH = 600;
@@ -34,6 +36,7 @@ public class UploadOpinion extends AppCompatActivity {
     Button upload;
     TextView uploadtDescription;
     TextView[] wordCounter;
+    TextInputEditText[] inputEditTexts;
 
 
     DataModel.Opinion currentOpinion;
@@ -223,5 +226,4 @@ public class UploadOpinion extends AppCompatActivity {
         }
     }
 }
-
  */

@@ -62,6 +62,14 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         this.mainPage = mainPage;
     }
 
+    public void setData(Context mContext, int layoutResourceId, DataModel[] data, MainPage mainPage){
+        this.layoutResourceId = layoutResourceId;
+        this.mContext = mContext;
+        this.data = data;
+        this.nextnilst = 0;
+        this.mainPage = mainPage;
+    }
+
     @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
@@ -127,6 +135,7 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
 
     private void inflateFavour(View listItem, int position)
     {
+
         ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
         TextView textViewName = listItem.findViewById(R.id.tv_text);
         TextView textViewDesc = listItem.findViewById(R.id.desc);

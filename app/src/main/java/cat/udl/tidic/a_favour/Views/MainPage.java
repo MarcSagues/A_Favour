@@ -23,6 +23,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,12 +42,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
+import cat.udl.tidic.a_favour.models.UserModel;
 
 public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     private DrawerLayout drawerLayout;
@@ -60,6 +64,8 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     DataModel.Favour[] mapFavours;
     Spinner filterSpinner;
     Spinner filterSpinnerCategory;
+    MutableLiveData<UserModel> userModel = new MutableLiveData<UserModel>();
+    DataModel dataModel;
 
 
 
@@ -71,7 +77,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        mainClassViewModel = new MainClassViewModel(this);
+        mainClassViewModel = new MainClassViewModel(this, this);
         getAllActivityData();
         addListeners();
         setUpToolbar();
@@ -81,6 +87,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         setScrollListener();
         setUpObserver();
         openOptions(false);
+
 
     }
 
@@ -125,6 +132,33 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
          //   adapter_event.setData(concatenateArray);
        // }
         recyclerView.setAdapter(adapter_event);
+        recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
+
+    }
+
+    public void onGetFavoursArray(DataModel.Favour[] eventList)
+    {
+        mapFavours = eventList;
+        System.out.println("EVENT LIST ======="+ Arrays.toString(eventList));
+
+        //Si el adaptador es nul, vol dir que no hi havien favors previament
+        // if (adapter_event == null)
+        //{
+        //Posem els favors que ens retorna la crida i ja esta
+        //adapter_event.clear();
+        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
+
+        //adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
+        //}
+        //En cas contrari, vol dir que hem carregat més favors
+        // else
+        //{
+        //Concateno l'array de favors que ja teniem amb els que ens retorna la crida a al API
+        //   DataModel.Favour[] concatenateArray = (DataModel.Favour[]) ArrayUtils.appendToArray(adapter_event.getData(),eventList);
+        //   adapter_event.setData(concatenateArray);
+        // }
+        recyclerView.invalidate();
+        recyclerView.setAdapter(adapter);
         recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
 
     }

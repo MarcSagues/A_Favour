@@ -3,16 +3,30 @@ package cat.udl.tidic.a_favour.MainPageClasses;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.location.Location;
+
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.util.Objects;
+
 import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.Views.ProfileView;
+import cat.udl.tidic.a_favour.models.ProfileViewModel;
+import cat.udl.tidic.a_favour.models.UserModel;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
 @SuppressLint("Registered")
 public class DataModel extends Activity
 {
     int icon;
+    UserModel userModel;
+
 
     //Cunstructor vuit de DataModel
     //S'ha utilitzat "herència" per a que sigui més fàcil crear i retornar arrays de
@@ -39,6 +53,8 @@ public class DataModel extends Activity
     public static class Favour extends DataModel implements Serializable
     {
 
+        private MutableLiveData<UserModel> userMutable = new MutableLiveData<>();
+
         @SerializedName("category")
         public String category;
         //@SerializedName("category")
@@ -58,9 +74,15 @@ public class DataModel extends Activity
         private boolean favourite;
         @SerializedName("lat")
         public double lat;
-
         @SerializedName("long")
         public double long_;
+
+
+        public float distance = 0;
+        public Location locationA;
+        public Location locationB;
+        public float longitud = 0;
+        public float latitud = 0;
 
         public Favour(String name, String description, float amount, String category, int id, String user, int owner_id, double lat, double long_)
         {
@@ -75,6 +97,7 @@ public class DataModel extends Activity
             this.lat = lat;
             this.long_ = long_;
             setIcon();
+
         }
 
         public int getOwner_id() {
@@ -166,6 +189,20 @@ public class DataModel extends Activity
         public void setDescription(String description)
         {
             this.description = description;
+        }
+
+        public void setDistance(SharedPreferences mPreferences) {
+            locationA = new Location("point A");
+            locationB = new Location("point B");
+            System.out.println("id------- "+mPreferences.getInt("id",id));
+            System.out.println("id------- "+mPreferences.getFloat("longitud",longitud));
+            mPreferences.getFloat("longitud", longitud);
+            mPreferences.getFloat("latitud", latitud);
+            locationA.setLatitude(longitud);
+            locationA.setLongitude(latitud);
+            locationB.setLatitude(lat);
+            locationB.setLongitude(long_);
+            distance = locationA.distanceTo(locationB);
         }
     }
 

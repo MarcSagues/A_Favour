@@ -10,6 +10,8 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.common.util.ArrayUtils;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -37,15 +39,20 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
     public DataModel.Favour[] favours;
     MainPage mainPage;
     DataModel.Favour[] eventList;
+    public DataModel.Favour favour;
+    public MutableLiveData<UserModel> userModelMutableLiveData = new MutableLiveData<>();
+    public ProfileViewModel profileViewModel;
 
 
 
-    public MainClassViewModel(Context c)
+    public MainClassViewModel(Context c, MainPage m)
     {
+
         this.c = c;
+        profileViewModel = new ProfileViewModel(c);
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
-        mainPage = new MainPage();
+        mainPage = m;
         SharedPreferences mPreferences = PreferencesProvider.providePreferences();
         String token = mPreferences.getString("all_favours", "");
         Log.d("Token:", token);
@@ -134,6 +141,7 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
                     for (int i = 0; i < response_.size(); i++)
                     {
                         response_.get(i).setIcon();
+
                     }
 
                     favours = (DataModel.Favour[]) response_.toArray(new DataModel.Favour[response_.size()]);
@@ -161,23 +169,22 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
         Log.d("ORDERLIST","");
         getAllFavours().observe( this, this::onGetFavoursData);
         DataModel.Favour[] listOfFavours = eventList;
-        float distance = 0;
-        Location locationA = new Location("point A");
-        Location locationB = new Location("point B");
+        SharedPreferences mPreferences;
+        mPreferences = PreferencesProvider.providePreferences();
+
 
         try{
             switch (selectedSpinner) {
 
 
                 case "Distance":
-                    for (int i = 0; i < favours.length; i++){
-//                        locationA.setLatitude();
-//                        locationA.setLongitude();
-//                        locationB.setLatitude();
-//                        locationB.setLongitude();
-//                        distance = locationA.distanceTo(locationB);
+                    for (DataModel.Favour value : favours) {
+                        value.setDistance(mPreferences);
+                        System.out.println("Valueeeeeeeeeeeeeee "+value.distance);
                     }
+                    quicksortDistance(favours, 0, favours.length-1);
 
+                    break;
 
 
                 case "Amount":
@@ -185,6 +192,7 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
                     for (int i=0; i<favours.length;i++) {
                         System.out.println("Distance" + favours[i].toString());
                     }
+                    break;
 
             }
 
@@ -193,10 +201,13 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
             Log.d("Favours are ",""+e);
         }
         assert false;
-        System.out.println("listOfFavours = "+ Arrays.toString(listOfFavours));
         System.out.println("favours = "+ Arrays.toString(favours));
         System.out.println("TOTS ELS FAVORS "+allFavours.getValue());
-        return listOfFavours;
+        if (favours != null){
+            mainPage.onGetFavoursArray(favours);
+        }
+
+        return favours;
     }
 
     public DataModel.Favour[] orderListCategory(String selectedSpinner, int ascendant){
@@ -212,6 +223,7 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
                         numb++;
                     }
                 }
+                break;
 
             case "Computing":
 
@@ -223,6 +235,8 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
                     }
                 }
 
+                break;
+
             case "Reparations":
 
                 numb = 0;
@@ -233,17 +247,26 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
                     }
                 }
 
+                break;
+
             case "Others":
 
                 numb = 0;
                 for (DataModel.Favour value : favours) {
-                    if (value.category.equals("others")) {
+                    if (value.category.equals("others") && value != null) {
                         listDataFavour[numb] = value;
                         numb++;
                     }
                 }
 
+                break;
+
+
         }
+            if (favours != null){
+                mainPage.onGetFavoursArray(listDataFavour);
+            }
+
         } catch(NullPointerException error){
             Log.e("orderListCategory ", error.getLocalizedMessage() );
         }
@@ -281,5 +304,35 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
             quicksort(lista1, i, der);
         }
     }
+    public static void quicksortDistance (DataModel.Favour[] lista1, int izq, int der){
+        int i=izq;
+        int j=der;
+        DataModel.Favour pivote=lista1[(i+j)/2];
+        do {
+            while (lista1[i].distance < pivote.distance){
+                i++;
+            }
+            while (lista1[j].distance >pivote.distance){
+                j--;
+            }
+            if (i<=j){
+                DataModel.Favour aux=lista1[i];
+                lista1[i]=lista1[j];
+                lista1[j]=aux;
+                i++;
+                j--;
+            }
+        }while(i<=j);
+        if (izq<j){
+            quicksort(lista1, izq, j);
+        }
+        if (i<der){
+            quicksort(lista1, i, der);
+        }
+    }
+
+
+
+
 
 }
