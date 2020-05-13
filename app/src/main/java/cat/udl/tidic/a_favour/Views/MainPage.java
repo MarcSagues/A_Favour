@@ -385,11 +385,14 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         }
         else {
 
-            for (DataModel.Favour mapFavour : mapFavours)
+            if (mapFavours != null)
             {
-                addFavourOnMap(map, mapFavour,i);
-                System.out.println(mapFavour.name + "-------------------------");
-                i++;
+                for (DataModel.Favour mapFavour : mapFavours)
+                {
+                    addFavourOnMap(map, mapFavour, i);
+                    System.out.println(mapFavour.name + "-------------------------");
+                    i++;
+                }
             }
         }
     }
