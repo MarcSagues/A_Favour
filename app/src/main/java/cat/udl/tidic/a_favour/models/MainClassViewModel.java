@@ -182,7 +182,9 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
                         value.setDistance(mPreferences);
                         System.out.println("Valueeeeeeeeeeeeeee "+value.distance);
                     }
-                    quicksortDistance(favours, 0, favours.length-1);
+                    if (favours.length > 0) {
+                         quicksortDistance(favours, 0, favours.length - 1);
+                    }
 
                     break;
 

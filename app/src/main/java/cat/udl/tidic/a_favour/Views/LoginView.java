@@ -29,6 +29,7 @@ import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.LoginViewModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
+import cat.udl.tidic.a_favour.view.MainActivity;
 
 public class LoginView extends AppCompatActivity {
 
@@ -101,7 +102,7 @@ public class LoginView extends AppCompatActivity {
     }
 
     public void openMainPage() {
-        Intent intent = new Intent(getApplicationContext(), MainPage.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
 
         System.out.println("--------------FORA DEL IF--------------------");

@@ -6,6 +6,7 @@
     <color name="AfavourColor">#ff3b5b</color>
     <color name="Unselected">#F3A1AE</color>
     <color name="MapFillColor">#44F3A1AE</color>
+    <color name="white">#FFFFFF</color>
 
 
 </resources>

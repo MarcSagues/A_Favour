@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+xmlns:android="http://schemas.android.com/apk/res/android">
+<group >
+    <item
+        android:id="@+id/itFavourxfavour"
+        android:icon="@drawable/favourxfavour"
+        android:title="@string/favourxfavour" />
+    <item
+        android:id="@+id/itDaytodaythings"
+        android:icon="@drawable/daytodaythings"
+        android:title="@string/daytoday" />
+    <item
+        android:id="@+id/itComputing"
+        android:icon="@drawable/computing"
+        android:title="@string/computing" />
+    <item
+        android:id="@+id/itReparation"
+        android:icon="@drawable/reparation"
+        android:title="@string/reparations" />
+    <item
+        android:id="@+id/itOthers"
+        android:icon="@drawable/others"
+        android:title="@string/others" />
+</group>
+<item android:title="Opciones">
+    <menu>
+        <item
+            android:id="@+id/itProfile"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:title="@string/goProfile" />
+        <item
+            android:id="@+id/itMessages"
+            android:icon="@android:drawable/sym_action_email"
+            android:title="@string/messages" />
+        <item
+            android:id="@+id/itConfig"
+            android:icon="@android:drawable/sym_action_email"
+            android:title="@string/config" />
+        <item
+            android:id="@+id/itHelp"
+            android:icon="@android:drawable/sym_action_email"
+            android:title="@string/help" />
+        <item
+            android:id="@+id/itLogOut"
+            android:icon="@android:drawable/sym_action_email"
+            android:title="@string/logOut" />
+    </menu>
+</item>
+</menu>

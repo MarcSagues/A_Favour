@@ -30,7 +30,7 @@
                 card_view:srcCompat="@drawable/handshacke"></ImageView>
 
             <TextView
-                android:id="@+id/tv_amount"
+                android:id="@+id/favourCategoryName"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
 
                 android:layout_width="329dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_amount"
+                android:layout_below="@+id/favourCategoryName"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="-2dp"
                 android:textColor="@color/design_default_color_on_secondary"

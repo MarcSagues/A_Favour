@@ -139,14 +139,19 @@ public class DrawerItemCustomAdapter extends ArrayAdapter<DataModel> {
         ImageView imageViewIcon = listItem.findViewById(R.id.iv_image);
         TextView textViewName = listItem.findViewById(R.id.tv_text);
         TextView textViewDesc = listItem.findViewById(R.id.desc);
-        TextView amount = listItem.findViewById(R.id.tv_amount);
+        TextView amount = listItem.findViewById(R.id.favourCategoryName);
 
         DataModel.Favour folder = (DataModel.Favour) data[position];
 
-        imageViewIcon.setImageResource(folder.getIcon());
-        textViewName.setText(folder.name);
-        if(textViewDesc !=null){textViewDesc.setText(folder.description);}
-        amount.setText(String.format("%s", folder.getAmount()));
+        Log.d("DICA","folder: " + folder);
+        if (folder != null) {
+            imageViewIcon.setImageResource(folder.getIcon());
+            textViewName.setText(folder.name);
+            if (textViewDesc != null) {
+                textViewDesc.setText(folder.description);
+            }
+            amount.setText(String.format("%s", folder.getAmount()));
+        }
     }
 
     private void inflateMenuList(View listItem, int position)
