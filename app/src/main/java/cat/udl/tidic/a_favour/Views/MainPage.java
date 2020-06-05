@@ -173,71 +173,18 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         uploadFavour = findViewById(R.id.upload_afavour);
         tabs = findViewById(R.id.tabmain);
         googleMap = findViewById(R.id.googleMap);
-        googleMap.setVisibility(View.GONE);
+        //googleMap.setVisibility(View.GONE);
     }
 
-    private void OnClickTab(boolean list)
-    {
-        //Si s'ha premut el botó de llista
-        if (list)
-        {
-            recyclerView.setVisibility(View.VISIBLE);
-            uploadFavour.setVisibility(View.VISIBLE);
-            googleMap.setVisibility(View.GONE);
-        }
-        else
-        {
-            generateMap();
-            recyclerView.setVisibility(View.GONE);
-            uploadFavour.setVisibility(View.GONE);
-            googleMap.setVisibility(View.VISIBLE);
-        }
-    }
 
     private void addListeners()
     {
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab)
-            {
-                if (tab.getText().equals(getString(R.string.list)))
-                {
-                    OnClickTab(true);
-                }
-                else
-                {
-                    OnClickTab(false);
-                }
 
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab)
-            {
-                if (tab.getText().equals(getString(R.string.list)))
-                {
-                    OnClickTab(true);
-                }
-                else
-                {
-                    OnClickTab(false);
-                }
 
-            }
-        });
     }
 
-    public void goToUploadPage(View v)
-    {
-        openOptions(false);
-        Intent intent = new Intent(v.getContext(), UploadFavour.class);
-        Bundle b = new Bundle();
-        b.putBoolean("upload", true); //Your id
-        intent.putExtras(b); //Put your id to your next Intent
-        startActivityForResult(intent, 0);
-    }
+
 
     private void setUpToolbar()
     {
@@ -331,9 +278,9 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
                 Log.d("sortttt","");
                 System.out.println("DINS filter");
                 if (selectedSpinner.equals("Category")){
-                    setSpinnerVisible(true);
+                   // setSpinnerVisible(true);
                 } else{
-                    setSpinnerVisible(false);
+                    //setSpinnerVisible(false);
                     mainClassViewModel.orderList(selectedSpinner, 0);
                     //onGetFavoursData(listOfFavours);
 //                    onGetFavoursData(Arrays.asList(listOfFavours));
@@ -376,7 +323,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
 
             }
         });
-        filterSpinnerCategory.setVisibility(View.GONE);
+        //filterSpinnerCategory.setVisibility(View.GONE);
         ;
 
     }
@@ -387,15 +334,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
        // mainClassViewModel.getFavours(listnumber);
     }
 
-    public void setSpinnerVisible(Boolean visible) {
-        if (visible){
-            filterSpinnerCategory.setVisibility(View.VISIBLE);
-        } else{
-            filterSpinnerCategory.setVisibility(View.GONE);
-        }
 
-
-    }
 
     @Override
     public void onMapReady(GoogleMap map)

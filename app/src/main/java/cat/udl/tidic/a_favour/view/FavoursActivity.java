@@ -3,6 +3,7 @@ package cat.udl.tidic.a_favour.view;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -27,6 +28,7 @@ import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.Views.HelpView;
 import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
+import cat.udl.tidic.a_favour.Views.UploadFavour;
 import cat.udl.tidic.a_favour.adapters.FavourTypeSpinnerAdapter;
 import cat.udl.tidic.a_favour.models.CategoryEnum;
 import cat.udl.tidic.a_favour.models.FavourTypeEnum;
@@ -148,6 +150,16 @@ public class FavoursActivity extends LocationActivity {
         alert.show();
     }
 
+    public void goToUploadPage(View v)
+    {
+        openOptions(false);
+        Intent intent = new Intent(v.getContext(), UploadFavour.class);
+        Bundle b = new Bundle();
+        b.putBoolean("upload", true); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivityForResult(intent, 0);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -163,8 +175,9 @@ public class FavoursActivity extends LocationActivity {
 
     public void openOptions(boolean open)
     {
-        if (open){drawerLayout.openDrawer(GravityCompat.START);}
-        else{drawerLayout.closeDrawer(GravityCompat.END);}
+        drawerLayout = findViewById(R.id.drawer_layout);
+        if (open){drawerLayout.openDrawer(Gravity.LEFT);}
+        else{drawerLayout.closeDrawer(Gravity.LEFT);}
     }
 
 

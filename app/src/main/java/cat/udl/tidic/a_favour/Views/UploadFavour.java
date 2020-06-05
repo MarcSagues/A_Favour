@@ -20,6 +20,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
+import cat.udl.tidic.a_favour.view.FavoursListActivity;
 
 public class UploadFavour extends AppCompatActivity
 {
@@ -108,8 +109,7 @@ public class UploadFavour extends AppCompatActivity
     public void onBackPressed()
     {
         if (upload_bool) {
-            Intent i = new Intent(this, MainPage.class);
-            startActivityForResult(i, 1);
+            super.onBackPressed();
             finish();
         }
         else
