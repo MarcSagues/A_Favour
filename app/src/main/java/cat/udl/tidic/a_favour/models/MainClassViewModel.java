@@ -45,18 +45,17 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
 
 
 
-    public MainClassViewModel(Context c, MainPage m)
+    public MainClassViewModel(Context c)
     {
 
         this.c = c;
-        profileViewModel = new ProfileViewModel(c);
+        //profileViewModel = new ProfileViewModel(c);
         userService = RetrofitClientInstance.
                 getRetrofitInstance().create(UserServices.class);
-        mainPage = m;
         SharedPreferences mPreferences = PreferencesProvider.providePreferences();
         String token = mPreferences.getString("all_favours", "");
         Log.d("Token:", token);
-        getFavours(0);
+        //getFavours(0);
     }
 
     public static void  logOut()
@@ -69,8 +68,6 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
         Intent intent = new Intent(c, LoginView.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         c.startActivity(intent);
-
-
     }
 
     public void logOutAPI()
@@ -78,7 +75,7 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
         Call<Void> call = userService.logOut(token);
-        LoadingPanel.enableLoading(c,true);
+        //LoadingPanel.enableLoading(c,true);
         //noinspection NullableProblems
         call.enqueue(new Callback<Void>() {
             @Override
@@ -101,7 +98,7 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
                         e.printStackTrace();
                     }
                 }
-                LoadingPanel.enableLoading(c,false);
+                //LoadingPanel.enableLoading(c,false);
             }
 
             @Override

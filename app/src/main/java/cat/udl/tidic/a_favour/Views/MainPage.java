@@ -77,7 +77,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        mainClassViewModel = new MainClassViewModel(this, this);
+        mainClassViewModel = new MainClassViewModel(this);
         getAllActivityData();
         addListeners();
         setUpToolbar();

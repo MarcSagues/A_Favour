@@ -2,8 +2,10 @@ package cat.udl.tidic.a_favour.view;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,16 +25,30 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.io.IOException;
+import java.util.Objects;
+
+import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.RetrofitClientInstance;
+import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.Views.HelpView;
+import cat.udl.tidic.a_favour.Views.LoadingPanel;
+import cat.udl.tidic.a_favour.Views.LoginView;
 import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.UploadFavour;
 import cat.udl.tidic.a_favour.adapters.FavourTypeSpinnerAdapter;
 import cat.udl.tidic.a_favour.models.CategoryEnum;
 import cat.udl.tidic.a_favour.models.FavourTypeEnum;
+import cat.udl.tidic.a_favour.models.MainClassViewModel;
+import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import cat.udl.tidic.a_favour.viewmodels.FavoursViewModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class FavoursActivity extends LocationActivity {
@@ -215,11 +231,25 @@ public class FavoursActivity extends LocationActivity {
                     case R.id.itHelp:
                         goTo(HelpView.class);
                         break;
+                    case R.id.itLogOut:
+                        MainClassViewModel mC= new MainClassViewModel(getApplicationContext());
+                        ShowDialog(mC);
+                        break;
                 }
                 return true;
             }
         });
     }
+
+    private void ShowDialog(MainClassViewModel mc)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.alertLogoutD).setTitle(R.string.logOut);
+        builder.setPositiveButton(R.string.no, (dialog, id) -> dialog.cancel());
+        builder.setNegativeButton(R.string.yes, (dialog, id) -> mc.logOutAPI());
+        builder.show();
+    }
+
 
 
     public void filterByCategory(CategoryEnum category){
@@ -230,8 +260,6 @@ public class FavoursActivity extends LocationActivity {
         }
         refreshList();
     }
-
-
 
 
     public void createSpinnerType(){
