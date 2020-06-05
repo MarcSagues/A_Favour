@@ -57,7 +57,7 @@ public class FavoursListActivity extends FavoursActivity {
             @Override
             public void onChanged(List<Favour> favours) {
                 progressBar.setVisibility(View.GONE);
-                Log.d(TAG, favours.toString());
+                //Log.d(TAG, favours.toString());
                 favourAdapter = new FavourAdapter(new FavourDiffCallback());
                 favourAdapter.setCurrentLocation(currentLocation.getValue());
                 favoursListView.setAdapter(favourAdapter);

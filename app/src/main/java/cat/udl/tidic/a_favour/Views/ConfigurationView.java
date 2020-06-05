@@ -16,6 +16,7 @@ import cat.udl.tidic.a_favour.LenguageManager;
 import cat.udl.tidic.a_favour.LenguagesArrayAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
+import cat.udl.tidic.a_favour.view.FavoursListActivity;
 
 public class ConfigurationView extends AppCompatActivity
 {
@@ -83,7 +84,7 @@ public class ConfigurationView extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-        Intent i = new Intent(this, MainPage.class);
+        Intent i = new Intent(this, FavoursListActivity.class);
         startActivityForResult(i, 1);
         finish();
     }

@@ -327,4 +327,31 @@
         </LinearLayout>
     </ScrollView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BCFFFFFF"
+            android:backgroundTintMode="screen"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteY="731dp"
+            tools:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                tools:visibility="visible" />
+
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
