@@ -7,9 +7,10 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
 
-public class Favour {
+public class Favour implements Serializable {
 
     @SerializedName("id")
     private int id;

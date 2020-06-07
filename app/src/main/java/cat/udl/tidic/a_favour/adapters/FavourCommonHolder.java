@@ -24,9 +24,11 @@ public class FavourCommonHolder {
     private TextView textViewfavourTypeColour;
     private TextView amount;
     private TextView distanceTo;
+    private Favour favour;
 
 
-    public FavourCommonHolder(@NonNull View itemView) {
+    public FavourCommonHolder(@NonNull View itemView)
+    {
           imageViewIcon = itemView.findViewById(R.id.iv_image);
           textViewName = itemView.findViewById(R.id.tv_text);
           textViewfavourTypeColour = itemView.findViewById(R.id.favourTypeColour);
@@ -34,6 +36,15 @@ public class FavourCommonHolder {
           distanceTo = itemView.findViewById(R.id.distanceTo);
     }
 
+    public void setFavour(Favour f)
+    {
+        this.favour = f;
+    }
+
+    public Favour getFavour()
+    {
+        return this.favour;
+    }
 
     public void bindHolder(Favour f, Location currentLocation) {
 

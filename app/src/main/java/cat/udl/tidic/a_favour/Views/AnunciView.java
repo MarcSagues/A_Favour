@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,24 +20,30 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
+import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.adapters.FavourAdapter;
+import cat.udl.tidic.a_favour.adapters.FavourDiffCallback;
+import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
 import cat.udl.tidic.a_favour.models.UserModel;
 
 public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 {
-    ListView anunci;
+    RecyclerView anunci;
     ListView valoracio;
     DataModel.Opinion[] userOpinion;
     ImageView back;
     ImageView eliminar;
     ImageView edit;
     Boolean isMyFavour;
-    DataModel.Favour currentFavour;
+    Favour currentFavour;
     ProfileViewModel pview;
 
 
@@ -60,10 +69,10 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         {
             Log.d("YYY La variable is my favour és :", String.valueOf(b.getBoolean("myfavour")));
             isMyFavour = b.getBoolean("myfavour");
-            currentFavour = (DataModel.Favour) getIntent().getSerializableExtra("favour");
+            currentFavour = (Favour) getIntent().getSerializableExtra("favour");
             assert currentFavour != null;
             pview.getUserProfile().observe(this, this::onGetUserData);
-            pview.getAnotherUser(String.valueOf(currentFavour.owner_id));
+            pview.getAnotherUser(String.valueOf(currentFavour.getOwner_id()));
 
         } else {
             Log.d("YYY La variable is my favour és :", "NO HI HA");
@@ -137,7 +146,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         AnunciView a = this;
         eliminar.setOnClickListener(v -> {
             UploadFavourModel vm = new UploadFavourModel(a);
-            vm.eliminarFavor(currentFavour.id, a);
+            vm.eliminarFavor(currentFavour.getId(), a);
         });
 
     }
@@ -183,15 +192,17 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
     private void getAllData()
     {
         eliminar = findViewById(R.id.eliminar);
-        anunci = findViewById(R.id.anunci);
+        anunci = findViewById(R.id.rv_recycler_view);
+        anunci.setLayoutManager(new LinearLayoutManager(this));
         valoracio = findViewById(R.id.valoracio);
         back = findViewById(R.id.back_arrow);
         edit = findViewById(R.id.edit);
-        DataModel.Favour[] favour = new DataModel.Favour[1];
+        Favour[] favour = new Favour[1];
         favour[0] = currentFavour;
-        DrawerItemCustomAdapter favour_adapter = new DrawerItemCustomAdapter(this, R.layout.favour_list_profile, favour);
-        anunci.setAdapter(favour_adapter);
 
+        FavourAdapter favour_adapter = new FavourAdapter(new FavourDiffCallback());
+        anunci.setAdapter(favour_adapter);
+        favour_adapter.submitList(Arrays.asList(favour));
     }
 
     private void setAnunci()
