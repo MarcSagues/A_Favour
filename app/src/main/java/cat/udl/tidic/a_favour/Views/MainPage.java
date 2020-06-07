@@ -2,10 +2,8 @@ package cat.udl.tidic.a_favour.Views;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,19 +18,15 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
-import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -43,12 +37,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
 import cat.udl.tidic.a_favour.models.UserModel;
 
@@ -61,7 +55,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     DrawerItemCustomAdapter adapter_event;
     TabLayout tabs;
     View googleMap;
-    DataModel.Favour[] mapFavours;
+    Favour[] mapFavours;
     Spinner filterSpinner;
     Spinner filterSpinnerCategory;
     MutableLiveData<UserModel> userModel = new MutableLiveData<UserModel>();
@@ -102,7 +96,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     {
         if (!FORTESTING.dev)
         {
-            mainClassViewModel.getAllFavours().observe(this, this::onGetFavoursData);
+            //mainClassViewModel.getAllFavours().observe(this, this::onGetFavoursData);
         }
         else
         {
@@ -113,30 +107,9 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
-    private void onGetFavoursData(List<DataModel.Favour> all_f)
-    {
-        DataModel.Favour[] eventList = all_f.toArray(new DataModel.Favour[0]);
-        mapFavours = eventList;
 
-        //Si el adaptador es nul, vol dir que no hi havien favors previament
-       // if (adapter_event == null)
-        //{
-            //Posem els favors que ens retorna la crida i ja esta
-            adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
-        //}
-        //En cas contrari, vol dir que hem carregat més favors
-       // else
-        //{
-            //Concateno l'array de favors que ja teniem amb els que ens retorna la crida a al API
-         //   DataModel.Favour[] concatenateArray = (DataModel.Favour[]) ArrayUtils.appendToArray(adapter_event.getData(),eventList);
-         //   adapter_event.setData(concatenateArray);
-       // }
-        recyclerView.setAdapter(adapter_event);
-        recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
 
-    }
-
-    public void onGetFavoursArray(DataModel.Favour[] eventList)
+    public void onGetFavoursArray(Favour[] eventList)
     {
         mapFavours = eventList;
         System.out.println("EVENT LIST ======="+ Arrays.toString(eventList));
@@ -146,7 +119,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         //{
         //Posem els favors que ens retorna la crida i ja esta
         //adapter_event.clear();
-        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
+        //DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
 
         //adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList, this);
         //}
@@ -158,7 +131,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         //   adapter_event.setData(concatenateArray);
         // }
         recyclerView.invalidate();
-        recyclerView.setAdapter(adapter);
+        //recyclerView.setAdapter(adapter);
         recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
 
     }
@@ -360,12 +333,13 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
 
             if (mapFavours != null)
             {
+                /*
                 for (DataModel.Favour mapFavour : mapFavours)
                 {
                     addFavourOnMap(map, mapFavour, i);
                     System.out.println(mapFavour.name + "-------------------------");
                     i++;
-                }
+                }*/
             }
         }
     }
@@ -422,7 +396,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
                     dw.goToSeeAnunci(FORTESTING.getExampleList()[(int) marker.getTag()]);
                 }
                 else {
-                    dw.goToSeeAnunci(mapFavours[(int) marker.getTag()]);
+                    //dw.goToSeeAnunci(mapFavours[(int) marker.getTag()]);
                 }
                 return false;
             }

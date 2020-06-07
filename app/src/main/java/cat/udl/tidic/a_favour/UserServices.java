@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.UserModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -36,7 +37,7 @@ public interface UserServices
 
 
     @GET("/favours")
-    Call <  List<DataModel.Favour>> getFavours(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);
+    Call <  List<Favour>> getFavours(@Query("user_id") String user_id, @Header ("Authorization") String tokenAuth);
 
 
 //    @Headers({"Content-Type:application/json"})

@@ -1,12 +1,6 @@
 package cat.udl.tidic.a_favour.Views;
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,17 +10,19 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
@@ -78,14 +74,14 @@ public class ProfileView extends AppCompatActivity
         Bundle b = getIntent().getExtras();
         if (b != null)
         {
-            DataModel.Favour currentFavour = (DataModel.Favour) getIntent().getSerializableExtra("favour");
+            Favour currentFavour = (Favour) getIntent().getSerializableExtra("favour");
             assert currentFavour != null;
-            ismyProfile = currentFavour.owner_id == mPreferences.getInt("id",-1);
+            ismyProfile = currentFavour.getOwner_id() == mPreferences.getInt("id",-1);
 
             if (!ismyProfile)
             {
                 edit.setVisibility(View.GONE);
-                profileViewModel.getAnotherUser(String.valueOf(currentFavour.owner_id));
+                profileViewModel.getAnotherUser(String.valueOf(currentFavour.getOwner_id()));
                 profileViewModel.getMyFavoursVoid(String.valueOf((currentFavour.getOwner_id())));
             }
         }
@@ -155,8 +151,7 @@ public class ProfileView extends AppCompatActivity
         {
             DataModel.Favour[] list = FORTESTING.getExampleList();
             DataModel.Opinion[] op = FORTESTING.getExampleListOPINION();
-            recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile,
-                    list, list, op );
+            //recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile,list, list, op );
             getRecyclerData();
         }
         else {
@@ -164,12 +159,12 @@ public class ProfileView extends AppCompatActivity
         }
     }
 
-    private void setMyFavoursList(List<DataModel.Favour> favours)
+    private void setMyFavoursList(List<Favour> favours)
     {
-        DataModel.Favour[] eventList = favours.toArray(new DataModel.Favour[0]);
+        Favour[] favoursarray = new Favour[favours.size()];
+        favoursarray = favours.toArray(favoursarray);
         DataModel.Opinion[] opinions = FORTESTING.getExampleListOPINION();
-        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, this.ismyProfile,
-                eventList, eventList, opinions );
+        recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, this.ismyProfile,favoursarray, favoursarray, opinions );
         getRecyclerData();
     }
 

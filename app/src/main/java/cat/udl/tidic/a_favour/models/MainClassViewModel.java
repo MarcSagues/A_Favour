@@ -3,14 +3,11 @@ package cat.udl.tidic.a_favour.models;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.google.android.gms.common.util.ArrayUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -32,8 +29,8 @@ import retrofit2.Response;
 public class MainClassViewModel extends MainPage implements LifecycleOwner{
     //private UserModel user = new UserModel();
     private UserServices userService;
-        private MutableLiveData<List<DataModel.Favour>> allFavours = new MutableLiveData<>();
-    public LiveData<List<DataModel.Favour>> getAllFavours(){ return allFavours; }
+        private MutableLiveData<List<Favour>> allFavours = new MutableLiveData<List<Favour>>();
+    public LiveData<List<Favour>> getAllFavours(){ return allFavours; }
     private Context c;
     public List<DataModel.Favour> listOfFavours;
     public DataModel.Favour[] favours;
@@ -118,29 +115,23 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
         //Aqui es fa la crida depenent del listnumber
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
-        Call<List<DataModel.Favour>> call = userService.getFavours(null,token);
+        Call<List<Favour>> call = userService.getFavours(null,token);
         listOfFavours = null;
         LoadingPanel.enableLoading(c,true);
         //noinspection NullableProblems
-        call.enqueue(new Callback<List<DataModel.Favour>>()
+        call.enqueue(new Callback<List<Favour>>()
         {
 
             @Override
-            public void onResponse(Call<List<DataModel.Favour>> call, Response<List<DataModel.Favour>> response)
+            public void onResponse(Call<List<Favour>> call, Response<List<Favour>> response)
             {
                 Log.d("Enqueue----------","Dins");
                 try
                 {
                     Log.d("MainClassViewModel",""+response.code());
-                   List<DataModel.Favour> response_ = response.body();
+                   List<Favour> response_ = response.body();
 
                     assert response_ != null;
-                    for (int i = 0; i < response_.size(); i++)
-                    {
-                        response_.get(i).setIcon();
-
-                    }
-
                     favours = (DataModel.Favour[]) response_.toArray(new DataModel.Favour[response_.size()]);
                     allFavours.setValue(response_);
                     LoadingPanel.enableLoading(c,false);
@@ -150,7 +141,7 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
             }
 
             @Override
-            public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
+            public void onFailure(Call<List<Favour>> call, Throwable t)
             {
                 try { LoadingPanel.setErrorDialog(c,() -> { getFavours(listnumber);return null; });}
                 catch (Exception e) { e.printStackTrace();}
@@ -164,7 +155,7 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
 
         DataModel.Favour aux = null;
         Log.d("ORDERLIST","");
-        getAllFavours().observe( this, this::onGetFavoursData);
+
         DataModel.Favour[] listOfFavours = eventList;
         SharedPreferences mPreferences;
         mPreferences = PreferencesProvider.providePreferences();
@@ -203,13 +194,13 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
         System.out.println("favours = "+ Arrays.toString(favours));
         System.out.println("TOTS ELS FAVORS "+allFavours.getValue());
         if (favours != null){
-            mainPage.onGetFavoursArray(favours);
+
         }
 
         return favours;
     }
 
-    public DataModel.Favour[] orderListCategory(String selectedSpinner, int ascendant){
+    public Favour[] orderListCategory(String selectedSpinner, int ascendant){
         DataModel.Favour[] listDataFavour = new DataModel.Favour[favours.length-1];
         int numb = 0;
         try{
@@ -263,13 +254,13 @@ public class MainClassViewModel extends MainPage implements LifecycleOwner{
 
         }
             if (favours != null){
-                mainPage.onGetFavoursArray(listDataFavour);
+
             }
 
         } catch(NullPointerException error){
             Log.e("orderListCategory ", error.getLocalizedMessage() );
         }
-        return listDataFavour;
+        return null;
     }
 
     private void onGetFavoursData(List<DataModel.Favour> all_f) {

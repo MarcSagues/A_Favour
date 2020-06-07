@@ -27,8 +27,8 @@ public class  ProfileViewModel
     public enum LISTOFTYPE { Favours, Favourites, Opinions}
     private MutableLiveData<UserModel> user = new MutableLiveData<>();
     public LiveData<UserModel> getUserProfile(){ return user; }
-    private MutableLiveData<List<DataModel.Favour>> myFavours = new MutableLiveData<>();
-    public LiveData<List<DataModel.Favour>> getMyFavours_(){ return myFavours; }
+    private MutableLiveData<List<Favour>> myFavours = new MutableLiveData<List<Favour>>();
+    public LiveData<List<Favour>> getMyFavours_(){ return myFavours; }
     private Context c;
 
    public ProfileViewModel(Context c)
@@ -160,24 +160,18 @@ public class  ProfileViewModel
     {
         userService = RetrofitClientInstance.getRetrofitInstance().create(UserServices.class);
         String token = PreferencesProvider.providePreferences().getString("token","");
-        Call<List<DataModel.Favour>> call = userService.getFavours(userID,token);
+        Call<List<Favour>> call = userService.getFavours(userID,token);
         LoadingPanel.enableLoading(c,true);
         //noinspection NullableProblems
-        call.enqueue(new Callback<List<DataModel.Favour>>()
+        call.enqueue(new Callback<List<Favour>>()
         {
             @Override
-            public void onResponse(Call<List<DataModel.Favour>> call, Response<List<DataModel.Favour>> response)
+            public void onResponse(Call<List<Favour>> call, Response<List<Favour>> response)
             {
                 try
                 {
-
-                    List<DataModel.Favour> response_ = response.body();
-
+                    List<Favour> response_ = response.body();
                     assert response_ != null;
-                    for (int i = 0; i < response_.size(); i++)
-                    {
-                        response_.get(i).setIcon();
-                    }
                     myFavours.setValue(response_);
                     LoadingPanel.enableLoading(c,false);
 
@@ -193,7 +187,7 @@ public class  ProfileViewModel
             }
 
             @Override
-            public void onFailure(Call<List<DataModel.Favour>> call, Throwable t)
+            public void onFailure(Call<List<Favour>> call, Throwable t)
             {
                 Log.e("---------------", Objects.requireNonNull(t.getMessage()));
                 //Generate ALERT DIALOG

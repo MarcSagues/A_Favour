@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Views.EditProfileView">
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BCFFFFFF"
+        android:backgroundTintMode="screen"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/progBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/up_panel2"
         android:layout_width="411dp"
