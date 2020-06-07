@@ -27,16 +27,16 @@ public class UploadFavourModel
                 getRetrofitInstance().create(UserServices.class);
     }
 
-    public void editFavour(DataModel.Favour fav, UploadFavour upFav)
+    public void editFavour(Favour fav, UploadFavour upFav)
     {
         JsonObject user_json = new JsonObject();
-            user_json.addProperty("name", fav.name);
-            user_json.addProperty("description", fav.description);
-            user_json.addProperty("category", fav.category);
-            user_json.addProperty("amount", fav.amount);
+            user_json.addProperty("name", fav.getName());
+            user_json.addProperty("description", fav.getDescription());
+            user_json.addProperty("category", fav.getCategory().toString());
+            user_json.addProperty("amount", fav.getAmount());
 
             String token = PreferencesProvider.providePreferences().getString("token","");
-        Call<Void> call = userService.setFavours(token,fav.id,user_json);
+        Call<Void> call = userService.setFavours(token,fav.getId(),user_json);
         LoadingPanel.enableLoading(c,true);
         //noinspection NullableProblems
         call.enqueue(new Callback<Void>() {
@@ -115,15 +115,15 @@ public class UploadFavourModel
         });
     }
 
-    public void postFavour(DataModel.Favour currentFavourData, UploadFavour upFav)
+    public void postFavour(Favour currentFavourData, UploadFavour upFav)
     {
         String token = PreferencesProvider.providePreferences().getString("token","");
         JsonObject user_json = new JsonObject();
-        user_json.addProperty("username", currentFavourData.user);
-        user_json.addProperty("name", currentFavourData.name);
-        user_json.addProperty("desc", currentFavourData.description);
-        user_json.addProperty("category", currentFavourData.category);
-        user_json.addProperty("amount", currentFavourData.amount);
+        user_json.addProperty("username", currentFavourData.getUser());
+        user_json.addProperty("name", currentFavourData.getName());
+        user_json.addProperty("desc", currentFavourData.getDescription());
+        user_json.addProperty("category", currentFavourData.getCategory().toString());
+        user_json.addProperty("amount", currentFavourData.getAmount());
         Call<Void> call = userService.postFavour(token,user_json);
         LoadingPanel.enableLoading(c,true);
         //noinspection NullableProblems

@@ -19,6 +19,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
+import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
@@ -69,6 +70,7 @@ public class ProfileView extends AppCompatActivity
 
     private void preparePage()
     {
+        App.setContext(this);
         SharedPreferences mPreferences = PreferencesProvider.providePreferences();
 
         Bundle b = getIntent().getExtras();

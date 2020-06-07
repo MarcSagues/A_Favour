@@ -4,6 +4,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.adapters.FavourAdapter;
 import cat.udl.tidic.a_favour.adapters.FavourDiffCallback;
 import cat.udl.tidic.a_favour.models.Favour;
@@ -81,14 +82,14 @@ public class BlankFragment extends Fragment
             if (id == 0)
             {
                 rv.setLayoutManager(new LinearLayoutManager(c));
-                FavourAdapter adapter_favour = new FavourAdapter(new FavourDiffCallback(), ProfileViewModel.class);
+                FavourAdapter adapter_favour = new FavourAdapter(new FavourDiffCallback(), ProfileView.class);
                 adapter_favour.submitList(Arrays.asList(favours));
                 rv.setAdapter(adapter_favour);
             }
             else if (id == 1)
             {
                 rv.setLayoutManager(new LinearLayoutManager(c));
-                FavourAdapter adapter_favour = new FavourAdapter(new FavourDiffCallback(), ProfileViewModel.class);
+                FavourAdapter adapter_favour = new FavourAdapter(new FavourDiffCallback(), ProfileView.class);
                 adapter_favour.submitList(Arrays.asList(favourites));
                 rv.setAdapter(adapter_favour);
             }

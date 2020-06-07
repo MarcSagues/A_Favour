@@ -23,7 +23,10 @@ import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.AnunciView;
+import cat.udl.tidic.a_favour.Views.ProfileView;
+import cat.udl.tidic.a_favour.Views.UploadFavour;
 import cat.udl.tidic.a_favour.models.Favour;
+import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import cat.udl.tidic.a_favour.view.FavoursActivity;
 import cat.udl.tidic.a_favour.view.FavoursListActivity;
@@ -79,13 +82,28 @@ public class FavourAdapter extends ListAdapter<Favour, FavourAdapter.FavourHolde
                 {
                     final Favour currentFavour = (Favour) getItem(getAdapterPosition());
                     //Si vinc del Menu principal, vaig acap a veure el anunci
-                    if (classe.equals(FavoursActivity.class))
+                    if (classe.equals(FavoursActivity.class) || classe.equals(ProfileViewModel.class) || classe.equals(ProfileView.class))
+                    {
+                        goToSeeAnunci(currentFavour);
+                    }
+                    if (classe.equals(ProfileView.class))
                     {
                         goToSeeAnunci(currentFavour);
                     }
                 }
             });
         }
+    }
+
+    private void goToEditFavour(Favour currentFavour)
+    {
+        Context c = App.getAppContext();
+        Intent intent = new Intent (c, UploadFavour.class);
+        Bundle b= new Bundle();
+        b.putBoolean("upload", true);
+        intent.putExtra("favour", currentFavour);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(c,intent,b);
     }
 
     public void goToSeeAnunci(Favour d)
@@ -99,11 +117,11 @@ public class FavourAdapter extends ListAdapter<Favour, FavourAdapter.FavourHolde
         b.putInt("user_id", d.getOwner_id());
         intent.putExtras(b);
         intent.putExtra("favour", (Serializable) d);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(c,intent,b);
         if (isMyfavour)
         {
-            ((Activity) c).finish();
+            ((Activity)(c)).finish();
         }
     }
 }

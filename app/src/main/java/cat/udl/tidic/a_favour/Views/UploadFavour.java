@@ -16,11 +16,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
-import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
-import cat.udl.tidic.a_favour.view.FavoursListActivity;
 
 public class UploadFavour extends AppCompatActivity
 {
@@ -38,7 +37,7 @@ public class UploadFavour extends AppCompatActivity
     TextView[] wordCounter;
     TextInputEditText[] inputEditTexts;
     TextInputLayout amount_parent;
-    DataModel.Favour currentFavour;
+    Favour currentFavour;
     UploadFavourModel uploadFavourModel;
 
     @Override
@@ -58,7 +57,7 @@ public class UploadFavour extends AppCompatActivity
         if(b != null)
         {
             upload_bool = b.getBoolean("upload");
-            currentFavour = (DataModel.Favour) getIntent().getSerializableExtra("favour");
+            currentFavour = (Favour) getIntent().getSerializableExtra("favour");
         }
         Log.d("Open upload page", String.valueOf(upload_bool));
         prepareUpload(upload_bool);
@@ -93,15 +92,15 @@ public class UploadFavour extends AppCompatActivity
 
         for (ImageView i : imageArrays)
         {
-            if (i.getTag().equals(currentFavour.getCategoria()))
+            if (i.getTag().equals(currentFavour.getCategory()))
             {
                 selectCategory(i);
             }
         }
         inputEditTexts[0].setText(currentFavour.getName());
         inputEditTexts[1].setText(currentFavour.getDescription());
-        if (!currentFavour.getCategoria().equals(CategoryManager.CATEGORIES.favourxfavour.name())) {
-            inputEditTexts[2].setText("" + currentFavour.amount);
+        if (!currentFavour.getCategory().equals(CategoryManager.CATEGORIES.favourxfavour.name())) {
+            inputEditTexts[2].setText("" + currentFavour.getAmount());
         }
     }
 
@@ -226,20 +225,20 @@ public class UploadFavour extends AppCompatActivity
         return null;
     }
 
-    public DataModel.Favour getCurrentFavourData()
+    public Favour getCurrentFavourData()
     {
         try
         {
             if (currentFavour == null)
             {
                 SharedPreferences mPreferences = PreferencesProvider.providePreferences();
-                currentFavour = new DataModel.Favour("", "", 0, "", mPreferences.getInt("id", 0), "",-1,0,0);
+                currentFavour = new Favour();
             }
             currentFavour.setName(Objects.requireNonNull(inputEditTexts[0].getText()).toString());
             currentFavour.setDescription(Objects.requireNonNull(inputEditTexts[1].getText()).toString());
-            currentFavour.setCategory(getSelectedCategory());
+            //currentFavour.setCategory(getSelectedCategory().toString());
 
-            if (!currentFavour.category.equals(CategoryManager.CATEGORIES.favourxfavour.name()))
+            if (!currentFavour.getCategory().equals(CategoryManager.CATEGORIES.favourxfavour.name()))
             {
                 currentFavour.setAmount(Float.parseFloat(Objects.requireNonNull(inputEditTexts[2].getText()).toString()));
             }
