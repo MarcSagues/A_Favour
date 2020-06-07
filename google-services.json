@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "665294036139",
+    "firebase_url": "https://afavour-b8799.firebaseio.com",
+    "project_id": "afavour-b8799",
+    "storage_bucket": "afavour-b8799.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665294036139:android:f94c231fd0d7628ea3abee",
+        "android_client_info": {
+          "package_name": "cat.udl.tidic.a_favour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665294036139-j7c4okhq0d7r5c8n3fd290rdcscjjldi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgvcnzoFw__pBdHRxHxvRBw6c3noraqMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665294036139-j7c4okhq0d7r5c8n3fd290rdcscjjldi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
