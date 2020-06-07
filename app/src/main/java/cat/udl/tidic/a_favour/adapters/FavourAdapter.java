@@ -25,6 +25,8 @@ import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.AnunciView;
 import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
+import cat.udl.tidic.a_favour.view.FavoursActivity;
+import cat.udl.tidic.a_favour.view.FavoursListActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static androidx.core.content.ContextCompat.startActivity;
@@ -35,10 +37,12 @@ public class FavourAdapter extends ListAdapter<Favour, FavourAdapter.FavourHolde
     private final static String TAG ="FavourAdapter";
     private Location currentLocation;
     private FavourCommonHolder favourHolder;
+    private Class classe;
 
 
-    public FavourAdapter(@NonNull DiffUtil.ItemCallback<Favour> diffCallback) {
+    public FavourAdapter(@NonNull DiffUtil.ItemCallback<Favour> diffCallback, Class classe) {
         super(diffCallback);
+        this.classe = classe;
     }
 
     public void setCurrentLocation(Location currentLocation) {
@@ -73,7 +77,12 @@ public class FavourAdapter extends ListAdapter<Favour, FavourAdapter.FavourHolde
                 @Override
                 public void onClick(View v)
                 {
-                    goToSeeAnunci(favourHolder.getFavour());
+                    final Favour currentFavour = (Favour) getItem(getAdapterPosition());
+                    //Si vinc del Menu principal, vaig acap a veure el anunci
+                    if (classe.equals(FavoursActivity.class))
+                    {
+                        goToSeeAnunci(currentFavour);
+                    }
                 }
             });
         }

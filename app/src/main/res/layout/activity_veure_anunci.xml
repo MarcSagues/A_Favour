@@ -20,9 +20,8 @@
             android:clickable="true"
             android:elevation="10dp"
             android:gravity="center"
-            android:visibility="invisible"
             tools:layout_editor_absoluteY="731dp"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <ProgressBar
                 android:id="@+id/progBar"

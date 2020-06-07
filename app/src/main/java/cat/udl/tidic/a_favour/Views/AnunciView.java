@@ -200,7 +200,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
         Favour[] favour = new Favour[1];
         favour[0] = currentFavour;
 
-        FavourAdapter favour_adapter = new FavourAdapter(new FavourDiffCallback());
+        FavourAdapter favour_adapter = new FavourAdapter(new FavourDiffCallback(), AnunciView.class);
         anunci.setAdapter(favour_adapter);
         favour_adapter.submitList(Arrays.asList(favour));
     }

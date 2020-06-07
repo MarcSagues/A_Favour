@@ -58,7 +58,7 @@ public class FavoursListActivity extends FavoursActivity {
             public void onChanged(List<Favour> favours) {
                 progressBar.setVisibility(View.GONE);
                 //Log.d(TAG, favours.toString());
-                favourAdapter = new FavourAdapter(new FavourDiffCallback());
+                favourAdapter = new FavourAdapter(new FavourDiffCallback(), FavoursActivity.class);
                 favourAdapter.setCurrentLocation(currentLocation.getValue());
                 favoursListView.setAdapter(favourAdapter);
                 favourAdapter.submitList(favours);
@@ -70,7 +70,7 @@ public class FavoursListActivity extends FavoursActivity {
             public void onChanged(Location location) {
                 Log.d(TAG, "Current location: " + currentLocation);
                 if (location != null) {
-                    favourAdapter = new FavourAdapter(new FavourDiffCallback());
+                    favourAdapter = new FavourAdapter(new FavourDiffCallback(),FavoursActivity.class);
                     favoursListView.setAdapter(favourAdapter);
                     favourAdapter.setCurrentLocation(location);
                     favourAdapter.notifyDataSetChanged();
