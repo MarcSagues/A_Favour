@@ -69,7 +69,7 @@
     <string name="favorUpdated">Favor actualizado</string>
     <string name="favourDeleted">Favor eliminado</string>
     <string name="errorfilled">Verifique que todos los campos estén llenos</string>
-
+    <string name="chat">CHAT </string>
     <string name="errorRegister">Error al registrarse</string>
     <string name="Registergood">Registro efectuado con éxito</string>
     <string name="fivechar">La contraseña debe tener mínimo 5 caracteres</string>

@@ -1,11 +1,13 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
 import cat.udl.tidic.a_favour.R;
 
@@ -39,6 +41,8 @@ public class MessagesView extends AppCompatActivity
 
         DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.message_list, allMessagesArray);
         messageList.setAdapter(adapter_event);
+        messageList.setOnItemClickListener(new DrawerItemClickListener(this));
+
     }
 
     void setListeners()

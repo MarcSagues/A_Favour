@@ -46,6 +46,7 @@
         <activity android:name=".Views.MessagesView" />
         <activity android:name=".Views.HelpView" />
         <activity android:name=".Views.RegisterView" />
+        <activity android:name=".Views.ChatView" />
         <activity android:name=".Views.ProfileView" />
         <activity android:name=".Views.UploadFavour" />
         <activity android:name=".Views.AnunciView" />

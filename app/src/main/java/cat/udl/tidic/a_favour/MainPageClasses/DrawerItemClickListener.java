@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog;
 import java.io.Serializable;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.AnunciView;
+
+import cat.udl.tidic.a_favour.Views.ChatView;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.Views.HelpView;
 import cat.udl.tidic.a_favour.Views.MessagesView;
@@ -81,7 +83,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         }
         else
         {
-            Log.d("No type", "mafren");
+           goToChat();
         }
     }
 
@@ -91,6 +93,14 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
         startActivity(c,intent,Bundle.EMPTY);
     }
 
+
+    private void goToChat()
+    {
+        Intent intent = new Intent (c, ChatView.class);
+        Bundle b= new Bundle();
+        b.putBoolean("myprofile", true);
+        startActivity(c,intent,b);
+    }
     private void goToProfile()
     {
         Intent intent = new Intent (c, ProfileView.class);
