@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.models.CategoryEnum;
 import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
@@ -92,14 +93,14 @@ public class UploadFavour extends AppCompatActivity
 
         for (ImageView i : imageArrays)
         {
-            if (i.getTag().equals(currentFavour.getCategory()))
+            if (i.getTag().equals(currentFavour.getCategory().getName()))
             {
                 selectCategory(i);
             }
         }
         inputEditTexts[0].setText(currentFavour.getName());
         inputEditTexts[1].setText(currentFavour.getDescription());
-        if (!currentFavour.getCategory().equals(CategoryManager.CATEGORIES.favourxfavour.name())) {
+        if (!currentFavour.getCategory().getName().equals(CategoryEnum.favourxfavour.getName())) {
             inputEditTexts[2].setText("" + currentFavour.getAmount());
         }
     }
@@ -144,19 +145,19 @@ public class UploadFavour extends AppCompatActivity
         imageArrays = new ImageView[total_categories];
 
         imageArrays[0] = findViewById(R.id.daytoday);
-        imageArrays[0].setTag(CategoryManager.CATEGORIES.daytodaythings.name());
+        imageArrays[0].setTag(CategoryEnum.daytodaythings.getName());
 
         imageArrays[1] = findViewById(R.id.computing);
-        imageArrays[1].setTag(CategoryManager.CATEGORIES.computing.name());
+        imageArrays[1].setTag(CategoryEnum.computing.getName());
 
         imageArrays[2] = findViewById(R.id.reparation);
-        imageArrays[2].setTag(CategoryManager.CATEGORIES.reparation.name());
+        imageArrays[2].setTag(CategoryEnum.reparation.getName());
 
         imageArrays[3] = findViewById(R.id.others);
-        imageArrays[3].setTag(CategoryManager.CATEGORIES.others.name());
+        imageArrays[3].setTag(CategoryEnum.others.getName());
 
         imageArrays[4] = findViewById(R.id.favourxfavour);
-        imageArrays[4].setTag(CategoryManager.CATEGORIES.favourxfavour.name());
+        imageArrays[4].setTag(CategoryEnum.favourxfavour.getName());
 
         upload = findViewById(R.id.upload);
 
@@ -215,12 +216,13 @@ public class UploadFavour extends AppCompatActivity
     }
 
     @SuppressWarnings("deprecation")
-    private String getSelectedCategory()
+    private CategoryEnum getSelectedCategory()
     {
         for (ImageView iv: imageArrays)
         {
-            if (Objects.requireNonNull(iv.getBackgroundTintList()).equals(ColorStateList.valueOf(getResources().getColor(R.color.AfavourColor))))
-                return iv.getTag().toString();
+            if (Objects.requireNonNull(iv.getBackgroundTintList()).equals(ColorStateList.valueOf(getResources().getColor(R.color.AfavourColor)))) {
+                return CategoryEnum.valueOf(iv.getTag().toString());
+            }
         }
         return null;
     }
@@ -229,16 +231,17 @@ public class UploadFavour extends AppCompatActivity
     {
         try
         {
-            if (currentFavour == null)
-            {
+
+            if (currentFavour == null) {
                 SharedPreferences mPreferences = PreferencesProvider.providePreferences();
                 currentFavour = new Favour();
             }
+
             currentFavour.setName(Objects.requireNonNull(inputEditTexts[0].getText()).toString());
             currentFavour.setDescription(Objects.requireNonNull(inputEditTexts[1].getText()).toString());
-            //currentFavour.setCategory(getSelectedCategory().toString());
+            currentFavour.setCategory(getSelectedCategory());
 
-            if (!currentFavour.getCategory().equals(CategoryManager.CATEGORIES.favourxfavour.name()))
+            if (!currentFavour.getCategory().getName().equals(CategoryEnum.favourxfavour.getName()))
             {
                 currentFavour.setAmount(Float.parseFloat(Objects.requireNonNull(inputEditTexts[2].getText()).toString()));
             }
@@ -288,7 +291,7 @@ public class UploadFavour extends AppCompatActivity
     {
         if (imageView.getTag() != null)
         {
-            if (imageView.getTag() == CategoryManager.CATEGORIES.favourxfavour.name())
+            if (imageView.getTag().equals(CategoryEnum.favourxfavour.getName()))
             {
                 Log.d("Category selected is ", "favour x favour");
                 amount_parent.setVisibility(View.GONE);

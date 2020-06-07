@@ -31,8 +31,8 @@ public class UploadFavourModel
     {
         JsonObject user_json = new JsonObject();
             user_json.addProperty("name", fav.getName());
-            user_json.addProperty("description", fav.getDescription());
-            user_json.addProperty("category", fav.getCategory().toString());
+            user_json.addProperty("desc", fav.getDescription());
+            user_json.addProperty("category", fav.getCategory().getName());
             user_json.addProperty("amount", fav.getAmount());
 
             String token = PreferencesProvider.providePreferences().getString("token","");
@@ -122,7 +122,7 @@ public class UploadFavourModel
         user_json.addProperty("username", currentFavourData.getUser());
         user_json.addProperty("name", currentFavourData.getName());
         user_json.addProperty("desc", currentFavourData.getDescription());
-        user_json.addProperty("category", currentFavourData.getCategory().toString());
+        user_json.addProperty("category", currentFavourData.getCategory().getName());
         user_json.addProperty("amount", currentFavourData.getAmount());
         Call<Void> call = userService.postFavour(token,user_json);
         LoadingPanel.enableLoading(c,true);
