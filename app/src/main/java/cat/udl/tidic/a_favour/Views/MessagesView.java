@@ -21,9 +21,15 @@ public class MessagesView extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
+        getFirebaseInstance();
         getAllActivityData();
         setListAdapter();
         setListeners();
+    }
+
+    private void getFirebaseInstance()
+    {
+
     }
 
     private void getAllActivityData()
