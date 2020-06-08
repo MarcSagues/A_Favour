@@ -10,6 +10,15 @@ public  class Chat implements Serializable
     public Favour favour;
 
     private List<Message> messages;
+
+    public List<Message> getMessages() {
+        return this.messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
     private String lastMessage;
     private String lastMessageDate;
 

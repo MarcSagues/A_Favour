@@ -14,8 +14,7 @@ import cat.udl.tidic.a_favour.models.Message;
 
 public class MessageListAdapter extends ListAdapter<Message, MessageListAdapter.MessageHolder> {
 
-    private final static String TAG ="FavourAdapter";
-    private Message currentLocation;
+    private final static String TAG ="MessageListAdapter";
     private MessageCommonHolder messageCommonHolder;
 
 
