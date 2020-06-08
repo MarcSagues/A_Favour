@@ -4,13 +4,13 @@ import java.util.List;
 
 public class MessageRoom
 {
-    public List<Message> allMessages;
+    public List<Chats> allMessages;
 
-    public List<Message> getAllMessages() {
+    public List<Chats> getAllMessages() {
         return allMessages;
     }
 
-    public void setAllMessages(List<Message> allMessages) {
+    public void setAllMessages(List<Chats> allMessages) {
         this.allMessages = allMessages;
     }
 }

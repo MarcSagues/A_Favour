@@ -6,6 +6,7 @@ import android.util.Log;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.CustomActivty;
 import cat.udl.tidic.a_favour.Views.LoginView;
+import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.view.FavoursActivity;
 import cat.udl.tidic.a_favour.view.FavoursListActivity;
 import cat.udl.tidic.a_favour.viewmodels.MainActivityViewModel;
@@ -19,11 +20,11 @@ public class MainActivity extends CustomActivty {
 
         if (mainActivityViewModel.isCurrentLogIn()) {
             Log.d(TAG, "onCreate() -> El usuario ya tiene token, por lo tanto entro." );
-            goTo(FavoursListActivity.class);
+            goTo(MessagesView.class);
         }
         else {
             Log.d(TAG, "onCreate() -> El usuario no tiene token, por lo tanto ir a login." );
-            goTo(LoginView.class);
+            goTo(MessagesView.class);
         }
     }
 

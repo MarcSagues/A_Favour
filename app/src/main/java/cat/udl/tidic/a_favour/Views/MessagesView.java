@@ -8,7 +8,7 @@ import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.MessagesItemClickListener;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.adapters.MessageAdapter;
-import cat.udl.tidic.a_favour.models.Message;
+import cat.udl.tidic.a_favour.models.Chats;
 
 public class MessagesView extends AppCompatActivity
 {
@@ -39,7 +39,7 @@ public class MessagesView extends AppCompatActivity
 
     private void setListAdapter()
     {
-        Message[] allMessagesArray;
+        Chats[] allMessagesArray;
         if (FORTESTING.dev) {allMessagesArray = FORTESTING.getMessageList();}
         else { allMessagesArray = FORTESTING.getMessageList(); }
 

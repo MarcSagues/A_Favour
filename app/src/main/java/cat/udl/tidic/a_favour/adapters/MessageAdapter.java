@@ -8,34 +8,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.Views.MainPage;
-import cat.udl.tidic.a_favour.models.Message;
-import cat.udl.tidic.a_favour.models.Opinions;
+import cat.udl.tidic.a_favour.models.Chats;
 
-public class MessageAdapter extends ArrayAdapter<Message>
+public class MessageAdapter extends ArrayAdapter<Chats>
 {
     private Context mContext;
     private int layoutResourceId;
-    private Message[] data;
+    private Chats[] data;
 
 
-    public Message[] getData()
+    public Chats[] getData()
     {
         return this.data;
     }
 
-    public void setData(Message[] data)
+    public void setData(Chats[] data)
     {
         this.data = data;
     }
-    public MessageAdapter(Context mContext, int layoutResourceId, Message[] data)
+    public MessageAdapter(Context mContext, int layoutResourceId, Chats[] data)
     {
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
@@ -63,7 +60,7 @@ public class MessageAdapter extends ArrayAdapter<Message>
         TextView lastMessage = listItem.findViewById(R.id.lastMessage);
         TextView lastMessageDate = listItem.findViewById(R.id.dateLastMessage);
 
-        Message folder = (Message) data[position];
+        Chats folder = (Chats) data[position];
         imageViewIcon.setImageResource(R.drawable.example_person);
         imageViewIcon.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageViewIcon, ImageHelper.ROUND));
 

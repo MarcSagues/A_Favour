@@ -2,24 +2,24 @@ package cat.udl.tidic.a_favour.models;
 
 import java.util.List;
 
-public  class Message
+public  class Chats
 {
     public UserModel user;
     public UserModel other_user;
     public Favour favour;
-    private List<String> messages;
+    private List<Messages> messages;
     private String lastMessage;
     private String lastMessageDate;
 
 
-    public Message(UserModel user, UserModel other_user, Favour fav, List allMessages)
+    public Chats(UserModel user, UserModel other_user, Favour fav, List<Messages> allMessages)
     {
         this.user = user;
         this.other_user = other_user;
         this.favour = fav;
         this.messages = allMessages;
-        this.lastMessage = lastMessage;
-        this.lastMessageDate = lastMessageDate;
+        this.lastMessage = allMessages.get(allMessages.size()-1).getText();
+        this.lastMessageDate = allMessages.get(allMessages.size()-1).getDate();
     }
 
     public String getLastMessage() {
