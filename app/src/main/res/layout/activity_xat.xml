@@ -62,12 +62,11 @@
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favour_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:itemCount="1"
-            tools:listitem="@layout/favours_xat" >
-
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/favours_list" />
 
         <FrameLayout
             android:id="@+id/content_frame"
@@ -75,22 +74,14 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
-            <ListView
-                android:id="@+id/rv_recycler_view"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/messages_rv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ListView>
+                android:layout_height="wrap_content"
+                tools:itemCount="3"
+                tools:listitem="@layout/favours_xat" />
 
         </FrameLayout>
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
 
 
     </LinearLayout>

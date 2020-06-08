@@ -207,7 +207,7 @@ public class FavoursActivity extends LocationActivity {
                         goTo(ProfileView.class);
                         break;
                     case R.id.itMessages:
-                        goTo(MessagesView.class);
+                        goTo(AllChatsView.class);
                         break;
                     case R.id.itConfig:
                         goTo(ConfigurationView.class);

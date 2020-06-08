@@ -16,7 +16,7 @@ import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.Chat;
 
-public class MessageAdapter extends ArrayAdapter<Chat>
+public class AllChatsAdapter extends ArrayAdapter<Chat>
 {
     private Context mContext;
     private int layoutResourceId;
@@ -32,7 +32,7 @@ public class MessageAdapter extends ArrayAdapter<Chat>
     {
         this.data = data;
     }
-    public MessageAdapter(Context mContext, int layoutResourceId, Chat[] data)
+    public AllChatsAdapter(Context mContext, int layoutResourceId, Chat[] data)
     {
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;

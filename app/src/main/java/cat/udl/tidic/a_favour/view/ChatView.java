@@ -9,8 +9,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.adapters.FavourAdapter;
+import cat.udl.tidic.a_favour.adapters.FavourDiffCallback;
 import cat.udl.tidic.a_favour.models.Chat;
 import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
@@ -19,6 +26,9 @@ public class ChatView extends AppCompatActivity
 {
     public Button sendMessage;
     private EditText input;
+    private RecyclerView favourRV;
+    private FavourAdapter favourAdapter;
+    private RecyclerView messagesRV;
     private Chat chat;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,7 +36,20 @@ public class ChatView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xat);
         getChat();
+        getAllActivityData();
         setOnClickListeners();
+    }
+
+    private void getAllActivityData()
+    {
+        favourRV = findViewById(R.id.favour_rv);
+        favourRV.setLayoutManager(new LinearLayoutManager(this));
+        favourAdapter = new FavourAdapter(new FavourDiffCallback(), FavoursActivity.class);
+        favourRV.setAdapter(favourAdapter);
+        List<Favour> singleFavour= new ArrayList<Favour>();
+        singleFavour.add(chat.getFavour());
+        favourAdapter.submitList(singleFavour);
+        messagesRV = findViewById(R.id.messages_rv);
     }
 
     private void getChat()

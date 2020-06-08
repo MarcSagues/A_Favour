@@ -5,9 +5,11 @@ import java.util.List;
 
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.models.CategoryEnum;
 import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.Chat;
-import cat.udl.tidic.a_favour.models.Messages;
+import cat.udl.tidic.a_favour.models.FavourTypeEnum;
+import cat.udl.tidic.a_favour.models.Message;
 import cat.udl.tidic.a_favour.models.Opinions;
 import cat.udl.tidic.a_favour.models.UserModel;
 
@@ -15,7 +17,7 @@ public class FORTESTING
 {
     //Si dev és FALSE --> Es fan les crides a l'API
     //Si dev és TRUE --> S'hagafen favors/opinions hardcoded
-    public static Boolean dev = false;
+    public static Boolean dev = true;
     public static Boolean checkLogin = true;
     public static DataModel.Favour[] getExampleList()
 {
@@ -59,7 +61,7 @@ public class FORTESTING
     return eventList;
 }
 
-    public static Chat[] getMessageList()
+    public static List<Chat> getChats()
     {
         UserModel user1 = new UserModel("12/12/12",1,"Uri","gg@wp.com",
                 "Jampi","Jumpi","12/12/12","uuuuuuu",3,2,1,"Igualada," 
@@ -71,21 +73,25 @@ public class FORTESTING
 
         Favour favour = new Favour();
         favour.setName("The name of favour");
+        favour.setCategory(CategoryEnum.daytodaythings);
+        favour.setAmount(20);
+        favour.setDescription("Desc");
+        favour.setType(FavourTypeEnum.necessito);
         
-        List<Messages> messages = new ArrayList<Messages>();
-        Messages messages1 = new Messages(0,"10/2/1999", "The text of message");
-        Messages messages2 = new Messages(1,"10/2/1999", "The text of message2");
-        messages.add(messages1);
-        messages.add(messages2);
-        Chat[] messageList = new Chat[5];
+        List<Message> messages = new ArrayList<Message>();
+        Message message1 = new Message(0,"10/2/1999", "The text of message");
+        Message message2 = new Message(1,"10/2/1999", "The text of message2");
+        messages.add(message1);
+        messages.add(message2);
+        List<Chat> chatList = new ArrayList<Chat>();
 
-        messageList[0] = new Chat(user1,user2,favour,messages);
-        messageList[1] = new Chat(user1,user2,favour,messages);
-        messageList[2] = new Chat(user1,user2,favour,messages);
-        messageList[3] = new Chat(user1,user2,favour,messages);
-        messageList[4] = new Chat(user1,user2,favour,messages);
+        chatList.add(new Chat(user1,user2,favour,messages));
+        chatList.add(new Chat(user1,user2,favour,messages));
+        chatList.add(new Chat(user1,user2,favour,messages));
+        chatList.add(new Chat(user1,user2,favour,messages));
+        chatList.add(new Chat(user1,user2,favour,messages));
         
-        return messageList;
+        return chatList;
     }
 
 

@@ -8,12 +8,13 @@ public  class Chat implements Serializable
     public UserModel user;
     public UserModel other_user;
     public Favour favour;
-    private List<Messages> messages;
+
+    private List<Message> messages;
     private String lastMessage;
     private String lastMessageDate;
 
 
-    public Chat(UserModel user, UserModel other_user, Favour fav, List<Messages> allMessages)
+    public Chat(UserModel user, UserModel other_user, Favour fav, List<Message> allMessages)
     {
         this.user = user;
         this.other_user = other_user;
@@ -37,5 +38,13 @@ public  class Chat implements Serializable
 
     public void setLastMessageDate(String lastMessageDate) {
         this.lastMessageDate = lastMessageDate;
+    }
+
+    public Favour getFavour() {
+        return favour;
+    }
+
+    public void setFavour(Favour favour) {
+        this.favour = favour;
     }
 }

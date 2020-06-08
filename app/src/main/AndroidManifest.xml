@@ -43,7 +43,7 @@
             android:value="@string/google_maps_key" />
         <activity android:name=".Views.EditProfileView" />
         <activity android:name=".Views.ConfigurationView" />
-        <activity android:name=".view.MessagesView" />
+        <activity android:name=".view.AllChatsView" />
         <activity android:name=".Views.HelpView" />
         <activity android:name=".Views.RegisterView" />
         <activity android:name=".view.ChatView" />

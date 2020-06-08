@@ -2,7 +2,7 @@ package cat.udl.tidic.a_favour.models;
 
 import java.io.Serializable;
 
-public class Messages implements Serializable
+public class Message implements Serializable
 {
     private int owner_id;
     private String date;
@@ -10,7 +10,7 @@ public class Messages implements Serializable
 
 
 
-    public Messages (int owner_id, String date, String text)
+    public Message(int owner_id, String date, String text)
     {
         this.owner_id = owner_id;
         this.date = date;

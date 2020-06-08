@@ -4,17 +4,19 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
+
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.MessagesItemClickListener;
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.adapters.MessageAdapter;
+import cat.udl.tidic.a_favour.adapters.AllChatsAdapter;
+import cat.udl.tidic.a_favour.models.AllChats;
 import cat.udl.tidic.a_favour.models.Chat;
 
-public class MessagesView extends AppCompatActivity
+public class AllChatsView extends AppCompatActivity
 {
     private ListView messageList;
     private ImageView backArrow;
-    private Chat chat;
+    private AllChats allChats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,10 +24,18 @@ public class MessagesView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
         getAllActivityData();
-        setListAdapter();
+        getAllChats();
+        setChatsListAdapter();
         setListeners();
     }
 
+    private void getAllChats()
+    {
+        if (FORTESTING.dev)
+        {
+            allChats= new AllChats(FORTESTING.getChats());
+        }
+    }
 
 
     private void getAllActivityData()
@@ -34,13 +44,12 @@ public class MessagesView extends AppCompatActivity
         backArrow = findViewById(R.id.back_arrow);
     }
 
-    private void setListAdapter()
+    private void setChatsListAdapter()
     {
-        Chat[] allMessagesArray;
-        if (FORTESTING.dev) {allMessagesArray = FORTESTING.getMessageList();}
-        else { allMessagesArray = FORTESTING.getMessageList(); }
+        Chat[] arrayChats = new Chat[allChats.getallChats().size()];
+        arrayChats = allChats.getallChats().toArray(arrayChats);
 
-        MessageAdapter adapter_event = new MessageAdapter(this, R.layout.message_list, allMessagesArray);
+        AllChatsAdapter adapter_event = new AllChatsAdapter(this, R.layout.message_list, arrayChats);
         messageList.setAdapter(adapter_event);
         messageList.setOnItemClickListener(new MessagesItemClickListener(this));
 
@@ -48,6 +57,6 @@ public class MessagesView extends AppCompatActivity
 
     void setListeners()
     {
-        backArrow.setOnClickListener(v -> MessagesView.super.onBackPressed());
+        backArrow.setOnClickListener(v -> AllChatsView.super.onBackPressed());
     }
 }
