@@ -25,6 +25,7 @@ import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
+import cat.udl.tidic.a_favour.models.Opinions;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.databinding.ActivityProfileBinding;
@@ -152,7 +153,7 @@ public class ProfileView extends AppCompatActivity
         if(FORTESTING.dev)
         {
             DataModel.Favour[] list = FORTESTING.getExampleList();
-            DataModel.Opinion[] op = FORTESTING.getExampleListOPINION();
+            Opinions[] op = FORTESTING.getExampleListOPINION();
             //recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, ismyProfile,list, list, op );
             getRecyclerData();
         }
@@ -165,7 +166,7 @@ public class ProfileView extends AppCompatActivity
     {
         Favour[] favoursarray = new Favour[favours.size()];
         favoursarray = favours.toArray(favoursarray);
-        DataModel.Opinion[] opinions = FORTESTING.getExampleListOPINION();
+        Opinions[] opinions = FORTESTING.getExampleListOPINION();
         recyclerManager = new RecyclerViewManager(getSupportFragmentManager(), ProfileView.this, this.ismyProfile,favoursarray, favoursarray, opinions );
         getRecyclerData();
     }

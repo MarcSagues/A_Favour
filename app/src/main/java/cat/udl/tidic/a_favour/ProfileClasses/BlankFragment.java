@@ -2,12 +2,13 @@ package cat.udl.tidic.a_favour.ProfileClasses;
 
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
+import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.adapters.FavourAdapter;
 import cat.udl.tidic.a_favour.adapters.FavourDiffCallback;
 import cat.udl.tidic.a_favour.models.Favour;
+import cat.udl.tidic.a_favour.models.Opinions;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import android.content.Context;
 import android.os.Bundle;
@@ -33,12 +34,12 @@ public class BlankFragment extends Fragment
     private int[] layout_listOTHER = new int[]{R.layout.favours_list,R.layout.opinions_list};
     private Favour[] favours;
     private Favour[] favourites;
-    private DataModel.Opinion[] opinions;
+    private Opinions[] opinions;
 
     BlankFragment(int id, Context c, Boolean myprofile,
                   Favour[] favours,
                   Favour[] favourites,
-                  DataModel.Opinion[] opinions)
+                  Opinions[] opinions)
     {
         this.myprofile = myprofile;
         pView = new ProfileViewModel(c);
@@ -70,7 +71,7 @@ public class BlankFragment extends Fragment
         }
 
 
-        DrawerItemCustomAdapter adapter;
+        OpinionsAdapter adapter;
 
         //Aquesta booleana determina si s'ha de carregar el meu perfil o és el perfil d'un altre usuari
         if (this.myprofile)
@@ -95,7 +96,7 @@ public class BlankFragment extends Fragment
             }
             else
                 {
-                adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, (opinions));
+                adapter = new OpinionsAdapter(getContext(), R.layout.opinions_list, (opinions));
                 lv.setAdapter(adapter);
             }
         }
@@ -110,7 +111,7 @@ public class BlankFragment extends Fragment
             }
             else
             {
-                adapter = new DrawerItemCustomAdapter(getContext(), R.layout.opinions_list, (opinions));
+                adapter = new OpinionsAdapter(getContext(), R.layout.opinions_list, (opinions));
                 lv.setAdapter(adapter);
             }
         }

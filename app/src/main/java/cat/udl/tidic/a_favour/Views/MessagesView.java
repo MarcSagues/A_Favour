@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
+import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
 import cat.udl.tidic.a_favour.R;
 
 public class MessagesView extends AppCompatActivity
@@ -45,8 +45,8 @@ public class MessagesView extends AppCompatActivity
         //Insertat dintre l'else la crida a l'API
         else { allMessagesArray = FORTESTING.getMessageList(); }
 
-        DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.message_list, allMessagesArray);
-        messageList.setAdapter(adapter_event);
+        //OpinionsAdapter adapter_event = new OpinionsAdapter(this, R.layout.message_list, allMessagesArray);
+        //messageList.setAdapter(adapter_event);
         messageList.setOnItemClickListener(new DrawerItemClickListener(this));
 
     }

@@ -24,12 +24,13 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
+import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
 import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.adapters.FavourAdapter;
 import cat.udl.tidic.a_favour.adapters.FavourDiffCallback;
 import cat.udl.tidic.a_favour.models.Favour;
+import cat.udl.tidic.a_favour.models.Opinions;
 import cat.udl.tidic.a_favour.models.ProfileViewModel;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
 import cat.udl.tidic.a_favour.models.UserModel;
@@ -38,7 +39,7 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
 {
     RecyclerView anunci;
     ListView valoracio;
-    DataModel.Opinion[] userOpinion;
+    Opinions[] userOpinion;
     ImageView back;
     ImageView eliminar;
     ImageView edit;
@@ -83,9 +84,9 @@ public class AnunciView extends AppCompatActivity implements OnMapReadyCallback
     private void onGetUserData(UserModel userModel)
     {
         if (userModel != null) {
-            userOpinion = new DataModel.Opinion[1];
-            userOpinion[0] = new DataModel.Opinion(R.drawable.example_person, userModel.getUsername(), "", userModel.getStars());
-            DrawerItemCustomAdapter userOpinion_adapter = new DrawerItemCustomAdapter(this, R.layout.user_opinion, userOpinion);
+            userOpinion = new Opinions[1];
+            userOpinion[0] = new Opinions(R.drawable.example_person, userModel.getUsername(), "", userModel.getStars());
+            OpinionsAdapter userOpinion_adapter = new OpinionsAdapter(this, R.layout.user_opinion, userOpinion);
             valoracio.setOnItemClickListener((parent, view, position, id) ->
             {
                 Log.d("Carregant el profile", "");

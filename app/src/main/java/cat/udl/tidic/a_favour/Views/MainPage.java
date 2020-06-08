@@ -40,7 +40,7 @@ import java.util.Objects;
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
+import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
@@ -52,7 +52,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
     private ListView recyclerView;
     private Button uploadFavour;
     MainClassViewModel mainClassViewModel;
-    DrawerItemCustomAdapter adapter_event;
+    //DrawerItemCustomAdapter adapter_event;
     TabLayout tabs;
     View googleMap;
     Favour[] mapFavours;
@@ -100,10 +100,10 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         }
         else
         {
-            DataModel.Favour[] eventList = FORTESTING.getExampleList();
-            DrawerItemCustomAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
-            recyclerView.setAdapter(adapter_event);
-            recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
+            //DataModel.Favour[] eventList = FORTESTING.getExampleList();
+            //OpinionsAdapter adapter_event = new DrawerItemCustomAdapter(this, R.layout.favours_list, eventList);
+            //recyclerView.setAdapter(adapter_event);
+            //recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
         }
     }
 
@@ -174,9 +174,9 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         drawerItem[2] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.config));
         drawerItem[3] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.help));
         drawerItem[4] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.logOut));
-        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
+       // DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
         llista.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
-        llista.setAdapter(adapter);
+        //llista.setAdapter(adapter);
     }
 
     @Override

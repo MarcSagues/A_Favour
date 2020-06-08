@@ -16,7 +16,7 @@ import java.util.Objects;
 
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemCustomAdapter;
+import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
 import cat.udl.tidic.a_favour.R;
 
 public class CustomActivty extends AppCompatActivity {

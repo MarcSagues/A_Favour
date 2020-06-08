@@ -39,25 +39,8 @@ public class  ProfileViewModel
        //String token = mPreferences.getString("token", "");
    }
 
-   public DataModel[] getListOf(LISTOFTYPE type, boolean myprofile)
-   {
-       if (myprofile)
-       {
-           if (type.equals(LISTOFTYPE.Favours)) { return getMyFavours(); }
-           if (type.equals(LISTOFTYPE.Favourites)) { return getMyFavourites(); }
-           else if (type.equals(LISTOFTYPE.Opinions)) { return getMyOpinions(); }
-       }
-       else
-       {
-           if (type.equals(LISTOFTYPE.Favours)) { return getMyFavours(); }
-           if (type.equals(LISTOFTYPE.Favourites)) { return getMyFavourites(); }
-           else if (type.equals(LISTOFTYPE.Opinions)) { return getMyOpinions(); }
-       }
 
-       return null;
-   }
-
-    private DataModel.Opinion[] getMyOpinions()
+    private Opinions[] getMyOpinions()
     {
         return FORTESTING.getExampleListOPINION();
     }

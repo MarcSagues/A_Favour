@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.Favour;
+import cat.udl.tidic.a_favour.models.Opinions;
 
 public class RecyclerViewManager extends FragmentPagerAdapter
 {
@@ -22,14 +23,14 @@ public class RecyclerViewManager extends FragmentPagerAdapter
     private Boolean myprofile;
     private Favour[] my_favours;
     private Favour[] favourites;
-    private DataModel.Opinion[] opinions;
+    private Opinions[] opinions;
 
     @SuppressWarnings("deprecation")
     public RecyclerViewManager(FragmentManager fm, Context context,
                                Boolean myprofile,
                                Favour[] my_favours,
                                Favour[] favourites,
-                               DataModel.Opinion[] opinions)
+                               Opinions[] opinions)
     {
         super(fm);
         this.context = context;

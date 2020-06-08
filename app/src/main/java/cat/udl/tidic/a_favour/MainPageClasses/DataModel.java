@@ -207,22 +207,7 @@ public class DataModel extends Activity
     }
 
     //Les opinions dels usuaris
-    public static class Opinion extends DataModel
-    {
 
-        public String description;
-        public Number mark;
-        float starRating;
-        public String name;
-
-        public Opinion(int icon, String name, String description, float starRating)
-        {
-            this.icon = icon;
-            this.name = name;
-            if(description != null) {this.description = description;}
-            this.starRating = starRating;
-        }
-    }
 
     //TODO
     //Els missaatges

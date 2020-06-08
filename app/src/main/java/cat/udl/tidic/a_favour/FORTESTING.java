@@ -2,13 +2,14 @@ package cat.udl.tidic.a_favour;
 
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.models.Opinions;
 
 public class FORTESTING
 {
     //Si dev és FALSE --> Es fan les crides a l'API
     //Si dev és TRUE --> S'hagafen favors/opinions hardcoded
     public static Boolean dev = false;
-    public static Boolean checkLogin = true;
+    public static Boolean checkLogin = false;
     public static DataModel.Favour[] getExampleList()
 {
     DataModel.Favour[] eventList = new DataModel.Favour[10];
@@ -77,10 +78,10 @@ public class FORTESTING
     }
 
 
-    public static DataModel.Opinion[] getExampleListOPINION()
+    public static Opinions[] getExampleListOPINION()
     {
-        DataModel.Opinion[] eventList = new DataModel.Opinion[6];
-        eventList[0] = new DataModel.Opinion(R.drawable.example_person, "Pepeito Jimenez", "Muy bien todo", 4.5f);
+        Opinions[] eventList = new Opinions[6];
+        eventList[0] = new Opinions(R.drawable.example_person, "Pepeito Jimenez", "Muy bien todo", 4.5f);
         eventList[1] = eventList[0];
         eventList[2] = eventList[0];
         eventList[3] = eventList[0];
