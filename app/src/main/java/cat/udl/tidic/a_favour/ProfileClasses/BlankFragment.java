@@ -1,8 +1,6 @@
 package cat.udl.tidic.a_favour.ProfileClasses;
 
-import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
-import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
+import cat.udl.tidic.a_favour.adapters.OpinionsAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.adapters.FavourAdapter;

@@ -1,4 +1,4 @@
-package cat.udl.tidic.a_favour.MainPageClasses;
+package cat.udl.tidic.a_favour.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

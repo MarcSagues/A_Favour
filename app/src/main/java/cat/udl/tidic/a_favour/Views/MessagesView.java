@@ -1,15 +1,14 @@
 package cat.udl.tidic.a_favour.Views;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import cat.udl.tidic.a_favour.FORTESTING;
-import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
-import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
+import cat.udl.tidic.a_favour.MainPageClasses.MessagesItemClickListener;
 import cat.udl.tidic.a_favour.R;
+import cat.udl.tidic.a_favour.adapters.MessageAdapter;
+import cat.udl.tidic.a_favour.models.Message;
 
 public class MessagesView extends AppCompatActivity
 {
@@ -40,14 +39,13 @@ public class MessagesView extends AppCompatActivity
 
     private void setListAdapter()
     {
-        DataModel.Message[] allMessagesArray;
+        Message[] allMessagesArray;
         if (FORTESTING.dev) {allMessagesArray = FORTESTING.getMessageList();}
-        //Insertat dintre l'else la crida a l'API
         else { allMessagesArray = FORTESTING.getMessageList(); }
 
-        //OpinionsAdapter adapter_event = new OpinionsAdapter(this, R.layout.message_list, allMessagesArray);
-        //messageList.setAdapter(adapter_event);
-        messageList.setOnItemClickListener(new DrawerItemClickListener(this));
+        MessageAdapter adapter_event = new MessageAdapter(this, R.layout.message_list, allMessagesArray);
+        messageList.setAdapter(adapter_event);
+        messageList.setOnItemClickListener(new MessagesItemClickListener(this));
 
     }
 

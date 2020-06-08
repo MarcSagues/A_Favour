@@ -20,12 +20,9 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
-import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
-import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
-import cat.udl.tidic.a_favour.ProfileClasses.RecyclerViewManager;
+import cat.udl.tidic.a_favour.adapters.OpinionsAdapter;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.adapters.FavourAdapter;
 import cat.udl.tidic.a_favour.adapters.FavourDiffCallback;

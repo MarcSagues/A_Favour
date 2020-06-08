@@ -1,8 +1,13 @@
 package cat.udl.tidic.a_favour;
 
+import java.util.List;
+
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
+import cat.udl.tidic.a_favour.models.Favour;
+import cat.udl.tidic.a_favour.models.Message;
 import cat.udl.tidic.a_favour.models.Opinions;
+import cat.udl.tidic.a_favour.models.UserModel;
 
 public class FORTESTING
 {
@@ -52,28 +57,30 @@ public class FORTESTING
     return eventList;
 }
 
-    public static DataModel.Message[] getMessageList()
+    public static Message[] getMessageList()
     {
-        DataModel.Message[] messageList = new DataModel.Message[5];
-        messageList[0] = new DataModel.Message(
-                "Pepito",
-                "Ayuda para noseque", "" +
-                "Podrias quedar alas 5?",
-                "10/5/2020");
+        UserModel user1 = new UserModel("12/12/12",1,"Uri","gg@wp.com",
+                "Jampi","Jumpi","12/12/12","uuuuuuu",3,2,1,"Igualada," 
+                ,"kk",12,12);
 
-        messageList[1] = new DataModel.Message(
-                "Lucía",
-                "Repaso de Mates", "" +
-                "Necessito que ayudes a mi hijo en Mates",
-                "12/10/2010");
+        UserModel user2 = new UserModel("12/12/12",1,"Pepito","gg@wp.com",
+                "Pepito","Jumpi","12/12/12","uuuuuuu",3,2,1,"Igualada," 
+                ,"kk",12,12);
 
-        messageList[2] = new DataModel.Message(
-                "Tete Lore",
-                "Message Ipsum", "" +
-                "Lore Lore Ipsum Ipsum",
-                "10/5/2020");
-        messageList[3] = messageList[0];
-        messageList[4] = messageList[2];
+        Favour favour = new Favour();
+        favour.setDescription("Thedescription");
+        
+        List<String> messages = null;
+        messages.add("Hola que tal?");
+        messages.add("Moltbe i tu ?");
+        Message[] messageList = new Message[5];
+        
+        messageList[0] = new Message(user1,user2,favour,messages);
+        messageList[1] = new Message(user1,user2,favour,messages);
+        messageList[2] = new Message(user1,user2,favour,messages);
+        messageList[3] = new Message(user1,user2,favour,messages);
+        messageList[4] = new Message(user1,user2,favour,messages);
+        
         return messageList;
     }
 

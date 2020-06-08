@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,13 +33,11 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
-import cat.udl.tidic.a_favour.MainPageClasses.DrawerItemClickListener;
-import cat.udl.tidic.a_favour.MainPageClasses.OpinionsAdapter;
+import cat.udl.tidic.a_favour.MainPageClasses.MessagesItemClickListener;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.Favour;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
@@ -132,7 +129,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         // }
         recyclerView.invalidate();
         //recyclerView.setAdapter(adapter);
-        recyclerView.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
+        recyclerView.setOnItemClickListener(new MessagesItemClickListener(this,mainClassViewModel));
 
     }
 
@@ -175,7 +172,7 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
         drawerItem[3] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.help));
         drawerItem[4] = new DataModel.MenuList(R.drawable.log_out, getResources().getString(R.string.logOut));
        // DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.list_view_item_row, drawerItem);
-        llista.setOnItemClickListener(new DrawerItemClickListener(this,mainClassViewModel));
+        llista.setOnItemClickListener(new MessagesItemClickListener(this,mainClassViewModel));
         //llista.setAdapter(adapter);
     }
 
@@ -390,10 +387,10 @@ public class MainPage extends AppCompatActivity implements OnMapReadyCallback {
             public boolean onMarkerClick(Marker marker)
             {
                 Log.d("Click Clock", "Cluck");
-                DrawerItemClickListener dw = new DrawerItemClickListener(context);
+                MessagesItemClickListener dw = new MessagesItemClickListener(context);
                 if (FORTESTING.dev)
                 {
-                    dw.goToSeeAnunci(FORTESTING.getExampleList()[(int) marker.getTag()]);
+                    //dw.goToSeeAnunci(FORTESTING.getExampleList()[(int) marker.getTag()]);
                 }
                 else {
                     //dw.goToSeeAnunci(mapFavours[(int) marker.getTag()]);
