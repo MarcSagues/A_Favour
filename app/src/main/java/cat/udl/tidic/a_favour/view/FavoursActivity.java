@@ -2,10 +2,8 @@ package cat.udl.tidic.a_favour.view;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,34 +19,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.IOException;
-import java.util.Objects;
-
-import cat.udl.tidic.a_favour.App;
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.RetrofitClientInstance;
-import cat.udl.tidic.a_favour.UserServices;
 import cat.udl.tidic.a_favour.Views.ConfigurationView;
 import cat.udl.tidic.a_favour.Views.HelpView;
-import cat.udl.tidic.a_favour.Views.LoadingPanel;
-import cat.udl.tidic.a_favour.Views.LoginView;
-import cat.udl.tidic.a_favour.Views.MessagesView;
 import cat.udl.tidic.a_favour.Views.ProfileView;
 import cat.udl.tidic.a_favour.Views.UploadFavour;
 import cat.udl.tidic.a_favour.adapters.FavourTypeSpinnerAdapter;
 import cat.udl.tidic.a_favour.models.CategoryEnum;
 import cat.udl.tidic.a_favour.models.FavourTypeEnum;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
-import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 import cat.udl.tidic.a_favour.viewmodels.FavoursViewModel;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class FavoursActivity extends LocationActivity {

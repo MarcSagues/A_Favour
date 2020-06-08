@@ -1,4 +1,4 @@
-package cat.udl.tidic.a_favour.Views;
+package cat.udl.tidic.a_favour.view;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -8,28 +8,25 @@ import cat.udl.tidic.a_favour.FORTESTING;
 import cat.udl.tidic.a_favour.MainPageClasses.MessagesItemClickListener;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.adapters.MessageAdapter;
-import cat.udl.tidic.a_favour.models.Chats;
+import cat.udl.tidic.a_favour.models.Chat;
 
 public class MessagesView extends AppCompatActivity
 {
     private ListView messageList;
     private ImageView backArrow;
+    private Chat chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        getFirebaseInstance();
         getAllActivityData();
         setListAdapter();
         setListeners();
     }
 
-    private void getFirebaseInstance()
-    {
 
-    }
 
     private void getAllActivityData()
     {
@@ -39,7 +36,7 @@ public class MessagesView extends AppCompatActivity
 
     private void setListAdapter()
     {
-        Chats[] allMessagesArray;
+        Chat[] allMessagesArray;
         if (FORTESTING.dev) {allMessagesArray = FORTESTING.getMessageList();}
         else { allMessagesArray = FORTESTING.getMessageList(); }
 

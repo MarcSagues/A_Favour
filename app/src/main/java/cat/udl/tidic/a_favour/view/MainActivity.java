@@ -3,12 +3,7 @@ package cat.udl.tidic.a_favour.view;
 import android.os.Bundle;
 import android.util.Log;
 
-import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.Views.CustomActivty;
-import cat.udl.tidic.a_favour.Views.LoginView;
-import cat.udl.tidic.a_favour.Views.MessagesView;
-import cat.udl.tidic.a_favour.view.FavoursActivity;
-import cat.udl.tidic.a_favour.view.FavoursListActivity;
 import cat.udl.tidic.a_favour.viewmodels.MainActivityViewModel;
 
 

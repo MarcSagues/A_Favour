@@ -1,6 +1,8 @@
 package cat.udl.tidic.a_favour.models;
 
-public class Messages
+import java.io.Serializable;
+
+public class Messages implements Serializable
 {
     private int owner_id;
     private String date;

@@ -14,25 +14,25 @@ import androidx.annotation.NonNull;
 
 import cat.udl.tidic.a_favour.ImageHelper;
 import cat.udl.tidic.a_favour.R;
-import cat.udl.tidic.a_favour.models.Chats;
+import cat.udl.tidic.a_favour.models.Chat;
 
-public class MessageAdapter extends ArrayAdapter<Chats>
+public class MessageAdapter extends ArrayAdapter<Chat>
 {
     private Context mContext;
     private int layoutResourceId;
-    private Chats[] data;
+    private Chat[] data;
 
 
-    public Chats[] getData()
+    public Chat[] getData()
     {
         return this.data;
     }
 
-    public void setData(Chats[] data)
+    public void setData(Chat[] data)
     {
         this.data = data;
     }
-    public MessageAdapter(Context mContext, int layoutResourceId, Chats[] data)
+    public MessageAdapter(Context mContext, int layoutResourceId, Chat[] data)
     {
         super(mContext, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
@@ -60,7 +60,7 @@ public class MessageAdapter extends ArrayAdapter<Chats>
         TextView lastMessage = listItem.findViewById(R.id.lastMessage);
         TextView lastMessageDate = listItem.findViewById(R.id.dateLastMessage);
 
-        Chats folder = (Chats) data[position];
+        Chat folder = (Chat) data[position];
         imageViewIcon.setImageResource(R.drawable.example_person);
         imageViewIcon.setImageBitmap(ImageHelper.getRoundedCornerBitmap(imageViewIcon, ImageHelper.ROUND));
 

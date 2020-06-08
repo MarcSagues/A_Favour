@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import cat.udl.tidic.a_favour.Views.ChatView;
+import java.io.Serializable;
+
+import cat.udl.tidic.a_favour.models.Chat;
+import cat.udl.tidic.a_favour.view.ChatView;
 import cat.udl.tidic.a_favour.models.MainClassViewModel;
 
 
@@ -35,14 +38,15 @@ public class MessagesItemClickListener implements ListView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        //Message d = (Message) parent.getItemAtPosition(position);
-        goToChat();
+        Chat chat = (Chat) parent.getItemAtPosition(position);
+        goToChat(chat);
     }
 
-    private void goToChat()
+    private void goToChat(Chat chat)
     {
         Intent intent = new Intent (c, ChatView.class);
         Bundle b= new Bundle();
+        intent.putExtra("chat", chat);
         startActivity(c,intent,b);
     }
 }

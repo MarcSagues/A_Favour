@@ -3,8 +3,10 @@ package cat.udl.tidic.a_favour.models;
 import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 @SuppressWarnings("unused")
-public class UserModel
+public class UserModel implements Serializable
 {
     @SerializedName("created_at")
     private String created_at;

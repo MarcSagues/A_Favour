@@ -6,7 +6,7 @@ import java.util.List;
 import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.MainPageClasses.DataModel;
 import cat.udl.tidic.a_favour.models.Favour;
-import cat.udl.tidic.a_favour.models.Chats;
+import cat.udl.tidic.a_favour.models.Chat;
 import cat.udl.tidic.a_favour.models.Messages;
 import cat.udl.tidic.a_favour.models.Opinions;
 import cat.udl.tidic.a_favour.models.UserModel;
@@ -59,7 +59,7 @@ public class FORTESTING
     return eventList;
 }
 
-    public static Chats[] getMessageList()
+    public static Chat[] getMessageList()
     {
         UserModel user1 = new UserModel("12/12/12",1,"Uri","gg@wp.com",
                 "Jampi","Jumpi","12/12/12","uuuuuuu",3,2,1,"Igualada," 
@@ -77,13 +77,13 @@ public class FORTESTING
         Messages messages2 = new Messages(1,"10/2/1999", "The text of message2");
         messages.add(messages1);
         messages.add(messages2);
-        Chats[] messageList = new Chats[5];
+        Chat[] messageList = new Chat[5];
 
-        messageList[0] = new Chats(user1,user2,favour,messages);
-        messageList[1] = new Chats(user1,user2,favour,messages);
-        messageList[2] = new Chats(user1,user2,favour,messages);
-        messageList[3] = new Chats(user1,user2,favour,messages);
-        messageList[4] = new Chats(user1,user2,favour,messages);
+        messageList[0] = new Chat(user1,user2,favour,messages);
+        messageList[1] = new Chat(user1,user2,favour,messages);
+        messageList[2] = new Chat(user1,user2,favour,messages);
+        messageList[3] = new Chat(user1,user2,favour,messages);
+        messageList[4] = new Chat(user1,user2,favour,messages);
         
         return messageList;
     }
