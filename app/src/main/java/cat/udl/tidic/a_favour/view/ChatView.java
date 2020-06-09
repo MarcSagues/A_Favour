@@ -70,7 +70,15 @@ public class ChatView extends AppCompatActivity
 
     private void setOnClickListeners()
     {
+        sendButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String textToSend = input.getText().toString();
 
+            }
+        });
     }
 
     private void inflateFavour()

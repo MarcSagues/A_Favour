@@ -17,7 +17,7 @@ public class FORTESTING
 {
     //Si dev és FALSE --> Es fan les crides a l'API
     //Si dev és TRUE --> S'hagafen favors/opinions hardcoded
-    public static Boolean dev = true;
+    public static Boolean dev = false;
     public static Boolean checkLogin = true;
     public static DataModel.Favour[] getExampleList()
 {

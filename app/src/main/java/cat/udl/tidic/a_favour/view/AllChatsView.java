@@ -31,10 +31,10 @@ public class AllChatsView extends AppCompatActivity
 
     private void getAllChats()
     {
-        if (FORTESTING.dev)
-        {
+        //if (FORTESTING.dev)
+        //{
             allChats= new AllChats(FORTESTING.getChats());
-        }
+        //}
     }
 
 
