@@ -79,8 +79,8 @@ public class FORTESTING
         favour.setType(FavourTypeEnum.necessito);
         
         List<Message> messages = new ArrayList<Message>();
-        Message message1 = new Message(0,"10/2/1999", "The text of message");
-        Message message2 = new Message(1,"10/2/1999", "The text of message2");
+        Message message1 = new Message(user1,"10:22", "The text of message");
+        Message message2 = new Message(user2,"10:23", "The text of message2");
         messages.add(message1);
         messages.add(message2);
         List<Chat> chatList = new ArrayList<Chat>();

@@ -12,7 +12,7 @@ public class MessageDiffCallback extends DiffUtil.ItemCallback<Message> {
 
     @Override
     public boolean areItemsTheSame(@NonNull Message oldItem, @NonNull Message newItem) {
-        return oldItem.getOwner_id() == newItem.getOwner_id();
+        return oldItem.getUser().getId() == newItem.getUser().getId();
     }
 
     @SuppressLint("DiffUtilEquals")

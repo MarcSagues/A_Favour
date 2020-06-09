@@ -29,7 +29,9 @@ public class MessageCommonHolder
 
     public void bindHolder(Message m)
     {
-        nombre = getNombre();
+        nombre.setText(m.getUser().getUsername());
+        mensaje.setText(m.getText());
+        hora.setText(m.getDate());
     }
 
     public TextView getNombre() {

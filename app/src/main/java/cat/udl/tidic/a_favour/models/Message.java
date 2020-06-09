@@ -4,25 +4,25 @@ import java.io.Serializable;
 
 public class Message implements Serializable
 {
-    private int owner_id;
+    private UserModel user;
     private String date;
     private String text;
 
 
 
-    public Message(int owner_id, String date, String text)
+    public Message(UserModel user, String date, String text)
     {
-        this.owner_id = owner_id;
+        this.user = user;
         this.date = date;
         this.text = text;
     }
 
-    public int getOwner_id() {
-        return owner_id;
+    public UserModel getUser() {
+        return user;
     }
 
-    public void setOwner_id(int owner_id) {
-        this.owner_id = owner_id;
+    public void setUser(UserModel u) {
+        this.user = u;
     }
 
     public String getDate() {
