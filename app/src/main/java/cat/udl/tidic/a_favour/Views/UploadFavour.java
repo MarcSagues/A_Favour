@@ -19,6 +19,7 @@ import cat.udl.tidic.a_favour.MainPageClasses.CategoryManager;
 import cat.udl.tidic.a_favour.R;
 import cat.udl.tidic.a_favour.models.CategoryEnum;
 import cat.udl.tidic.a_favour.models.Favour;
+import cat.udl.tidic.a_favour.models.FavourTypeEnum;
 import cat.udl.tidic.a_favour.models.UploadFavourModel;
 import cat.udl.tidic.a_favour.preferences.PreferencesProvider;
 
@@ -237,6 +238,9 @@ public class UploadFavour extends AppCompatActivity
                 currentFavour = new Favour();
             }
 
+            String user = PreferencesProvider.providePreferences().getString("username", "nouserFound");
+            currentFavour.setUser(user);
+            //currentFavour.setType(FavourTypeEnum.ofereixo);
             currentFavour.setName(Objects.requireNonNull(inputEditTexts[0].getText()).toString());
             currentFavour.setDescription(Objects.requireNonNull(inputEditTexts[1].getText()).toString());
             currentFavour.setCategory(getSelectedCategory());

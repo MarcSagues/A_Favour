@@ -1,6 +1,8 @@
 package cat.udl.tidic.a_favour.models;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.util.Objects;
@@ -124,6 +126,7 @@ public class UploadFavourModel
         user_json.addProperty("desc", currentFavourData.getDescription());
         user_json.addProperty("category", currentFavourData.getCategory().getName());
         user_json.addProperty("amount", currentFavourData.getAmount());
+        Log.d("----------", user_json.toString());
         Call<Void> call = userService.postFavour(token,user_json);
         LoadingPanel.enableLoading(c,true);
         //noinspection NullableProblems
