@@ -16,11 +16,11 @@ public class MainActivity extends CustomActivty {
 
         if (mainActivityViewModel.isCurrentLogIn()) {
             Log.d(TAG, "onCreate() -> El usuario ya tiene token, por lo tanto entro." );
-            goTo(AllChatsView.class);
+            goTo(FavoursListActivity.class);
         }
         else {
             Log.d(TAG, "onCreate() -> El usuario no tiene token, por lo tanto ir a login." );
-            goTo(AllChatsView.class);
+            goTo(LoginView.class);
         }
     }
 
