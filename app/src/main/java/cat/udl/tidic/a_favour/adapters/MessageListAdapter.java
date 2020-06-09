@@ -66,7 +66,7 @@ public class MessageListAdapter extends ListAdapter<Message, MessageListAdapter.
         //TODO!
         //No sé com fer-ho, és nomes visual!!
         //!!!!!!!
-        if(position%2 == 0)
+        if(position%2 != 0)
         {
             return R.layout.card_view_mensajes_receptor;
         }
