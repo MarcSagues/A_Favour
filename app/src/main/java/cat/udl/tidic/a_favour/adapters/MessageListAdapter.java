@@ -51,9 +51,28 @@ public class MessageListAdapter extends ListAdapter<Message, MessageListAdapter.
     @Override
     public MessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_mensajes_receptor,
-                null, false);
+
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(viewType,
+                parent, false);
+
         return new MessageHolder(itemView);
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        //!!!!!!!!!
+        //TODO!
+        //TODO!
+        //No sé com fer-ho, és nomes visual!!
+        //!!!!!!!
+        if(position%2 == 0)
+        {
+            return R.layout.card_view_mensajes_receptor;
+        }
+        else {
+            return R.layout.card_view_mensajes_emisor;
+        }
     }
 
 
@@ -61,7 +80,7 @@ public class MessageListAdapter extends ListAdapter<Message, MessageListAdapter.
     @Override
     public void onBindViewHolder(@NonNull MessageListAdapter.MessageHolder holder, int position) {
         final Message currentFavour = (Message) getItem(position);
-        Log.d(TAG, "onBindViewHolder() -> currentFavour: " + currentFavour);
+        Log.d(TAG, "onBindViewHolder() -> currentMessage: " + currentFavour);
         messageCommonHolder.bindHolder(currentFavour);
 
     }
@@ -69,7 +88,8 @@ public class MessageListAdapter extends ListAdapter<Message, MessageListAdapter.
 
     class MessageHolder extends RecyclerView.ViewHolder
     {
-        public MessageHolder(@NonNull View itemView) {
+        public MessageHolder(@NonNull View itemView)
+        {
             super(itemView);
             messageCommonHolder = new MessageCommonHolder(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {

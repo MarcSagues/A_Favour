@@ -10,13 +10,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
-        </LinearLayout>
+            android:layout_weight="2"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,51 +26,59 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                cardview:cardBackgroundColor="@color/AfavourColor"
                 cardview:cardCornerRadius="10sp"
-                cardview:cardBackgroundColor="#3F51B5"
                 cardview:contentPadding="5sp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:id="@+id/horaMensaje"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="00:00"
                                 android:textColor="#ffffff"
-                                android:textStyle="italic"/>
+                                android:textStyle="italic" />
+
                             <TextView
                                 android:id="@+id/nombreMensaje"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Kevin"
                                 android:layout_weight="1"
+                                android:gravity="end"
+                                android:text="Kevin"
                                 android:textColor="#ffffff"
-                                android:textStyle="bold"
-                                android:gravity="end"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
+
                         <TextView
-                            android:visibility="visible"
                             android:id="@+id/mensajeMensaje"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="end"
                             android:text="Hola bienvenido"
                             android:textColor="#ffffff"
-                            android:gravity="end"/>
+                            android:visibility="visible" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="5sp"/>
+                        android:padding="5sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
