@@ -83,6 +83,8 @@
     <string name="update">Actualiza el perfil</string>
     <string name="list">Lista</string>
     <string name="map">Mapa</string>
+    <string name="sendmessage">Escribe un mensaje</string>
+    <string name="send">Enviar</string>
 
 
 </resources>

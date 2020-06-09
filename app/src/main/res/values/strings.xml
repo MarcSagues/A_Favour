@@ -126,6 +126,8 @@
     <string name="uploadOpinion" />
     <string name="list">List</string>
     <string name="map">Map</string>
+    <string name="sendmessage">Type a message</string>
+    <string name="send">Send</string>
 
 
 </resources>
